@@ -110,10 +110,10 @@ const AddResume = () => {
                                     </div>
                                     <div className="add-post-btn">
                                         <div className="float-left">
-                                            <NavLink to="#" className="btn-added"><i className="ti-plus"></i> Add New Education</NavLink>
+                                            <NavLink to="/" className="btn-added"><i className="ti-plus"></i> Add New Education</NavLink>
                                         </div>
                                         <div className="float-right">
-                                            <NavLink to="#" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
+                                            <NavLink to="/" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
                                         </div>
                                     </div>
                                     <div className="divider"><h3>Work Experience</h3></div>
@@ -155,10 +155,10 @@ const AddResume = () => {
                                     </div>
                                     <div className="add-post-btn">
                                         <div className="float-left">
-                                            <NavLink to="#" className="btn-added"><i className="ti-plus"></i> Add New Experience</NavLink>
+                                            <NavLink to="/" className="btn-added"><i className="ti-plus"></i> Add New Experience</NavLink>
                                         </div>
                                         <div className="float-right">
-                                            <NavLink to="#" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
+                                            <NavLink to="/" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
                                         </div>
                                     </div>
                                     <div className="divider"><h3 className='text-start'>Skills</h3></div>
@@ -176,10 +176,10 @@ const AddResume = () => {
                                     </div>
                                     <div className="add-post-btn">
                                         <div className="float-left">
-                                            <NavLink to="#" className="btn-added"><i className="ti-plus"></i> Add New Skills</NavLink>
+                                            <NavLink to="/" className="btn-added"><i className="ti-plus"></i> Add New Skills</NavLink>
                                         </div>
                                         <div className="float-right">
-                                            <NavLink to="#" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
+                                            <NavLink to="/" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
                                         </div>
                                     </div>
                                 </form>

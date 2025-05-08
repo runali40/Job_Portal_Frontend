@@ -25,10 +25,10 @@ const BrowseResumes = () => {
           <div className="col-lg-12 col-md-6 col-xs-12">
             <div className="manager-resumes-item">
               <div className="manager-content">
-                <NavLink to="resume.html"><img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt=""/></NavLink>
+                <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt=""/></NavLink>
                 <div className="manager-info">
                   <div className="manager-name text-start">
-                    <h4><NavLink to="#">Zane Joyner</NavLink></h4>
+                    <h4><NavLink to="/">Zane Joyner</NavLink></h4>
                     <h5>Front-end developer</h5>
                   </div>
                   <div className="manager-meta">
@@ -49,7 +49,7 @@ const BrowseResumes = () => {
                     <span>Wordpress</span>
                   </div>
                   <div className="resume-exp float-right">
-                    <NavLink to="#" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
+                    <NavLink to="/" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
                   </div>
                 </div>
               </div>
@@ -58,10 +58,10 @@ const BrowseResumes = () => {
           <div className="col-lg-6 col-md-6 col-xs-12">
             <div className="manager-resumes-item">
               <div className="manager-content">
-                <NavLink to="resume.html"><img className="resume-thumb" src="assets/img/jobs/avatar-1.png" alt=""/></NavLink>
+                <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-1.png" alt=""/></NavLink>
                 <div className="manager-info">
                   <div className="manager-name text-start">
-                    <h4><NavLink to="#">Bikesh Soltaniane</NavLink></h4>
+                    <h4><NavLink to="/">Bikesh Soltaniane</NavLink></h4>
                     <h5>Java developer</h5>
                   </div>
                   <div className="manager-meta">
@@ -82,7 +82,7 @@ const BrowseResumes = () => {
                     <span>Wordpress</span>
                   </div>
                   <div className="resume-exp float-right">
-                    <NavLink to="#" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
+                    <NavLink to="/" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
                   </div>
                 </div>
               </div>
@@ -91,10 +91,10 @@ const BrowseResumes = () => {
           <div className="col-lg-6 col-md-6 col-xs-12">
             <div className="manager-resumes-item">
               <div className="manager-content">
-                <NavLink to="resume.html"><img className="resume-thumb" src="assets/img/jobs/avatar-2.png" alt=""/></NavLink>
+                <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-2.png" alt=""/></NavLink>
                 <div className="manager-info">
                   <div className="manager-name text-start">
-                    <h4><NavLink to="#">Chris Hernandeziyan</NavLink></h4>
+                    <h4><NavLink to="/">Chris Hernandeziyan</NavLink></h4>
                     <h5>.Net developer</h5>
                   </div>
                   <div className="manager-meta">
@@ -115,7 +115,7 @@ const BrowseResumes = () => {
                     <span>Wordpress</span>
                   </div>
                   <div className="resume-exp float-right">
-                    <NavLink to="#" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
+                    <NavLink to="/" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
                   </div>
                 </div>
               </div>
@@ -124,10 +124,10 @@ const BrowseResumes = () => {
           <div className="col-lg-6 col-md-6 col-xs-12">
             <div className="manager-resumes-item">
               <div className="manager-content">
-                <NavLink to="resume.html"><img className="resume-thumb" src="assets/img/jobs/avatar-3.png" alt=""/></NavLink>
+                <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-3.png" alt=""/></NavLink>
                 <div className="manager-info">
                   <div className="manager-name text-start">
-                    <h4><NavLink to="#">Mary Amiri</NavLink></h4>
+                    <h4><NavLink to="/">Mary Amiri</NavLink></h4>
                     <h5>Quality assurance</h5>
                   </div>
                   <div className="manager-meta">
@@ -148,7 +148,7 @@ const BrowseResumes = () => {
                     <span>Wordpress</span>
                   </div>
                   <div className="resume-exp float-right">
-                    <NavLink to="#" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
+                    <NavLink to="/" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
                   </div>
                 </div>
               </div>
@@ -157,10 +157,10 @@ const BrowseResumes = () => {
           <div className="col-lg-6 col-md-6 col-xs-12">
             <div className="manager-resumes-item">
               <div className="manager-content">
-                <NavLink to="resume.html"><img className="resume-thumb" src="assets/img/jobs/avatar-4.png" alt=""/></NavLink>
+                <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-4.png" alt=""/></NavLink>
                 <div className="manager-info">
                   <div className="manager-name text-start">
-                    <h4><NavLink to="#">Sarah Luizgarden</NavLink></h4>
+                    <h4><NavLink to="/">Sarah Luizgarden</NavLink></h4>
                     <h5>UI/UX developer</h5>
                   </div>
                   <div className="manager-meta">
@@ -181,7 +181,7 @@ const BrowseResumes = () => {
                     <span>Wordpress</span>
                   </div>
                   <div className="resume-exp float-right">
-                    <NavLink to="#" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
+                    <NavLink to="/" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
                   </div>
                 </div>
               </div>

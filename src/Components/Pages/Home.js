@@ -161,7 +161,7 @@ const Home = () => {
                     </div>
                     <div className="row">
                         <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-                            <NavLink to="browse-jobs.html">
+                            <NavLink to="/browseJobs">
                                 <div className="icon bg-color-1">
                                     <i className="lni-home"></i>
                                 </div>
@@ -170,7 +170,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-                            <NavLink to="browse-jobs.html">
+                            <NavLink to="/browseJobs">
                                 <div className="icon bg-color-2">
                                     <i className="lni-world"></i>
                                 </div>
@@ -179,7 +179,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-                            <NavLink to="browse-jobs.html">
+                            <NavLink to="/browseJobs">
                                 <div className="icon bg-color-3">
                                     <i className="lni-book"></i>
                                 </div>
@@ -188,7 +188,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-3 col-md-6 col-xs-12 f-category border-right-0">
-                            <NavLink to="browse-jobs.html">
+                            <NavLink to="/browseJobs">
                                 <div className="icon bg-color-4">
                                     <i className="lni-display"></i>
                                 </div>
@@ -197,7 +197,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-3 col-md-6 col-xs-12 f-category border-bottom-0">
-                            <NavLink to="browse-jobs.html">
+                            <NavLink to="/browseJobs">
                                 <div className="icon bg-color-5">
                                     <i className="lni-brush"></i>
                                 </div>
@@ -206,7 +206,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-3 col-md-6 col-xs-12 f-category border-bottom-0">
-                            <NavLink to="browse-jobs.html">
+                            <NavLink to="/browseJobs">
                                 <div className="icon bg-color-6">
                                     <i className="lni-heart"></i>
                                 </div>
@@ -215,7 +215,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-3 col-md-6 col-xs-12 f-category border-bottom-0">
-                            <NavLink to="browse-jobs.html">
+                            <NavLink to="/browseJobs">
                                 <div className="icon bg-color-7">
                                     <i className="lni-funnel"></i>
                                 </div>
@@ -224,7 +224,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-3 col-md-6 col-xs-12 f-category border-right-0 border-bottom-0">
-                            <NavLink to="browse-jobs.html">
+                            <NavLink to="/browseJobs">
                                 <div className="icon bg-color-8">
                                     <i className="lni-cup"></i>
                                 </div>
@@ -244,7 +244,7 @@ const Home = () => {
                     </div>
                     <div className="row">
                         <div className="col-lg-6 col-md-12 col-xs-12">
-                            <NavLink className="job-listings-featured" to="job-details.html">
+                            <NavLink className="job-listings-featured" to="/jobDetails">
                                 <div className="row">
                                     <div className="col-lg-6 col-md-6 col-xs-12">
                                         <div className="job-company-logo">
@@ -271,7 +271,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-6 col-md-12 col-xs-12">
-                            <NavLink className="job-listings-featured" to="job-details.html">
+                            <NavLink className="job-listings-featured" to="/jobDetails">
                                 <div className="row">
                                     <div className="col-lg-6 col-md-6 col-xs-12">
                                         <div className="job-company-logo">
@@ -298,7 +298,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-6 col-md-12 col-xs-12">
-                            <NavLink className="job-listings-featured" to="job-details.html">
+                            <NavLink className="job-listings-featured" to="/jobDetails">
                                 <div className="row">
                                     <div className="col-lg-6 col-md-6 col-xs-12">
                                         <div className="job-company-logo">
@@ -325,7 +325,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-6 col-md-12 col-xs-12">
-                            <NavLink className="job-listings-featured" to="job-details.html">
+                            <NavLink className="job-listings-featured" to="/jobDetails">
                                 <div className="row">
                                     <div className="col-lg-6 col-md-6 col-xs-12">
                                         <div className="job-company-logo">
@@ -352,7 +352,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-6 col-md-12 col-xs-12">
-                            <NavLink className="job-listings-featured" to="job-details.html">
+                            <NavLink className="job-listings-featured" to="/jobDetails">
                                 <div className="row">
                                     <div className="col-lg-6 col-md-6 col-xs-12">
                                         <div className="job-company-logo">
@@ -379,7 +379,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-6 col-md-12 col-xs-12">
-                            <NavLink className="job-listings-featured" to="job-details.html">
+                            <NavLink className="job-listings-featured" to="/jobDetails">
                                 <div className="row">
                                     <div className="col-lg-6 col-md-6 col-xs-12">
                                         <div className="job-company-logo">
@@ -406,7 +406,7 @@ const Home = () => {
                             </NavLink>
                         </div>
                         <div className="col-12 text-center mt-4">
-                            <NavLink to="job-page.html" className="btn btn-common">Browse All Jobs</NavLink>
+                            <NavLink to="/jobPage" className="btn btn-common">Browse All Jobs</NavLink>
                         </div>
                     </div>
                 </div>
@@ -484,7 +484,7 @@ const Home = () => {
                                     <img src="assets/img/features/img-1.jpg" alt="" />
                                 </div>
                                 <div className="content text-start">
-                                    <h3><NavLink to="job-details.html">UX Designer</NavLink></h3>
+                                    <h3><NavLink to="/jobDetails">UX Designer</NavLink></h3>
                                     <p className="brand">MagNews</p>
                                     <div className="tags">
                                         <span><i className="lni-map-marker"></i> New York</span>
@@ -501,7 +501,7 @@ const Home = () => {
                                     <img src="assets/img/features/img-2.jpg" alt="" />
                                 </div>
                                 <div className="content text-start">
-                                    <h3><NavLink to="job-details.html">UI Designer</NavLink></h3>
+                                    <h3><NavLink to="/jobDetails">UI Designer</NavLink></h3>
                                     <p className="brand">Hunter Inc.</p>
                                     <div className="tags">
                                         <span><i className="lni-map-marker"></i> New York</span>
@@ -518,7 +518,7 @@ const Home = () => {
                                     <img src="assets/img/features/img-3.jpg" alt="" />
                                 </div>
                                 <div className="content text-start">
-                                    <h3><NavLink to="job-details.html">Web Developer</NavLink></h3>
+                                    <h3><NavLink to="/jobDetails">Web Developer</NavLink></h3>
                                     <p className="brand">MagNews</p>
                                     <div className="tags">
                                         <span><i className="lni-map-marker"></i> New York</span>
@@ -535,7 +535,7 @@ const Home = () => {
                                     <img src="assets/img/features/img-4.jpg" alt="" />
                                 </div>
                                 <div className="content text-start">
-                                    <h3><NavLink to="job-details.html">UX Designer</NavLink></h3>
+                                    <h3><NavLink to="/jobDetails">UX Designer</NavLink></h3>
                                     <p className="brand">AmazeSoft</p>
                                     <div className="tags">
                                         <span><i className="lni-map-marker"></i> New York</span>
@@ -552,7 +552,7 @@ const Home = () => {
                                     <img src="assets/img/features/img-2.jpg" alt="" />
                                 </div>
                                 <div className="content text-start">
-                                    <h3><NavLink to="job-details.html">Digital Marketer</NavLink></h3>
+                                    <h3><NavLink to="/jobDetails">Digital Marketer</NavLink></h3>
                                     <p className="brand">Bingo</p>
                                     <div className="tags">
                                         <span><i className="lni-map-marker"></i> New York</span>
@@ -569,7 +569,7 @@ const Home = () => {
                                     <img src="assets/img/features/img-1.jpg" alt="" />
                                 </div>
                                 <div className="content text-start">
-                                    <h3><NavLink to="job-details.html">Web Developer</NavLink></h3>
+                                    <h3><NavLink to="/jobDetails">Web Developer</NavLink></h3>
                                     <p className="brand">MagNews</p>
                                     <div className="tags">
                                         <span><i className="lni-map-marker"></i> New York</span>
@@ -581,7 +581,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="col-12 text-center mt-4">
-                            <NavLink to="job-page.html" className="btn btn-common">Browse All Jobs</NavLink>
+                            <NavLink to="/jobPage" className="btn btn-common">Browse All Jobs</NavLink>
                         </div>
                     </div>
                 </div>
@@ -740,12 +740,12 @@ const Home = () => {
 
                             <div className="blog-item-wrapper">
                                 <div className="blog-item-img">
-                                    <NavLink to="single-post.html">
+                                    <NavLink to="/blog">
                                         <img src="assets/img/blog/img1.jpg" alt="" />
                                     </NavLink>
                                 </div>
                                 <div className="blog-item-text text-start">
-                                    <h3><NavLink to="single-post.html">Tips to write an impressive resume online for beginner</NavLink></h3>
+                                    <h3><NavLink to="/blog">Tips to write an impressive resume online for beginner</NavLink></h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore praesentium asperiores ad vitae.</p>
                                 </div>
                                 <NavLink className="readmore" to="#">Read More</NavLink>
@@ -757,12 +757,12 @@ const Home = () => {
 
                             <div className="blog-item-wrapper">
                                 <div className="blog-item-img">
-                                    <NavLink to="single-post.html">
+                                    <NavLink to="/blog">
                                         <img src="assets/img/blog/img2.jpg" alt="" />
                                     </NavLink>
                                 </div>
                                 <div className="blog-item-text text-start">
-                                    <h3><NavLink to="single-post.html">Let's explore 5 cool new features in JobBoard theme</NavLink></h3>
+                                    <h3><NavLink to="/blog">Let's explore 5 cool new features in JobBoard theme</NavLink></h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore praesentium asperiores ad vitae.</p>
                                 </div>
                                 <NavLink className="readmore" to="#">Read More</NavLink>
@@ -774,12 +774,12 @@ const Home = () => {
 
                             <div className="blog-item-wrapper">
                                 <div className="blog-item-img">
-                                    <NavLink to="single-post.html">
+                                    <NavLink to="/blog">
                                         <img src="assets/img/blog/img3.jpg" alt="" />
                                     </NavLink>
                                 </div>
                                 <div className="blog-item-text text-start">
-                                    <h3><NavLink to="single-post.html">How to convince recruiters and get your dream job</NavLink></h3>
+                                    <h3><NavLink to="/blog">How to convince recruiters and get your dream job</NavLink></h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore praesentium asperiores ad vitae.</p>
                                 </div>
                                 <NavLink className="readmore" to="#">Read More</NavLink>

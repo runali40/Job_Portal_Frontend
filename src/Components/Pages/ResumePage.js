@@ -48,10 +48,10 @@ const ResumePage = () => {
                   <p className="sub-title">UI/UX Designer</p>
                   <p><span className="address"><i className="lni-map-marker"></i>Mahattan, NYC, USA</span> <span><i className="ti-phone"></i>(+01) 211-123-5678</span></p>
                   <div className="social-link">  
-                    <NavLink to="#" className="Twitter"><i className="lni-twitter-filled"></i></NavLink>
-                    <NavLink to="#" className="facebook"><i className="lni-facebook-filled"></i></NavLink>
-                    <NavLink to="#" className="google"><i className="lni-google-plus"></i></NavLink>
-                    <NavLink to="#" className="linkedin"><i className="lni-linkedin-fill"></i></NavLink>
+                    <NavLink to="/" className="Twitter"><i className="lni-twitter-filled"></i></NavLink>
+                    <NavLink to="/" className="facebook"><i className="lni-facebook-filled"></i></NavLink>
+                    <NavLink to="/" className="google"><i className="lni-google-plus"></i></NavLink>
+                    <NavLink to="/" className="linkedin"><i className="lni-linkedin-fill"></i></NavLink>
                   </div>
                 </div>                  
               </div>
@@ -65,13 +65,13 @@ const ResumePage = () => {
                 <h5>Bannana INC.</h5>
                 <span className="date">Fab 2017-Present(5year)</span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero vero, dolores, officia quibusdam architecto sapiente eos voluptas odit ab veniam porro quae possimus itaque, quas! Tempora sequi nobis, atque incidunt!</p>
-                <p><NavLink to="#">4 Projects</NavLink></p>
+                <p><NavLink to="/">4 Projects</NavLink></p>
                 <br/>
                 <h4>UI Designer</h4>
                 <h5>Whale Creative</h5>
                 <span className="date">Fab 2017-Present(2year)</span>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero vero, dolores, officia quibusdam architecto sapiente eos voluptas odit ab veniam porro quae possimus itaque, quas! Tempora sequi nobis, atque incidunt!</p>
-                <p><NavLink to="#">4 Projects</NavLink></p>
+                <p><NavLink to="/">4 Projects</NavLink></p>
               </div>
               <div className="education item text-start">
                 <h3>Education</h3>

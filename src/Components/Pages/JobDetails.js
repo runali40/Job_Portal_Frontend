@@ -54,7 +54,7 @@ const JobDetails = () => {
                                 </ul>
                                 <h5>How To Apply</h5>
                                 <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
-                                <NavLink to="#" className="btn btn-common">Apply job</NavLink>
+                                <NavLink to="/" className="btn btn-common">Apply job</NavLink>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-12 col-xs-12">
@@ -78,15 +78,15 @@ const JobDetails = () => {
                                             </div>
                                         </form>
                                         <ul className="mt-4 footer-social">
-                                            <li><NavLink className="facebook" to="#"><i className="lni-facebook-filled"></i></NavLink></li>
-                                            <li><NavLink className="twitter" to="#"><i className="lni-twitter-filled"></i></NavLink></li>
-                                            <li><NavLink className="linkedin" to="#"><i className="lni-linkedin-fill"></i></NavLink></li>
-                                            <li><NavLink className="google-plus" to="#"><i className="lni-google-plus"></i></NavLink></li>
+                                            <li><NavLink className="facebook" to="/"><i className="lni-facebook-filled"></i></NavLink></li>
+                                            <li><NavLink className="twitter" to="/"><i className="lni-twitter-filled"></i></NavLink></li>
+                                            <li><NavLink className="linkedin" to="/"><i className="lni-linkedin-fill"></i></NavLink></li>
+                                            <li><NavLink className="google-plus" to="/"><i className="lni-google-plus"></i></NavLink></li>
                                         </ul>
                                         <div className="meta-tag">
-                                            <span className="meta-part"><NavLink to="#"><i className="lni-star"></i> Write a Review</NavLink></span>
-                                            <span className="meta-part"><NavLink to="#"><i className="lni-warning"></i> Reports</NavLink></span>
-                                            <span className="meta-part"><NavLink to="#"><i className="lni-share"></i> Share</NavLink></span>
+                                            <span className="meta-part"><NavLink to="/"><i className="lni-star"></i> Write a Review</NavLink></span>
+                                            <span className="meta-part"><NavLink to="/"><i className="lni-warning"></i> Reports</NavLink></span>
+                                            <span className="meta-part"><NavLink to="/"><i className="lni-share"></i> Share</NavLink></span>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@ const JobDetails = () => {
                     <h4 className="small-title text-left">Similar Jobs</h4>
                     <div className="row">
                         <div className="col-lg-6 col-md-12 col-xs-12">
-                            <NavLink className="job-listings-featured" to="job-details.html">
+                            <NavLink className="job-listings-featured" to="/jobDetails">
                                 <div className="row">
                                     <div className="col-lg-6 col-md-6 col-xs-12">
                                         <div className="job-company-logo">
@@ -128,7 +128,7 @@ const JobDetails = () => {
                             </NavLink>
                         </div>
                         <div className="col-lg-6 col-md-12 col-xs-12">
-                            <NavLink className="job-listings-featured" to="job-details.html">
+                            <NavLink className="job-listings-featured" to="/jobDetails">
                                 <div className="row">
                                     <div className="col-lg-6 col-md-6 col-xs-12">
                                         <div className="job-company-logo">

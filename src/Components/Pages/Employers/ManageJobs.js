@@ -65,7 +65,7 @@ const ManageJobs = () => {
                     <p><span className="full-time">Full-Time</span></p>
                   </div>
                   <div className="col-lg-3 col-md-2 col-xs-12">
-                    <div className="can-img"><NavLink to="#"><img src="assets/img/jobs/candidates.png" alt=""/></NavLink></div>
+                    <div className="can-img"><NavLink to="/"><img src="assets/img/jobs/candidates.png" alt=""/></NavLink></div>
                   </div>
                   <div className="col-lg-3 col-md-2 col-xs-12">
                     <p><i className="lni-star"></i></p>
@@ -82,7 +82,7 @@ const ManageJobs = () => {
                     <p><span className="full-time">Full-Time</span></p>
                   </div>
                   <div className="col-lg-3 col-md-2 col-xs-12">
-                    <div className="can-img"><NavLink to="#"><img src="assets/img/jobs/candidates.png" alt=""/></NavLink></div>
+                    <div className="can-img"><NavLink to="/"><img src="assets/img/jobs/candidates.png" alt=""/></NavLink></div>
                   </div>
                   <div className="col-lg-3 col-md-2 col-xs-12">
                     <p><i className="lni-star"></i></p>
@@ -99,7 +99,7 @@ const ManageJobs = () => {
                     <p><span className="full-time">Full-Time</span></p>
                   </div>
                   <div className="col-lg-3 col-md-2 col-xs-12">
-                    <div className="can-img"><NavLink to="#"><img src="assets/img/jobs/candidates.png" alt=""/></NavLink></div>
+                    <div className="can-img"><NavLink to="/"><img src="assets/img/jobs/candidates.png" alt=""/></NavLink></div>
                   </div>
                   <div className="col-lg-3 col-md-2 col-xs-12">
                     <p><i className="lni-star"></i></p>
@@ -116,7 +116,7 @@ const ManageJobs = () => {
                     <p><span className="full-time">Full-Time</span></p>
                   </div>
                   <div className="col-lg-3 col-md-2 col-xs-12">
-                    <div className="can-img"><NavLink to="#"><img src="assets/img/jobs/candidates.png" alt=""/></NavLink></div>
+                    <div className="can-img"><NavLink to="/"><img src="assets/img/jobs/candidates.png" alt=""/></NavLink></div>
                   </div>
                   <div className="col-lg-3 col-md-2 col-xs-12">
                     <p><i className="lni-star"></i></p>
@@ -126,13 +126,13 @@ const ManageJobs = () => {
               <br/>
 
               <ul className="pagination">              
-                <li className="active"><NavLink to="#" className="btn-prev" ><i className="lni-angle-left"></i> prev</NavLink></li>
-                <li><NavLink to="#">1</NavLink></li>
-                <li><NavLink to="#">2</NavLink></li>
-                <li><NavLink to="#">3</NavLink></li>
-                <li><NavLink to="#">4</NavLink></li>
-                <li><NavLink to="#">5</NavLink></li>
-                <li className="active"><NavLink to="#" className="btn-next">Next <i className="lni-angle-right"></i></NavLink></li>
+                <li className="active"><NavLink to="/" className="btn-prev" ><i className="lni-angle-left"></i> prev</NavLink></li>
+                <li><NavLink to="/">1</NavLink></li>
+                <li><NavLink to="/">2</NavLink></li>
+                <li><NavLink to="/">3</NavLink></li>
+                <li><NavLink to="/">4</NavLink></li>
+                <li><NavLink to="/">5</NavLink></li>
+                <li className="active"><NavLink to="/" className="btn-next">Next <i className="lni-angle-right"></i></NavLink></li>
               </ul>
            
             </div>

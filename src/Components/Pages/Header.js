@@ -11,7 +11,7 @@ const Header = () => {
                         <div className="theme-header clearfix">
 
                             <div className="navbar-header">
-                                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="/main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
                                     <span className="navbar-toggler-icon"></span>
                                     <span className="lni-menu"></span>
                                     <span className="lni-menu"></span>

@@ -129,13 +129,13 @@ const JobAlerts = () => {
               <br/>
            
               <ul className="pagination">              
-                <li className="active"><NavLink to="#" className="btn-prev" ><i className="lni-angle-left"></i> prev</NavLink></li>
-                <li><NavLink to="#">1</NavLink></li>
-                <li><NavLink to="#">2</NavLink></li>
-                <li><NavLink to="#">3</NavLink></li>
-                <li><NavLink to="#">4</NavLink></li>
-                <li><NavLink to="#">5</NavLink></li>
-                <li className="active"><NavLink to="#" className="btn-next">Next <i className="lni-angle-right"></i></NavLink></li>
+                <li className="active"><NavLink to="/" className="btn-prev" ><i className="lni-angle-left"></i> prev</NavLink></li>
+                <li><NavLink to="/">1</NavLink></li>
+                <li><NavLink to="/">2</NavLink></li>
+                <li><NavLink to="/">3</NavLink></li>
+                <li><NavLink to="/">4</NavLink></li>
+                <li><NavLink to="/">5</NavLink></li>
+                <li className="active"><NavLink to="/" className="btn-next">Next <i className="lni-angle-right"></i></NavLink></li>
               </ul>
             
             </div>

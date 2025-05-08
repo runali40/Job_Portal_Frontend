@@ -51,7 +51,7 @@ const ChangePassword = () => {
                                         <input className="form-control" type="text" />
                                         <span className="material-input"></span>
                                     </div>
-                                    <NavLink to="#" id="submit" className="btn btn-common">Save Change</NavLink>
+                                    <NavLink to="/" id="submit" className="btn btn-common">Save Change</NavLink>
                                 </form>
                             </div>
                         </div>

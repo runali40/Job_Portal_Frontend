@@ -1,9 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import { NavLink } from 'react-router-dom'
 
 const Contact = () => {
+      const [name, settName] = useState("")
+      const [email, setEmail] = useState("")
+      const [subject, setSubjec] = useState("")
+      const [message, setMessage] = useState("")
+
   return (
    <>
      <Header/>
@@ -27,11 +32,11 @@ const Contact = () => {
             <div className="col-md-12 col-lg-6 col-sm-12">
               <div className="contact-block text-start">
                 <h2>Contact Form</h2>
-                <form id="contactForm">
+                <div id="contactForm">
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group">
-                        <input type="text" className="form-control" id="name" name="name" placeholder="Name" required data-error="Please enter your name"/>
+                        <input type="text" className="form-control" id="name" name="name" placeholder="Name" required data-error="Please enter your name" value={name} onChange={(e)=>settName(e.target.value)}/>
                         <div className="help-block with-errors"></div>
                       </div>                                 
                     </div>
@@ -59,7 +64,7 @@ const Contact = () => {
                       </div>
                     </div>
                   </div>            
-                </form>
+                </div>
               </div>
             </div>
             <div className="col-md-12 col-lg-6 col-sm-12">
@@ -83,8 +88,8 @@ const Contact = () => {
                     <div className="contact-icon">
                       <i className="lni-phone-handset"></i>
                     </div>
-                    <p><NavLink to="#">Main Office: +880 123 456 789</NavLink></p>
-                    <p><NavLink to="#">Customer Supprort: +880 123 456 789</NavLink></p>
+                    <p><NavLink to="/">Main Office: +880 123 456 789</NavLink></p>
+                    <p><NavLink to="/">Customer Supprort: +880 123 456 789</NavLink></p>
                   </div>
                 </div>
               </div>

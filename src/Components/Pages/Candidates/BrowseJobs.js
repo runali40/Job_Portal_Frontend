@@ -36,7 +36,7 @@ const BrowseJobs = () => {
             </div>
           </div>
           <div className="col-lg-6 col-md-12 col-xs-12">
-            <NavLink className="job-listings-featured" to="job-details.html">
+            <NavLink className="job-listings-featured" to="/jobDetails">
               <div className="row ">
                 <div className="col-lg-6 col-md-6 col-xs-12 ">
                   <div className="job-company-logo">
@@ -63,7 +63,7 @@ const BrowseJobs = () => {
             </NavLink>
           </div>
           <div className="col-lg-6 col-md-12 col-xs-12">
-            <NavLink className="job-listings-featured" to="job-details.html">
+            <NavLink className="job-listings-featured" to="/jobDetails">
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-xs-12">
                   <div className="job-company-logo">
@@ -90,7 +90,7 @@ const BrowseJobs = () => {
             </NavLink>
           </div>
           <div className="col-lg-6 col-md-12 col-xs-12">
-            <NavLink className="job-listings-featured" to="job-details.html">
+            <NavLink className="job-listings-featured" to="/jobDetails">
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-xs-12">
                   <div className="job-company-logo">
@@ -117,7 +117,7 @@ const BrowseJobs = () => {
             </NavLink>
           </div>
           <div className="col-lg-6 col-md-12 col-xs-12">
-            <NavLink className="job-listings-featured" to="job-details.html">
+            <NavLink className="job-listings-featured" to="/jobDetails">
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-xs-12">
                   <div className="job-company-logo">
@@ -144,7 +144,7 @@ const BrowseJobs = () => {
             </NavLink>
           </div>
           <div className="col-lg-6 col-md-12 col-xs-12">
-            <NavLink className="job-listings-featured" to="job-details.html">
+            <NavLink className="job-listings-featured" to="/jobDetails">
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-xs-12">
                   <div className="job-company-logo">
@@ -171,7 +171,7 @@ const BrowseJobs = () => {
             </NavLink>
           </div>
           <div className="col-lg-6 col-md-12 col-xs-12">
-            <NavLink className="job-listings-featured" to="job-details.html">
+            <NavLink className="job-listings-featured" to="/jobDetails">
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-xs-12">
                   <div className="job-company-logo">
@@ -200,7 +200,7 @@ const BrowseJobs = () => {
           <div className="col-lg-12 col-md-12 col-xs-12">
  
             <ul className="pagination">              
-              <li className="active"><NavLink to="#" className="btn-prev" ><i className="lni-angle-left"></i> prev</NavLink></li>
+              <li className="active"><NavLink to="/" className="btn-prev" ><i className="lni-angle-left"></i> prev</NavLink></li>
               <li><NavLink to="/">1</NavLink></li>
               <li><NavLink to="/">2</NavLink></li>
               <li><NavLink to="/">3</NavLink></li>

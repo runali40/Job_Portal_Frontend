@@ -40,7 +40,7 @@ const Footer = () => {
                     <p>Sed consequat sapien faus quam bibendum convallis.</p>
                     <form method="post" id="subscribe-form" name="subscribe-form" className="validate">
                         <div className="form-group is-empty">
-                            <input type="email" value="" name="Email" className="form-control" id="EMAIL" placeholder="Enter Email..." required="" />
+                            <input type="email"  name="Email" className="form-control" id="EMAIL" placeholder="Enter Email..." required="" />
                             <button type="submit" name="subscribe" id="subscribes" className="btn btn-common sub-btn"><i className="lni-envelope"></i></button>
                             <div className="clearfix"></div>
                         </div>

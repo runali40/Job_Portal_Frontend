@@ -30,7 +30,7 @@ const About = () => {
                                 <h3>About Job Career</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est modi, saepe hic esse maxime quasi, sapiente ex debitis quis dolorum unde, neque quibusdam eveniet nobis enim porro repudiandae nesciunt quidem.</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni delectus soluta adipisci beatae ullam quisquam, quia recusandae rem assumenda, praesentium porro sequi eaque doloremque tenetur incidunt officiis explicabo optio perferendis.</p>
-                                <NavLink to="#" className="btn btn-common">Learn More</NavLink>
+                                <NavLink to="/" className="btn btn-common">Learn More</NavLink>
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6 col-xs-12">
@@ -147,7 +147,7 @@ const About = () => {
                                         <div className="content-inner">
                                             <p className="description">Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui.</p>
                                             <div className="author-info">
-                                                <h2><NavLink to="#">Jessica</NavLink></h2>
+                                                <h2><NavLink to="/">Jessica</NavLink></h2>
                                                 <span>Senior Accountant</span>
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@ const About = () => {
                                         <div className="content-inner">
                                             <p className="description">Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui.</p>
                                             <div className="author-info">
-                                                <h2><NavLink to="#">John Doe</NavLink></h2>
+                                                <h2><NavLink to="/">John Doe</NavLink></h2>
                                                 <span>Project Menager</span>
                                             </div>
                                         </div>
@@ -179,7 +179,7 @@ const About = () => {
                                         <div className="content-inner">
                                             <p className="description">Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui.</p>
                                             <div className="author-info">
-                                                <h2><NavLink to="#">Helen</NavLink></h2>
+                                                <h2><NavLink to="/">Helen</NavLink></h2>
                                                 <span>Engineer</span>
                                             </div>
                                         </div>

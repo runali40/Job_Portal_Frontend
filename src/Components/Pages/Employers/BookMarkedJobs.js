@@ -39,7 +39,7 @@ const BookMarkedJobs = () => {
           <div className="col-lg-8 col-md-6 col-xs-12">
             <div className="job-alerts-item bookmarked text-start">
               <h3 className="alerts-title">Bookmarked Jobs</h3>
-              <NavLink className="job-listings" to="job-details.html">
+              <NavLink className="job-listings" to="/jobDetails">
                 <div className="row">
                   <div className="col-lg-4 col-md-12 col-xs-12">
                     <div className="job-company-logo">
@@ -65,7 +65,7 @@ const BookMarkedJobs = () => {
                   </div>
                 </div>
               </NavLink>
-              <NavLink className="job-listings" to="job-details.html">
+              <NavLink className="job-listings" to="/jobDetails">
                 <div className="row">
                   <div className="col-lg-4 col-md-12 col-xs-12">
                     <div className="job-company-logo">
@@ -91,7 +91,7 @@ const BookMarkedJobs = () => {
                   </div>
                 </div>
               </NavLink>
-              <NavLink className="job-listings" to="job-details.html">
+              <NavLink className="job-listings" to="/jobDetails">
                 <div className="row">
                   <div className="col-lg-4 col-md-12 col-xs-12">
                     <div className="job-company-logo">
@@ -117,7 +117,7 @@ const BookMarkedJobs = () => {
                   </div>
                 </div>
               </NavLink>
-              <NavLink className="job-listings" to="job-details.html">
+              <NavLink className="job-listings" to="/jobDetails">
                 <div className="row">
                   <div className="col-lg-4 col-md-12 col-xs-12">
                     <div className="job-company-logo">
@@ -145,13 +145,13 @@ const BookMarkedJobs = () => {
               </NavLink>
           
               <ul className="pagination">              
-                <li className="active"><NavLink to="#" className="btn btn-common" ><i className="ti-angle-left"></i> prev</NavLink></li>
-                <li><NavLink to="#">1</NavLink></li>
-                <li><NavLink to="#">2</NavLink></li>
-                <li><NavLink to="#">3</NavLink></li>
-                <li><NavLink to="#">4</NavLink></li>
-                <li><NavLink to="#">5</NavLink></li>
-                <li className="active"><NavLink to="#" className="btn btn-common">Next <i className="ti-angle-right"></i></NavLink></li>
+                <li className="active"><NavLink to="/" className="btn btn-common" ><i className="ti-angle-left"></i> prev</NavLink></li>
+                <li><NavLink to="/">1</NavLink></li>
+                <li><NavLink to="/">2</NavLink></li>
+                <li><NavLink to="/">3</NavLink></li>
+                <li><NavLink to="/">4</NavLink></li>
+                <li><NavLink to="/">5</NavLink></li>
+                <li className="active"><NavLink to="/" className="btn btn-common">Next <i className="ti-angle-right"></i></NavLink></li>
               </ul>
              
             </div>

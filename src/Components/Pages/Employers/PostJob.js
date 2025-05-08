@@ -64,7 +64,7 @@ const PostJob = () => {
                 </div>  
                 <section id="editor">
                    <div className="form-group">
-                  <label for="comment">Description</label>
+                  <label htmlFor="comment">Description</label>
                   <textarea className="form-control" rows="5" id="comment"></textarea>
                 </div>
                 </section>
@@ -97,7 +97,7 @@ const PostJob = () => {
                 </div> 
                 <div className="custom-file mb-3">
                   <input type="file" className="custom-file-input" id="validatedCustomFile" required/>
-                  <label className="custom-file-label form-control" for="validatedCustomFile">Choose file...</label>
+                  <label className="custom-file-label form-control" htmlFor="validatedCustomFile">Choose file...</label>
                   <div className="invalid-feedback">Example invalid custom file feedback</div>
                 </div>
                 <NavLink to="/" className="btn btn-common">Submit your job</NavLink>
