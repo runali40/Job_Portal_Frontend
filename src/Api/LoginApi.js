@@ -1,6 +1,9 @@
 import axios from 'axios';
 import UrlData from '../UrlData';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
 
 export const LoginApi = (username, password) => {
     const sessionId = uuidv4();
@@ -18,6 +21,12 @@ export const LoginApi = (username, password) => {
     })
         .then((response) => {
             console.log('API response:', response);
+            console.log("token",response.data.result.outcome.tokens)
+            sessionStorage.setItem("sessionid", response.data.result.outcome.sessionId);
+            sessionStorage.setItem("userid", response.data.result.data.UserId);
+            Cookies.set("UserCredential", response.data.result.outcome.tokens, { expires: 7 });
+            toast.success("User Login Successfully!")
+
             return response.data;
         })
         .catch((error) => {
@@ -57,7 +66,7 @@ export const RegisterApi = (username, password, email, role) => {
         um_EmailId: email,
         IpAddress: "192.168.1.4",
         SessionId: sessionId,
-        um_roleid : role
+        um_roleid: role
     };
 
     const url = 'UserMaster/Insert';
@@ -68,6 +77,7 @@ export const RegisterApi = (username, password, email, role) => {
     })
         .then((response) => {
             console.log('API response:', response);
+            toast.success("User Register Successfully!")
             return response.data;
         })
         .catch((error) => {

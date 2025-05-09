@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Footer from './Footer'
 import { NavLink } from 'react-router-dom'
+import { GetCategoryApi, GetLocationApi } from '../../Api/HomeApi'
 
 
 const Home = () => {
+    const [location, setLocation] = useState("")
+    const [allLocation, setAllLocation] = useState([])
+    const [category, setCategory] = useState("")
+    const [allCategory, setAllCategory] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await GetLocationData();
+            await GetCategoryData();
+        };
+
+        fetchData();
+    }, []);
+
+    const GetLocationData = () => {
+        GetLocationApi().then((data) => {
+            setAllLocation(data)
+        })
+    }
+
+    const GetCategoryData = () => {
+        GetCategoryApi().then((data) => {
+            setAllCategory(data)
+        })
+    }
+
     return (
         <>
             <header id="home" className="hero-area">
@@ -38,6 +65,7 @@ const Home = () => {
                                             <li><NavLink className="dropdown-item" to="/jobDetails">Job Details</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/privacyPolicy">Privacy Policy</NavLink></li>
+                                            <li><NavLink className="dropdown-item" to="/pricing">Pricing Tables</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/contact">Contact</NavLink></li>
                                         </ul>
                                     </li>
@@ -107,14 +135,14 @@ const Home = () => {
                                                 <div className="form-group">
                                                     <div className="search-category-container">
                                                         <label className="styled-select">
-                                                            <select>
-                                                                <option value="none">Locations</option>
-                                                                <option value="none">New York</option>
-                                                                <option value="none">California</option>
-                                                                <option value="none">Washington</option>
-                                                                <option value="none">Birmingham</option>
-                                                                <option value="none">Chicago</option>
-                                                                <option value="none">Phoenix</option>
+
+                                                            <select value={location} onChange={(e) => setLocation(e.target.value)}>
+                                                                <option value="" disabled hidden>Select Location</option>
+                                                                {allLocation.map((data) => (
+                                                                    <option key={data.LocationId} value={data.LocationId}>
+                                                                        {data.LocationName}
+                                                                    </option>
+                                                                ))}
                                                             </select>
                                                         </label>
                                                     </div>
@@ -125,16 +153,13 @@ const Home = () => {
                                                 <div className="form-group">
                                                     <div className="search-category-container">
                                                         <label className="styled-select">
-                                                            <select>
-                                                                <option>All Categories</option>
-                                                                <option>Finance</option>
-                                                                <option>IT & Engineering</option>
-                                                                <option>Education/Training</option>
-                                                                <option>Art/Design</option>
-                                                                <option>Sale/Markting</option>
-                                                                <option>Healthcare</option>
-                                                                <option>Science</option>
-                                                                <option>Food Services</option>
+                                                            <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                                                                <option value="" disabled hidden>Select Category</option>
+                                                                {allCategory.map((data) => (
+                                                                    <option key={data.CategoryId} value={data.CategoryId}>
+                                                                        {data.CategoryName}
+                                                                    </option>
+                                                                ))}
                                                             </select>
                                                         </label>
                                                     </div>
@@ -160,7 +185,23 @@ const Home = () => {
                         <p>Most popular categories of portal, sorted by popularity</p>
                     </div>
                     <div className="row">
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category">
+                        {
+                            allCategory.map((data) => {
+                                return (
+                                    <>
+                                        <div className="col-lg-3 col-md-6 col-xs-12 f-category" key={data.CategoryId}>
+                                            <NavLink to="/browseJobs">
+                                                <h3>{data.CategoryName}</h3>
+                                                <p>{data.TotalJobs}</p>
+                                            </NavLink>
+                                        </div>
+                                    </>
+
+                                )
+                            })
+                        }
+
+                        {/* <div className="col-lg-3 col-md-6 col-xs-12 f-category">
                             <NavLink to="/browseJobs">
                                 <div className="icon bg-color-1">
                                     <i className="lni-home"></i>
@@ -231,7 +272,7 @@ const Home = () => {
                                 <h3>Food Services</h3>
                                 <p>(4286 jobs)</p>
                             </NavLink>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </section>
@@ -261,9 +302,9 @@ const Home = () => {
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                                         <div className="tag-type">
-                                            <sapn className="heart-icon">
+                                            <span className="heart-icon">
                                                 <i className="lni-heart"></i>
-                                            </sapn>
+                                            </span>
                                             <span className="full-time">Full Time</span>
                                         </div>
                                     </div>
@@ -288,9 +329,9 @@ const Home = () => {
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                                         <div className="tag-type">
-                                            <sapn className="heart-icon">
+                                            <span className="heart-icon">
                                                 <i className="lni-heart"></i>
-                                            </sapn>
+                                            </span>
                                             <span className="part-time">Part Time</span>
                                         </div>
                                     </div>
@@ -315,9 +356,9 @@ const Home = () => {
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                                         <div className="tag-type">
-                                            <sapn className="heart-icon">
+                                            <span className="heart-icon">
                                                 <i className="lni-heart"></i>
-                                            </sapn>
+                                            </span>
                                             <span className="part-time">Part Time</span>
                                         </div>
                                     </div>
@@ -342,9 +383,9 @@ const Home = () => {
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                                         <div className="tag-type">
-                                            <sapn className="heart-icon">
+                                            <span className="heart-icon">
                                                 <i className="lni-heart"></i>
-                                            </sapn>
+                                            </span>
                                             <span className="full-time">Full Time</span>
                                         </div>
                                     </div>
@@ -369,9 +410,9 @@ const Home = () => {
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                                         <div className="tag-type">
-                                            <sapn className="heart-icon">
+                                            <span className="heart-icon">
                                                 <i className="lni-heart"></i>
-                                            </sapn>
+                                            </span>
                                             <span className="full-time">Full Time</span>
                                         </div>
                                     </div>
@@ -396,9 +437,9 @@ const Home = () => {
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                                         <div className="tag-type">
-                                            <sapn className="heart-icon">
+                                            <span className="heart-icon">
                                                 <i className="lni-heart"></i>
-                                            </sapn>
+                                            </span>
                                             <span className="part-time">Part Time</span>
                                         </div>
                                     </div>

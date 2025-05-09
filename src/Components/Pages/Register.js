@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import { GetRoleApi, RegisterApi } from '../../Api/LoginApi'
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
     const [role, setRole] = useState("")
@@ -17,10 +19,19 @@ const Register = () => {
     }, [])
 
     const RegisterData = () => {
-        RegisterApi(username, password, email, role).then((data) => {
-            console.log(data)
-        })
+        if (role === "") {
+            toast.warning("Please select role!")
+        }
+        else if (username === "" || password === "" || email === "" || retypePassword === ""){
+            toast.warning("Please enter all the fields!")
+        }
+        else {
+            RegisterApi(username, password, email, role).then((data) => {
+                console.log(data)
+            })
+        }
     }
+
     const GetRoleData = () => {
         GetRoleApi().then((data) => {
             setAllRole(data)
@@ -54,8 +65,8 @@ const Register = () => {
                                     <div className="form-group">
 
                                         <div className="d-flex gap-5">
-                                            {allRole.map((data, index) => (
-                                                <label key={data.r_id}>
+                                            {allRole.map((data) => (
+                                                <label className='mx-3' key={data.r_id}>
                                                     <input
                                                         type="radio"
                                                         name="role"

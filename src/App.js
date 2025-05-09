@@ -7,6 +7,8 @@ import '../src/assets/css/slicknav.min.css'
 import '../src/assets/css/animate.css'
 import '../src/assets/css/main.css'
 import '../src/assets/css/responsive.css'
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 // import '../node_modules/bootstrap/dist/css/bootstrap.css'
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import Home from './Components/Pages/Home';
@@ -32,10 +34,12 @@ import Blog from './Components/Pages/Blog';
 import ChangePassword from './Components/Pages/Employers/ChangePassword';
 import BookMarkedJobs from './Components/Pages/Employers/BookMarkedJobs';
 import Notifications from './Components/Pages/Employers/Notifications';
+import Pricing from './Components/Pages/Pricing';
 
 function App() {
   return (
     <div className="App">
+      <ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -59,6 +63,7 @@ function App() {
         <Route path="/changePassword" element={<ChangePassword />} />
         <Route path="/bookMarkedJobs" element={<BookMarkedJobs />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/pricing" element={<Pricing />} />
       </Routes>
     </div>
   );

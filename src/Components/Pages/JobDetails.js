@@ -63,7 +63,7 @@ const JobDetails = () => {
                                     <h3>Job Location</h3>
                                     <div className="maps">
                                         <div id="map" className="map-full">
-                                            <iframe title='map' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d405691.57240383344!2d-122.3212843181106!3d37.40247298383319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb68ad0cfc739%3A0x7eb356b66bd4b50e!2sSilicon+Valley%2C+CA%2C+USA!5e0!3m2!1sen!2sbd!4v1538319316724" allowfullscreen=""></iframe>
+                                            <iframe title='map' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d405691.57240383344!2d-122.3212843181106!3d37.40247298383319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb68ad0cfc739%3A0x7eb356b66bd4b50e!2sSilicon+Valley%2C+CA%2C+USA!5e0!3m2!1sen!2sbd!4v1538319316724" allowFullScreen=""></iframe>
                                         </div>
                                     </div>
                                 </div>
@@ -118,9 +118,9 @@ const JobDetails = () => {
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                                         <div className="tag-type">
-                                            <sapn className="heart-icon">
+                                            <span className="heart-icon">
                                                 <i className="lni-heart"></i>
-                                            </sapn>
+                                            </span>
                                             <span className="full-time">Full Time</span>
                                         </div>
                                     </div>
@@ -145,9 +145,9 @@ const JobDetails = () => {
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                                         <div className="tag-type">
-                                            <sapn className="heart-icon">
+                                            <span className="heart-icon">
                                                 <i className="lni-heart"></i>
-                                            </sapn>
+                                            </span>
                                             <span className="part-time">Part Time</span>
                                         </div>
                                     </div>

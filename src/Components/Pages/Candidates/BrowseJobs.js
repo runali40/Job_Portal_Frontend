@@ -53,9 +53,9 @@ const BrowseJobs = () => {
                 </div>
                 <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                   <div className="tag-type">
-                    <sapn className="heart-icon">
+                    <span className="heart-icon">
                       <i className="lni-heart"></i>
-                    </sapn>
+                    </span>
                     <span className="full-time">Full Time</span>
                   </div>
                 </div>
@@ -80,9 +80,9 @@ const BrowseJobs = () => {
                 </div>
                 <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                   <div className="tag-type">
-                    <sapn className="heart-icon">
+                    <span className="heart-icon">
                       <i className="lni-heart"></i>
-                    </sapn>
+                    </span>
                     <span className="part-time">Part Time</span>
                   </div>
                 </div>
@@ -107,9 +107,9 @@ const BrowseJobs = () => {
                 </div>
                 <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                   <div className="tag-type">
-                    <sapn className="heart-icon">
+                    <span className="heart-icon">
                       <i className="lni-heart"></i>
-                    </sapn>
+                    </span>
                     <span className="part-time">Part Time</span>
                   </div>
                 </div>
@@ -134,9 +134,9 @@ const BrowseJobs = () => {
                 </div>
                 <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                   <div className="tag-type">
-                    <sapn className="heart-icon">
+                    <span className="heart-icon">
                       <i className="lni-heart"></i>
-                    </sapn>
+                    </span>
                     <span className="full-time">Full Time</span>
                   </div>
                 </div>
@@ -161,9 +161,9 @@ const BrowseJobs = () => {
                 </div>
                 <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                   <div className="tag-type">
-                    <sapn className="heart-icon">
+                    <span className="heart-icon">
                       <i className="lni-heart"></i>
-                    </sapn>
+                    </span>
                     <span className="full-time">Full Time</span>
                   </div>
                 </div>
@@ -188,9 +188,9 @@ const BrowseJobs = () => {
                 </div>
                 <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                   <div className="tag-type">
-                    <sapn className="heart-icon">
+                    <span className="heart-icon">
                       <i className="lni-heart"></i>
-                    </sapn>
+                    </span>
                     <span className="part-time">Part Time</span>
                   </div>
                 </div>
