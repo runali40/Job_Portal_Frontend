@@ -1,13 +1,62 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { AddResumeApi } from '../../../Api/CandidateApi/AddResumeApi'
+import { GetLocationApi } from '../../../Api/HomeApi'
 
 
 const AddResume = () => {
+    const navigate = useNavigate();
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [professionTitle, setProfessionTitle] = useState("")
+    const [location, setLocation] = useState("")
+    const [allLocation, setAllLocation] = useState([])
+    const [website, setWebsite] = useState("")
+    const [preHour, setPreHour] = useState("")
+    const [age, setAge] = useState("")
+
+    const [degree, setDegree] = useState("")
+    const [fieldOfStudy, setFieldOfStudy] = useState("")
+    const [school, setSchool] = useState("")
+    const [from, setFrom] = useState("")
+    const [to, setTo] = useState("")
+    const [description, setDescription] = useState("")
+
+    const [companyName, setCompanyName] = useState("")
+    const [title, setTitle] = useState("")
+    const [expFrom, setExpFrom] = useState("")
+    const [expTo, setExpTo] = useState("")
+    const [workDescription, setWorkDescription] = useState("")
+
+    const [skillName, setSkillName] = useState("")
+    const [skillProficiency, setSkillProficiency] = useState("")
+
+
+    useEffect(() => {
+        GetLocationData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const GetLocationData = () => {
+        GetLocationApi(navigate).then((data) => {
+            setAllLocation(data)
+        })
+    }
+
+    const AddResumeData = () => {
+        AddResumeApi(name, email, professionTitle, location, website, preHour, age, degree, fieldOfStudy, school, from, to, description, companyName, title, expFrom, expTo, workDescription, skillName, skillProficiency, navigate).then((data) => {
+            console.log(data)
+        })
+    }
+
+    const currentYear = new Date().getFullYear();
+    const years = Array.from(new Array(50), (val, index) => currentYear - index);
+
     return (
         <>
-        <Header/>
+            <Header />
             <div className="page-header">
                 <div className="container">
                     <div className="row">
@@ -26,38 +75,74 @@ const AddResume = () => {
                         <div className="col-lg-9 col-md-12 col-xs-12">
                             <div className="add-resume box">
                                 <div className="post-header ">
-                                    <p className='text-left'>Already have an account? <NavLink to="/register">Click here to login</NavLink></p>
+                                    <p className='text-left'>Already have an account? <NavLink to="/login">Click here to login</NavLink></p>
                                 </div>
-                                <form className="form-ad">
+                                <div className="form-ad">
                                     <h3 className='text-left'>Basic information</h3>
                                     <div className="form-group text-start">
                                         <label className="control-label">Name</label>
-                                        <input type="text" className="form-control text-left" placeholder="Name" />
+                                        <input type="text" className="form-control text-left" placeholder="Name" value={name} onChange={(e) => {
+                                            const input = e.target.value;
+                                            if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                setName(input);
+                                            }
+                                        }} />
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label text-left"></label>
                                         <label className="control-label text-left">Email</label>
-                                        <input type="text" className="form-control" placeholder="Your@domain.com" />
+                                        <input type="email" className="form-control" placeholder="Your@domain.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label text-left">Profession Title</label>
-                                        <input type="text" className="form-control" placeholder="Headline (e.g. Front-end developer)" />
+                                        <input type="text" className="form-control" placeholder="Headline (e.g. Front-end developer)" value={professionTitle} onChange={(e) => {
+                                            const input = e.target.value;
+                                            if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                setProfessionTitle(input);
+                                            }
+                                        }} />
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label text-left">Location</label>
-                                        <input type="text" className="form-control" placeholder="Location, e.g" />
+
+                                        <label className="styled-select form-control">
+                                            <select value={location} onChange={(e) => setLocation(e.target.value)}>
+                                                <option value="" disabled hidden>Select Location</option>
+                                                {allLocation.map((data) => (
+                                                    <option key={data.LocationId} value={data.LocationId}>
+                                                        {data.LocationName}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </label>
+
+
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label text-left">Web</label>
-                                        <input type="text" className="form-control" placeholder="Website address" />
+                                        <input type="text" className="form-control" placeholder="Website address" value={website} onChange={(e) => setWebsite(e.target.value)} />
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label text-left">Pre Hour</label>
-                                        <input type="text" className="form-control" placeholder="Salary, e.g. 85" />
+                                        <input type="text" className="form-control" placeholder="Salary, e.g. 85" value={preHour}
+                                            maxLength={6}
+                                            onChange={(e) => {
+                                                const value = e.target.value;
+                                                if (/^\d*$/.test(value)) {
+                                                    setPreHour(value);
+                                                }
+                                            }}
+                                        />
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label text-left">Age</label>
-                                        <input type="text" className="form-control" placeholder="Years old" />
+                                        <input type="text" className="form-control" placeholder="Years old" value={age} maxLength={2}
+                                            onChange={(e) => {
+                                                const value = e.target.value;
+                                                if (/^\d*$/.test(value)) {
+                                                    setAge(value);
+                                                }
+                                            }} />
                                     </div>
                                     <div className="form-group text-start">
                                         <div className="button-group">
@@ -70,33 +155,76 @@ const AddResume = () => {
                                         </div>
                                     </div>
                                     <h3 className='text-start'>Education</h3>
+                                    <div>
                                     <div className="form-group text-start">
                                         <label className="control-label">Degree</label>
-                                        <input type="text" className="form-control" placeholder="Degree, e.g. Bachelor" />
+                                        <input type="text" className="form-control" placeholder="Degree, e.g. Bachelor" value={degree} onChange={(e) => {
+                                            const input = e.target.value;
+                                            if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                setDegree(input);
+                                            }
+                                        }} />
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label">Field of Study</label>
-                                        <input type="text" className="form-control" placeholder="Major, e.g Computer Science" />
+                                        <input type="text" className="form-control" placeholder="Major, e.g Computer Science" value={fieldOfStudy} onChange={(e) => {
+                                            const input = e.target.value;
+                                            if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                setFieldOfStudy(input);
+                                            }
+                                        }} />
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label">School</label>
-                                        <input type="text" className="form-control" placeholder="School name, e.g. Massachusetts Institute of Technology" />
+                                        <input type="text" className="form-control" placeholder="School name, e.g. Massachusetts Institute of Technology" value={school} onChange={(e) => {
+                                            const input = e.target.value;
+                                            if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                setSchool(input);
+                                            }
+                                        }} />
                                     </div>
                                     <div className="form-group text-start">
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <label className="control-label">From</label>
-                                                <input type="text" className="form-control" placeholder="e.g 2014" />
+                                                <select
+                                                    className="form-control"
+                                                    value={from}
+                                                    onChange={(e) => setFrom(e.target.value)}
+                                                >
+                                                    <option value="">e.g 2014</option>
+                                                    {years.map((year) => (
+                                                        <option key={year} value={year}>
+                                                            {year}
+                                                        </option>
+                                                    ))}
+                                                </select>
                                             </div>
                                             <div className="col-md-6">
                                                 <label className="control-label">To</label>
-                                                <input type="text" className="form-control" placeholder="e.g 2020" />
+                                                <select
+                                                    className="form-control"
+                                                    value={to}
+                                                    onChange={(e) => setTo(e.target.value)}
+                                                >
+                                                    <option value="">e.g 2020</option>
+                                                    {years.map((year) => (
+                                                        <option key={year} value={year}>
+                                                            {year}
+                                                        </option>
+                                                    ))}
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label">Description</label>
-                                        <textarea className="form-control" rows="7"></textarea>
+                                        <textarea className="form-control" rows="4" value={description} onChange={(e) => {
+                                            const input = e.target.value;
+                                            if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                setDescription(input);
+                                            }
+                                        }}></textarea>
                                     </div>
                                     <div className="form-group text-start">
                                         <div className="button-group">
@@ -116,33 +244,69 @@ const AddResume = () => {
                                             <NavLink to="/" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
                                         </div>
                                     </div>
+                                    </div>
                                     <div className="divider"><h3>Work Experience</h3></div>
                                     <div className="form-group text-start">
                                         <label className="control-label">Company Name</label>
-                                        <input type="text" className="form-control" placeholder="Company name" />
+                                        <input type="text" className="form-control" placeholder="Company name" value={companyName} onChange={(e) => {
+                                            const input = e.target.value;
+                                            if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                setCompanyName(input);
+                                            }
+                                        }} />
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label">Title</label>
-                                        <input type="text" className="form-control" placeholder="e.g UI/UX Researcher" />
+                                        <input type="text" className="form-control" placeholder="e.g UI/UX Researcher" value={title} onChange={(e) => {
+                                            const input = e.target.value;
+                                            if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                setTitle(input);
+                                            }
+                                        }} />
                                     </div>
                                     <div className="form-group text-start">
                                         <div className="row">
                                             <div className="col-md-6">
-                                                <label className="control-label">Date Form</label>
-                                                <input type="text" className="form-control" placeholder="e.g 2014" />
+                                                <label className="control-label">Date From</label>
+                                                <select
+                                                    className="form-control"
+                                                    value={expFrom}
+                                                    onChange={(e) => setExpFrom(e.target.value)}
+                                                >
+                                                    <option value="">e.g 2014</option>
+                                                    {years.map((year) => (
+                                                        <option key={year} value={year}>
+                                                            {year}
+                                                        </option>
+                                                    ))}
+                                                </select>
                                             </div>
                                             <div className="col-md-6">
                                                 <label className="control-label">Date To</label>
-                                                <input type="text" className="form-control" placeholder="e.g 2020" />
+                                                <select
+                                                    className="form-control"
+                                                    value={expTo}
+                                                    onChange={(e) => setExpTo(e.target.value)}
+                                                >
+                                                    <option value="">e.g 2020</option>
+                                                    {years.map((year) => (
+                                                        <option key={year} value={year}>
+                                                            {year}
+                                                        </option>
+                                                    ))}
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label">Description</label>
+                                        <textarea className="form-control" rows="4" value={workDescription} onChange={(e) => {
+                                            const input = e.target.value;
+                                            if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                setWorkDescription(input);
+                                            }
+                                        }}></textarea>
                                     </div>
-                                    <section id="editor"   style={{marginBottom: "30px"}}>
-                                        <div id="summernote"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem quia aut modi fugit, ratione saepe perferendis odio optio repellat dolorum voluptas excepturi possimus similique veritatis nobis. Provident cupiditate delectus, optio?</p></div>
-                                    </section>
                                     <div className="form-group text-start">
                                         <div className="button-group">
                                             <div className="action-buttons">
@@ -166,11 +330,16 @@ const AddResume = () => {
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <label className="control-label">Skill Name</label>
-                                                <input className="form-control" placeholder="Skill name, e.g. HTML" type="text" />
+                                                <input className="form-control" placeholder="Skill name, e.g. HTML" type="text" value={skillName} onChange={(e) => {
+                                                    const input = e.target.value;
+                                                    if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                        setSkillName(input);
+                                                    }
+                                                }} />
                                             </div>
                                             <div className="col-md-6">
                                                 <label className="control-label">% (1-100)</label>
-                                                <input className="form-control" placeholder="Skill proficiency, e.g. 90" type="text" />
+                                                <input className="form-control" placeholder="Skill proficiency, e.g. 90" type="text" value={skillProficiency} onChange={(e) => setSkillProficiency(e.target.value)} />
                                             </div>
                                         </div>
                                     </div>
@@ -182,14 +351,16 @@ const AddResume = () => {
                                             <NavLink to="/" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
                                         </div>
                                     </div>
-                                </form>
-                                <NavLink to="/resumePage" className="btn btn-common text-start">Save</NavLink>
+                                </div>
+                                <div className='text-start'>
+                                    <button className="btn btn-common text-start" onClick={AddResumeData}>Save</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <Footer/>
+            <Footer />
         </>
     )
 }

@@ -4,8 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie';
+// import ErrorHandler from '../ErrorHandler';
 
-export const LoginApi = (username, password) => {
+export const LoginApi = (username, password, navigate) => {
     const sessionId = uuidv4();
     const data = {
         username: username,
@@ -21,17 +22,29 @@ export const LoginApi = (username, password) => {
     })
         .then((response) => {
             console.log('API response:', response);
-            console.log("token",response.data.result.outcome.tokens)
+            console.log("token", response.data.result.outcome.tokens)
             sessionStorage.setItem("sessionid", response.data.result.outcome.sessionId);
             sessionStorage.setItem("userid", response.data.result.data.UserId);
             Cookies.set("UserCredential", response.data.result.outcome.tokens, { expires: 7 });
             toast.success("User Login Successfully!")
-
+            navigate("/")
             return response.data;
         })
         .catch((error) => {
-            console.error('API error:', error);
-            return null;
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.outcome
+            ) {
+                const token1 = error.response.data.outcome.tokens;
+                Cookies.set("UserCredential", token1, { expires: 7 });
+            }
+            console.log(error);
+            if (error.response.status === 400) {
+                toast.error("Invalid username or password");
+            }
+            // const errors = ErrorHandler(error);
+            // toast.error(errors);
         });
 };
 

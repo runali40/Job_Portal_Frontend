@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { GetCategoryApi, GetLocationApi } from '../../../Api/HomeApi'
 import { AddJobApi } from '../../../Api/EmployeerApi'
 
 const PostJob = () => {
+  const navigate = useNavigate()
   const [jobTitle, setJobTitle] = useState("")
   const [location, setLocation] = useState("")
   const [allLocation, setAllLocation] = useState([])
@@ -24,28 +25,28 @@ const PostJob = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await GetLocationData();
-      await GetCategoryData();
+        await GetLocationData();
+        await GetCategoryData();
     };
 
     fetchData();
-  }, []);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
   const GetLocationData = () => {
-    GetLocationApi().then((data) => {
+    GetLocationApi(navigate).then((data) => {
       setAllLocation(data)
     })
   }
 
   const GetCategoryData = () => {
-    GetCategoryApi().then((data) => {
+    GetCategoryApi(navigate).then((data) => {
       setAllCategory(data)
     })
   }
 
   const AddJobData = () => {
-    AddJobApi(jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, file).then((data) => {
-      setAllCategory(data)
+    AddJobApi(jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, file, navigate).then((data) => {
+      console.log(data)
     })
   }
   return (

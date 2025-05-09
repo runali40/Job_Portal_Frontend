@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import Footer from './Footer'
-import { NavLink } from 'react-router-dom'
+import { NavLink , useNavigate} from 'react-router-dom'
 import { GetCategoryApi, GetLocationApi } from '../../Api/HomeApi'
+import {
+    FaHome,
+    FaGlobe,
+    FaBook,
+    FaDesktop,
+    FaPaintBrush,
+    FaHeart,
+    FaFlask,
+    FaTrophy,
+} from 'react-icons/fa';
 
 
 const Home = () => {
+    const navigate = useNavigate();
     const [location, setLocation] = useState("")
     const [allLocation, setAllLocation] = useState([])
     const [category, setCategory] = useState("")
@@ -15,22 +26,32 @@ const Home = () => {
             await GetLocationData();
             await GetCategoryData();
         };
-
+    
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const GetLocationData = () => {
-        GetLocationApi().then((data) => {
+        GetLocationApi(navigate).then((data) => {
             setAllLocation(data)
         })
     }
 
     const GetCategoryData = () => {
-        GetCategoryApi().then((data) => {
+        GetCategoryApi(navigate).then((data) => {
             setAllCategory(data)
         })
     }
-
+    const categoryIcons = {
+        'Finance': <FaHome />,
+        'Sale/Markting': <FaGlobe />,
+        'Education/Training': <FaBook />,
+        'Technologies': <FaDesktop />,
+        'Art/Design': <FaPaintBrush />,
+        'Healthcare': <FaHeart />,
+        'Science': <FaFlask />,
+        'Food Services': <FaTrophy />
+    };
     return (
         <>
             <header id="home" className="hero-area">
@@ -185,94 +206,19 @@ const Home = () => {
                         <p>Most popular categories of portal, sorted by popularity</p>
                     </div>
                     <div className="row">
-                        {
-                            allCategory.map((data) => {
-                                return (
-                                    <>
-                                        <div className="col-lg-3 col-md-6 col-xs-12 f-category" key={data.CategoryId}>
-                                            <NavLink to="/browseJobs">
-                                                <h3>{data.CategoryName}</h3>
-                                                <p>{data.TotalJobs}</p>
-                                            </NavLink>
-                                        </div>
-                                    </>
+                        {allCategory.map((data) => {
+                            const Icon = categoryIcons[data.CategoryName] || <FaGlobe />; // Default fallback icon
 
-                                )
-                            })
-                        }
-
-                        {/* <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-1">
-                                    <i className="lni-home"></i>
+                            return (
+                                <div className="col-lg-3 col-md-6 col-xs-12 f-category" key={data.CategoryId}>
+                                    <NavLink to="/browseJobs">
+                                        <div style={{ fontSize: '2.5rem', marginBottom: '10px' }} className='icon bg-color-1'>{Icon}</div>
+                                        <h3>{data.CategoryName}</h3>
+                                        <p>{data.TotalJobs} jobs</p>
+                                    </NavLink>
                                 </div>
-                                <h3>Finance</h3>
-                                <p>(4286 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-2">
-                                    <i className="lni-world"></i>
-                                </div>
-                                <h3>Sale/Markting</h3>
-                                <p>(2000 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-3">
-                                    <i className="lni-book"></i>
-                                </div>
-                                <h3>Education/Training</h3>
-                                <p>(1450 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category border-right-0">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-4">
-                                    <i className="lni-display"></i>
-                                </div>
-                                <h3>Technologies</h3>
-                                <p>(5100 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category border-bottom-0">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-5">
-                                    <i className="lni-brush"></i>
-                                </div>
-                                <h3>Art/Design</h3>
-                                <p>(5079 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category border-bottom-0">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-6">
-                                    <i className="lni-heart"></i>
-                                </div>
-                                <h3>Healthcare</h3>
-                                <p>(3235 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category border-bottom-0">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-7">
-                                    <i className="lni-funnel"></i>
-                                </div>
-                                <h3>Science</h3>
-                                <p>(1800 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category border-right-0 border-bottom-0">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-8">
-                                    <i className="lni-cup"></i>
-                                </div>
-                                <h3>Food Services</h3>
-                                <p>(4286 jobs)</p>
-                            </NavLink>
-                        </div> */}
+                            );
+                        })}                       
                     </div>
                 </div>
             </section>
