@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Footer from './Footer'
-import { NavLink , useNavigate} from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { GetCategoryApi, GetLocationApi } from '../../Api/HomeApi'
 import {
     FaHome,
@@ -16,6 +16,7 @@ import {
 
 const Home = () => {
     const navigate = useNavigate();
+    const RoleName = sessionStorage.getItem("rolename")
     const [location, setLocation] = useState("")
     const [allLocation, setAllLocation] = useState([])
     const [category, setCategory] = useState("")
@@ -26,7 +27,7 @@ const Home = () => {
             await GetLocationData();
             await GetCategoryData();
         };
-    
+
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -90,29 +91,34 @@ const Home = () => {
                                             <li><NavLink className="dropdown-item" to="/contact">Contact</NavLink></li>
                                         </ul>
                                     </li>
-                                    <li className="nav-item dropdown">
-                                        <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Candidates
-                                        </NavLink>
-                                        <ul className="dropdown-menu">
-                                            <li><NavLink className="dropdown-item" to="/browseJobs">Browse Jobs</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/browseCategories">Browse Categories</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/addResume">Add Resume</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/manageResume">Manage Resumes</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/jobAlerts">Job Alerts</NavLink></li>
-                                        </ul>
-                                    </li>
-                                    <li className="nav-item dropdown">
-                                        <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Employers
-                                        </NavLink>
-                                        <ul className="dropdown-menu">
-                                            <li><NavLink className="dropdown-item" to="/postJob">Add Job</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/manageJobs">Manage Jobs</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/manageApplications">Manage Applications</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/browseResumes">Browse Resumes</NavLink></li>
-                                        </ul>
-                                    </li>
+                                    {
+                                        RoleName === "Candidate" ?
+                                            <li className="nav-item dropdown">
+                                                <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Candidates
+                                                </NavLink>
+                                                <ul className="dropdown-menu">
+                                                    <li><NavLink className="dropdown-item" to="/browseJobs">Browse Jobs</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/browseCategories">Browse Categories</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/addResume">Add Resume</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/manageResume">Manage Resumes</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/jobAlerts">Job Alerts</NavLink></li>
+                                                </ul>
+                                            </li>
+                                            :
+                                            <li className="nav-item dropdown">
+                                                <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Employers
+                                                </NavLink>
+                                                <ul className="dropdown-menu">
+                                                    <li><NavLink className="dropdown-item" to="/postJob">Add Job</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/manageJobs">Manage Jobs</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/manageApplications">Manage Applications</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/browseResumes">Browse Resumes</NavLink></li>
+                                                </ul>
+                                            </li>
+                                    }
+
                                     <li className="nav-item dropdown">
                                         <NavLink className="nav-link dropdown-toggle" to="/blog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Blog
@@ -122,6 +128,11 @@ const Home = () => {
                                     <li className="nav-item">
                                         <NavLink className="nav-link" to="/contact">
                                             Contact
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/uploadCv">
+                                            Upload CV
                                         </NavLink>
                                     </li>
                                     <li className="nav-item">
@@ -218,7 +229,7 @@ const Home = () => {
                                     </NavLink>
                                 </div>
                             );
-                        })}                       
+                        })}
                     </div>
                 </div>
             </section>

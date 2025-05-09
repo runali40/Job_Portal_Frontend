@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const Header = () => {
+    const RoleName = sessionStorage.getItem("rolename")
     return (
         <>
             <header id="home" className="hero-area">
@@ -40,29 +41,35 @@ const Header = () => {
                                             <li><NavLink className="dropdown-item" to="/contact">Contact</NavLink></li>
                                         </ul>
                                     </li>
-                                    <li className="nav-item dropdown">
-                                        <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Candidates
-                                        </NavLink>
-                                        <ul className="dropdown-menu">
-                                            <li><NavLink className="dropdown-item" to="/browseJobs">Browse Jobs</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/browseCategories">Browse Categories</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/addResume">Add Resume</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/manageResume">Manage Resumes</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/jobAlerts">Job Alerts</NavLink></li>
-                                        </ul>
-                                    </li>
-                                    <li className="nav-item dropdown">
-                                        <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Employers
-                                        </NavLink>
-                                        <ul className="dropdown-menu">
-                                            <li><NavLink className="dropdown-item" to="/postJob">Add Job</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/manageJobs">Manage Jobs</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/manageApplications">Manage Applications</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/browseResumes">Browse Resumes</NavLink></li>
-                                        </ul>
-                                    </li>
+                                    {
+                                        RoleName === "Candidate" ?
+                                            <li className="nav-item dropdown">
+                                                <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Candidates
+                                                </NavLink>
+                                                <ul className="dropdown-menu">
+                                                    <li><NavLink className="dropdown-item" to="/browseJobs">Browse Jobs</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/browseCategories">Browse Categories</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/addResume">Add Resume</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/manageResume">Manage Resumes</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/jobAlerts">Job Alerts</NavLink></li>
+                                                </ul>
+                                            </li>
+                                            :
+                                            <li className="nav-item dropdown">
+                                                <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Employers
+                                                </NavLink>
+                                                <ul className="dropdown-menu">
+                                                    <li><NavLink className="dropdown-item" to="/postJob">Add Job</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/manageJobs">Manage Jobs</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/manageApplications">Manage Applications</NavLink></li>
+                                                    <li><NavLink className="dropdown-item" to="/browseResumes">Browse Resumes</NavLink></li>
+                                                </ul>
+                                            </li>
+                                    }
+
+
                                     <li className="nav-item dropdown">
                                         <NavLink className="nav-link dropdown-toggle" to="/blog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Blog
@@ -72,6 +79,11 @@ const Header = () => {
                                     <li className="nav-item">
                                         <NavLink className="nav-link" to="/contact">
                                             Contact
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to="/uploadCv">
+                                            Upload CV
                                         </NavLink>
                                     </li>
                                     <li className="nav-item">

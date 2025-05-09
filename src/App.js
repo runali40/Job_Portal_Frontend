@@ -7,6 +7,7 @@ import '../src/assets/css/slicknav.min.css'
 import '../src/assets/css/animate.css'
 import '../src/assets/css/main.css'
 import '../src/assets/css/responsive.css'
+import '../src/assets/css/uploadCv.css'
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 // import '../node_modules/bootstrap/dist/css/bootstrap.css'
@@ -35,6 +36,7 @@ import ChangePassword from './Components/Pages/Employers/ChangePassword';
 import BookMarkedJobs from './Components/Pages/Employers/BookMarkedJobs';
 import Notifications from './Components/Pages/Employers/Notifications';
 import Pricing from './Components/Pages/Pricing';
+import UploadCv from './Components/Pages/Candidates/UploadCv';
 
 function App() {
   return (
@@ -64,6 +66,7 @@ function App() {
         <Route path="/bookMarkedJobs" element={<BookMarkedJobs />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/uploadCv" element={<UploadCv />} />
       </Routes>
     </div>
   );
