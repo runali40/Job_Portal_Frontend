@@ -46,13 +46,119 @@ const AddResume = () => {
     }
 
     const AddResumeData = () => {
-        AddResumeApi(name, email, professionTitle, location, website, preHour, age, degree, fieldOfStudy, school, from, to, description, companyName, title, expFrom, expTo, workDescription, skillName, skillProficiency, navigate).then((data) => {
+        AddResumeApi(name, email, professionTitle, location, website, preHour, age, educations, workExperiences, skills, navigate).then((data) => {
             console.log(data)
         })
     }
 
+    // const currentYear = new Date().getFullYear();
+    // const years = Array.from(new Array(50), (val, index) => currentYear - index);
+
     const currentYear = new Date().getFullYear();
-    const years = Array.from(new Array(50), (val, index) => currentYear - index);
+    const years = Array.from({ length: 50 }, (_, i) => currentYear - i);
+
+    const [educations, setEducations] = useState([
+        {
+            // id: uuidv4(),
+            degree: '',
+            fieldOfStudy: '',
+            school: '',
+            from: '',
+            to: '',
+            description: ''
+        }
+    ]);
+
+    const handleChange = (index, field, value) => {
+        const updated = [...educations];
+        updated[index][field] = value;
+        setEducations(updated);
+    };
+
+    const addEducation = () => {
+        setEducations([
+            ...educations,
+            {
+                // id: uuidv4(),
+                degree: '',
+                fieldOfStudy: '',
+                school: '',
+                from: '',
+                to: '',
+                description: ''
+            }
+        ]);
+    };
+
+    const deleteEducation = (index) => {
+        if (educations.length === 1) return; // Prevent deleting last form
+        const updated = educations.filter((_, i) => i !== index);
+        setEducations(updated);
+
+    };
+    const [workExperiences, setWorkExperiences] = useState([
+        {
+
+            company_Name: "",
+            com_Title: "",
+            compStartDate: "",
+            compEndDate: "",
+            workDescription: ""
+        }
+    ]);
+    const handleAddExperience = () => {
+        setWorkExperiences([
+            ...workExperiences,
+            {
+                company_Name: "",
+                com_Title: "",
+                compStartDate: "",
+                compEndDate: "",
+                description: ""
+            }
+        ]);
+    };
+
+    const handleDeleteExperience = (index) => {
+        if (workExperiences.length === 1) return;
+        const updated = [...workExperiences];
+        updated.splice(index, 1);
+        setWorkExperiences(updated);
+    };
+
+    const handleExperienceChange = (index, field, value) => {
+        const updated = [...workExperiences];
+        updated[index][field] = value;
+        setWorkExperiences(updated);
+    };
+    const [skills, setSkills] = useState([
+        {
+            skill_Name: "",
+            proficiencyPercentage: ""
+        }
+    ]);
+    const addSkill = () => {
+        setSkills([
+            ...skills,
+            {
+
+                skill_Name: "",
+                proficiencyPercentage: ""
+            }
+        ]);
+    };
+
+    const deleteSkill = (index) => {
+        const updated = [...skills];
+        updated.splice(index, 1);
+        setSkills(updated);
+    };
+
+    const handleSkillChange = (index, field, value) => {
+        const updated = [...skills];
+        updated[index][field] = value;
+        setSkills(updated);
+    };
 
     return (
         <>
@@ -154,7 +260,7 @@ const AddResume = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <h3 className='text-start'>Education</h3>
+                                    {/* <h3 className='text-start'>Education</h3>
                                     <div>
                                     <div className="form-group text-start">
                                         <label className="control-label">Degree</label>
@@ -243,8 +349,121 @@ const AddResume = () => {
                                         <div className="float-right">
                                             <NavLink to="/" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
                                         </div>
+                                    </div> 
+                                     </div> */}
+                                    <div>
+                                        <h3 className="text-start">Education</h3>
+                                        {educations.map((edu, index) => (
+                                            <div key={edu.id} className="education-section mb-4 border p-3 rounded">
+                                                <h3 className="text-start">Education {index + 1}</h3>
+                                                <div className="form-group text-start">
+                                                    <label className="control-label">Degree</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={edu.degree}
+                                                        onChange={(e) => {
+                                                            const val = e.target.value;
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleChange(index, "degree", val);
+                                                        }}
+                                                        placeholder="e.g. Bachelor"
+                                                    />
+                                                </div>
+
+                                                <div className="form-group text-start">
+                                                    <label className="control-label">Field of Study</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={edu.fieldOfStudy}
+                                                        onChange={(e) => {
+                                                            const val = e.target.value;
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleChange(index, "fieldOfStudy", val);
+                                                        }}
+                                                        placeholder="e.g. Computer Science"
+                                                    />
+                                                </div>
+
+                                                <div className="form-group text-start">
+                                                    <label className="control-label">School</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={edu.school}
+                                                        onChange={(e) => {
+                                                            const val = e.target.value;
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleChange(index, "school", val);
+                                                        }}
+                                                        placeholder="e.g. MIT"
+                                                    />
+                                                </div>
+
+                                                <div className="form-group text-start">
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <label className="control-label">From</label>
+                                                            <select
+                                                                className="form-control"
+                                                                value={edu.from}
+                                                                onChange={(e) => handleChange(index, "from", e.target.value)}
+                                                            >
+                                                                <option value="">Select Year</option>
+                                                                {years.map((y) => (
+                                                                    <option key={y} value={y}>{y}</option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <label className="control-label">To</label>
+                                                            <select
+                                                                className="form-control"
+                                                                value={edu.to}
+                                                                onChange={(e) => handleChange(index, "to", e.target.value)}
+                                                            >
+                                                                <option value="">Select Year</option>
+                                                                {years.map((y) => (
+                                                                    <option key={y} value={y}>{y}</option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="form-group text-start">
+                                                    <label className="control-label">Description</label>
+                                                    <textarea
+                                                        className="form-control"
+                                                        rows="3"
+                                                        value={edu.description}
+                                                        onChange={(e) => {
+                                                            const val = e.target.value;
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleChange(index, "description", val);
+                                                        }}
+                                                    ></textarea>
+                                                </div>
+
+                                                <div className="d-flex justify-content-between">
+                                                    <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteEducation(index)}>
+                                                        Delete This
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))}
+
+                                        <div className="text-start mt-3">
+                                            <button type="button" className="btn btn-primary btn-md" onClick={addEducation}>
+                                                <i className="ti-plus"></i> Add New Education
+                                            </button>
+                                        </div>
+
+
+                                        {/* <div className="text-end mt-3">
+                                            <button type="button" className="btn btn-success" onClick={handleSubmit}>
+                                                Submit All
+                                            </button>
+                                        </div> */}
                                     </div>
-                                    </div>
+                                    {/* 
                                     <div className="divider"><h3>Work Experience</h3></div>
                                     <div className="form-group text-start">
                                         <label className="control-label">Company Name</label>
@@ -324,8 +543,107 @@ const AddResume = () => {
                                         <div className="float-right">
                                             <NavLink to="/" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
                                         </div>
+                                    </div> */}
+                                    <div>
+                                        <h3 className="text-start mt-4">Work Experience</h3>
+                                        {workExperiences.map((exp, index) => (
+                                            <div key={exp.id} className="education-section mb-4 border p-3 rounded">
+                                                <h3 className="text-start">Experience {index + 1}</h3>
+
+                                                <div className="form-group text-start">
+                                                    <label className="control-label">Job Title</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={exp.com_Title}
+                                                        onChange={(e) => {
+                                                            const val = e.target.value;
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleExperienceChange(index, "com_Title", val);
+                                                        }}
+                                                        placeholder="e.g. Software Engineer"
+                                                    />
+                                                </div>
+
+                                                <div className="form-group text-start">
+                                                    <label className="control-label">Company</label>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={exp.company_Name}
+                                                        onChange={(e) => {
+                                                            const val = e.target.value;
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleExperienceChange(index, "company_Name", val);
+                                                        }}
+                                                        placeholder="e.g. Google"
+                                                    />
+                                                </div>
+
+                                                <div className="form-group text-start">
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <label className="control-label">From</label>
+                                                            <select
+                                                                className="form-control"
+                                                                value={exp.compStartDate}
+                                                                onChange={(e) => handleExperienceChange(index, "compStartDate", e.target.value)}
+                                                            >
+                                                                <option value="">Select Year</option>
+                                                                {years.map((y) => (
+                                                                    <option key={y} value={y}>{y}</option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <label className="control-label">To</label>
+                                                            <select
+                                                                className="form-control"
+                                                                value={exp.compEndDate}
+                                                                onChange={(e) => handleExperienceChange(index, "compEndDate", e.target.value)}
+                                                            >
+                                                                <option value="">Select Year</option>
+                                                                {years.map((y) => (
+                                                                    <option key={y} value={y}>{y}</option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="form-group text-start">
+                                                    <label className="control-label">Description</label>
+                                                    <textarea
+                                                        className="form-control"
+                                                        rows="3"
+                                                        value={exp.description}
+                                                        onChange={(e) => {
+                                                            const val = e.target.value;
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleExperienceChange(index, "description", val);
+                                                        }}
+                                                    ></textarea>
+                                                </div>
+
+                                                <div className="d-flex justify-content-between">
+                                                    {workExperiences.length > 1 && (
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-danger btn-sm"
+                                                            onClick={() => handleDeleteExperience(index)}
+                                                        >
+                                                            Delete This
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))}
+
+                                        <div className="text-start mt-3">
+                                            <button type="button" className="btn btn-primary btn-md" onClick={handleAddExperience}>
+                                                <i className="ti-plus"></i> Add New Work Experience
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div className="divider"><h3 className='text-start'>Skills</h3></div>
+
+                                    {/* <div className="divider"><h3 className='text-start'>Skills</h3></div>
                                     <div className="form-group text-start">
                                         <div className="row">
                                             <div className="col-md-6">
@@ -350,7 +668,71 @@ const AddResume = () => {
                                         <div className="float-right">
                                             <NavLink to="/" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
                                         </div>
+                                    </div> */}
+                                    <div className="divider">
+                                        <h3 className="text-start">Skills</h3>
                                     </div>
+
+                                    {skills.map((skill, index) => (
+                                        <div key={skill.id} className="education-section mb-4 border p-3 rounded">
+                                            <h3 className="text-start">Skill {index + 1}</h3>
+
+                                            <div className="form-group text-start">
+                                                <div className="row">
+                                                    <div className="col-md-6">
+                                                        <label className="control-label">Skill Name</label>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="e.g. HTML"
+                                                            value={skill.skill_Name}
+                                                            onChange={(e) => {
+                                                                const input = e.target.value;
+                                                                if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                                    handleSkillChange(index, "skill_Name", input);
+                                                                }
+                                                            }}
+                                                        />
+                                                    </div>
+
+                                                    <div className="col-md-6">
+                                                        <label className="control-label">% (1–100)</label>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="e.g. 90"
+                                                            value={skill.proficiencyPercentage}
+                                                            onChange={(e) => {
+                                                                const val = e.target.value;
+                                                                if (/^\d{0,3}$/.test(val) && (+val <= 100 || val === "")) {
+                                                                    handleSkillChange(index, "proficiencyPercentage", val);
+                                                                }
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="add-post-btn d-flex justify-content-between mt-2">
+                                                {skills.length > 1 && (
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-delete"
+                                                        onClick={() => deleteSkill(index)}
+                                                    >
+                                                        <i className="ti-trash"></i> Delete This
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                    <div className="text-start mt-3">
+                                        <button type="button" className="btn btn-primary btn-md" onClick={addSkill}>
+                                            <i className="ti-plus"></i> Add New Skill
+                                        </button>
+                                    </div>
+
                                 </div>
                                 <div className='text-start'>
                                     <button className="btn btn-common text-start" onClick={AddResumeData}>Save</button>
