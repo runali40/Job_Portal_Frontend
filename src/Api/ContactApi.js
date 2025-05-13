@@ -1,4 +1,4 @@
-import apiClient from "../ApiClient";
+import { apiClient } from "../ApiClient";
 import UrlData from "../UrlData";
 
 export const ContactApi = (name, email, subject, message) => {

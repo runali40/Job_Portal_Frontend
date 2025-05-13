@@ -23,30 +23,49 @@ const PostJob = () => {
   const [tagline1, setTagLine1] = useState("")
   const [tagline2, setTagLine2] = useState("")
   const [file, setFile] = useState("")
+  const [base64Image, setBase64Image] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
-        await GetLocationData();
-        await GetCategoryData();
+      try {
+        await GetLocationData();  // waits fully
+        await GetCategoryData();  // uses updated token
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
-
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
-  const GetLocationData = () => {
-    GetLocationApi(navigate).then((data) => {
-      setAllLocation(data)
-    })
-  }
+  }, []);
 
-  const GetCategoryData = () => {
-    GetCategoryApi(navigate).then((data) => {
-      setAllCategory(data)
-    })
-  }
+
+  const GetLocationData = async () => {
+    const data = await GetLocationApi(navigate);
+    setAllLocation(data);
+  };
+
+  const GetCategoryData = async () => {
+    const data = await GetCategoryApi(navigate);
+    setAllCategory(data);
+  };
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
+      setFile(selectedFile.name); // To show in label
+
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setBase64Image(reader.result); // base64 string
+        console.log("Base64 Image:", reader.result); // You can send this to API
+      };
+
+      reader.readAsDataURL(selectedFile); // Convert to base64
+    }
+  };
 
   const AddJobData = () => {
-    AddJobApi(jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, file, navigate).then((data) => {
+    AddJobApi(jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate).then((data) => {
       console.log(data)
     })
   }
@@ -151,8 +170,19 @@ const PostJob = () => {
                     <input type="text" className="form-control" placeholder="Briefly describe your company" value={tagline2} onChange={(e) => setTagLine2(e.target.value)} />
                   </div>
                   <div className="custom-file mb-3">
-                    <input type="file" className="custom-file-input" id="validatedCustomFile" required value={file} onChange={(e) => setFile(e.target.value)} />
-                    <label className="custom-file-label form-control" htmlFor="validatedCustomFile">Choose file...</label>
+                    {/* <input type="file" className="custom-file-input" id="validatedCustomFile" required value={file} onChange={(e) => setFile(e.target.value)} />
+                    <label className="custom-file-label form-control" htmlFor="validatedCustomFile">Choose file...</label> */}
+                    <input
+                      type="file"
+                      className="custom-file-input"
+                      id="validatedCustomFile"
+                      accept="image/*"
+                      required
+                      onChange={handleFileChange}
+                    />
+                    <label className="custom-file-label form-control" htmlFor="validatedCustomFile">
+                      {file || 'Choose file...'}
+                    </label>
                     <div className="invalid-feedback">Example invalid custom file feedback</div>
                   </div>
                   <button className="btn btn-common" onClick={AddJobData}>Submit your job</button>

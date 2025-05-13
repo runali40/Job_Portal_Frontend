@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import UrlData from '../../UrlData';
-import apiClient from '../../ApiClient';
+import { apiClient } from '../../ApiClient';
 import ErrorHandler from '../../ErrorHandler';
 
 export const AddResumeApi = (name, email, professionTitle, location, website, preHour, age, educations, workExperiences, skills, navigate) => {

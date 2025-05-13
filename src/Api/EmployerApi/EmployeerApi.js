@@ -1,11 +1,11 @@
-import apiClient from "../../ApiClient";
+import { apiClient } from "../../ApiClient";
 import UrlData from "../../UrlData";
 import Cookies from 'js-cookie';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorHandler from "../../ErrorHandler";
 
-export const AddJobApi = (jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, file) => {
+export const AddJobApi = (jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image) => {
     const userId = sessionStorage.getItem('userid');
     const data = {
         UserId: userId,
@@ -20,7 +20,7 @@ export const AddJobApi = (jobTitle, location, category, jobTags, description, ap
         website: website,
         tagline1: tagline1,
         tagline2: tagline2,
-        logoFile: "",
+        logoFile: base64Image,
 
     };
     const url = 'Employeer/AddJob';

@@ -6,14 +6,23 @@ import { ManageResumeApi } from '../../../Api/CandidateApi/AddResumeApi'
 
 const ManageResume = () => {
   const navigate = useNavigate();
+  const [name, setName] = useState("")
+  const [professionTitle, setProfessionTitle] = useState("")
+  const [locationName, setLocationName] = useState("")
+  const [perHour, setPerHour] = useState("")
   useEffect(() => {
     ManageResumeData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
   const ManageResumeData = () => {
     ManageResumeApi(navigate).then((data) => {
-      console.log(data)
+      console.log(data[0])
+      setName(data[0].Name)
+      setProfessionTitle(data[0].ProfessionTitle)
+      setLocationName(data[0].LocationName)
+      setPerHour(data[0].PreHour)
     })
   }
   return (
@@ -57,12 +66,12 @@ const ManageResume = () => {
                     <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" /></NavLink>
                     <div className="manager-info">
                       <div className="manager-name text-start">
-                        <h4><NavLink to="/">Zane Joyner</NavLink></h4>
-                        <h5>Front-end developer</h5>
+                        <h4>{name}</h4>
+                        <h5>{professionTitle}</h5>
                       </div>
                       <div className="manager-meta">
-                        <span className="location"><i className="lni-map-marker"></i> Cupertino, CA, USA</span>
-                        <span className="rate"><i className="lni-alarm-clock"></i> $55 per hour</span>
+                        <span className="location"><i className="lni-map-marker"></i> {locationName}</span>
+                        <span className="rate"><i className="lni-alarm-clock"></i> ₹ {perHour} per hour</span>
                       </div>
                     </div>
                   </div>
@@ -77,82 +86,9 @@ const ManageResume = () => {
                     </div>
                   </div>
                 </div>
-                <div className="manager-resumes-item">
-                  <div className="manager-content">
-                    <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" /></NavLink>
-                    <div className="manager-info">
-                      <div className="manager-name text-start">
-                        <h4><NavLink to="/">Zane Joyner</NavLink></h4>
-                        <h5>Front-end developer</h5>
-                      </div>
-                      <div className="manager-meta">
-                        <span className="location"><i className="lni-map-marker"></i> Cupertino, CA, USA</span>
-                        <span className="rate"><i className="lni-alarm-clock"></i> $55 per hour</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="update-date">
-                    <p className="status">
-                      <strong>Updated on:</strong> Fab 22, 2020
-                    </p>
-                    <div className="action-btn">
-                      <NavLink className="btn btn-xs btn-gray" to="/">Hide</NavLink>
-                      <NavLink className="btn btn-xs btn-gray" to="/">Edit</NavLink>
-                      <NavLink className="btn btn-xs btn-danger" to="/">Delete</NavLink>
-                    </div>
-                  </div>
+                <div className='text-start'>
+                  <NavLink className="btn btn-common btn-sm" to="/addResume">Add new resume</NavLink>
                 </div>
-                <div className="manager-resumes-item">
-                  <div className="manager-content">
-                    <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" /></NavLink>
-                    <div className="manager-info">
-                      <div className="manager-name text-start">
-                        <h4><NavLink to="/">Zane Joyner</NavLink></h4>
-                        <h5>Front-end developer</h5>
-                      </div>
-                      <div className="manager-meta">
-                        <span className="location"><i className="lni-map-marker"></i> Cupertino, CA, USA</span>
-                        <span className="rate"><i className="lni-alarm-clock"></i> $55 per hour</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="update-date">
-                    <p className="status">
-                      <strong>Updated on:</strong> Fab 22, 2020
-                    </p>
-                    <div className="action-btn">
-                      <NavLink className="btn btn-xs btn-gray" to="/">Hide</NavLink>
-                      <NavLink className="btn btn-xs btn-gray" to="/">Edit</NavLink>
-                      <NavLink className="btn btn-xs btn-danger" to="/">Delete</NavLink>
-                    </div>
-                  </div>
-                </div>
-                <div className="manager-resumes-item">
-                  <div className="manager-content">
-                    <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" /></NavLink>
-                    <div className="manager-info">
-                      <div className="manager-name text-start">
-                        <h4><NavLink to="/">Zane Joyner</NavLink></h4>
-                        <h5>Front-end developer</h5>
-                      </div>
-                      <div className="manager-meta">
-                        <span className="location"><i className="lni-map-marker"></i> Cupertino, CA, USA</span>
-                        <span className="rate"><i className="lni-alarm-clock"></i> $55 per hour</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="update-date">
-                    <p className="status">
-                      <strong>Updated on:</strong> Fab 22, 2020
-                    </p>
-                    <div className="action-btn">
-                      <NavLink className="btn btn-xs btn-gray" to="/">Hide</NavLink>
-                      <NavLink className="btn btn-xs btn-gray" to="/">Edit</NavLink>
-                      <NavLink className="btn btn-xs btn-danger" to="/">Delete</NavLink>
-                    </div>
-                  </div>
-                </div>
-                <NavLink className="btn btn-common btn-sm" to="add-/resumePage">Add new resume</NavLink>
               </div>
             </div>
           </div>

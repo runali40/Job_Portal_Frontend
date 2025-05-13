@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { GetBrowseApi, ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
+import { ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
 
 const BrowseJobs = () => {
   const navigate = useNavigate();
@@ -18,13 +18,6 @@ const BrowseJobs = () => {
       setAllBrowseJobs(data)
     })
   }
-
-  // const GetBrowseData = (id) => {
-  //   console.log(id, "23")
-  //   GetBrowseApi(id, navigate).then((data) => {
-  //     console.log(data, "get browse data")
-  //   })
-  // }
 
   const GetBrowseData = (id) => {
     console.log("30")

@@ -24,25 +24,26 @@ const Home = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            await GetLocationData();
-            await GetCategoryData();
+            try {
+                await GetLocationData();  // waits fully
+                await GetCategoryData();  // uses updated token
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
         };
-
         fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    
 
-    const GetLocationData = () => {
-        GetLocationApi(navigate).then((data) => {
-            setAllLocation(data)
-        })
-    }
+    const GetLocationData = async () => {
+        const data = await GetLocationApi(navigate);
+        setAllLocation(data);
+    };
 
-    const GetCategoryData = () => {
-        GetCategoryApi(navigate).then((data) => {
-            setAllCategory(data)
-        })
-    }
+    const GetCategoryData = async () => {
+        const data = await GetCategoryApi(navigate);
+        setAllCategory(data);
+    };
     const categoryIcons = {
         'Finance': <FaHome />,
         'Sale/Markting': <FaGlobe />,

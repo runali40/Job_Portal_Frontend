@@ -1,49 +1,67 @@
-// // src/api/apiClient.js
+// src/api/apiClient.js
 import axios from 'axios';
 import UrlData from './UrlData';
 import Cookies from 'js-cookie';
 
-// Utility: Get IP Address (mock or real API if needed)
-const getIpAddress = () => {
-  return '192.168.1.4'; // Replace with dynamic IP logic if needed
-};
-
-// Utility: Get Session ID from sessionStorage
 const getSessionId = () => {
-  return sessionStorage.getItem('sessionid') || '';
+  let sessionId = sessionStorage.getItem('sessionid');
+  return sessionId;
 };
 
-// Utility: Get Token from cookies
-const getToken = () => {
-  return Cookies.get('UserCredential') || '';
-};
-
-// Create Axios instance
+// Create an Axios instance with base URL
 const apiClient = axios.create({
   baseURL: UrlData,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   }
 });
 
-// Request Interceptor: add IP, SessionId, and Bearer Token headers
 apiClient.interceptors.request.use(
-  (config) => {
-    const ip = getIpAddress();
+  async config => {
+    const token = Cookies.get("UserCredential");
+    // console.log('Adding token to headers:', token);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    
+    try {
+      // const ipAddress = await getLocalIP();
+      config.headers['IpAddress'] = "192.168.1.4";
+      // config.headers['IpAddress'] = "192.168.1.2";
+      // console.log('Adding local IP to headers:', ipAddress);
+    } catch (error) {
+      console.warn('Failed to get local IP:', error);
+    }
+    
     const sessionId = getSessionId();
-    const token = getToken();
-
-    config.headers = {
-      ...config.headers,
-      IpAddress: ip,
-      SessionId: sessionId,
-      Authorization: token ? `Bearer ${token}` : '' // Only add if token exists
-    };
-
+    config.headers['SessionId'] = sessionId;
+    // console.log('Adding session ID to headers:', sessionId);
+    
     return config;
   },
-  (error) => Promise.reject(error)
+  error => {
+    console.warn('Request interceptor error:', error);
+    return Promise.reject(error);
+  }
+);
+// Response Interceptor: handle token refresh in responses
+apiClient.interceptors.response.use(
+  (response) => {
+    // Check if response contains a new token and update cookie
+    if (response.data && response.data.outcome && response.data.outcome.tokens) {
+      const newToken = response.data.outcome.tokens;
+      Cookies.set("UserCredential", newToken, { expires: 7 });
+    }
+    return response;
+  },
+  (error) => {
+    // Even in case of error, check if there's a new token
+    if (error.response && error.response.data && error.response.data.outcome && error.response.data.outcome.tokens) {
+      const newToken = error.response.data.outcome.tokens;
+      Cookies.set("UserCredential", newToken, { expires: 7 });
+    }
+    return Promise.reject(error);
+  }
 );
 
-export default apiClient;
-
+export { apiClient };
