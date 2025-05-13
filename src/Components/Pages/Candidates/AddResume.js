@@ -63,8 +63,8 @@ const AddResume = () => {
             degree: '',
             fieldOfStudy: '',
             school: '',
-            from: '',
-            to: '',
+            schoolFrom: '',
+            schoolTo: '',
             description: ''
         }
     ]);
@@ -83,8 +83,8 @@ const AddResume = () => {
                 degree: '',
                 fieldOfStudy: '',
                 school: '',
-                from: '',
-                to: '',
+                schoolFrom: '',
+                schoolTo: '',
                 description: ''
             }
         ]);
@@ -404,8 +404,8 @@ const AddResume = () => {
                                                             <label className="control-label">From</label>
                                                             <select
                                                                 className="form-control"
-                                                                value={edu.from}
-                                                                onChange={(e) => handleChange(index, "from", e.target.value)}
+                                                                value={edu.schoolFrom}
+                                                                onChange={(e) => handleChange(index, "schoolFrom", e.target.value)}
                                                             >
                                                                 <option value="">Select Year</option>
                                                                 {years.map((y) => (
@@ -417,8 +417,8 @@ const AddResume = () => {
                                                             <label className="control-label">To</label>
                                                             <select
                                                                 className="form-control"
-                                                                value={edu.to}
-                                                                onChange={(e) => handleChange(index, "to", e.target.value)}
+                                                                value={edu.schoolTo}
+                                                                onChange={(e) => handleChange(index, "schoolTo", e.target.value)}
                                                             >
                                                                 <option value="">Select Year</option>
                                                                 {years.map((y) => (

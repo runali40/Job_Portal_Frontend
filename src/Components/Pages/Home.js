@@ -84,7 +84,7 @@ const Home = () => {
                                         <ul className="dropdown-menu">
                                             <li><NavLink className="dropdown-item" to="/about">About</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/jobPage">Job Page</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/jobDetails">Job Details</NavLink></li>
+                                            {/* <li><NavLink className="dropdown-item" to="/jobDetails">Job Details</NavLink></li> */}
                                             <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/privacyPolicy">Privacy Policy</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/pricing">Pricing Tables</NavLink></li>

@@ -1,12 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { GetBrowseApi } from '../../Api/EmployerApi/EmployeerApi'
 
 const JobDetails = () => {
+    const location = useLocation();
+    const navigate = useNavigate()
+    const { id } = location.state || {};
+    console.log(id, "10")
+    const [jobTitle, setJobTitle] = useState("")
+    const [companyName, setCompanyName] = useState("")
+    const [locationName, setLocationName] = useState("")
+    const [closingDate, setClosingDate] = useState("")
+    const [postingDate, setPostingDate] = useState("")
+    const [jobSkills, setJobSkills] = useState("")
+    const [description, setDescription] = useState("")
+
+    useEffect(() => {
+        GetJobDetails();
+    }, [])
+
+    const GetJobDetails = () => {
+        GetBrowseApi(id, navigate).then((data) => {
+            console.log(data, "get browse data")
+            setJobTitle(data.Slug)
+            setCompanyName(data.Name)
+            setClosingDate(data.ClosingDate)
+            setJobSkills(data.Introduce)
+            setDescription(data.Description)
+            setLocationName(data.LocationName)
+
+        })
+    }
+
     return (
         <>
-           <Header/>
+            <Header />
 
             <div className="page-header">
                 <div className="container">
@@ -17,10 +47,10 @@ const JobDetails = () => {
                                     <img src="assets/img/about/company-logo.png" alt="" />
                                 </div>
                                 <div className="content text-start">
-                                    <h3 className="product-title">Hiring UI Designer</h3>
-                                    <p className="brand">UIDeck Inc.</p>
+                                    <h3 className="product-title">{jobTitle}</h3>
+                                    <p className="brand">{companyName}</p>
                                     <div className="tags">
-                                        <span><i className="lni-map-marker"></i> New York</span>
+                                        <span><i className="lni-map-marker"></i> {locationName}</span>
                                         <span><i className="lni-calendar"></i> Posted 26 June, 2020</span>
                                     </div>
                                 </div>
@@ -42,15 +72,16 @@ const JobDetails = () => {
                         <div className="col-lg-8 col-md-12 col-xs-12">
                             <div className="content-area text-start" >
                                 <h4>Job Description</h4>
-                                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi umsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit</p>
-                                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi umsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</p>
+                                <p>{description}</p>
+                                {/* <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi umsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</p> */}
                                 <h5>What You Need for this Position</h5>
                                 <ul>
-                                    <li>- Objective-C</li>
+                                    {/* <li>- Objective-C</li>
                                     <li>- iOS SDK</li>
                                     <li>- XCode</li>
                                     <li>- Cocoa</li>
-                                    <li>- ClojureScript</li>
+                                    <li>- ClojureScript</li> */}
+                                    <li>{jobSkills}</li>
                                 </ul>
                                 <h5>How To Apply</h5>
                                 <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
@@ -157,7 +188,7 @@ const JobDetails = () => {
                     </div>
                 </div>
             </section>
-<Footer/>
+            <Footer />
         </>
     )
 }

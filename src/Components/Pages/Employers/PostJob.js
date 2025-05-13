@@ -3,7 +3,8 @@ import Header from '../Header'
 import Footer from '../Footer'
 import { useNavigate } from 'react-router-dom'
 import { GetCategoryApi, GetLocationApi } from '../../../Api/HomeApi'
-import { AddJobApi } from '../../../Api/EmployeerApi'
+import { AddJobApi } from '../../../Api/EmployerApi/EmployeerApi'
+
 
 const PostJob = () => {
   const navigate = useNavigate()
