@@ -7,7 +7,7 @@ import UrlData from '../../UrlData';
 import { apiClient } from '../../ApiClient';
 import ErrorHandler from '../../ErrorHandler';
 
-export const AddResumeApi = (name, email, professionTitle, location, website, preHour, age, educations, workExperiences, skills, navigate) => {
+export const AddResumeApi = (name, email, professionTitle, location, website, preHour, age, educations, workExperiences, skills, rId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const data = {
         userId: userId,
@@ -21,8 +21,10 @@ export const AddResumeApi = (name, email, professionTitle, location, website, pr
         educations: educations,
         workExperiences: workExperiences,
         skills: skills,
-
     };
+    if (rId) {
+        data.Id = rId;
+    }
     const url = 'Candidate/AddResume';
     return apiClient({
         method: 'post',
@@ -32,6 +34,9 @@ export const AddResumeApi = (name, email, professionTitle, location, website, pr
         .then((response) => {
             console.log('API response:', response);
             toast.success("Resume Added Successfully!")
+            toast.success(
+                data.Id ? "Resume Updated successfully!" : "Resume Added Successfully!"
+              );
             const token1 = response.data.outcome.tokens;
             Cookies.set("UserCredential", token1, { expires: 7 });
             return response.data;

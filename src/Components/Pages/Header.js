@@ -5,8 +5,160 @@ const Header = () => {
     const RoleName = sessionStorage.getItem("rolename")
     return (
         <>
+            {/* <header id="home" className="hero-area">
+
+                <nav className="navbar navbar-expand-lg fixed-top scrolling-navbar">
+                    <div className="container">
+                        <div className="theme-header clearfix">
+
+                            <div className="navbar-header">
+                                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span className="navbar-toggler-icon"></span>
+                                    <span className="lni-menu"></span>
+                                    <span className="lni-menu"></span>
+                                    <span className="lni-menu"></span>
+                                </button>
+                                <a href="index-2.html" className="navbar-brand"><img src="assets/img/logo.png" alt="" /></a>
+                            </div>
+                            <div className="collapse navbar-collapse" id="main-navbar">
+                                <ul className="navbar-nav mr-auto w-100 justify-content-end">
+                                    <li className="nav-item active">
+                                        <a className="nav-link" href="index-2.html">
+                                            Home
+                                        </a>
+                                    </li>
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Pages
+                                        </a>
+                                        <ul className="dropdown-menu">
+                                            <li><a className="dropdown-item" href="about.html">About</a></li>
+                                            <li><a className="dropdown-item" href="job-page.html">Job Page</a></li>
+                                            <li><a className="dropdown-item" href="job-details.html">Job Details</a></li>
+                                            <li><a className="dropdown-item" href="resume.html">Resume Page</a></li>
+                                            <li><a className="dropdown-item" href="privacy-policy.html">Privacy Policy</a></li>
+                                            <li><a className="dropdown-item" href="faq.html">FAQ</a></li>
+                                            <li><a className="dropdown-item" href="pricing.html">Pricing Tables</a></li>
+                                            <li><a className="dropdown-item" href="contact.html">Contact</a></li>
+                                        </ul>
+                                    </li>
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Candidates
+                                        </a>
+                                        <ul className="dropdown-menu">
+                                            <li><a className="dropdown-item" href="browse-jobs.html">Browse Jobs</a></li>
+                                            <li><a className="dropdown-item" href="browse-categories.html">Browse Categories</a></li>
+                                            <li><a className="dropdown-item" href="add-resume.html">Add Resume</a></li>
+                                            <li><a className="dropdown-item" href="manage-resumes.html">Manage Resumes</a></li>
+                                            <li><a className="dropdown-item" href="job-alerts.html">Job Alerts</a></li>
+                                        </ul>
+                                    </li>
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Employers
+                                        </a>
+                                        <ul className="dropdown-menu">
+                                            <li><a className="dropdown-item" href="post-job.html">Add Job</a></li>
+                                            <li><a className="dropdown-item" href="manage-jobs.html">Manage Jobs</a></li>
+                                            <li><a className="dropdown-item" href="manage-applications.html">Manage Applications</a></li>
+                                            <li><a className="dropdown-item" href="browse-resumes.html">Browse Resumes</a></li>
+                                        </ul>
+                                    </li>
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Blog
+                                        </a>
+                                        <ul className="dropdown-menu">
+                                            <li><a className="dropdown-item" href="blog.html">Blog - Right Sidebar</a></li>
+                                            <li><a className="dropdown-item" href="blog-left-sidebar.html">Blog - Left Sidebar</a></li>
+                                            <li><a className="dropdown-item" href="blog-full-width.html"> Blog full width</a></li>
+                                            <li><a className="dropdown-item" href="single-post.html">Blog Single Post</a></li>
+                                        </ul>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a className="nav-link" href="contact.html">
+                                            Contact
+                                        </a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a className="nav-link" href="login.html">Sign In</a>
+                                    </li>
+                                    <li className="button-group">
+                                        <a href="post-job.html" className="button btn btn-common">Post a Job</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mobile-menu" data-logo="assets/img/logo-mobile.png"></div>
+                </nav>
+                <div className="container">
+                    <div className="row space-100 justify-content-center">
+                        <div className="col-lg-10 col-md-12 col-xs-12">
+                            <div className="contents">
+                                <h2 className="head-title">Find the job that fits your life</h2>
+                                <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus, <br /> id tincidunt nisi porta sit amet. Suspendisse et sapien varius, pellentesque dui non.</p>
+                                <div className="job-search-form">
+                                    <form>
+                                        <div className="row">
+                                            <div className="col-lg-5 col-md-6 col-xs-12">
+                                                <div className="form-group">
+                                                    <input className="form-control" type="text" placeholder="Job Title or Company Name" />
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-3 col-md-6 col-xs-12">
+                                                <div className="form-group">
+                                                    <div className="search-category-container">
+                                                        <label className="styled-select">
+                                                            <select>
+                                                                <option value="none">Locations</option>
+                                                                <option value="none">New York</option>
+                                                                <option value="none">California</option>
+                                                                <option value="none">Washington</option>
+                                                                <option value="none">Birmingham</option>
+                                                                <option value="none">Chicago</option>
+                                                                <option value="none">Phoenix</option>
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <i className="lni-map-marker"></i>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-3 col-md-6 col-xs-12">
+                                                <div className="form-group">
+                                                    <div className="search-category-container">
+                                                        <label className="styled-select">
+                                                            <select>
+                                                                <option>All Categories</option>
+                                                                <option>Finance</option>
+                                                                <option>IT & Engineering</option>
+                                                                <option>Education/Training</option>
+                                                                <option>Art/Design</option>
+                                                                <option>Sale/Markting</option>
+                                                                <option>Healthcare</option>
+                                                                <option>Science</option>
+                                                                <option>Food Services</option>
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <i className="lni-layers"></i>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-1 col-md-6 col-xs-12">
+                                                <button type="submit" className="button"><i className="lni-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header> */}
+
             <header id="home" className="hero-area">
-                <nav className="navbar navbar-expand-lg fixed-top scrolling-navbar navbar-light bg-light">
+                <nav className="navbar navbar-expand-lg fixed-top scrolling-navbar">
                     <div className="container">
                         <div className="theme-header clearfix">
                             <div className="navbar-header">

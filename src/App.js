@@ -9,6 +9,7 @@ import '../src/assets/css/main.css'
 import '../src/assets/css/responsive.css'
 import '../src/assets/css/uploadCv.css'
 
+
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 // import '../node_modules/bootstrap/dist/css/bootstrap.css'

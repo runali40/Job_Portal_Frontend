@@ -19,6 +19,7 @@ const AddResume = () => {
     const [website, setWebsite] = useState("")
     const [preHour, setPreHour] = useState("")
     const [age, setAge] = useState("")
+    const [rId, setRId] = useState("")
 
 
     useEffect(() => {
@@ -36,16 +37,27 @@ const AddResume = () => {
     const GetManageResumeData = async () => {
         const data = await GetManageResumeApi(resumeId, navigate);
         console.log(data, "data 30")
+        setEducations(data.educations)
+        setWorkExperiences(data.workExperiences)
+        setSkills(data.skills)
+        setName(data.model1.Name)
+        setEmail(data.model1.Email)
+        setProfessionTitle(data.model1.ProfessionTitle)
+        setLocation(data.model1.Location)
+        setWebsite(data.model1.Web)
+        setPreHour(data.model1.PreHour)
+        setAge(data.model1.Age)
+        setRId(data.model1.Id)
     };
 
-    const GetLocationData = () => {
-        GetLocationApi(navigate).then((data) => {
-            setAllLocation(data)
-        })
+    const GetLocationData = async () => {
+        const data = await GetLocationApi(navigate);
+        setAllLocation(data)
+
     }
 
     const AddResumeData = () => {
-        AddResumeApi(name, email, professionTitle, location, website, preHour, age, educations, workExperiences, skills, navigate).then((data) => {
+        AddResumeApi(name, email, professionTitle, location, website, preHour, age, educations, workExperiences, skills, rId, navigate).then((data) => {
             console.log(data)
         })
     }
@@ -59,11 +71,11 @@ const AddResume = () => {
     const [educations, setEducations] = useState([
         {
             // id: uuidv4(),
-            degree: '',
-            fieldOfStudy: '',
-            school: '',
-            schoolFrom: '',
-            schoolTo: '',
+            Degree: '',
+            FieldofStudy: '',
+            School: '',
+            SchoolFrom: '',
+            SchoolTo: '',
             description: ''
         }
     ]);
@@ -79,11 +91,11 @@ const AddResume = () => {
             ...educations,
             {
                 // id: uuidv4(),
-                degree: '',
-                fieldOfStudy: '',
-                school: '',
-                schoolFrom: '',
-                schoolTo: '',
+                Degree: '',
+                FieldofStudy: '',
+                School: '',
+                SchoolFrom: '',
+                SchoolTo: '',
                 description: ''
             }
         ]);
@@ -97,11 +109,10 @@ const AddResume = () => {
     };
     const [workExperiences, setWorkExperiences] = useState([
         {
-
-            company_Name: "",
-            com_Title: "",
-            compStartDate: "",
-            compEndDate: "",
+            CompanyName: "",
+            Title: "",
+            CompDateFrom: "",
+            CompDateTo: "",
             workDescription: ""
         }
     ]);
@@ -109,10 +120,10 @@ const AddResume = () => {
         setWorkExperiences([
             ...workExperiences,
             {
-                company_Name: "",
-                com_Title: "",
-                compStartDate: "",
-                compEndDate: "",
+                CompanyName: "",
+                Title: "",
+                CompDateFrom: "",
+                CompDateTo: "",
                 description: ""
             }
         ]);
@@ -132,17 +143,16 @@ const AddResume = () => {
     };
     const [skills, setSkills] = useState([
         {
-            skill_Name: "",
-            proficiencyPercentage: ""
+            SkillName: "",
+            SkillProficiency: ""
         }
     ]);
     const addSkill = () => {
         setSkills([
             ...skills,
             {
-
-                skill_Name: "",
-                proficiencyPercentage: ""
+                SkillName: "",
+                SkillProficiency: ""
             }
         ]);
     };
@@ -263,19 +273,19 @@ const AddResume = () => {
                                     <div>
                                     <div className="form-group text-start">
                                         <label className="control-label">Degree</label>
-                                        <input type="text" className="form-control" placeholder="Degree, e.g. Bachelor" value={degree} onChange={(e) => {
+                                        <input type="text" className="form-control" placeholder="Degree, e.g. Bachelor" value={Degree} onChange={(e) => {
                                             const input = e.target.value;
                                             if (/^[a-zA-Z\s]*$/.test(input)) {
-                                                setDegree(input);
+                                                Degree(input);
                                             }
                                         }} />
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label">Field of Study</label>
-                                        <input type="text" className="form-control" placeholder="Major, e.g Computer Science" value={fieldOfStudy} onChange={(e) => {
+                                        <input type="text" className="form-control" placeholder="Major, e.g Computer Science" value={FieldofStudy} onChange={(e) => {
                                             const input = e.target.value;
                                             if (/^[a-zA-Z\s]*$/.test(input)) {
-                                                setFieldOfStudy(input);
+                                                setFieldofStudy(input);
                                             }
                                         }} />
                                     </div>
@@ -360,10 +370,10 @@ const AddResume = () => {
                                                     <input
                                                         type="text"
                                                         className="form-control"
-                                                        value={edu.degree}
+                                                        value={edu.Degree}
                                                         onChange={(e) => {
                                                             const val = e.target.value;
-                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleChange(index, "degree", val);
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleChange(index, "Degree", val);
                                                         }}
                                                         placeholder="e.g. Bachelor"
                                                     />
@@ -374,10 +384,10 @@ const AddResume = () => {
                                                     <input
                                                         type="text"
                                                         className="form-control"
-                                                        value={edu.fieldOfStudy}
+                                                        value={edu.FieldofStudy}
                                                         onChange={(e) => {
                                                             const val = e.target.value;
-                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleChange(index, "fieldOfStudy", val);
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleChange(index, "FieldofStudy", val);
                                                         }}
                                                         placeholder="e.g. Computer Science"
                                                     />
@@ -388,10 +398,10 @@ const AddResume = () => {
                                                     <input
                                                         type="text"
                                                         className="form-control"
-                                                        value={edu.school}
+                                                        value={edu.School}
                                                         onChange={(e) => {
                                                             const val = e.target.value;
-                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleChange(index, "school", val);
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleChange(index, "School", val);
                                                         }}
                                                         placeholder="e.g. MIT"
                                                     />
@@ -403,8 +413,8 @@ const AddResume = () => {
                                                             <label className="control-label">From</label>
                                                             <select
                                                                 className="form-control"
-                                                                value={edu.schoolFrom}
-                                                                onChange={(e) => handleChange(index, "schoolFrom", e.target.value)}
+                                                                value={edu.SchoolFrom}
+                                                                onChange={(e) => handleChange(index, "SchoolFrom", e.target.value)}
                                                             >
                                                                 <option value="">Select Year</option>
                                                                 {years.map((y) => (
@@ -416,8 +426,8 @@ const AddResume = () => {
                                                             <label className="control-label">To</label>
                                                             <select
                                                                 className="form-control"
-                                                                value={edu.schoolTo}
-                                                                onChange={(e) => handleChange(index, "schoolTo", e.target.value)}
+                                                                value={edu.SchoolTo}
+                                                                onChange={(e) => handleChange(index, "SchoolTo", e.target.value)}
                                                             >
                                                                 <option value="">Select Year</option>
                                                                 {years.map((y) => (
@@ -554,10 +564,10 @@ const AddResume = () => {
                                                     <input
                                                         type="text"
                                                         className="form-control"
-                                                        value={exp.com_Title}
+                                                        value={exp.Title}
                                                         onChange={(e) => {
                                                             const val = e.target.value;
-                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleExperienceChange(index, "com_Title", val);
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleExperienceChange(index, "Title", val);
                                                         }}
                                                         placeholder="e.g. Software Engineer"
                                                     />
@@ -568,10 +578,10 @@ const AddResume = () => {
                                                     <input
                                                         type="text"
                                                         className="form-control"
-                                                        value={exp.company_Name}
+                                                        value={exp.CompanyName}
                                                         onChange={(e) => {
                                                             const val = e.target.value;
-                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleExperienceChange(index, "company_Name", val);
+                                                            if (/^[a-zA-Z\s]*$/.test(val)) handleExperienceChange(index, "CompanyName", val);
                                                         }}
                                                         placeholder="e.g. Google"
                                                     />
@@ -583,8 +593,8 @@ const AddResume = () => {
                                                             <label className="control-label">From</label>
                                                             <select
                                                                 className="form-control"
-                                                                value={exp.compStartDate}
-                                                                onChange={(e) => handleExperienceChange(index, "compStartDate", e.target.value)}
+                                                                value={exp.CompDateFrom}
+                                                                onChange={(e) => handleExperienceChange(index, "CompDateFrom", e.target.value)}
                                                             >
                                                                 <option value="">Select Year</option>
                                                                 {years.map((y) => (
@@ -596,8 +606,8 @@ const AddResume = () => {
                                                             <label className="control-label">To</label>
                                                             <select
                                                                 className="form-control"
-                                                                value={exp.compEndDate}
-                                                                onChange={(e) => handleExperienceChange(index, "compEndDate", e.target.value)}
+                                                                value={exp.CompDateTo}
+                                                                onChange={(e) => handleExperienceChange(index, "CompDateTo", e.target.value)}
                                                             >
                                                                 <option value="">Select Year</option>
                                                                 {years.map((y) => (
@@ -684,11 +694,11 @@ const AddResume = () => {
                                                             type="text"
                                                             className="form-control"
                                                             placeholder="e.g. HTML"
-                                                            value={skill.skill_Name}
+                                                            value={skill.SkillName}
                                                             onChange={(e) => {
                                                                 const input = e.target.value;
                                                                 if (/^[a-zA-Z\s]*$/.test(input)) {
-                                                                    handleSkillChange(index, "skill_Name", input);
+                                                                    handleSkillChange(index, "SkillName", input);
                                                                 }
                                                             }}
                                                         />
@@ -700,11 +710,11 @@ const AddResume = () => {
                                                             type="text"
                                                             className="form-control"
                                                             placeholder="e.g. 90"
-                                                            value={skill.proficiencyPercentage}
+                                                            value={skill.SkillProficiency}
                                                             onChange={(e) => {
                                                                 const val = e.target.value;
                                                                 if (/^\d{0,3}$/.test(val) && (+val <= 100 || val === "")) {
-                                                                    handleSkillChange(index, "proficiencyPercentage", val);
+                                                                    handleSkillChange(index, "SkillProficiency", val);
                                                                 }
                                                             }}
                                                         />
