@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { AddResumeApi } from '../../../Api/CandidateApi/AddResumeApi'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
+import { AddResumeApi, GetManageResumeApi } from '../../../Api/CandidateApi/AddResumeApi'
 import { GetLocationApi } from '../../../Api/HomeApi'
 
 
 const AddResume = () => {
     const navigate = useNavigate();
+    const locationValue = useLocation();
+    const { resumeId } = locationValue.state || {};
+    console.log(resumeId, "resumeID")
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [professionTitle, setProfessionTitle] = useState("")
@@ -17,27 +20,23 @@ const AddResume = () => {
     const [preHour, setPreHour] = useState("")
     const [age, setAge] = useState("")
 
-    const [degree, setDegree] = useState("")
-    const [fieldOfStudy, setFieldOfStudy] = useState("")
-    const [school, setSchool] = useState("")
-    const [from, setFrom] = useState("")
-    const [to, setTo] = useState("")
-    const [description, setDescription] = useState("")
-
-    const [companyName, setCompanyName] = useState("")
-    const [title, setTitle] = useState("")
-    const [expFrom, setExpFrom] = useState("")
-    const [expTo, setExpTo] = useState("")
-    const [workDescription, setWorkDescription] = useState("")
-
-    const [skillName, setSkillName] = useState("")
-    const [skillProficiency, setSkillProficiency] = useState("")
-
 
     useEffect(() => {
-        GetLocationData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        const fetchData = async () => {
+            try {
+                await GetLocationData();  // waits fully
+                await GetManageResumeData();  // uses updated token
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        fetchData();
+    }, []);
+
+    const GetManageResumeData = async () => {
+        const data = await GetManageResumeApi(resumeId, navigate);
+        console.log(data, "data 30")
+    };
 
     const GetLocationData = () => {
         GetLocationApi(navigate).then((data) => {

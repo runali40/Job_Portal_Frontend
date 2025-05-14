@@ -10,6 +10,9 @@ const ManageResume = () => {
   const [professionTitle, setProfessionTitle] = useState("")
   const [locationName, setLocationName] = useState("")
   const [perHour, setPerHour] = useState("")
+  const [resumeId, setResumeId] = useState("")
+  const [updatedDate, setUpdatedDate] = useState("")
+
   useEffect(() => {
     ManageResumeData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -23,7 +26,17 @@ const ManageResume = () => {
       setProfessionTitle(data[0].ProfessionTitle)
       setLocationName(data[0].LocationName)
       setPerHour(data[0].PreHour)
+      setResumeId(data[0].Id)
+      setUpdatedDate(data[0].UpdatedDate)
     })
+  }
+
+  const GetResumeData = (resumeId) => {
+    console.log("30")
+    navigate("/addResume", {
+      state: { resumeId },
+    }
+    )
   }
   return (
     <>
@@ -77,12 +90,12 @@ const ManageResume = () => {
                   </div>
                   <div className="update-date">
                     <p className="status">
-                      <strong>Updated on:</strong> Fab 22, 2020
+                      <strong>Updated on:</strong> {updatedDate}
                     </p>
                     <div className="action-btn">
                       <NavLink className="btn btn-xs btn-gray" to="/">Hide</NavLink>
-                      <NavLink className="btn btn-xs btn-gray" to="/">Edit</NavLink>
-                      <NavLink className="btn btn-xs btn-danger" to="/">Delete</NavLink>
+                      <button className="btn btn-xs btn-gray" onClick={() => GetResumeData(resumeId)}>Edit</button>
+                      {/* <NavLink className="btn btn-xs btn-danger" to="/">Delete</NavLink> */}
                     </div>
                   </div>
                 </div>

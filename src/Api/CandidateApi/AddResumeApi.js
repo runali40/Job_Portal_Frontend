@@ -94,7 +94,7 @@ export const GetResumeApi = (navigate) => {
     const params = {
         UserId: userId,
 
-    }; 
+    };
     const url = 'Candidate/GetResume';
     return apiClient({
         method: 'get',
@@ -149,6 +149,46 @@ export const ApplyJobApi = (jobTitle, jobDetailId, resumeUrl, navigate) => {
             const token1 = response.data.outcome.tokens;
             Cookies.set("UserCredential", token1, { expires: 7 });
             return response.data;
+        })
+        .catch((error) => {
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.outcome
+            ) {
+                const token1 = error.response.data.outcome.tokens;
+                Cookies.set("UserCredential", token1, { expires: 7 });
+            }
+            console.log(error);
+
+            const errors = ErrorHandler(error, navigate);
+            toast.error(errors);
+            return [];
+        });
+};
+
+export const GetManageResumeApi = (resumeId, navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    console.log(resumeId, "82")
+    const params = {
+        UserId: userId,
+        Id: resumeId,
+        // Skills : [],
+        // Educations : [],
+        // WorkExperiences : []
+    };
+    const url = 'Candidate/GetManageResume';
+    return apiClient({
+        method: 'get',
+        url: (UrlData + url).toString(),
+        params: params,
+    })
+        .then((response) => {
+            console.log('API response:', response.data.data);
+            console.log("token1", response.data.outcome.tokens)
+            const token1 = response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+            return response.data.data;
         })
         .catch((error) => {
             if (

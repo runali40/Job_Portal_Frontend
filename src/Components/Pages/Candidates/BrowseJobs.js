@@ -26,6 +26,7 @@ const BrowseJobs = () => {
       state: { id },
     });
   };
+  
   return (
     <>
       <Header />
