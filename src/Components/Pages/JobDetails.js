@@ -3,6 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { GetBrowseApi } from '../../Api/EmployerApi/EmployeerApi'
+import { ApplyJobApi, GetResumeApi } from '../../Api/CandidateApi/AddResumeApi'
 
 const JobDetails = () => {
     const location = useLocation();
@@ -16,23 +17,61 @@ const JobDetails = () => {
     const [postingDate, setPostingDate] = useState("")
     const [jobSkills, setJobSkills] = useState("")
     const [description, setDescription] = useState("")
+    const [jobDetailId, setJobDetailId] = useState("")
+    const [resumeUrl, setResumeUrl] = useState("")
 
+    // useEffect(() => {
+    //     GetJobDetails();
+    // }, [])
     useEffect(() => {
-        GetJobDetails();
-    }, [])
+        const fetchData = async () => {
+            try {
+                await GetJobDetails();  // waits fully
+                await GetResumeData();  // uses updated token
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        fetchData();
+    }, []);
 
-    const GetJobDetails = () => {
-        GetBrowseApi(id, navigate).then((data) => {
-            console.log(data, "get browse data")
-            setJobTitle(data.Slug)
-            setCompanyName(data.Name)
-            setClosingDate(data.ClosingDate)
-            setJobSkills(data.Introduce)
-            setDescription(data.Description)
-            setLocationName(data.LocationName)
+    
+    const GetJobDetails = async () => {
+        const data = await GetBrowseApi(id, navigate);
+        setJobTitle(data.Slug)
+        setCompanyName(data.Name)
+        setClosingDate(data.ClosingDate)
+        setJobSkills(data.Introduce)
+        setDescription(data.Description)
+        setLocationName(data.LocationName)
+        setJobDetailId(data.Id)
 
-        })
-    }
+    };
+    const GetResumeData = async () => {
+        const data = await GetResumeApi(jobDetailId, navigate);
+        console.log(data);
+        setResumeUrl(data.ResumeUrl)
+    };
+    // const GetJobDetails = () => {
+    //     GetBrowseApi(id, navigate).then((data) => {
+    //         console.log(data, "get browse data")
+    //         setJobTitle(data.Slug)
+    //         setCompanyName(data.Name)
+    //         setClosingDate(data.ClosingDate)
+    //         setJobSkills(data.Introduce)
+    //         setDescription(data.Description)
+    //         setLocationName(data.LocationName)
+    //         setJobDetailId(data.Id)
+
+    //     })
+    // }
+
+
+
+    const ApplyJobData = async () => {
+        await ApplyJobApi(jobTitle, jobDetailId, resumeUrl, navigate);
+
+    };
 
     return (
         <>
@@ -85,7 +124,7 @@ const JobDetails = () => {
                                 </ul>
                                 <h5>How To Apply</h5>
                                 <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
-                                <NavLink to="/" className="btn btn-common">Apply job</NavLink>
+                                <button className="btn btn-common" onClick={ApplyJobData}>Apply job</button>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-12 col-xs-12">

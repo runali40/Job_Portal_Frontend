@@ -7,6 +7,7 @@ import { ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
 const BrowseJobs = () => {
   const navigate = useNavigate();
   const [allBrowseJobs, setAllBrowseJobs] = useState([])
+
   useEffect(() => {
     BrowseJobData();
   }, [])
@@ -61,11 +62,11 @@ const BrowseJobs = () => {
                 return (
                   <>
                     <div className="col-lg-6 col-md-12 col-xs-12" key={data.Id}>
-                      <div className="job-listings-featured" /* to="/jobDetails" */ onClick={() => GetBrowseData(data.Id)}>
+                      <div className="job-listings-featured" /* to="/jobDetails" */ onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>
                         <div className="row ">
                           <div className="col-lg-6 col-md-6 col-xs-12 ">
                             <div className="job-company-logo">
-                              <img src="assets/img/features/img1.png" alt="" />
+                              <img src={data.LOGOFile} alt="" style={{ width: "55px", height: "50px" }} />
                             </div>
                             <div className="job-details text-start">
                               <h3>{data.Slug}</h3>
