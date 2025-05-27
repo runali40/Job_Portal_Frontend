@@ -4,10 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { apiClient } from "../../ApiClient";
 import Cookies from 'js-cookie';
 
-export const FeaturedJobApi = async (Id, newStatus,  navigate) => {
+export const FeaturedJobApi = async (Id, newStatus, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const url = 'Employeer/FeaturedJobupdate';
-    const data = { UserId: userId, id : Id , featured : "1" };
+    const data = { UserId: userId, id: Id, featured: newStatus };
 
     try {
         const response = await apiClient({

@@ -27,8 +27,8 @@ const ManageJobs = () => {
   const [isFeatured, setIsFeatured] = useState("0");
 
   const handleStarClick = (Id) => {
-    const newStatus = isFeatured ? "0" : "1"; // toggle status
-    setIsFeatured(!isFeatured);
+    const newStatus = isFeatured === "1" ? "0" : "1"; // toggle status
+    setIsFeatured(newStatus); // update the state
     FeaturedJobData(Id, newStatus); // pass Id and new status
   };
   return (
@@ -105,8 +105,8 @@ const ManageJobs = () => {
                               {/* <p><i className="lni-star" onClick={()=>{FeaturedJobData(data.Id)}}></i></p> */}
                               <p>
                                 <i
-                                  className={`lni-star ${isFeatured ? "text-yellow-500" : "text-gray-400"}`}
-                                  onClick={()=>handleStarClick(data.Id)}
+                                  className={`lni-star ${isFeatured === "1" && (data.Id) ? "bg-primary" : "text-gray-400"}`}
+                                  onClick={() => handleStarClick(data.Id)}
                                   style={{ cursor: "pointer" }}
                                 ></i>
                               </p>
