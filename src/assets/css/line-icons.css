@@ -23,7 +23,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.lni-star-color  {
+  color: blue;
+}
 .lni-add-files:before {
   content: "\e900";
 }

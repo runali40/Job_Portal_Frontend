@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { GetCategoryApi, GetLocationApi } from '../../Api/HomeApi'
+import { GetFeaturedApi } from '../../Api/EmployerApi/FeaturedApi'
 
 const JobPage = () => {
+  const navigate = useNavigate();
   const [location, setLocation] = useState("")
   const [allLocation, setAllLocation] = useState([])
   const [category, setCategory] = useState("")
@@ -14,22 +16,28 @@ const JobPage = () => {
     const fetchData = async () => {
       await GetLocationData();
       await GetCategoryData();
+      await GetFeaturesData();
     };
 
     fetchData();
   }, []);
 
-  const GetLocationData = () => {
-    GetLocationApi().then((data) => {
-      setAllLocation(data)
-    })
+  const GetLocationData = async() => {
+    const data = await GetLocationApi();
+    setAllLocation(data)
   }
 
-  const GetCategoryData = () => {
-    GetCategoryApi().then((data) => {
-      setAllCategory(data)
-    })
+  const GetCategoryData = async () => {
+    const data = await GetCategoryApi();
+    setAllCategory(data)
   }
+
+  const GetFeaturesData = async () => {
+    const data = await GetFeaturedApi(navigate);
+    console.log(data, "get featured data");
+
+  }
+
   return (
     <>
       <Header />

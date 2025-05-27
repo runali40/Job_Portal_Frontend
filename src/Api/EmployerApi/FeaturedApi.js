@@ -32,3 +32,32 @@ export const FeaturedJobApi = async (Id, newStatus, navigate) => {
         throw error;
     }
 };
+
+export const GetFeaturedApi = async (navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    const url = 'Employeer/GetFeatures';
+    const params = { UserId: userId };
+
+    try {
+        const response = await apiClient({
+            method: 'get',
+            url: url,
+            params: params,
+        });
+
+        console.log(response.data.data, "get featured job api");
+
+        // ✅ Set token manually so it's ready for next API call
+        if (response.data?.outcome?.tokens) {
+            const newToken = response.data.outcome.tokens;
+            Cookies.set("UserCredential", newToken, { expires: 7 });
+        }
+
+        return response.data.data;
+    } catch (error) {
+        console.error("Error fetching applied candidate data:", error);
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        throw error;
+    }
+};

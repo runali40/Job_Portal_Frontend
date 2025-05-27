@@ -22,14 +22,14 @@ const ManageJobs = () => {
   const FeaturedJobData = async (Id, newStatus) => {
     const data = await FeaturedJobApi(Id, newStatus, navigate);
     console.log(data, "count data");
+    await ManageJobData();
 
   }
   const [isFeatured, setIsFeatured] = useState("0");
 
-  const handleStarClick = (Id) => {
-    const newStatus = isFeatured === "1" ? "0" : "1"; // toggle status
-    setIsFeatured(newStatus); // update the state
-    FeaturedJobData(Id, newStatus); // pass Id and new status
+  const handleStarClick = (Id, currentStatus) => {
+    const newStatus = currentStatus === "1" ? "0" : "1";
+    FeaturedJobData(Id, newStatus); // Send updated status to backend
   };
   return (
     <>
@@ -104,11 +104,17 @@ const ManageJobs = () => {
                             <div className="col-lg-3 col-md-2 col-xs-12">
                               {/* <p><i className="lni-star" onClick={()=>{FeaturedJobData(data.Id)}}></i></p> */}
                               <p>
-                                <i
-                                  className={`lni-star ${isFeatured === "1" && (data.Id) ? "bg-primary" : "text-gray-400"}`}
-                                  onClick={() => handleStarClick(data.Id)}
+                                {/* <i
+                                  className={`lni-star ${data.Featured === "1" ? "lni-star-color  " : "text-white"}`}
+                                  onClick={() => handleStarClick(data.Id, data.Featured)}
                                   style={{ cursor: "pointer" }}
-                                ></i>
+                                ></i> */}
+                                <span
+                                  onClick={() => handleStarClick(data.Id, data.Featured)}
+                                  style={{ cursor: "pointer", fontSize: "20px", color: data.Featured === "1" ? "blue" : "gray" }}
+                                >
+                                  {data.Featured === "1" ? "★" : "☆"}
+                                </span>
                               </p>
                             </div>
                           </div>
