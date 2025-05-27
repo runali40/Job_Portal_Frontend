@@ -59,3 +59,30 @@ export const GetCategoryApi = async (navigate) => {
     }
 };
 
+export const JobSearchApi = async (locationId, categoryId, navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    const url = 'Home/SearchJob';
+    const data = { UserId: userId, LocationName: locationId, CategoryName: categoryId };
+
+    try {
+        const response = await apiClient({
+            method: 'post',
+            url: url,
+            data: data,
+        });
+
+        console.log(response.data.data, "get categories data");
+        if (response.data?.outcome?.tokens) {
+            const newToken = response.data.outcome.tokens;
+            Cookies.set("UserCredential", newToken, { expires: 7 });
+        }
+
+        return response.data.data;
+    } catch (error) {
+        console.error("Error fetching category data:", error);
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        throw error;
+    }
+};
+
