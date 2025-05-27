@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Footer from '../Footer'
 import Header from '../Header'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
+import { FeaturedJobApi } from '../../../Api/EmployerApi/FeaturedApi'
 
 const ManageJobs = () => {
+  const navigate = useNavigate();
   const [allManageJobs, setAllManageJobs] = useState([])
   useEffect(() => {
     ManageJobData();
@@ -17,7 +19,18 @@ const ManageJobs = () => {
       setAllManageJobs(data)
     })
   }
+  const FeaturedJobData = async (Id, newStatus) => {
+    const data = await FeaturedJobApi(Id, newStatus, navigate);
+    console.log(data, "count data");
 
+  }
+  const [isFeatured, setIsFeatured] = useState("0");
+
+  const handleStarClick = (Id) => {
+    const newStatus = isFeatured ? "0" : "1"; // toggle status
+    setIsFeatured(!isFeatured);
+    FeaturedJobData(Id, newStatus); // pass Id and new status
+  };
   return (
     <>
       <Header />
@@ -89,7 +102,14 @@ const ManageJobs = () => {
                               <div className="can-img"><NavLink to="/"><img src="assets/img/jobs/candidates.png" alt="" /></NavLink></div>
                             </div>
                             <div className="col-lg-3 col-md-2 col-xs-12">
-                              <p><i className="lni-star"></i></p>
+                              {/* <p><i className="lni-star" onClick={()=>{FeaturedJobData(data.Id)}}></i></p> */}
+                              <p>
+                                <i
+                                  className={`lni-star ${isFeatured ? "text-yellow-500" : "text-gray-400"}`}
+                                  onClick={()=>handleStarClick(data.Id)}
+                                  style={{ cursor: "pointer" }}
+                                ></i>
+                              </p>
                             </div>
                           </div>
                         </div>

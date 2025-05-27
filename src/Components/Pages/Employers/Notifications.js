@@ -5,9 +5,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import {
   GetAppliedCandidateApi,
   GetNotificationApi,
+  GetNotificationCountApi,
+  GetNotificationMsgApi,
 } from "../../../Api/EmployerApi/NotificationApi";
 
 const Notifications = () => {
+  const [notificationCount, setNotificationCount] = useState("")
+  const [allNotification, setAllNotification] = useState([])
   // useEffect(() => {
   //   GetNotificationData();
   // }, []);
@@ -15,9 +19,11 @@ const Notifications = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await GetNotificationData(); // waits fully
+        await GetNotificationMsgData();
 
-        await GetAppliedCandidateData(); // uses updated token
+        await GetNotificationCountData(); // waits fully
+
+        // await GetAppliedCandidateData(); 
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -26,16 +32,23 @@ const Notifications = () => {
   }, []);
   const navigate = useNavigate();
 
-  const GetNotificationData = async () => {
-    const data = await GetNotificationApi(navigate);
+  const GetNotificationMsgData = async () => {
+    const data = await GetNotificationMsgApi(navigate);
     console.log(data);
+    setAllNotification(data)
   }
-     const GetAppliedCandidateData = async () => {
+
+  const GetNotificationCountData = async () => {
+    const data = await GetNotificationCountApi(navigate);
+    console.log(data.NotificationCount, "count data");
+    setNotificationCount(data.NotificationCount)
+  }
+  const GetAppliedCandidateData = async () => {
     const data = await GetAppliedCandidateApi(navigate);
     console.log(data);
 
   };
-  
+
   return (
     <>
       <Header />
@@ -66,7 +79,7 @@ const Notifications = () => {
                   </li>
                   <li>
                     <NavLink className="active" to="/notifications">
-                      Notifications <span className="notinumber">2</span>
+                      Notifications <span className="notinumber">{notificationCount}</span>
                     </NavLink>
                   </li>
                   <li>
@@ -89,21 +102,28 @@ const Notifications = () => {
             <div className="col-md-8 col-sm-8 col-xs-12">
               <div className="job-alerts-item notification">
                 <h3 className="alerts-title text-start">Your Notifications</h3>
-                <div className="notification-item">
-                  <div className="thums">
-                    <img src="assets/img/jobs/img-1.jpg" alt="" />
-                  </div>
-                  <div className="text-left">
-                    <p>
-                      Your Bookmarked job "Web designer needed" from Banana Inc,
-                      has expired.
-                    </p>
-                    <span className="time">
-                      <i className="lni-alarm-clock"></i>3 Hours ago
-                    </span>
-                  </div>
-                </div>
-                <div className="notification-item">
+                {
+                  allNotification.map((data) => {
+                    return (
+                      <div className="notification-item">
+                        <div className="thums">
+                          {/* <img src="assets/img/jobs/img-1.jpg" alt="" /> */}
+                          <img src={data.LOGOFile} alt="" />
+                        </div>
+                        <div className="text-left">
+                          <p>
+                            {data.Message}
+                          </p>
+                          <span className="time">
+                            <i className="lni-alarm-clock"></i>3 Hours ago
+                          </span>
+                        </div>
+                      </div>
+                    )
+                  })
+                }
+
+                {/* <div className="notification-item">
                   <div className="thums">
                     <img src="assets/img/jobs/img-2.jpg" alt="" />
                   </div>
@@ -172,7 +192,7 @@ const Notifications = () => {
                       <i className="lni-alarm-clock"></i>3 Hours ago
                     </span>
                   </div>
-                </div>
+                </div> */}
 
                 <ul className="pagination">
                   <li className="active">
