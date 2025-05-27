@@ -7,7 +7,8 @@ import { ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
 const BrowseJobs = () => {
   const navigate = useNavigate();
   const [allBrowseJobs, setAllBrowseJobs] = useState([])
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
   useEffect(() => {
     BrowseJobData();
   }, [])
@@ -26,7 +27,10 @@ const BrowseJobs = () => {
       state: { id },
     });
   };
-  
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentJobs = allBrowseJobs.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(allBrowseJobs.length / itemsPerPage);
   return (
     <>
       <Header />
@@ -59,7 +63,7 @@ const BrowseJobs = () => {
               </div>
             </div>
             {
-              allBrowseJobs.map((data) => {
+              currentJobs.map((data) => {
                 return (
                   <>
                     <div className="col-lg-6 col-md-12 col-xs-12" key={data.Id}>
@@ -93,7 +97,7 @@ const BrowseJobs = () => {
                 )
               })
             }
-            <div className="col-lg-12 col-md-12 col-xs-12">
+            {/* <div className="col-lg-12 col-md-12 col-xs-12">
 
               <ul className="pagination">
                 <li className="active"><NavLink to="/" className="btn-prev" ><i className="lni-angle-left"></i> prev</NavLink></li>
@@ -105,6 +109,35 @@ const BrowseJobs = () => {
                 <li className="active"><NavLink to="/" className="btn-next">Next <i className="lni-angle-right"></i></NavLink></li>
               </ul>
 
+            </div> */}
+            <div className="col-lg-12 col-md-12 col-xs-12">
+              <ul className="pagination">
+                <li className={currentPage === 1 ? "disabled" : "active"}>
+                  <button
+                    className="btn btn-prev"
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                  >
+                    <i className="lni-angle-left"></i> Prev
+                  </button>
+                </li>
+
+                {[...Array(totalPages)].map((_, index) => (
+                  <li key={index} className={currentPage === index + 1 ? "active" : ""}>
+                    <button className='btn btn-prev' onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
+                  </li>
+                ))}
+
+                <li className={currentPage === totalPages ? "disabled" : "active"}>
+                  <button
+                    className="btn btn-next"
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                  >
+                    Next <i className="lni-angle-right"></i>
+                  </button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

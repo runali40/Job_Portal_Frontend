@@ -9965,3 +9965,18 @@ a.text-dark:hover {
     }
 }
 
+.pagination li {
+    display: inline-block;
+    /* margin: 0 5px; */
+  }
+  .pagination li.active button {
+    background-color: #007bff;
+    color: white;
+  }
+  .pagination button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    background-color: lightgray;
+    color: black
+  }
