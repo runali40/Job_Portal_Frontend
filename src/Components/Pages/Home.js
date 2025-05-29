@@ -14,7 +14,7 @@ import {
 } from 'react-icons/fa';
 import { GetFeaturedApi } from '../../Api/EmployerApi/FeaturedApi';
 import { BookmarkedJobApi } from '../../Api/CandidateApi/BookmarkedJobApi';
-
+import Cookies from 'js-cookie';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -89,6 +89,15 @@ const Home = () => {
         const newStatus = currentStatus === "1" ? "0" : "1";
         BookmarkedJobData(Id, newStatus); // Send updated status to backend
     };
+
+    const LogOutButton = () => {
+        localStorage.removeItem("sessionid");
+        // localStorage.removeItem("UserCredential");
+        Cookies.remove("UserCredential", { path: '/' });
+        Cookies.remove("UserCredential")
+        navigate("/")
+    }
+
     return (
         <>
             <header id="home" className="hero-area">
@@ -155,12 +164,12 @@ const Home = () => {
                                             </li>
                                     }
 
-                                    <li className="nav-item dropdown">
+                                    {/* <li className="nav-item dropdown">
                                         <NavLink className="nav-link dropdown-toggle" to="/blog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Blog
                                         </NavLink>
 
-                                    </li>
+                                    </li> */}
                                     {/* <li className="nav-item">
                                         <NavLink className="nav-link" to="/contact">
                                             Contact
@@ -171,11 +180,14 @@ const Home = () => {
                                             Upload CV
                                         </NavLink>
                                     </li>
-                                    <li className="nav-item">
+                                    {/* <li className="nav-item">
                                         <NavLink className="nav-link" to="/login">Sign In</NavLink>
-                                    </li>
+                                    </li> */}
                                     <li className="button-group">
                                         <NavLink to="/postJob" className="button btn btn-common">Post a Job</NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <div className="nav-link" onClick={LogOutButton} style={{ cursor: "pointer" }}>Sign Out</div>
                                     </li>
                                 </ul>
                             </div>

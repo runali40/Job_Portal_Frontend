@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorHandler from "../../ErrorHandler";
 
-export const AddJobApi = (jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image) => {
+export const AddJobApi = (jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const data = {
         UserId: userId,
@@ -37,7 +37,18 @@ export const AddJobApi = (jobTitle, location, category, jobTags, description, ap
             return response.data;
         })
         .catch((error) => {
-            console.error('API error:', error);
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.outcome
+            ) {
+                const token1 = error.response.data.outcome.tokens;
+                Cookies.set("UserCredential", token1, { expires: 7 });
+            }
+            console.log(error);
+
+            const errors = ErrorHandler(error, navigate);
+            toast.error(errors);
             return null;
         });
 };

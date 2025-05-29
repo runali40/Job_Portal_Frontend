@@ -26,10 +26,19 @@ export const GetNotificationCountApi = async (navigate) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching notification data:", error);
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
         const errors = ErrorHandler(error, navigate);
         toast.error(errors);
-        throw error;
+        return null;
     }
 };
 
@@ -55,10 +64,19 @@ export const GetAppliedCandidateApi = async (navigate) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching applied candidate data:", error);
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
         const errors = ErrorHandler(error, navigate);
         toast.error(errors);
-        throw error;
+        return null;
     }
 };
 
@@ -84,10 +102,19 @@ export const GetNotificationMsgApi = async (navigate) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching applied candidate data:", error);
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
         const errors = ErrorHandler(error, navigate);
         toast.error(errors);
-        throw error;
+        return null;
     }
 };
 
@@ -113,9 +140,18 @@ export const EmpViewNotification = async (navigate) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching applied candidate data:", error);
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
         const errors = ErrorHandler(error, navigate);
         toast.error(errors);
-        throw error;
+        return null;
     }
 };

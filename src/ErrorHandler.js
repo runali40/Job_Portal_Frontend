@@ -9,7 +9,7 @@ const ErrorHandler = (error, navigate) => {
         } else if (error.response.status === 402) {
             return "Allowed only 4 Entries";
         } else if (error.response.status === 401) {
-            navigate("/login")
+            navigate("/")
             return "Session Time Out";
         } else if (error.response.status === 500) {
             return "Application is not connect to API";

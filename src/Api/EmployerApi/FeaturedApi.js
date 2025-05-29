@@ -26,10 +26,19 @@ export const FeaturedJobApi = async (Id, newStatus, navigate) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching applied candidate data:", error);
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
         const errors = ErrorHandler(error, navigate);
         toast.error(errors);
-        throw error;
+        return null;
     }
 };
 
@@ -55,9 +64,18 @@ export const GetFeaturedApi = async (navigate) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching applied candidate data:", error);
-        const errors = ErrorHandler(error, navigate);
-        toast.error(errors);
-        throw error;
+      if (
+                      error.response &&
+                      error.response.data &&
+                      error.response.data.outcome
+                  ) {
+                      const token1 = error.response.data.outcome.tokens;
+                      Cookies.set("UserCredential", token1, { expires: 7 });
+                  }
+                  console.log(error);
+      
+                  const errors = ErrorHandler(error, navigate);
+                  toast.error(errors);
+                  return null;
     }
 };

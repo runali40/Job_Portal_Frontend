@@ -1,7 +1,11 @@
 import { apiClient } from "../ApiClient";
+import ErrorHandler from "../ErrorHandler";
 import UrlData from "../UrlData";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
 
-export const ContactApi = (name, email, subject, message) => {
+export const ContactApi = (name, email, subject, message, navigate) => {
     const data = {
         name: name,
         email: email,
@@ -19,7 +23,18 @@ export const ContactApi = (name, email, subject, message) => {
             return response.data;
         })
         .catch((error) => {
-            console.error('API error:', error);
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.outcome
+            ) {
+                const token1 = error.response.data.outcome.tokens;
+                Cookies.set("UserCredential", token1, { expires: 7 });
+            }
+            console.log(error);
+
+            const errors = ErrorHandler(error, navigate);
+            toast.error(errors);
             return null;
         });
 };

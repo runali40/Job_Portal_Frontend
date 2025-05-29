@@ -30,7 +30,7 @@ export const LoginApi = (username, password, navigate) => {
             sessionStorage.setItem("rolename", response.data.result.data.r_rolename);
             Cookies.set("UserCredential", response.data.result.outcome.tokens, { expires: 7 });
             toast.success("User Login Successfully!")
-            navigate("/")
+            navigate("/home")
             return response.data;
         })
         .catch((error) => {
@@ -124,9 +124,18 @@ export const ChangePasswordApi = async (oldPassword, newPassword, navigate) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching applied candidate data:", error);
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
         const errors = ErrorHandler(error, navigate);
         toast.error(errors);
-        throw error;
+        return null;
     }
 };

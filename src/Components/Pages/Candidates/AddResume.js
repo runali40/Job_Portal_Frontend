@@ -90,7 +90,7 @@ const AddResume = () => {
             School: "",
             SchoolFrom: "",
             SchoolTo: "",
-            educationDescription: '',
+            educationDescription: "",
         },
     ]);
 

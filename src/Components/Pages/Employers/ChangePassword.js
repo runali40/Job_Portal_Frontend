@@ -3,11 +3,13 @@ import Footer from '../Footer'
 import Header from '../Header'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ChangePasswordApi } from '../../../Api/LoginApi'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const ChangePassword = () => {
     const navigate = useNavigate();
     const [oldPassword, setOldPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
+    const [showPassword, setShowPassword] = useState(false);
 
     const ChangePasswordData = async () => {
         const data = ChangePasswordApi(oldPassword, newPassword, navigate)
@@ -54,11 +56,37 @@ const ChangePassword = () => {
                                     <div className="form-group is-empty">
                                         <label className="control-label">Old Password*</label>
                                         <input className="form-control" type="password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+                                        {/* <span
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            style={{
+                                                position: "absolute",
+                                                right: "10px",
+                                                top: "50%",
+                                                transform: "translateY(-50%)",
+                                                cursor: "pointer",
+                                                color: "#555"
+                                            }}
+                                        >
+                                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                        </span> */}
                                         <span className="material-input"></span>
                                     </div>
                                     <div className="form-group is-empty">
                                         <label className="control-label">New Password*</label>
                                         <input className="form-control" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                                        {/* <span
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            style={{
+                                                position: "absolute",
+                                                right: "10px",
+                                                top: "50%",
+                                                transform: "translateY(-50%)",
+                                                cursor: "pointer",
+                                                color: "#555"
+                                            }}
+                                        >
+                                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                        </span> */}
                                         <span className="material-input"></span>
                                     </div>
                                     <button id="submit" className="btn btn-common" onClick={ChangePasswordData}>Save Change</button>

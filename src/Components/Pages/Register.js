@@ -40,7 +40,7 @@ const Register = () => {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <div className="page-header">
                 <div className="container">
                     <div className="row">
@@ -104,14 +104,14 @@ const Register = () => {
                                         </div>
                                     </div>
                                     <button className="btn btn-common log-btn mt-3" onClick={RegisterData}>Register</button>
-                                    <p className="text-center">Already have an account?<NavLink to="/login"> Sign In</NavLink></p>
+                                    <p className="text-center">Already have an account?<NavLink to="/"> Sign In</NavLink></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

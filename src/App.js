@@ -43,12 +43,14 @@ import UploadCv from './Components/Pages/Candidates/UploadCv';
 function App() {
   return (
     <div className="App">
-      <ToastContainer/>
+      <ToastContainer />
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/postJob" element={<PostJob />} />
         <Route path="/jobPage" element={<JobPage />} />

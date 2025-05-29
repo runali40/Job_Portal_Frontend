@@ -5,27 +5,28 @@ import Footer from './Footer'
 import { LoginApi } from '../../Api/LoginApi'
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false);
 
   const LoginData = () => {
     if (username === "" || password === "") {
       toast.warning("Please enter all the fields!")
     }
     else {
-      LoginApi(username, password, navigate).then((data) => {
-        console.log(data)
-      })
+      const data = LoginApi(username, password, navigate);
+      console.log(data)
     }
 
   }
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="page-header">
         <div className="container">
           <div className="row">
@@ -56,7 +57,20 @@ const Login = () => {
                   <div className="form-group">
                     <div className="input-icon">
                       <i className="lni-lock"></i>
-                      <input type="password" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                      <input  type={showPassword ? "text" : "password"} className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                      <span
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{
+                          position: "absolute",
+                          right: "10px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          cursor: "pointer",
+                          color: "#555"
+                        }}
+                      >
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                      </span>
                     </div>
                   </div>
                   <div className="form-group form-check text-start">
@@ -74,7 +88,7 @@ const Login = () => {
         </div>
       </section>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

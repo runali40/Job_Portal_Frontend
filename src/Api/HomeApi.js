@@ -26,10 +26,19 @@ export const GetLocationApi = async (navigate) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching location data:", error);
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
         const errors = ErrorHandler(error, navigate);
         toast.error(errors);
-        throw error;
+        return null;
     }
 };
 export const GetCategoryApi = async (navigate) => {
@@ -52,10 +61,19 @@ export const GetCategoryApi = async (navigate) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching category data:", error);
-        const errors = ErrorHandler(error, navigate);
-        toast.error(errors);
-        throw error;
+        if (
+                       error.response &&
+                       error.response.data &&
+                       error.response.data.outcome
+                   ) {
+                       const token1 = error.response.data.outcome.tokens;
+                       Cookies.set("UserCredential", token1, { expires: 7 });
+                   }
+                   console.log(error);
+       
+                   const errors = ErrorHandler(error, navigate);
+                   toast.error(errors);
+                   return null;
     }
 };
 
@@ -79,10 +97,19 @@ export const JobSearchApi = async (locationId, categoryId, navigate) => {
 
         return response.data.data;
     } catch (error) {
-        console.error("Error fetching category data:", error);
-        const errors = ErrorHandler(error, navigate);
-        toast.error(errors);
-        throw error;
+       if (
+                      error.response &&
+                      error.response.data &&
+                      error.response.data.outcome
+                  ) {
+                      const token1 = error.response.data.outcome.tokens;
+                      Cookies.set("UserCredential", token1, { expires: 7 });
+                  }
+                  console.log(error);
+      
+                  const errors = ErrorHandler(error, navigate);
+                  toast.error(errors);
+                  return null;
     }
 };
 
