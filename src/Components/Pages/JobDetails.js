@@ -9,6 +9,7 @@ const JobDetails = () => {
     const location = useLocation();
     const navigate = useNavigate()
     const { id } = location.state || {};
+    console.log(location.state, "10")
     console.log(id, "10")
     const [jobTitle, setJobTitle] = useState("")
     const [companyName, setCompanyName] = useState("")

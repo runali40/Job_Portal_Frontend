@@ -62,13 +62,13 @@ export const GetCategoryApi = async (navigate) => {
 export const JobSearchApi = async (locationId, categoryId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const url = 'Home/SearchJob';
-    const data = { UserId: userId, LocationName: locationId, CategoryName: categoryId };
+    const params = { UserId: userId, locationId: locationId, categoryId: categoryId };
 
     try {
         const response = await apiClient({
-            method: 'post',
+            method: 'get',
             url: url,
-            data: data,
+            params: params,
         });
 
         console.log(response.data.data, "get categories data");

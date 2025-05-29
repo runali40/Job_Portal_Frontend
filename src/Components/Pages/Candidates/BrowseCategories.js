@@ -1,9 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import {
+    FaHome,
+    FaGlobe,
+    FaBook,
+    FaDesktop,
+    FaPaintBrush,
+    FaHeart,
+    FaFlask,
+    FaTrophy,
+} from 'react-icons/fa';
+import { GetCategoryApi } from '../../../Api/HomeApi';
 
 const BrowseCategories = () => {
+    const navigate = useNavigate();
+    const [allCategory, setAllCategory] = useState([])
+
+    useEffect(() => {
+        GetCategoryData();
+    }, [])
+
+    const GetCategoryData = async () => {
+        const data = await GetCategoryApi(navigate);
+        setAllCategory(data);
+    };
+
+    const categoryIcons = {
+        'Finance': <FaHome />,
+        'Sale/Markting': <FaGlobe />,
+        'Education/Training': <FaBook />,
+        'Technologies': <FaDesktop />,
+        'Art/Design': <FaPaintBrush />,
+        'Healthcare': <FaHeart />,
+        'Science': <FaFlask />,
+        'Food Services': <FaTrophy />
+    };
     return (
         <>
             <Header />
@@ -22,78 +55,19 @@ const BrowseCategories = () => {
             <section className="category section bg-gray">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-1">
-                                    <i className="lni-home"></i>
+                        {allCategory.map((data) => {
+                            const Icon = categoryIcons[data.CategoryName] || <FaGlobe />; // Default fallback icon
+
+                            return (
+                                <div className="col-lg-3 col-md-6 col-xs-12 f-category" key={data.CategoryId}>
+                                    <NavLink to="/browseJobs">
+                                        <div style={{ fontSize: '2.5rem', marginBottom: '10px' }} className='icon bg-color-1'>{Icon}</div>
+                                        <h3>{data.CategoryName}</h3>
+                                        <p>{data.TotalJobs} jobs</p>
+                                    </NavLink>
                                 </div>
-                                <h3>Finance</h3>
-                                <p>(4286 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-2">
-                                    <i className="lni-world"></i>
-                                </div>
-                                <h3>Sale/Markting</h3>
-                                <p>(2000 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-3">
-                                    <i className="lni-book"></i>
-                                </div>
-                                <h3>Education/Training</h3>
-                                <p>(1450 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category border-right-0">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-4">
-                                    <i className="lni-display"></i>
-                                </div>
-                                <h3>Technologies</h3>
-                                <p>(5100 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category border-bottom-0">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-5">
-                                    <i className="lni-brush"></i>
-                                </div>
-                                <h3>Art/Design</h3>
-                                <p>(5079 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category border-bottom-0">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-6">
-                                    <i className="lni-heart"></i>
-                                </div>
-                                <h3>Healthcare</h3>
-                                <p>(3235 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category border-bottom-0">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-7">
-                                    <i className="lni-funnel"></i>
-                                </div>
-                                <h3>Science</h3>
-                                <p>(1800 jobs)</p>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-xs-12 f-category border-right-0 border-bottom-0">
-                            <NavLink to="/browseJobs">
-                                <div className="icon bg-color-8">
-                                    <i className="lni-cup"></i>
-                                </div>
-                                <h3>Food Services</h3>
-                                <p>(4286 jobs)</p>
-                            </NavLink>
-                        </div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>

@@ -28,7 +28,7 @@ const UploadCv = () => {
 
         const formData = new FormData();
         formData.append('resumeFile', file); // 'UFileName' should match your backend parameter name
-        
+
         formData.append('UFileName', file.name);
         // Get userId from sessionStorage and append
         const userId = sessionStorage.getItem('userid');

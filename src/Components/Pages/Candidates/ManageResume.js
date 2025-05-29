@@ -19,16 +19,15 @@ const ManageResume = () => {
   }, [])
 
 
-  const ManageResumeData = () => {
-    ManageResumeApi(navigate).then((data) => {
-      console.log(data[0])
-      setName(data[0].Name)
-      setProfessionTitle(data[0].ProfessionTitle)
-      setLocationName(data[0].LocationName)
-      setPerHour(data[0].PreHour)
-      setResumeId(data[0].Id)
-      setUpdatedDate(data[0].UpdatedDate)
-    })
+  const ManageResumeData = async() => {
+    const data = await ManageResumeApi(navigate);
+    console.log(data[0])
+    setName(data[0].Name)
+    setProfessionTitle(data[0].ProfessionTitle)
+    setLocationName(data[0].LocationName)
+    setPerHour(data[0].PreHour)
+    setResumeId(data[0].Id)
+    setUpdatedDate(data[0].UpdatedDate)
   }
 
   const GetResumeData = (resumeId) => {
@@ -63,7 +62,7 @@ const ManageResume = () => {
                   <li><NavLink to="/resumePage">My Resume</NavLink></li>
                   <li><NavLink to="/bookmarkedJobs">Bookmarked Jobs</NavLink></li>
                   <li><NavLink to="/notifications">Notifications <span className="notinumber">2</span></NavLink></li>
-                  <li><NavLink to="/mangeApplications">Manage Applications</NavLink></li>
+                  <li><NavLink to="/manageApplications">Manage Applications</NavLink></li>
                   <li><NavLink className="active" to="/manageResumes">Manage Resume</NavLink></li>
                   <li><NavLink to="/jobAlerts">Job Alerts</NavLink></li>
                   <li><NavLink to="/changePassword">Change Password</NavLink></li>

@@ -68,6 +68,8 @@ const Home = () => {
     const JobSearchData = async () => {
         const data = await JobSearchApi(location, category, navigate);
         console.log(data, "job search data");
+        const featuredData = data.filter(item => item.Featured === "1");
+        setAllFeatures(featuredData);
     }
 
     return (

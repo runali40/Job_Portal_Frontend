@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { GetCategoryApi, GetLocationApi } from '../../Api/HomeApi'
+import { GetCategoryApi, GetLocationApi, JobSearchApi } from '../../Api/HomeApi'
 import { GetFeaturedApi } from '../../Api/EmployerApi/FeaturedApi'
 
 const JobPage = () => {
@@ -37,7 +37,20 @@ const JobPage = () => {
     const data = await GetFeaturedApi(navigate);
     console.log(data, "get featured data");
     setAllFeatures(data)
+  }
 
+  const GetBrowseData = (id) => {
+    console.log("30", id)
+    navigate("/jobDetails", {
+      state: { id },
+    });
+  };
+
+  const JobSearchData = async () => {
+    const data = await JobSearchApi(location, category, navigate);
+    console.log(data, "job search data");
+    const featuredData = data.filter(item => item.Featured === "1");
+    setAllFeatures(featuredData);
   }
 
   return (
@@ -53,7 +66,7 @@ const JobPage = () => {
                 <h3>Find Job</h3>
               </div>
               <div className="job-search-form">
-                <form>
+                <div>
                   <div className="row">
                     <div className="col-lg-5 col-md-5 col-xs-12">
                       <div className="form-group">
@@ -95,10 +108,10 @@ const JobPage = () => {
                       </div>
                     </div>
                     <div className="col-lg-1 col-md-2 col-xs-12">
-                      <button type="submit" className="button"><i className="lni-search"></i></button>
+                      <button type="submit" className="button"><i className="lni-search" onClick={JobSearchData}></i></button>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
@@ -125,8 +138,8 @@ const JobPage = () => {
 
                           </div>
                           <div className="job-details text-start">
-                            <h3>{data.Slug}</h3>
-                            <span className="company-neme">{data.Name}</span>
+                            <h3 onClick={() => GetBrowseData(data.Id)} >{data.Slug}</h3>
+                            <span className="company-neme" onClick={() => GetBrowseData(data.Id)} >{data.Name}</span>
                             <div className="tags">
                               <span><i className="lni-map-marker"></i>{data.LocationName}</span>
                               <span><i className="lni-user"></i>John Smith</span>
@@ -146,10 +159,7 @@ const JobPage = () => {
                   </div>
                 )
               })
-
             }
-
-           
             <div className="col-12 text-center mt-4">
               <NavLink to="/jobPage" className="btn btn-common">Browse All Jobs</NavLink>
             </div>

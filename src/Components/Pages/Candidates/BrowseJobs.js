@@ -3,22 +3,40 @@ import Header from '../Header'
 import Footer from '../Footer'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
+import { BookmarkedJobApi } from '../../../Api/CandidateApi/BookmarkedJobApi'
+import { GetLocationApi, JobSearchApi } from '../../../Api/HomeApi'
 
 const BrowseJobs = () => {
   const navigate = useNavigate();
+  const [location, setLocation] = useState("")
+  const [allLocation, setAllLocation] = useState([])
   const [allBrowseJobs, setAllBrowseJobs] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
+
   useEffect(() => {
-    BrowseJobData();
-  }, [])
+    const fetchData = async () => {
+      try {
+        await GetLocationData();  // waits fully
+        await BrowseJobData();  // uses updated token
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
 
-  const BrowseJobData = () => {
-    ManageJobApi().then((data) => {
-      console.log(data, 'browse job')
-      setAllBrowseJobs(data)
-    })
+  const GetLocationData = async () => {
+    const data = await GetLocationApi(navigate);
+    setAllLocation(data);
+  };
+
+  const BrowseJobData = async () => {
+    const data = await ManageJobApi();
+    console.log(data, 'browse job')
+    setAllBrowseJobs(data)
   }
 
   const GetBrowseData = (id) => {
@@ -27,6 +45,25 @@ const BrowseJobs = () => {
       state: { id },
     });
   };
+
+  const JobSearchData = async () => {
+    const data = await JobSearchApi(location, null, navigate);
+    console.log(data, "job search data");
+    setAllBrowseJobs(data);
+  }
+
+  const BookmarkedJobData = async (Id, newStatus) => {
+    const data = await BookmarkedJobApi(Id, newStatus, navigate);
+    console.log(data, "count data");
+    await BrowseJobData();
+
+  }
+
+  const handleStarClick = (Id, currentStatus) => {
+    const newStatus = currentStatus === "1" ? "0" : "1";
+    BookmarkedJobData(Id, newStatus); // Send updated status to backend
+  };
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentJobs = allBrowseJobs.slice(indexOfFirstItem, indexOfLastItem);
@@ -55,10 +92,25 @@ const BrowseJobs = () => {
                   <input type="text" className="form-control" placeholder="Keyword: Name, Tag" />
                 </div>
                 <div className="col-lg-5 col-md-5 col-xs-12">
-                  <input type="text" className="form-control" placeholder="Location: City, State, Zip" />
+                  {/* <input type="text" className="form-control" placeholder="Location: City, State, Zip" /> */}
+                  <div className="form-group" style={{ border: '1px solid #ced4da', borderRadius: "4px" }}>
+                    <div className="search-category-container">
+                      <label className="styled-select">
+
+                        <select value={location} onChange={(e) => setLocation(e.target.value)}>
+                          <option value="" disabled hidden>Select Location</option>
+                          {allLocation.map((data) => (
+                            <option key={data.LocationId} value={data.LocationId}>
+                              {data.LocationName}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    </div>
+                  </div>
                 </div>
                 <div className="col-lg-2 col-md-2 col-xs-12">
-                  <button type="submit" className="btn btn-common float-right">Filter</button>
+                  <button type="submit" className="btn btn-common float-right" onClick={JobSearchData}>Filter</button>
                 </div>
               </div>
             </div>
@@ -67,15 +119,15 @@ const BrowseJobs = () => {
                 return (
                   <>
                     <div className="col-lg-6 col-md-12 col-xs-12" key={data.Id}>
-                      <div className="job-listings-featured" /* to="/jobDetails" */ onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>
+                      <div className="job-listings-featured" /* to="/jobDetails" */ >
                         <div className="row ">
                           <div className="col-lg-6 col-md-6 col-xs-12 ">
                             <div className="job-company-logo">
                               <img src={data.LOGOFile} alt="" style={{ width: "55px", height: "50px" }} />
                             </div>
                             <div className="job-details text-start">
-                              <h3>{data.Slug}</h3>
-                              <span className="company-neme">{data.Name}</span>
+                              <h3 onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>{data.Slug}</h3>
+                              <span className="company-neme" onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>{data.Name}</span>
                               <div className="tags">
                                 <span><i className="lni-map-marker"></i>{data.LocationName}</span>
                                 <span><i className="lni-user"></i>John Smith</span>
@@ -84,8 +136,15 @@ const BrowseJobs = () => {
                           </div>
                           <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                             <div className="tag-type">
-                              <span className="heart-icon">
+                              {/* <span className="heart-icon">
                                 <i className="lni-heart"></i>
+                              </span> */}
+                              <span
+                                onClick={() => handleStarClick(data.Id, data.Bookmark)}
+                                style={{ cursor: "pointer", fontSize: "20px", color: data.Bookmark === "1" ? "blue" : "gray" }}
+                              >
+                                {/* {data.Bookmark === "1" ? "♥" : "♡"} */}
+                                <i className={data.Bookmark === "1" ? "fas fa-heart" : "far fa-heart"}></i>
                               </span>
                               <span className="full-time">Full Time</span>
                             </div>

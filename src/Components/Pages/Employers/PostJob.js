@@ -64,10 +64,9 @@ const PostJob = () => {
     }
   };
 
-  const AddJobData = () => {
-    AddJobApi(jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate).then((data) => {
-      console.log(data)
-    })
+  const AddJobData = async () => {
+    const data = await AddJobApi(jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate);
+    console.log(data)
   }
   return (
     <>

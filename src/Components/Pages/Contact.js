@@ -10,10 +10,10 @@ const Contact = () => {
   const [subject, setSubject] = useState("")
   const [message, setMessage] = useState("")
 
-  const ContactData = () => {
-    ContactApi(name, email, subject, message).then((data) => {
-      console.log("data", data)
-    })
+  const ContactData = async () => {
+    const data =  await ContactApi(name, email, subject, message);
+    console.log("data", data)
+
   }
 
   return (
