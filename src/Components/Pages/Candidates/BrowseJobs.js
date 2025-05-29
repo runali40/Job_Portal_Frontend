@@ -68,6 +68,7 @@ const BrowseJobs = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentJobs = allBrowseJobs.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(allBrowseJobs.length / itemsPerPage);
+  
   return (
     <>
       <Header />

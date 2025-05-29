@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie';
+import ErrorHandler from '../ErrorHandler';
+import { apiClient } from '../ApiClient';
 // import ErrorHandler from '../ErrorHandler';
 
 export const LoginApi = (username, password, navigate) => {
@@ -98,4 +100,33 @@ export const RegisterApi = (username, password, email, role) => {
             console.error('API error:', error);
             return null;
         });
+};
+
+export const ChangePasswordApi = async (oldPassword, newPassword, navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    const url = 'Employeer/BookmarkJobupdate';
+    const data = { UserId: userId, oldPassword: oldPassword, newPassword: newPassword };
+
+    try {
+        const response = await apiClient({
+            method: 'post',
+            url: url,
+            data: data,
+        });
+
+        console.log(response.data.data, "change password");
+
+        // ✅ Set token manually so it's ready for next API call
+        if (response.data?.outcome?.tokens) {
+            const newToken = response.data.outcome.tokens;
+            Cookies.set("UserCredential", newToken, { expires: 7 });
+        }
+
+        return response.data.data;
+    } catch (error) {
+        console.error("Error fetching applied candidate data:", error);
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        throw error;
+    }
 };

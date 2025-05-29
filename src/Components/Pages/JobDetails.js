@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { GetBrowseApi } from '../../Api/EmployerApi/EmployeerApi'
 import { ApplyJobApi, GetResumeApi } from '../../Api/CandidateApi/AddResumeApi'
 
 const JobDetails = () => {
-    const location = useLocation();
     const navigate = useNavigate()
+    const location = useLocation();
+
     const { id } = location.state || {};
     console.log(location.state, "10")
-    console.log(id, "10")
+    console.log("Received ID:", id);
+    console.log(id, "14")
+    const [searchParams] = useSearchParams();
+    const jobId = searchParams.get("id");
+    console.log(jobId, "14")
     const [jobTitle, setJobTitle] = useState("")
     const [companyName, setCompanyName] = useState("")
     const [locationName, setLocationName] = useState("")
@@ -36,7 +41,7 @@ const JobDetails = () => {
         fetchData();
     }, []);
 
-    
+
     const GetJobDetails = async () => {
         const data = await GetBrowseApi(id, navigate);
         setJobTitle(data.Slug)

@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Footer from '../Footer'
 import Header from '../Header'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { ChangePasswordApi } from '../../../Api/LoginApi'
 
 const ChangePassword = () => {
+    const navigate = useNavigate();
+    const [oldPassword, setOldPassword] = useState("")
+    const [newPassword, setNewPassword] = useState("")
+
+    const ChangePasswordData = async () => {
+        const data = ChangePasswordApi(oldPassword, newPassword, navigate)
+        console.log(data)
+    }
+
     return (
         <>
             <Header />
@@ -40,19 +50,19 @@ const ChangePassword = () => {
                         <div className="col-md-8 col-sm-8 col-xs-12">
                             <div className="job-alerts-item text-start">
                                 <h3 className="alerts-title">Change Password</h3>
-                                <form className="form">
+                                <div className="form">
                                     <div className="form-group is-empty">
                                         <label className="control-label">Old Password*</label>
-                                        <input className="form-control" type="text" />
+                                        <input className="form-control" type="password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
                                         <span className="material-input"></span>
                                     </div>
                                     <div className="form-group is-empty">
                                         <label className="control-label">New Password*</label>
-                                        <input className="form-control" type="text" />
+                                        <input className="form-control" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                                         <span className="material-input"></span>
                                     </div>
-                                    <NavLink to="/" id="submit" className="btn btn-common">Save Change</NavLink>
-                                </form>
+                                    <button id="submit" className="btn btn-common" onClick={ChangePasswordData}>Save Change</button>
+                                </div>
                             </div>
                         </div>
                     </div>

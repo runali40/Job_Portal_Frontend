@@ -4,6 +4,7 @@ import Footer from './Footer'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { GetCategoryApi, GetLocationApi, JobSearchApi } from '../../Api/HomeApi'
 import { GetFeaturedApi } from '../../Api/EmployerApi/FeaturedApi'
+import { BookmarkedJobApi } from '../../Api/CandidateApi/BookmarkedJobApi'
 
 const JobPage = () => {
   const navigate = useNavigate();
@@ -33,18 +34,18 @@ const JobPage = () => {
     setAllCategory(data)
   }
 
-  const GetFeaturesData = async () => {
-    const data = await GetFeaturedApi(navigate);
-    console.log(data, "get featured data");
-    setAllFeatures(data)
-  }
-
   const GetBrowseData = (id) => {
     console.log("30", id)
     navigate("/jobDetails", {
       state: { id },
     });
   };
+
+  const GetFeaturesData = async () => {
+    const data = await GetFeaturedApi(navigate);
+    console.log(data, "get featured data");
+    setAllFeatures(data)
+  }
 
   const JobSearchData = async () => {
     const data = await JobSearchApi(location, category, navigate);
@@ -53,6 +54,16 @@ const JobPage = () => {
     setAllFeatures(featuredData);
   }
 
+  const BookmarkedJobData = async (Id, newStatus) => {
+    const data = await BookmarkedJobApi(Id, newStatus, navigate);
+    console.log(data, "count data");
+    await GetFeaturesData();
+  }
+
+  const handleStarClick = (Id, currentStatus) => {
+    const newStatus = currentStatus === "1" ? "0" : "1";
+    BookmarkedJobData(Id, newStatus); // Send updated status to backend
+  };
   return (
     <>
       <Header />
@@ -128,18 +139,17 @@ const JobPage = () => {
             {
               allFeatures.map((data) => {
                 return (
-                  <div className="col-lg-6 col-md-12 col-xs-12">
-                    <NavLink className="job-listings-featured" to="/jobDetails">
+                  <div className="col-lg-6 col-md-12 col-xs-12" key={data.Id}>
+                    <div className="job-listings-featured">
                       <div className="row">
                         <div className="col-lg-6 col-md-6 col-xs-12">
                           <div className="job-company-logo">
                             {/* <img src="assets/img/features/img1.png" alt="" /> */}
                             {data.LOGOFile && <img src={data.LOGOFile} alt="" style={{ width: "55px", height: "50px" }} />}
-
                           </div>
                           <div className="job-details text-start">
-                            <h3 onClick={() => GetBrowseData(data.Id)} >{data.Slug}</h3>
-                            <span className="company-neme" onClick={() => GetBrowseData(data.Id)} >{data.Name}</span>
+                            <h3 onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>{data.Slug}</h3>
+                            <span className="company-neme" onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>{data.Name}</span>
                             <div className="tags">
                               <span><i className="lni-map-marker"></i>{data.LocationName}</span>
                               <span><i className="lni-user"></i>John Smith</span>
@@ -148,14 +158,18 @@ const JobPage = () => {
                         </div>
                         <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                           <div className="tag-type">
-                            <span className="heart-icon">
-                              <i className="lni-heart"></i>
+                            <span
+                              onClick={() => handleStarClick(data.Id, data.Bookmark)}
+                              style={{ cursor: "pointer", fontSize: "20px", color: data.Bookmark === "1" ? "blue" : "gray" }}
+                            >
+                              {/* {data.Bookmark === "1" ? "♥" : "♡"} */}
+                              <i className={data.Bookmark === "1" ? "fas fa-heart" : "far fa-heart"}></i>
                             </span>
                             <span className="full-time">Full Time</span>
                           </div>
                         </div>
                       </div>
-                    </NavLink>
+                    </div>
                   </div>
                 )
               })

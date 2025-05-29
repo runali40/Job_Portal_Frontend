@@ -13,6 +13,7 @@ import {
     FaTrophy,
 } from 'react-icons/fa';
 import { GetFeaturedApi } from '../../Api/EmployerApi/FeaturedApi';
+import { BookmarkedJobApi } from '../../Api/CandidateApi/BookmarkedJobApi';
 
 
 const Home = () => {
@@ -62,8 +63,14 @@ const Home = () => {
         const data = await GetFeaturedApi(navigate);
         console.log(data, "get featured data");
         setAllFeatures(data)
-
     }
+
+    const GetBrowseData = (id) => {
+        console.log("30", id)
+        navigate("/jobDetails", {
+            state: { id },
+        });
+    };
 
     const JobSearchData = async () => {
         const data = await JobSearchApi(location, category, navigate);
@@ -72,6 +79,16 @@ const Home = () => {
         setAllFeatures(featuredData);
     }
 
+    const BookmarkedJobData = async (Id, newStatus) => {
+        const data = await BookmarkedJobApi(Id, newStatus, navigate);
+        console.log(data, "count data");
+        await GetFeaturesData();
+    }
+
+    const handleStarClick = (Id, currentStatus) => {
+        const newStatus = currentStatus === "1" ? "0" : "1";
+        BookmarkedJobData(Id, newStatus); // Send updated status to backend
+    };
     return (
         <>
             <header id="home" className="hero-area">
@@ -263,8 +280,8 @@ const Home = () => {
                         {
                             allFeatures.map((data) => {
                                 return (
-                                    <div className="col-lg-6 col-md-12 col-xs-12">
-                                        <NavLink className="job-listings-featured" to="/jobDetails">
+                                    <div className="col-lg-6 col-md-12 col-xs-12" key={data.Id}>
+                                        <div className="job-listings-featured">
                                             <div className="row">
                                                 <div className="col-lg-6 col-md-6 col-xs-12">
                                                     <div className="job-company-logo">
@@ -273,8 +290,8 @@ const Home = () => {
 
                                                     </div>
                                                     <div className="job-details text-start">
-                                                        <h3>{data.Slug}</h3>
-                                                        <span className="company-neme">{data.Name}</span>
+                                                        <h3 onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>{data.Slug}</h3>
+                                                        <span className="company-neme" onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>{data.Name}</span>
                                                         <div className="tags">
                                                             <span><i className="lni-map-marker"></i>{data.LocationName}</span>
                                                             <span><i className="lni-user"></i>John Smith</span>
@@ -283,14 +300,18 @@ const Home = () => {
                                                 </div>
                                                 <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                                                     <div className="tag-type">
-                                                        <span className="heart-icon">
-                                                            <i className="lni-heart"></i>
+                                                        <span
+                                                            onClick={() => handleStarClick(data.Id, data.Bookmark)}
+                                                            style={{ cursor: "pointer", fontSize: "20px", color: data.Bookmark === "1" ? "blue" : "gray" }}
+                                                        >
+                                                            {/* {data.Bookmark === "1" ? "♥" : "♡"} */}
+                                                            <i className={data.Bookmark === "1" ? "fas fa-heart" : "far fa-heart"}></i>
                                                         </span>
                                                         <span className="full-time">Full Time</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </NavLink>
+                                        </div>
                                     </div>
                                 )
                             })
