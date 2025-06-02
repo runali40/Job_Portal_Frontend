@@ -27,18 +27,18 @@ export const GetAllBrowseResumeApi = async (navigate) => {
 
         return response.data.data;
     } catch (error) {
-      if (
-                      error.response &&
-                      error.response.data &&
-                      error.response.data.outcome
-                  ) {
-                      const token1 = error.response.data.outcome.tokens;
-                      Cookies.set("UserCredential", token1, { expires: 7 });
-                  }
-                  console.log(error);
-      
-                  const errors = ErrorHandler(error, navigate);
-                  toast.error(errors);
-                  return null;
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        return null;
     }
 };

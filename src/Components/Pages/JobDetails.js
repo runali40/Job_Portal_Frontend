@@ -13,9 +13,9 @@ const JobDetails = () => {
     console.log(location.state, "10")
     console.log("Received ID:", id);
     console.log(id, "14")
-    const [searchParams] = useSearchParams();
-    const jobId = searchParams.get("id");
-    console.log(jobId, "14")
+    // const [searchParams] = useSearchParams();
+    // const jobId = searchParams.get("id");
+    // console.log(jobId, "14")
     const [jobTitle, setJobTitle] = useState("")
     const [companyName, setCompanyName] = useState("")
     const [locationName, setLocationName] = useState("")
@@ -54,7 +54,8 @@ const JobDetails = () => {
 
     };
     const GetResumeData = async () => {
-        const data = await GetResumeApi(jobDetailId, navigate);
+        // const data = await GetResumeApi(jobDetailId, navigate);
+        const data = await GetResumeApi(navigate);
         console.log(data);
         setResumeUrl(data.ResumeUrl)
     };
@@ -79,6 +80,13 @@ const JobDetails = () => {
 
     };
 
+    const DownloadResume = async () => {
+        if (resumeUrl) {
+            window.open(resumeUrl, '_blank');
+        } else {
+            console.error("Resume URL is not available");
+        }
+    };
     return (
         <>
             <Header />
@@ -131,6 +139,7 @@ const JobDetails = () => {
                                 <h5>How To Apply</h5>
                                 <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
                                 <button className="btn btn-common" onClick={ApplyJobData}>Apply job</button>
+                                <button className="btn btn-common" onClick={DownloadResume}>Download Resume</button>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-12 col-xs-12">

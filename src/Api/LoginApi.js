@@ -104,7 +104,7 @@ export const RegisterApi = (username, password, email, role) => {
 
 export const ChangePasswordApi = async (oldPassword, newPassword, navigate) => {
     const userId = sessionStorage.getItem('userid');
-    const url = 'Employeer/BookmarkJobupdate';
+    const url = 'Auth/ChangePassword';
     const data = { UserId: userId, oldPassword: oldPassword, newPassword: newPassword };
 
     try {
@@ -115,7 +115,7 @@ export const ChangePasswordApi = async (oldPassword, newPassword, navigate) => {
         });
 
         console.log(response.data.data, "change password");
-
+        toast.success("Changed Password Successfully!");
         // ✅ Set token manually so it's ready for next API call
         if (response.data?.outcome?.tokens) {
             const newToken = response.data.outcome.tokens;
@@ -139,3 +139,4 @@ export const ChangePasswordApi = async (oldPassword, newPassword, navigate) => {
         return null;
     }
 };
+

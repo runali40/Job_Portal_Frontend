@@ -7,7 +7,7 @@ import UrlData from '../../UrlData';
 import { apiClient } from '../../ApiClient';
 import ErrorHandler from '../../ErrorHandler';
 
-export const AddResumeApi = (name, email, professionTitle, location, website, preHour, age, educations, workExperiences, skills, rId, navigate) => {
+export const AddResumeApi = (name, email, professionTitle, location, website, preHour, age, aboutMe, educations, workExperiences, skills, rId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const data = {
         userId: userId,
@@ -18,6 +18,7 @@ export const AddResumeApi = (name, email, professionTitle, location, website, pr
         web: website,
         preHour: preHour,
         age: age,
+        aboutMe: aboutMe,
         educations: educations,
         workExperiences: workExperiences,
         skills: skills,
@@ -94,11 +95,11 @@ export const ManageResumeApi = (navigate) => {
         });
 };
 
-export const GetResumeApi = (navigate) => {
+export const GetResumeApi = (jobDetailId,navigate) => {
     const userId = sessionStorage.getItem('userid');
     const params = {
         UserId: userId,
-
+       
     };
     const url = 'Candidate/GetResume';
     return apiClient({

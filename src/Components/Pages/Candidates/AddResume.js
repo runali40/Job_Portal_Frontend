@@ -22,6 +22,7 @@ const AddResume = () => {
     const [preHour, setPreHour] = useState("");
     const [age, setAge] = useState("");
     const [rId, setRId] = useState("");
+    const [aboutMe, setAboutMe] = useState("")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -67,6 +68,7 @@ const AddResume = () => {
             website,
             preHour,
             age,
+            aboutMe,
             educations,
             workExperiences,
             skills,
@@ -312,6 +314,20 @@ const AddResume = () => {
                                                 }
                                             }}
                                         />
+                                    </div>
+                                    <div className="form-group text-start">
+                                        <label className="control-label">About Me</label>
+                                        <textarea
+                                            className="form-control"
+                                            rows="3"
+                                            value={aboutMe}
+                                            onChange={(e) => {
+                                                const input = e.target.value;
+                                                if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                    setAboutMe(input);
+                                                }
+                                            }}
+                                        ></textarea>
                                     </div>
                                     <div className="form-group text-start">
                                         <div className="button-group">

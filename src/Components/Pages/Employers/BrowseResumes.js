@@ -6,14 +6,26 @@ import { GetAllBrowseResumeApi } from '../../../Api/EmployerApi/BrowseResumeApi'
 
 const BrowseResumes = () => {
   const navigate = useNavigate();
+  const [allResume, setAllResume] = useState([])
+  const [allSkills, setAllSkills] = useState([])
+
   useEffect(() => {
     getAllResumeData()
   }, [])
 
   const getAllResumeData = async () => {
-    const data = GetAllBrowseResumeApi(navigate);
-    console.log(data)
-  }
+    const data = await GetAllBrowseResumeApi(navigate); // await the API call
+    console.log(data); // Logs the entire array
+    setAllResume(data)
+    data.forEach((item, index) => {
+      console.log(`Resume ${index + 1}:`);
+      console.log("Educations:", item.educations);
+      console.log("Skills:", item.skills);
+      setAllSkills(item.skills)
+      console.log("Work Experiences:", item.workExperiences);
+    });
+  };
+
   return (
     <>
       <Header />
@@ -32,7 +44,51 @@ const BrowseResumes = () => {
       <div id="content">
         <div className="container">
           <div className="row">
-            <div className="col-lg-12 col-md-6 col-xs-12">
+            {
+              allResume.map((data) => {
+                return (
+                  <div className="col-lg-12 col-md-6 col-xs-12">
+                    <div className="manager-resumes-item">
+                      <div className="manager-content">
+                        <NavLink to="/resumePage">
+                          <img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" />
+                        </NavLink>
+                        <div className="manager-info">
+                          <div className="manager-name text-start">
+                            <h4><NavLink to="/">{data.name}</NavLink></h4>
+                            <h5>{data.professionTitle}</h5>
+                          </div>
+                          <div className="manager-meta">
+                            <span className="location"><i className="ti-location-pin"></i>{data.locationName}</span>
+                            <span className="rate"><i className="ti-time"></i> ₹{data.preHour} per hour</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="item-body">
+                        <div className="content text-start">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, qui aspernatur accusantium! Molestiae, cum cupiditate nam optio dignissimos magnam velit, perspiciatis amet qui aut nobis, quisquam, laudantium vitae eos ipsam.</p>
+                        </div>
+                        <div className="resume-skills text-start">
+                          <div className="tag-list float-left">
+                            {
+                              data.skills && data.skills.map((item, i) => (
+                                <span key={i}>{item.skillName}</span>
+                              ))
+                            }
+                          </div>
+                          <div className="resume-exp float-right">
+                            <NavLink to="/" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })
+            }
+
+
+            {/* <div className="col-lg-12 col-md-6 col-xs-12">
               <div className="manager-resumes-item">
                 <div className="manager-content">
                   <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" /></NavLink>
@@ -196,7 +252,7 @@ const BrowseResumes = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
