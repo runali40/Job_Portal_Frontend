@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import { NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { GetBrowseApi } from '../../Api/EmployerApi/EmployeerApi'
-import { ApplyJobApi, GetResumeApi } from '../../Api/CandidateApi/AddResumeApi'
+import { ApplyJobApi, DownloadResumeApi, GetResumeApi } from '../../Api/CandidateApi/AddResumeApi'
 
 const JobDetails = () => {
     const navigate = useNavigate()
@@ -25,6 +25,7 @@ const JobDetails = () => {
     const [description, setDescription] = useState("")
     const [jobDetailId, setJobDetailId] = useState("")
     const [resumeUrl, setResumeUrl] = useState("")
+    const [fileName, setFileName] = useState("")
 
     // useEffect(() => {
     //     GetJobDetails();
@@ -51,6 +52,8 @@ const JobDetails = () => {
         setDescription(data.Description)
         setLocationName(data.LocationName)
         setJobDetailId(data.Id)
+        setFileName(data.UFileName)
+    
 
     };
     const GetResumeData = async () => {
@@ -58,6 +61,7 @@ const JobDetails = () => {
         const data = await GetResumeApi(navigate);
         console.log(data);
         setResumeUrl(data.ResumeUrl)
+        setFileName(data.UFileName)
     };
     // const GetJobDetails = () => {
     //     GetBrowseApi(id, navigate).then((data) => {
@@ -81,11 +85,8 @@ const JobDetails = () => {
     };
 
     const DownloadResume = async () => {
-        if (resumeUrl) {
-            window.open(resumeUrl, '_blank');
-        } else {
-            console.error("Resume URL is not available");
-        }
+        const data = await DownloadResumeApi(fileName, navigate)
+        console.log(data)
     };
     return (
         <>

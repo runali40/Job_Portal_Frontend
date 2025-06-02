@@ -95,7 +95,7 @@ export const ManageResumeApi = (navigate) => {
         });
 };
 
-export const GetResumeApi = (jobDetailId,navigate) => {
+export const GetResumeApi = (navigate) => {
     const userId = sessionStorage.getItem('userid');
     const params = {
         UserId: userId,
@@ -109,6 +109,42 @@ export const GetResumeApi = (jobDetailId,navigate) => {
     })
         .then((response) => {
             console.log('API response:', response.data.data);
+            console.log("token1", response.data.outcome.tokens)
+            const token1 = response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+            return response.data.data;
+        })
+        .catch((error) => {
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.outcome
+            ) {
+                const token1 = error.response.data.outcome.tokens;
+                Cookies.set("UserCredential", token1, { expires: 7 });
+            }
+            console.log(error);
+
+            const errors = ErrorHandler(error, navigate);
+            toast.error(errors);
+            return [];
+        });
+};
+
+export const DownloadResumeApi = (fileName, navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    const params = {
+        UserId: userId,
+        fileName : fileName
+    };
+    const url = 'UserMaster/DownloadResume';
+    return apiClient({
+        method: 'get',
+        url: (UrlData + url).toString(),
+        params: params,
+    })
+        .then((response) => {
+            console.log('download resume:', response.data.data);
             console.log("token1", response.data.outcome.tokens)
             const token1 = response.data.outcome.tokens;
             Cookies.set("UserCredential", token1, { expires: 7 });
