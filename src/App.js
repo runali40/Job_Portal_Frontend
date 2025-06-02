@@ -39,6 +39,7 @@ import BookMarkedJobs from './Components/Pages/Employers/BookMarkedJobs';
 import Notifications from './Components/Pages/Employers/Notifications';
 import Pricing from './Components/Pages/Pricing';
 import UploadCv from './Components/Pages/Candidates/UploadCv';
+import AppliedCandidate from './Components/Pages/Employers/AppliedCanidate';
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
         <Route path="/changePassword" element={<ChangePassword />} />
         <Route path="/bookMarkedJobs" element={<BookMarkedJobs />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/appliedCandidate" element={<AppliedCandidate />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/uploadCv" element={<UploadCv />} />
       </Routes>

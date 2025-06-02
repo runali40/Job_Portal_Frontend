@@ -13,6 +13,7 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [retypePassword, setRetypePassword] = useState("")
+    const [companyName, setCompanyName] = useState("")
 
     useEffect(() => {
         GetRoleData();
@@ -22,7 +23,7 @@ const Register = () => {
         if (role === "") {
             toast.warning("Please select role!")
         }
-        else if (username === "" || password === "" || email === "" || retypePassword === ""){
+        else if (username === "" || password === "" || email === "" || retypePassword === "") {
             toast.warning("Please enter all the fields!")
         }
         else {
@@ -79,6 +80,12 @@ const Register = () => {
                                             ))}
                                         </div>
                                     </div>
+                                    {/* <div className="form-group">
+                                        <div className="input-icon">
+                                            <i className="lni-user"></i>
+                                            <input type="text" className="form-control" name="name" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                                        </div>
+                                    </div> */}
                                     <div className="form-group">
                                         <div className="input-icon">
                                             <i className="lni-user"></i>

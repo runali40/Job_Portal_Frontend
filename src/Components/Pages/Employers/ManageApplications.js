@@ -29,6 +29,7 @@ const ManageApplications = () => {
                 <li><NavLink to="/resumePage">My Resume</NavLink></li>
                 <li><NavLink to="/bookMarkedJobs">Bookmarked Jobs</NavLink></li>
                 <li><NavLink to="/notifications">Notifications <span className="notinumber">2</span></NavLink></li>
+                <li><NavLink to="/appliedCandidate">Applied Candidate</NavLink></li>
                 <li><NavLink className="active" to="/manageJobs">Manage Applications</NavLink></li>
                 <li><NavLink to="/jobAlerts">Job Alerts</NavLink></li>
                 <li><NavLink to="/changePassword">Change Password</NavLink></li>

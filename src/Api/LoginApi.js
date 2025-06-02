@@ -80,6 +80,7 @@ export const RegisterApi = (username, password, email, role) => {
         um_user_name: username,
         um_password: password,
         um_EmailId: email,
+        // um_CompanyName: companyName,
         IpAddress: "192.168.1.4",
         SessionId: sessionId,
         um_roleid: role

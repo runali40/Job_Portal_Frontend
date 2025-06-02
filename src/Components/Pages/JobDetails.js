@@ -53,7 +53,7 @@ const JobDetails = () => {
         setLocationName(data.LocationName)
         setJobDetailId(data.Id)
         setFileName(data.UFileName)
-    
+
 
     };
     const GetResumeData = async () => {
@@ -85,9 +85,33 @@ const JobDetails = () => {
     };
 
     const DownloadResume = async () => {
-        const data = await DownloadResumeApi(fileName, navigate)
-        console.log(data)
+        const data = await DownloadResumeApi(fileName, navigate);
+
+        if (!data?.fileBytes) {
+            console.error("No fileBytes found in response");
+            return;
+        }
+
+        // Decode base64 to binary
+        const byteCharacters = atob(data.fileBytes);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+
+        // Create a byte array and blob
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'application/pdf' });
+
+        // Create a link element to trigger download
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `${fileName || 'Resume'}.pdf`; // Customize file name here
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); // Cleanup
     };
+    
     return (
         <>
             <Header />
