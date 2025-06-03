@@ -7,7 +7,7 @@ import UrlData from '../../UrlData';
 import { apiClient } from '../../ApiClient';
 import ErrorHandler from '../../ErrorHandler';
 
-export const AddResumeApi = (name, email, professionTitle, location, website, preHour, age, aboutMe, educations, workExperiences, skills, rId, navigate) => {
+export const AddResumeApi = (name, email, professionTitle, location, website, preHour, age, aboutMe, base64Image, educations, workExperiences, skills, rId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const data = {
         userId: userId,
@@ -19,6 +19,7 @@ export const AddResumeApi = (name, email, professionTitle, location, website, pr
         preHour: preHour,
         age: age,
         aboutMe: aboutMe,
+        profilePhoto: base64Image,
         educations: educations,
         workExperiences: workExperiences,
         skills: skills,
@@ -37,7 +38,7 @@ export const AddResumeApi = (name, email, professionTitle, location, website, pr
             toast.success("Resume Added Successfully!")
             toast.success(
                 data.Id ? "Resume Updated successfully!" : "Resume Added Successfully!"
-              );
+            );
             const token1 = response.data.outcome.tokens;
             Cookies.set("UserCredential", token1, { expires: 7 });
             return response.data;
@@ -99,7 +100,7 @@ export const GetResumeApi = (navigate) => {
     const userId = sessionStorage.getItem('userid');
     const params = {
         UserId: userId,
-       
+
     };
     const url = 'Candidate/GetResume';
     return apiClient({
@@ -135,7 +136,7 @@ export const DownloadResumeApi = (fileName, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const params = {
         UserId: userId,
-        fileName : fileName
+        fileName: fileName
     };
     const url = 'UserMaster/DownloadResume';
     return apiClient({

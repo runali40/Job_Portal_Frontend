@@ -118,16 +118,16 @@ export const GetNotificationMsgApi = async (navigate) => {
     }
 };
 
-export const EmpViewNotification = async (navigate) => {
+export const EmpViewNotification = async (jobId, NotificationId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const url = 'Employeer/EmpViewNotification';
-    const params = { UserId: userId };
+    const data = {  UserId: userId ,  jobId: jobId, notificationId: NotificationId };
 
     try {
         const response = await apiClient({
             method: 'post',
             url: url,
-            params: params,
+            data: data,
         });
 
         console.log(response.data.data, "get view notification data");

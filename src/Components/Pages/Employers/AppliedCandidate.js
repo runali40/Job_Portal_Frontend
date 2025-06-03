@@ -3,6 +3,7 @@ import Footer from "../Footer";
 import Header from "../Header";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
+  EmpViewNotification,
   GetAppliedCandidateApi,
   GetNotificationApi,
   GetNotificationCountApi,
@@ -15,6 +16,7 @@ const AppliedCandidate = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
   const [allAppliedCandidate, setAllAppliedCandidate] = useState([])
+  const [jobId, setJobId] = useState("")
 
   // useEffect(() => {
   //   GetNotificationData();
@@ -27,7 +29,7 @@ const AppliedCandidate = () => {
 
         // await GetNotificationCountData(); // waits fully
 
-        await GetAppliedCandidateData(); 
+        await GetAppliedCandidateData();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -36,27 +38,33 @@ const AppliedCandidate = () => {
   }, []);
   const navigate = useNavigate();
 
-  const GetNotificationMsgData = async () => {
-    const data = await GetNotificationMsgApi(navigate);
-    console.log(data);
-    setAllNotification(data)
-  }
+  // const GetNotificationMsgData = async () => {
+  //   const data = await GetNotificationMsgApi(navigate);
+  //   console.log(data);
+  //   setAllNotification(data)
+  // }
 
   const GetNotificationCountData = async () => {
     const data = await GetNotificationCountApi(navigate);
     console.log(data.NotificationCount, "count data");
     setNotificationCount(data.NotificationCount)
   }
+
   const GetAppliedCandidateData = async () => {
     const data = await GetAppliedCandidateApi(navigate);
     console.log(data);
     setAllAppliedCandidate(data)
-
   };
+
+  const EmpViewNotificationData = async (jobId, NotificationId) => {
+    const data = await EmpViewNotification(jobId, NotificationId, navigate);
+    console.log(data);
+  };
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentJobs = allNotification.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(allNotification.length / itemsPerPage);
+  const currentJobs = allAppliedCandidate.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(allAppliedCandidate.length / itemsPerPage);
   return (
     <>
       <Header />
@@ -77,7 +85,7 @@ const AppliedCandidate = () => {
           <div className="row">
             <div className="col-lg-4 col-md-6 col-xs-12">
               <div className="right-sideabr text-start">
-                <h4>Applied Canidate</h4>
+                <h4>Applied Candidate</h4>
                 <ul className="list-item">
                   <li>
                     <NavLink to="/resumePage">My Resume</NavLink>
@@ -109,21 +117,23 @@ const AppliedCandidate = () => {
             </div>
             <div className="col-md-8 col-sm-8 col-xs-12">
               <div className="job-alerts-item notification">
-                <h3 className="alerts-title text-start">Your Applied Canidate</h3>
+                <h3 className="alerts-title text-start">Your Applied Candidate</h3>
                 {
                   currentJobs.map((data) => {
                     return (
-                      <div className="notification-item">
+                      <div className="notification-item"
+                        style={{ backgroundColor: data.IsRead === null ? '#f0f0f0' : 'transparent', cursor: "pointer" }}
+                        onClick={() => EmpViewNotificationData(data.JobId, data.NotificationId)}>
                         <div className="thums">
                           {/* <img src="assets/img/jobs/img-1.jpg" alt="" /> */}
-                          <img src={data.LOGOFile} alt="" />
+                          <img src={data.ProfilePhoto} alt="" />
                         </div>
                         <div className="text-left">
                           <p>
-                            {data.Message}
+                            {data.Name}
                           </p>
                           <span className="time">
-                            <i className="lni-alarm-clock"></i>3 Hours ago
+                            <i className="lni-alarm-clock"></i>{data.PostName}
                           </span>
                         </div>
                       </div>
@@ -229,7 +239,7 @@ const AppliedCandidate = () => {
                     </NavLink>
                   </li>
                 </ul> */}
-                  <div className="col-lg-12 col-md-12 col-xs-12">
+                <div className="col-lg-12 col-md-12 col-xs-12">
                   <ul className="pagination">
                     <li className={currentPage === 1 ? "disabled" : "active"}>
                       <button

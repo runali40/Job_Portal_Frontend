@@ -39,7 +39,7 @@ import BookMarkedJobs from './Components/Pages/Employers/BookMarkedJobs';
 import Notifications from './Components/Pages/Employers/Notifications';
 import Pricing from './Components/Pages/Pricing';
 import UploadCv from './Components/Pages/Candidates/UploadCv';
-import AppliedCandidate from './Components/Pages/Employers/AppliedCanidate';
+import AppliedCandidate from './Components/Pages/Employers/AppliedCandidate';
 
 function App() {
   return (

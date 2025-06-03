@@ -12,6 +12,7 @@ const ManageResume = () => {
   const [perHour, setPerHour] = useState("")
   const [resumeId, setResumeId] = useState("")
   const [updatedDate, setUpdatedDate] = useState("")
+  const [profilePhoto, setProfilePhoto] = useState("")
 
   useEffect(() => {
     ManageResumeData();
@@ -28,6 +29,7 @@ const ManageResume = () => {
     setPerHour(data[0].PreHour)
     setResumeId(data[0].Id)
     setUpdatedDate(data[0].UpdatedDate)
+    setProfilePhoto(data[0].ProfilePhoto)
   }
 
   const GetResumeData = (resumeId) => {
@@ -75,7 +77,7 @@ const ManageResume = () => {
                 <h3 className="alerts-title text-start">Manage Resumes</h3>
                 <div className="manager-resumes-item">
                   <div className="manager-content">
-                    <NavLink to="/resumePage"><img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" /></NavLink>
+                    <NavLink to="/resumePage"><img className="resume-thumb" src={profilePhoto} alt="" /></NavLink>
                     <div className="manager-info">
                       <div className="manager-name text-start">
                         <h4>{name}</h4>

@@ -23,6 +23,8 @@ const AddResume = () => {
     const [age, setAge] = useState("");
     const [rId, setRId] = useState("");
     const [aboutMe, setAboutMe] = useState("")
+    const [base64Image, setBase64Image] = useState("")
+    const [file, setFile] = useState("")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -69,6 +71,7 @@ const AddResume = () => {
             preHour,
             age,
             aboutMe,
+            base64Image,
             educations,
             workExperiences,
             skills,
@@ -181,6 +184,23 @@ const AddResume = () => {
         const updated = [...skills];
         updated[index][field] = value;
         setSkills(updated);
+    };
+
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+
+        if (selectedFile) {
+            setFile(selectedFile.name); // To show in label
+
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                setBase64Image(reader.result); // base64 string
+                console.log("Base64 Image:", reader.result); // You can send this to API
+            };
+
+            reader.readAsDataURL(selectedFile); // Convert to base64
+        }
     };
 
     return (
@@ -336,7 +356,15 @@ const AddResume = () => {
                                                     <button className="btn btn-common">
                                                         Choose a cover image
                                                     </button>
-                                                    <input id="cover_img_file_2" type="file" />
+                                                    {/* <input id="cover_img_file_2" type="file" /> */}
+                                                    <input
+                                                        type="file"
+                                                        className="custom-file-input"
+                                                        id="validatedCustomFile"
+                                                        accept="image/*"
+                                                        required
+                                                        onChange={handleFileChange}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
