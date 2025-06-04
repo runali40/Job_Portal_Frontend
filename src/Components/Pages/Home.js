@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Footer from './Footer'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { GetCategoryApi, GetLocationApi, JobSearchApi } from '../../Api/HomeApi'
+import { GetCategoryApi, GetCompanyNameApi, GetJobTitleApi, GetLocationApi, JobSearchApi } from '../../Api/HomeApi'
 import {
     FaHome,
     FaGlobe,
@@ -24,12 +24,18 @@ const Home = () => {
     const [category, setCategory] = useState("")
     const [allCategory, setAllCategory] = useState([])
     const [allFeatures, setAllFeatures] = useState([])
+    const [companyName, setCompanyName] = useState("")
+    const [allCompanyName, setAllCompanyName] = useState([])
+    const [jobTitle, setJobTitle] = useState("")
+    const [allJobTitle, setAllJobTitle] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 await GetLocationData();  // waits fully
                 await GetCategoryData();  // uses updated token
+                await GetCompanyNameData();
+                await GetJobTitleData();
                 await GetFeaturesData();
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -48,6 +54,17 @@ const Home = () => {
         const data = await GetCategoryApi(navigate);
         setAllCategory(data);
     };
+
+    const GetCompanyNameData = async () => {
+        const data = await GetCompanyNameApi(navigate);
+        setAllCompanyName(data);
+    };
+
+    const GetJobTitleData = async () => {
+        const data = await GetJobTitleApi(navigate);
+        setAllJobTitle(data);
+    };
+
     const categoryIcons = {
         'Finance': <FaHome />,
         'Sale/Markting': <FaGlobe />,
@@ -73,7 +90,7 @@ const Home = () => {
     };
 
     const JobSearchData = async () => {
-        const data = await JobSearchApi(location, category, navigate);
+        const data = await JobSearchApi(location, category, companyName, jobTitle, navigate);
         console.log(data, "job search data");
         const featuredData = data.filter(item => item.Featured === "1");
         setAllFeatures(featuredData);
@@ -206,9 +223,45 @@ const Home = () => {
                                 <div className="job-search-form">
                                     <div>
                                         <div className="row">
-                                            <div className="col-lg-5 col-md-6 col-xs-12">
+                                            {/* <div className="col-lg-5 col-md-6 col-xs-12">
                                                 <div className="form-group">
                                                     <input className="form-control" type="text" placeholder="Job Title or Company Name" />
+                                                </div>
+                                            </div> */}
+                                            <div className="col-lg-3 col-md-6 col-xs-12">
+                                                <div className="form-group">
+                                                    <div className="search-category-container">
+                                                        <label className="styled-select">
+
+                                                            <select value={companyName} onChange={(e) => setCompanyName(e.target.value)}>
+                                                                <option value="" disabled hidden>Select Company Name</option>
+                                                                {allCompanyName.map((data) => (
+                                                                    <option key={data.Name} value={data.Name}>
+                                                                        {data.Name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <i className="lni-map-marker"></i>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-3 col-md-6 col-xs-12">
+                                                <div className="form-group">
+                                                    <div className="search-category-container">
+                                                        <label className="styled-select">
+
+                                                            <select value={jobTitle} onChange={(e) => setJobTitle(e.target.value)}>
+                                                                <option value="" disabled hidden>Select Job Title</option>
+                                                                {allJobTitle.map((data) => (
+                                                                    <option key={data.Slug} value={data.Slug}>
+                                                                        {data.Slug}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <i className="lni-map-marker"></i>
                                                 </div>
                                             </div>
                                             <div className="col-lg-3 col-md-6 col-xs-12">
@@ -229,7 +282,7 @@ const Home = () => {
                                                     <i className="lni-map-marker"></i>
                                                 </div>
                                             </div>
-                                            <div className="col-lg-3 col-md-6 col-xs-12">
+                                            <div className="col-lg-2 col-md-6 col-xs-12">
                                                 <div className="form-group">
                                                     <div className="search-category-container">
                                                         <label className="styled-select">

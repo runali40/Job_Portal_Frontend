@@ -9953,5 +9953,16 @@ a.text-dark:hover {
         border-color: #dee2e6
     }
 }
-
+.thums {
+    width: 100px; /* adjust as needed */
+    height: auto;
+    overflow: hidden;
+  }
+  
+  .rounded-image {
+    width: 100%; /* or set fixed width like 80px */
+    height: auto;
+    border-radius: 50%; /* makes it round */
+    object-fit: cover;
+  }
 /*# sourceMappingURL=bootstrap.min.css.map */

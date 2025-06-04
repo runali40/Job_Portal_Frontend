@@ -4,6 +4,7 @@ import Header from "../Header";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   EmpViewNotification,
+  GetAllAppliedCandidateApi,
   GetAppliedCandidateApi,
   GetNotificationApi,
   GetNotificationCountApi,
@@ -29,7 +30,7 @@ const AppliedCandidate = () => {
 
         // await GetNotificationCountData(); // waits fully
 
-        await GetAppliedCandidateData();
+        await GetAllAppliedCandidateData();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -55,10 +56,22 @@ const AppliedCandidate = () => {
     console.log(data);
     setAllAppliedCandidate(data)
   };
-
-  const EmpViewNotificationData = async (jobId, NotificationId) => {
-    const data = await EmpViewNotification(jobId, NotificationId, navigate);
+  const GetAllAppliedCandidateData = async () => {
+    const data = await GetAllAppliedCandidateApi(navigate);
     console.log(data);
+    setAllAppliedCandidate(data)
+  };
+  const EmpViewNotificationData = async (jobId, NotificationId, ApplicationId) => {
+    const data = await EmpViewNotification(jobId, NotificationId, ApplicationId, navigate);
+    console.log(data);
+    GetApplyCandidate(ApplicationId)
+  };
+
+  const GetApplyCandidate = (ApplicationId) => {
+    console.log("30")
+    navigate("/viewAppliedCandidates", {
+      state: { ApplicationId },
+    });
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -123,10 +136,9 @@ const AppliedCandidate = () => {
                     return (
                       <div className="notification-item"
                         style={{ backgroundColor: data.IsRead === null ? '#f0f0f0' : 'transparent', cursor: "pointer" }}
-                        onClick={() => EmpViewNotificationData(data.JobId, data.NotificationId)}>
+                        onClick={() => EmpViewNotificationData(data.JobId, data.NotificationId, data.ApplicationId)}>
                         <div className="thums">
-                          {/* <img src="assets/img/jobs/img-1.jpg" alt="" /> */}
-                          <img src={data.ProfilePhoto} alt="" />
+                          <img src={data.ProfilePhoto} alt="Profile" className=" my-auto" style={{ borderRadius: "55%", height: "50px", width: "50px" }} />
                         </div>
                         <div className="text-left">
                           <p>

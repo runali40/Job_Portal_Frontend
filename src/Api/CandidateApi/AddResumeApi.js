@@ -7,7 +7,7 @@ import UrlData from '../../UrlData';
 import { apiClient } from '../../ApiClient';
 import ErrorHandler from '../../ErrorHandler';
 
-export const AddResumeApi = (name, email, professionTitle, location, website, preHour, age, aboutMe, base64Image, educations, workExperiences, skills, rId, navigate) => {
+export const AddResumeApi = (name, email, professionTitle, location,category, website, preHour, age, aboutMe, base64Image, educations, workExperiences, skills, rId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const data = {
         userId: userId,
@@ -15,6 +15,7 @@ export const AddResumeApi = (name, email, professionTitle, location, website, pr
         email: email,
         professionTitle: professionTitle,
         location: location,
+        currentIndustry : category,
         web: website,
         preHour: preHour,
         age: age,

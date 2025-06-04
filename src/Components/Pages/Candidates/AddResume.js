@@ -6,7 +6,7 @@ import {
     AddResumeApi,
     GetManageResumeApi,
 } from "../../../Api/CandidateApi/AddResumeApi";
-import { GetLocationApi } from "../../../Api/HomeApi";
+import { GetCategoryApi, GetJobTitleApi, GetLocationApi } from "../../../Api/HomeApi";
 
 const AddResume = () => {
     const navigate = useNavigate();
@@ -25,11 +25,14 @@ const AddResume = () => {
     const [aboutMe, setAboutMe] = useState("")
     const [base64Image, setBase64Image] = useState("")
     const [file, setFile] = useState("")
+    const [category, setCategory] = useState("")
+    const [allCategory, setAllCategory] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 await GetLocationData(); // waits fully
+                await GetCategoryData();
                 if (resumeId) {
                     await GetManageResumeData(); // uses updated token
                 }
@@ -39,6 +42,12 @@ const AddResume = () => {
         };
         fetchData();
     }, []);
+
+   const GetCategoryData = async () => {
+        const data = await GetCategoryApi(navigate);
+        setAllCategory(data);
+    };
+
 
     const GetManageResumeData = async () => {
         const data = await GetManageResumeApi(resumeId, navigate);
@@ -54,6 +63,8 @@ const AddResume = () => {
         setPreHour(data.model1.PreHour);
         setAge(data.model1.Age);
         setRId(data.model1.Id);
+        setAboutMe(data.model1.AboutMe)
+        setCategory(data.model1.CurrentIndustry)
     };
 
     const GetLocationData = async () => {
@@ -67,6 +78,7 @@ const AddResume = () => {
             email,
             professionTitle,
             location,
+            category,
             website,
             preHour,
             age,
@@ -273,6 +285,25 @@ const AddResume = () => {
                                                 }
                                             }}
                                         />
+                                    </div>
+                                    <div className="form-group text-start">
+                                        <label className="control-label text-left">Current Industry</label>
+
+                                        <label className="styled-select form-control">
+                                            <select
+                                                value={category}
+                                                onChange={(e) => setCategory(e.target.value)}
+                                            >
+                                                <option value="" disabled hidden>
+                                                    Select Current Industry
+                                                </option>
+                                                {allCategory.map((data) => (
+                                                    <option key={data.CategoryId} value={data.CategoryId}>
+                                                        {data.CategoryName}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </label>
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label text-left">Location</label>
