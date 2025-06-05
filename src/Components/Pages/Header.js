@@ -184,7 +184,7 @@ const Header = () => {
                             <div className="collapse navbar-collapse" id="main-navbar">
                                 <ul className="navbar-nav mr-auto w-100 justify-content-end">
                                     <li className="nav-item active">
-                                        <NavLink className="nav-link" to="/">
+                                        <NavLink className="nav-link" to="/home">
                                             Home
                                         </NavLink>
                                     </li>
@@ -204,18 +204,25 @@ const Header = () => {
                                     </li>
                                     {
                                         RoleName === "Candidate" ?
-                                            <li className="nav-item dropdown">
-                                                <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Candidates
-                                                </NavLink>
-                                                <ul className="dropdown-menu">
-                                                    <li><NavLink className="dropdown-item" to="/browseJobs">Browse Jobs</NavLink></li>
-                                                    <li><NavLink className="dropdown-item" to="/browseCategories">Browse Categories</NavLink></li>
-                                                    <li><NavLink className="dropdown-item" to="/addResume">Add Resume</NavLink></li>
-                                                    <li><NavLink className="dropdown-item" to="/manageResume">Manage Resumes</NavLink></li>
-                                                    <li><NavLink className="dropdown-item" to="/jobAlerts">Job Alerts</NavLink></li>
-                                                </ul>
-                                            </li>
+                                            <>
+                                                <li className="nav-item dropdown">
+                                                    <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Candidates
+                                                    </NavLink>
+                                                    <ul className="dropdown-menu">
+                                                        <li><NavLink className="dropdown-item" to="/browseJobs">Browse Jobs</NavLink></li>
+                                                        <li><NavLink className="dropdown-item" to="/browseCategories">Browse Categories</NavLink></li>
+                                                        <li><NavLink className="dropdown-item" to="/addResume">Add Resume</NavLink></li>
+                                                        <li><NavLink className="dropdown-item" to="/manageResume">Manage Resumes</NavLink></li>
+                                                        <li><NavLink className="dropdown-item" to="/jobAlerts">Job Alerts</NavLink></li>
+                                                    </ul>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <NavLink className="nav-link" to="/uploadCv">
+                                                        Upload CV
+                                                    </NavLink>
+                                                </li>
+                                            </>
                                             :
                                             <li className="nav-item dropdown">
                                                 <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -240,15 +247,13 @@ const Header = () => {
                                             Contact
                                         </NavLink>
                                     </li> */}
-                                    <li className="nav-item">
-                                        <NavLink className="nav-link" to="/uploadCv">
-                                            Upload CV
-                                        </NavLink>
-                                    </li>
 
-                                    <li className="button-group">
-                                        <NavLink to="/postJob" className="button btn btn-common">Post a Job</NavLink>
-                                    </li>
+                                    {
+                                        RoleName === "Employer" &&
+                                        <li className="button-group">
+                                            <NavLink to="/postJob" className="button btn btn-common">Post a Job</NavLink>
+                                        </li>
+                                    }
                                     <li className="nav-item">
                                         <div className="nav-link" onClick={LogOutButton} style={{ cursor: "pointer" }}>Sign Out</div>
                                     </li>

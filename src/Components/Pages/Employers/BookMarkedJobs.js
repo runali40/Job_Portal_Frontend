@@ -3,6 +3,8 @@ import Footer from '../Footer'
 import Header from '../Header'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { getBookmarkedJob } from '../../../Api/CandidateApi/BookmarkedJobApi'
+import LeftSidebar from '../LeftSidebar'
+import { ApplyJobApi } from '../../../Api/CandidateApi/AddResumeApi'
 
 const BookMarkedJobs = () => {
   const [allBookmarked, setAllBookmarked] = useState([])
@@ -11,14 +13,26 @@ const BookMarkedJobs = () => {
   const [itemsPerPage] = useState(5);
 
   useEffect(() => {
-    GetBookmarkedData();
+    GetAllBookmarkedData();
   }, [])
 
-  const GetBookmarkedData = async () => {
+  const GetAllBookmarkedData = async () => {
     const data = await getBookmarkedJob(navigate);
     console.log(data, "get bookmarked data");
     setAllBookmarked(data)
   }
+
+  const GetBookmarkedData = (id) => {
+    console.log("30")
+    navigate("/jobDetails", {
+      state: { id },
+    });
+  };
+
+      // const ApplyJobData = async () => {
+      //     // await ApplyJobApi(jobTitle, jobDetailId, resumeUrl, navigate);
+  
+      // };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -44,7 +58,7 @@ const BookMarkedJobs = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-4 col-md-6 col-xs-12">
-              <div className="right-sideabr text-start">
+              {/* <div className="right-sideabr text-start">
                 <h4>Manage Account</h4>
                 <ul className="list-item">
                   <li><NavLink to="/resume">My Resume</NavLink></li>
@@ -55,7 +69,8 @@ const BookMarkedJobs = () => {
                   <li><NavLink to="/changePassword">Change Password</NavLink></li>
                   <li><NavLink to="/">Sing Out</NavLink></li>
                 </ul>
-              </div>
+              </div> */}
+              <LeftSidebar />
             </div>
             <div className="col-lg-8 col-md-6 col-xs-12">
               <div className="job-alerts-item bookmarked text-start">
@@ -63,11 +78,11 @@ const BookMarkedJobs = () => {
                 {
                   currentJobs.map((data) => {
                     return (
-                      <NavLink className="job-listings" to="/jobDetails">
+                      <div className="job-listings" onClick={() => GetBookmarkedData(data.Id)} style={{ cursor: "pointer" }}>
                         <div className="row">
                           <div className="col-lg-4 col-md-12 col-xs-12">
                             <div className="job-company-logo">
-                              <img src={data.LOGOFile} alt="" />
+                              <img src={data.LOGOFile} alt="" style={{ width: "55px", height: "50px" }} />
                             </div>
                             <div className="job-details">
                               <h3>{data.Slug}</h3>
@@ -84,11 +99,11 @@ const BookMarkedJobs = () => {
                           <div className="col-lg-2 col-md-12 col-xs-12 text-right">
                             <span className="btn-full-time">Full Time</span>
                           </div>
-                          <div className="col-lg-3 col-md-12 col-xs-12 text-right">
-                            <span className="btn-apply">Apply Now</span>
-                          </div>
+                          {/* <div className="col-lg-3 col-md-12 col-xs-12 text-right">
+                            <span className="btn-apply" onClick={()=>ApplyJobData(data.Slug, data.Id,)}>Apply Now</span>
+                          </div> */}
                         </div>
-                      </NavLink>
+                      </div>
                     )
                   })
                 }

@@ -3,6 +3,7 @@ import Header from '../Header'
 import Footer from '../Footer'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ManageResumeApi } from '../../../Api/CandidateApi/AddResumeApi'
+import LeftSidebar from '../LeftSidebar'
 
 const ManageResume = () => {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ const ManageResume = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-4 col-md-12 col-xs-12">
-              <div className="right-sideabr">
+              {/* <div className="right-sideabr">
                 <h4>Manage Account</h4>
                 <ul className="list-item text-start">
                   <li><NavLink to="/resumePage">My Resume</NavLink></li>
@@ -70,7 +71,8 @@ const ManageResume = () => {
                   <li><NavLink to="/changePassword">Change Password</NavLink></li>
                   <li><NavLink to="/">Sign Out</NavLink></li>
                 </ul>
-              </div>
+              </div> */}
+              <LeftSidebar/>
             </div>
             <div className="col-lg-8 col-md-12 col-xs-12">
               <div className="job-alerts-item candidates">

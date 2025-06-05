@@ -4,6 +4,7 @@ import Header from '../Header'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ChangePasswordApi } from '../../../Api/LoginApi'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import LeftSidebar from '../LeftSidebar'
 
 const ChangePassword = () => {
     const navigate = useNavigate();
@@ -35,7 +36,7 @@ const ChangePassword = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4 col-sm-4 col-xs-12">
-                            <div className="right-sideabr text-start">
+                            {/* <div className="right-sideabr text-start">
                                 <h4>Manage Account</h4>
                                 <ul className="list-item">
 
@@ -47,7 +48,8 @@ const ChangePassword = () => {
                                     <li><NavLink className="active" to="/changePassword">Change Password</NavLink></li>
                                     <li><NavLink to="/">Sign Out</NavLink></li>
                                 </ul>
-                            </div>
+                            </div> */}
+                            <LeftSidebar/>
                         </div>
                         <div className="col-md-8 col-sm-8 col-xs-12">
                             <div className="job-alerts-item text-start">

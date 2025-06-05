@@ -8,6 +8,7 @@ import {
   GetNotificationCountApi,
   GetNotificationMsgApi,
 } from "../../../Api/EmployerApi/NotificationApi";
+import LeftSidebar from '../LeftSidebar'
 
 const Notifications = () => {
   const [notificationCount, setNotificationCount] = useState("")
@@ -74,7 +75,7 @@ const Notifications = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-4 col-md-6 col-xs-12">
-              <div className="right-sideabr text-start">
+              {/* <div className="right-sideabr text-start">
                 <h4>Manage Account</h4>
                 <ul className="list-item">
                   <li>
@@ -103,7 +104,8 @@ const Notifications = () => {
                     <NavLink to="/">Sign Out</NavLink>
                   </li>
                 </ul>
-              </div>
+              </div> */}
+              <LeftSidebar/>
             </div>
             <div className="col-md-8 col-sm-8 col-xs-12">
               <div className="job-alerts-item notification">

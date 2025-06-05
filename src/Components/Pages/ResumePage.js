@@ -23,7 +23,7 @@ const ResumePage = () => {
       <div className="section">
         <div className="container">
           <div className="row">
-            <div className="col-lg-4 col-md-4 col-xs-12">
+            {/* <div className="col-lg-4 col-md-4 col-xs-12">
               <div className="right-sideabr">
                 <h4>Manage Account</h4>
                 <ul className="list-item text-start">
@@ -36,8 +36,8 @@ const ResumePage = () => {
                   <li><NavLink to="/">Sign Out</NavLink></li>
                 </ul>
               </div>
-            </div>
-            <div className="col-lg-8 col-md-8 col-xs-12">
+            </div> */}
+            <div className="col-lg-12 col-md-12 col-xs-12">
               <div className="inner-box my-resume">
                 <div className="author-resume">
                   <div className="thumb">

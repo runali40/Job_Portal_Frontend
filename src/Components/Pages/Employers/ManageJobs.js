@@ -4,6 +4,7 @@ import Header from '../Header'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
 import { FeaturedJobApi } from '../../../Api/EmployerApi/FeaturedApi'
+import LeftSidebar from '../LeftSidebar'
 
 const ManageJobs = () => {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ const ManageJobs = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-4 col-md-4 col-xs-12">
-              <div className="right-sideabr text-start">
+              {/* <div className="right-sideabr text-start">
                 <h4>Manage Account</h4>
                 <ul className="list-item">
                   <li><NavLink to="/resumePage">My Resume</NavLink></li>
@@ -69,7 +70,8 @@ const ManageJobs = () => {
                   <li><NavLink to="/changePassword">Change Password</NavLink></li>
                   <li><NavLink to="/">Sign Out</NavLink></li>
                 </ul>
-              </div>
+              </div> */}
+              <LeftSidebar/>
             </div>
             <div className="col-lg-8 col-md-8 col-xs-12">
               <div className="job-alerts-item candidates text-start">

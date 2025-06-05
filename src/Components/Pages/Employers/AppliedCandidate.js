@@ -5,19 +5,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import {
   EmpViewNotification,
   GetAllAppliedCandidateApi,
-  GetAppliedCandidateApi,
-  GetNotificationApi,
-  GetNotificationCountApi,
-  GetNotificationMsgApi,
 } from "../../../Api/EmployerApi/NotificationApi";
+import LeftSidebar from '../LeftSidebar'
 
 const AppliedCandidate = () => {
   const [notificationCount, setNotificationCount] = useState("")
-  const [allNotification, setAllNotification] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
   const [allAppliedCandidate, setAllAppliedCandidate] = useState([])
-  const [jobId, setJobId] = useState("")
+
 
   // useEffect(() => {
   //   GetNotificationData();
@@ -45,22 +41,12 @@ const AppliedCandidate = () => {
   //   setAllNotification(data)
   // }
 
-  const GetNotificationCountData = async () => {
-    const data = await GetNotificationCountApi(navigate);
-    console.log(data.NotificationCount, "count data");
-    setNotificationCount(data.NotificationCount)
-  }
-
-  const GetAppliedCandidateData = async () => {
-    const data = await GetAppliedCandidateApi(navigate);
-    console.log(data);
-    setAllAppliedCandidate(data)
-  };
   const GetAllAppliedCandidateData = async () => {
     const data = await GetAllAppliedCandidateApi(navigate);
     console.log(data);
     setAllAppliedCandidate(data)
   };
+
   const EmpViewNotificationData = async (jobId, NotificationId, ApplicationId) => {
     const data = await EmpViewNotification(jobId, NotificationId, ApplicationId, navigate);
     console.log(data);
@@ -78,6 +64,7 @@ const AppliedCandidate = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentJobs = allAppliedCandidate.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(allAppliedCandidate.length / itemsPerPage);
+
   return (
     <>
       <Header />
@@ -97,7 +84,7 @@ const AppliedCandidate = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-4 col-md-6 col-xs-12">
-              <div className="right-sideabr text-start">
+              {/* <div className="right-sideabr text-start">
                 <h4>Applied Candidate</h4>
                 <ul className="list-item">
                   <li>
@@ -126,7 +113,8 @@ const AppliedCandidate = () => {
                     <NavLink to="/">Sign Out</NavLink>
                   </li>
                 </ul>
-              </div>
+              </div> */}
+              <LeftSidebar/>
             </div>
             <div className="col-md-8 col-sm-8 col-xs-12">
               <div className="job-alerts-item notification">
