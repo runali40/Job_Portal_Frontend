@@ -75,8 +75,8 @@ export const UpdateJobAlertApi = async (alertId, navigate) => {
 export const GetCandidateAlertCount = async (alertId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const currentIndustry = sessionStorage.getItem('currentIndustry');
-    const url = 'Candidate/GetCandidateAlertCount';
-    const params = {  UserId: userId ,CurrentIndustry : currentIndustry};
+    const url = 'Employeer/GetCandidateAlertCount';
+    const params = {  UserId: userId ,CategoryId : currentIndustry};
 
     try {
         const response = await apiClient({

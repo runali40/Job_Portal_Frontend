@@ -170,46 +170,59 @@ export const DownloadResumeApi = (fileName, navigate) => {
 };
 
 export const ApplyJobApi = (jobTitle, jobDetailId, resumeUrl, navigate) => {
-    const userId = sessionStorage.getItem('userid');
+    const userId = sessionStorage.getItem("userid");
+  
     const data = {
-        userId: userId,
-        // AppliedDate: "",
-        Status: "",
-        CoverLetter: `I am writing to express my interest in the position of ${jobTitle}`,
-        JobId: jobDetailId,
-        Resume: resumeUrl
-
-
+      userId: userId,
+      Status: "",
+      CoverLetter: `I am writing to express my interest in the position of ${jobTitle}`,
+      JobId: jobDetailId,
+      Resume: resumeUrl,
     };
-    const url = 'Candidate/Apply';
+  
+    const url = "Candidate/Apply";
+  
     return apiClient({
-        method: 'post',
-        url: UrlData + url,
-        data: data,
+      method: "post",
+      url: UrlData + url,
+      data: data,
     })
-        .then((response) => {
-            console.log('API response:', response);
-            toast.success("Resume Added Successfully!")
-            const token1 = response.data.outcome.tokens;
+      .then((response) => {
+        console.log("API response:", response);
+        toast.success("Resume Added Successfully!");
+  
+        const token1 = response?.data?.outcome?.tokens;
+        if (token1) {
+          Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+  
+        return response.data;
+      })
+      .catch((error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.outcome
+        ) {
+          const token1 = error.response.data.outcome.tokens;
+          if (token1) {
             Cookies.set("UserCredential", token1, { expires: 7 });
-            return response.data;
-        })
-        .catch((error) => {
-            if (
-                error.response &&
-                error.response.data &&
-                error.response.data.outcome
-            ) {
-                const token1 = error.response.data.outcome.tokens;
-                Cookies.set("UserCredential", token1, { expires: 7 });
-            }
-            console.log(error);
-
-            const errors = ErrorHandler(error, navigate);
-            toast.error(errors);
-            return [];
-        });
-};
+          }
+        }
+  
+        console.log(error);
+  
+        // 🔁 Handle specific error status 409 (conflict)
+        if (error?.response?.status === 409) {
+          toast.error("This job is already applied!");
+        } else {
+          const errors = ErrorHandler(error, navigate);
+          toast.error(errors);
+        }
+  
+        return [];
+      });
+  };
 
 export const GetManageResumeApi = (resumeId, navigate) => {
     const userId = sessionStorage.getItem('userid');

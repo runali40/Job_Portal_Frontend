@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Footer from './Footer'
+import { MdNotifications } from 'react-icons/md';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { GetCategoryApi, GetCompanyNameApi, GetJobTitleApi, GetLocationApi, JobSearchApi } from '../../Api/HomeApi'
 import {
@@ -11,11 +12,14 @@ import {
     FaHeart,
     FaFlask,
     FaTrophy,
+    FaBell
 } from 'react-icons/fa';
+
 import { GetFeaturedApi } from '../../Api/EmployerApi/FeaturedApi';
 import { BookmarkedJobApi } from '../../Api/CandidateApi/BookmarkedJobApi';
 import Cookies from 'js-cookie';
 import { getAllJobAlertApi, GetCandidateAlertCount } from '../../Api/CandidateApi/JobAlertApi';
+import { GetNotificationCountApi } from '../../Api/EmployerApi/NotificationApi';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -29,6 +33,8 @@ const Home = () => {
     const [allCompanyName, setAllCompanyName] = useState([])
     const [jobTitle, setJobTitle] = useState("")
     const [allJobTitle, setAllJobTitle] = useState([])
+    const [jobAlertCount, setJobAlertCount] = useState("")
+    const [appliedCandidateCount, setAppliedCandidateCount] = useState("")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,14 +44,18 @@ const Home = () => {
                 await GetCompanyNameData();
                 await GetJobTitleData();
                 await GetFeaturesData();
-                await GetJobAlertCount();
+                {
+                    RoleName === "Candidate" ?
+                        await GetJobAlertCount() :
+                        await GetAppliedCandidateCountData()
+                }
+
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         };
         fetchData();
     }, []);
-
 
     const GetLocationData = async () => {
         const data = await GetLocationApi(navigate);
@@ -69,8 +79,14 @@ const Home = () => {
 
     const GetJobAlertCount = async () => {
         const data = await GetCandidateAlertCount(navigate);
-        console.log(data);
+        setJobAlertCount(data.Alertcount);
     };
+
+    const GetAppliedCandidateCountData = async () => {
+        const data = await GetNotificationCountApi(navigate);
+        console.log(data.NotificationCount, "count data");
+        setAppliedCandidateCount(data.NotificationCount)
+    }
 
     const categoryIcons = {
         'Finance': <FaHome />,
@@ -147,7 +163,7 @@ const Home = () => {
                                         </NavLink>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <NavLink className="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Pages
                                         </NavLink>
                                         <ul className="dropdown-menu">
@@ -164,7 +180,7 @@ const Home = () => {
                                         RoleName === "Candidate" ?
                                             <>
                                                 <li className="nav-item dropdown">
-                                                    <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <NavLink className="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Candidates
                                                     </NavLink>
                                                     <ul className="dropdown-menu">
@@ -183,7 +199,7 @@ const Home = () => {
                                             </>
                                             :
                                             <li className="nav-item dropdown">
-                                                <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <NavLink className="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Employers
                                                 </NavLink>
                                                 <ul className="dropdown-menu">
@@ -216,6 +232,26 @@ const Home = () => {
                                             <NavLink to="/postJob" className="button btn btn-common">Post a Job</NavLink>
                                         </li>
                                     }
+                                    <div style={{ position: 'relative', display: 'inline-block' }}>
+                                        <MdNotifications size={28} color="#000" className='mt-3' />
+
+                                        <span style={{
+                                            position: 'absolute',
+                                            top: '2px',
+                                            right: '-6px',
+                                            backgroundColor: 'red',
+                                            color: 'white',
+                                            borderRadius: '50%',
+                                            padding: '2px 6px',
+                                            fontSize: '10px'
+                                        }}>
+                                            {
+                                                RoleName === "Candidate" ? jobAlertCount : appliedCandidateCount
+                                            }
+                                        </span>
+
+                                    </div>
+
                                     <li className="nav-item">
                                         <div className="nav-link" onClick={LogOutButton} style={{ cursor: "pointer" }}>Sign Out</div>
                                     </li>
@@ -225,8 +261,6 @@ const Home = () => {
                     </div>
                     <div className="mobile-menu" data-logo="assets/img/logo-mobile.png"></div>
                 </nav>
-
-
                 <div className="container">
                     <div className="row space-100 justify-content-center">
                         <div className="col-lg-10 col-md-12 col-xs-12">

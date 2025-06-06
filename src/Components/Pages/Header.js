@@ -1,10 +1,41 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie';
+import { MdNotifications } from 'react-icons/md';
+import { GetNotificationCountApi } from '../../Api/EmployerApi/NotificationApi';
+import { GetCandidateAlertCount } from '../../Api/CandidateApi/JobAlertApi';
 
 const Header = () => {
     const RoleName = sessionStorage.getItem("rolename")
     const navigate = useNavigate();
+    const [jobAlertCount, setJobAlertCount] = useState("")
+    const [appliedCandidateCount, setAppliedCandidateCount] = useState("")
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                {
+                    RoleName === "Candidate" ?
+                        await GetJobAlertCount() :
+                        await GetAppliedCandidateCountData()
+                }
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+        fetchData();
+    }, []);
+    const GetJobAlertCount = async () => {
+        const data = await GetCandidateAlertCount(navigate);
+        setJobAlertCount(data.Alertcount);
+    };
+
+    const GetAppliedCandidateCountData = async () => {
+        const data = await GetNotificationCountApi(navigate);
+        console.log(data.NotificationCount, "count data");
+        setAppliedCandidateCount(data.NotificationCount)
+    }
 
     const LogOutButton = () => {
         localStorage.removeItem("sessionid");
@@ -189,7 +220,7 @@ const Header = () => {
                                         </NavLink>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <NavLink className="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Pages
                                         </NavLink>
                                         <ul className="dropdown-menu">
@@ -206,7 +237,7 @@ const Header = () => {
                                         RoleName === "Candidate" ?
                                             <>
                                                 <li className="nav-item dropdown">
-                                                    <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <NavLink className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Candidates
                                                     </NavLink>
                                                     <ul className="dropdown-menu">
@@ -225,7 +256,7 @@ const Header = () => {
                                             </>
                                             :
                                             <li className="nav-item dropdown">
-                                                <NavLink className="nav-link dropdown-toggle" to="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <NavLink className="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Employers
                                                 </NavLink>
                                                 <ul className="dropdown-menu">
@@ -254,6 +285,25 @@ const Header = () => {
                                             <NavLink to="/postJob" className="button btn btn-common">Post a Job</NavLink>
                                         </li>
                                     }
+                                    <div style={{ position: 'relative', display: 'inline-block' }}>
+                                        <MdNotifications size={28} color="#000" className='mt-3' />
+
+                                        <span style={{
+                                            position: 'absolute',
+                                            top: '2px',
+                                            right: '-6px',
+                                            backgroundColor: 'red',
+                                            color: 'white',
+                                            borderRadius: '50%',
+                                            padding: '2px 6px',
+                                            fontSize: '10px'
+                                        }}>
+                                            {
+                                                RoleName === "Candidate" ? jobAlertCount : appliedCandidateCount
+                                            }
+                                        </span>
+
+                                    </div>
                                     <li className="nav-item">
                                         <div className="nav-link" onClick={LogOutButton} style={{ cursor: "pointer" }}>Sign Out</div>
                                     </li>

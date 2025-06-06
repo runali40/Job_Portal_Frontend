@@ -26,6 +26,7 @@ const JobDetails = () => {
     const [jobDetailId, setJobDetailId] = useState("")
     const [resumeUrl, setResumeUrl] = useState("")
     const [fileName, setFileName] = useState("")
+    const [jobStatus, setJobStatus] = useState("")
 
     // useEffect(() => {
     //     GetJobDetails();
@@ -42,19 +43,27 @@ const JobDetails = () => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        console.log("Updated jobStatus:", jobStatus);
+        setJobStatus(jobStatus)
+        console.log("Updated jobStatus:", jobStatus);
+    }, [jobStatus]);
 
     const GetJobDetails = async () => {
         const data = await GetBrowseApi(id, navigate);
-        setJobTitle(data.Slug)
-        setCompanyName(data.Name)
-        setClosingDate(data.ClosingDate)
-        setJobSkills(data.Introduce)
-        setDescription(data.Description)
-        setLocationName(data.LocationName)
-        setJobDetailId(data.Id)
-        setFileName(data.UFileName)
+        setJobTitle(data.Slug);
+        setCompanyName(data.Name);
+        setClosingDate(data.ClosingDate);
+        setJobSkills(data.Introduce);
+        setDescription(data.Description);
+        setLocationName(data.LocationName);
+        setJobDetailId(data.Id);
 
+        const status = data.Status;
+        console.log("Setting jobStatus to:", status); // ✅ correct placement
+        setJobStatus(status);
 
+        setFileName(data.UFileName);
     };
     const GetResumeData = async () => {
         // const data = await GetResumeApi(jobDetailId, navigate);
@@ -111,7 +120,7 @@ const JobDetails = () => {
         link.click();
         document.body.removeChild(link); // Cleanup
     };
-    
+
     return (
         <>
             <Header />
@@ -163,8 +172,15 @@ const JobDetails = () => {
                                 </ul>
                                 <h5>How To Apply</h5>
                                 <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
-                                <button className="btn btn-common" onClick={ApplyJobData}>Apply job</button>
-                                <button className="btn btn-common" onClick={DownloadResume}>Download Resume</button>
+
+                                <button
+                                    className="btn btn-common"
+                                    onClick={ApplyJobData}
+                                    disabled={!jobStatus || jobStatus === "Applied"}
+                                >
+                                    Apply job
+                                </button>
+                                {/* <button className="btn btn-common" onClick={DownloadResume}>Download Resume</button> */}
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-12 col-xs-12">
