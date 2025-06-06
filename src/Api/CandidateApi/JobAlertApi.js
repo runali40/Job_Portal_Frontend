@@ -71,3 +71,43 @@ export const UpdateJobAlertApi = async (alertId, navigate) => {
         return null;
     }
 };
+
+export const GetCandidateAlertCount = async (alertId, navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    const currentIndustry = sessionStorage.getItem('currentIndustry');
+    const url = 'Candidate/GetCandidateAlertCount';
+    const params = {  UserId: userId ,CurrentIndustry : currentIndustry};
+
+    try {
+        const response = await apiClient({
+            method: 'get',
+            url: url,
+            params: params,
+        });
+
+        console.log(response.data.data, "get update job alert data");
+
+        // ✅ Set token manually so it's ready for next API call
+        if (response.data?.outcome?.tokens) {
+            const newToken = response.data.outcome.tokens;
+            Cookies.set("UserCredential", newToken, { expires: 7 });
+        }
+
+        return response.data.data;
+    } catch (error) {
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        return null;
+    }
+};
+

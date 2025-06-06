@@ -15,6 +15,7 @@ import {
 import { GetFeaturedApi } from '../../Api/EmployerApi/FeaturedApi';
 import { BookmarkedJobApi } from '../../Api/CandidateApi/BookmarkedJobApi';
 import Cookies from 'js-cookie';
+import { getAllJobAlertApi, GetCandidateAlertCount } from '../../Api/CandidateApi/JobAlertApi';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -37,6 +38,7 @@ const Home = () => {
                 await GetCompanyNameData();
                 await GetJobTitleData();
                 await GetFeaturesData();
+                await GetJobAlertCount();
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -63,6 +65,11 @@ const Home = () => {
     const GetJobTitleData = async () => {
         const data = await GetJobTitleApi(navigate);
         setAllJobTitle(data);
+    };
+
+    const GetJobAlertCount = async () => {
+        const data = await GetCandidateAlertCount(navigate);
+        console.log(data);
     };
 
     const categoryIcons = {
