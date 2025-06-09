@@ -7,9 +7,7 @@ import Footer from './Footer';
 const About = () => {
     return (
         <>
- <Header/>
-
-
+            <Header />
             <div className="page-header">
                 <div className="container">
                     <div className="row">
@@ -28,9 +26,9 @@ const About = () => {
                         <div className="col-lg-6 col-md-6 col-xs-12">
                             <div className="about-content text-start">
                                 <h3>About Job Career</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est modi, saepe hic esse maxime quasi, sapiente ex debitis quis dolorum unde, neque quibusdam eveniet nobis enim porro repudiandae nesciunt quidem.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni delectus soluta adipisci beatae ullam quisquam, quia recusandae rem assumenda, praesentium porro sequi eaque doloremque tenetur incidunt officiis explicabo optio perferendis.</p>
-                                <NavLink to="/" className="btn btn-common">Learn More</NavLink>
+                                <p>A job career is more than just a series of paychecks—it's a path toward personal growth, skill development, and long-term achievement. Whether you're just starting or advancing in your field, a career reflects your journey through learning, contributing, and evolving in your profession.</p>
+                                <p>Choosing the right career helps you align your passions with your strengths, offering purpose and direction in your work life. With dedication and continuous learning, a job can become a rewarding career filled with opportunities, challenges, and accomplishments.</p>
+                                {/* <NavLink to="/" className="btn btn-common">Learn More</NavLink> */}
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6 col-xs-12">
@@ -94,7 +92,7 @@ const About = () => {
                 <div className="container">
                     <div className="section-header">
                         <h2 className="section-title">How It Works?</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ellentesque dignissim quam et <br /> metus effici turac fringilla lorem facilisis.</p>
+                        <p> Follow these simple steps to start your career journey and land the right job faster.</p>
                     </div>
                     <div className="row">
                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -103,7 +101,7 @@ const About = () => {
                                     <i className="lni-user"></i>
                                 </span>
                                 <h4>Create an Account</h4>
-                                <p>Post a job to tell us about your project. We'll quickly match you with the right freelancers find place best.</p>
+                                <p>Sign up and create your profile in just a few easy steps. Provide your basic information, showcase your skills, and get ready to explore career opportunities that match your strengths.</p>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -112,7 +110,7 @@ const About = () => {
                                     <i className="lni-search"></i>
                                 </span>
                                 <h4>Search Jobs</h4>
-                                <p>Post a job to tell us about your project. We'll quickly match you with the right freelancers find place best.</p>
+                                <p>Browse through a wide variety of job listings that fit your profile. Use filters to search by industry, location, experience level, and more—helping you find roles that suit your career goals.</p>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -121,7 +119,9 @@ const About = () => {
                                     <i className="lni-cup"></i>
                                 </span>
                                 <h4>Apply</h4>
-                                <p>Post a job to tell us about your project. We'll quickly match you with the right freelancers find place best.</p>
+                                <p>Once you find the right job, apply with just a few clicks. Submit your resume, cover letter, or portfolio (if required), and track your application status in your dashboard.
+
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -191,9 +191,9 @@ const About = () => {
                 </div>
             </section>
 
-        <Footer/>
+            <Footer />
 
-           
+
 
 
         </>

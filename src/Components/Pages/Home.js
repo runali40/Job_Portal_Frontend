@@ -461,7 +461,7 @@ const Home = () => {
                 <div className="container">
                     <div className="section-header">
                         <h2 className="section-title">How It Works?</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ellentesque dignissim quam et <br /> metus effici turac fringilla lorem facilisis.</p>
+                        <p> Follow these simple steps to start your career journey and land the right job faster.</p>
                     </div>
                     <div className="row">
                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -470,7 +470,7 @@ const Home = () => {
                                     <i className="lni-user"></i>
                                 </span>
                                 <h4>Create an Account</h4>
-                                <p>Post a job to tell us about your project. We'll quickly match you with the right freelancers find place best.</p>
+                                <p>Sign up and create your profile in just a few easy steps. Provide your basic information, showcase your skills, and get ready to explore career opportunities that match your strengths.</p>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -479,7 +479,7 @@ const Home = () => {
                                     <i className="lni-search"></i>
                                 </span>
                                 <h4>Search Jobs</h4>
-                                <p>Post a job to tell us about your project. We'll quickly match you with the right freelancers find place best.</p>
+                                <p>Browse through a wide variety of job listings that fit your profile. Use filters to search by industry, location, experience level, and more—helping you find roles that suit your career goals.</p>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -488,7 +488,7 @@ const Home = () => {
                                     <i className="lni-cup"></i>
                                 </span>
                                 <h4>Apply</h4>
-                                <p>Post a job to tell us about your project. We'll quickly match you with the right freelancers find place best.</p>
+                                <p>Once you find the right job, apply with just a few clicks. Submit your resume, cover letter, or portfolio (if required), and track your application status in your dashboard.</p>
                             </div>
                         </div>
                     </div>

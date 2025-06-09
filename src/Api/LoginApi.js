@@ -75,16 +75,18 @@ export const GetRoleApi = () => {
         });
 };
 
-export const RegisterApi = (username, password, email, role) => {
+export const RegisterApi = (username, password, email, role, companyName, companyWebsite, companyLogo) => {
     const sessionId = uuidv4();
     const data = {
         um_user_name: username,
         um_password: password,
         um_EmailId: email,
-        // um_CompanyName: companyName,
+        companyName: companyName,
         IpAddress: "192.168.1.4",
         SessionId: sessionId,
-        um_roleid: role
+        um_roleid: role,
+        companyWebsite: companyWebsite,
+        companyLogo : companyLogo
     };
 
     const url = 'UserMaster/Insert';

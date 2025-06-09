@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import Header from './Header'
-import Footer from './Footer'
 import { GetRoleApi, RegisterApi } from '../../Api/LoginApi'
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +12,9 @@ const Register = () => {
     const [password, setPassword] = useState("")
     const [retypePassword, setRetypePassword] = useState("")
     const [companyName, setCompanyName] = useState("")
+    const [companyWebsite, setCompanyWebsite] = useState("")
+    const [companyLogo, setCompanyLogo] = useState("")
+    const [file, setFile] = useState("")
 
     useEffect(() => {
         GetRoleData();
@@ -27,7 +28,7 @@ const Register = () => {
             toast.warning("Please enter all the fields!")
         }
         else {
-            RegisterApi(username, password, email, role).then((data) => {
+            RegisterApi(username, password, email, role, companyName, companyWebsite, companyLogo).then((data) => {
                 console.log(data)
             })
         }
@@ -39,6 +40,22 @@ const Register = () => {
         })
     }
 
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+
+        if (selectedFile) {
+            setFile(selectedFile.name); // To show in label
+
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                setCompanyLogo(reader.result); // base64 string
+                console.log("Base64 Image:", reader.result); // You can send this to API
+            };
+
+            reader.readAsDataURL(selectedFile); // Convert to base64
+        }
+    }
     return (
         <>
             {/* <Header /> */}
@@ -47,7 +64,7 @@ const Register = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="inner-header">
-                                <h3>Create Your account</h3>
+                                <h3>Create Your Account</h3>
                             </div>
                         </div>
                     </div>
@@ -60,7 +77,7 @@ const Register = () => {
                         <div className="col-lg-5 col-md-6 col-xs-12">
                             <div className="page-login-form box">
                                 <h3>
-                                    Create Your account
+                                    Create Your Account
                                 </h3>
                                 <div className="login-form">
                                     <div className="form-group">
@@ -110,6 +127,30 @@ const Register = () => {
                                             <input type="password" className="form-control" placeholder="Retype Password" value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} />
                                         </div>
                                     </div>
+                                    {allRole.find((item) => item.r_id === role && item.r_rolename === "Employer")
+                                        ?
+                                        <>
+                                            <div className="form-group">
+                                                <div className="input-icon">
+                                                    <i className="lni-user"></i>
+                                                    <input type="text" className="form-control" name="companyName" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <div className="input-icon">
+                                                    <i className="lni-user"></i>
+                                                    <input type="text" className="form-control" name="companyWebsite" placeholder="Company Website" value={companyWebsite} onChange={(e) => setCompanyWebsite(e.target.value)} />
+                                                </div>
+                                            </div>
+                                            {/* <div className="form"> */}
+                                            {/* <div className="input-icon"> */}
+                                            {/* <i className="lni-user"></i> */}
+                                            <input type="file" className="form-control" name="companyLogo" placeholder="Company Logo" onChange={handleFileChange} />
+                                            {/* </div> */}
+                                            {/* </div> */}
+
+                                        </>
+                                        : null}
                                     <button className="btn btn-common log-btn mt-3" onClick={RegisterData}>Register</button>
                                     <p className="text-center">Already have an account?<NavLink to="/"> Sign In</NavLink></p>
                                 </div>
