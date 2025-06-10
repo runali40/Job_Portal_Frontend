@@ -1,10 +1,26 @@
-import React from 'react'
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { NavLink, useNavigate } from "react-router-dom";
 import Header from './Header';
 import Footer from './Footer';
+import { EmpDashboardApi } from '../../Api/LoginApi';
 
 
 const About = () => {
+    const navigate = useNavigate();
+    const [postedJob, setPostedJob] = useState("")
+    const [allCompany, setAllCompany] = useState("")
+
+    useEffect(() => {
+        EmpDashboardData()
+    }, [])
+
+    const EmpDashboardData = async () => {
+        const data = await EmpDashboardApi(navigate)
+        console.log(data)
+        setPostedJob(data.PostedJobs)
+        setAllCompany(data.AllCompanies)
+    }
+
     return (
         <>
             <Header />
@@ -43,12 +59,20 @@ const About = () => {
             <section id="counter" className="section bg-gray">
                 <div className="container">
                     <div className="row">
-
+                        <div className="col-lg-3 col-md-6 col-xs-12">
+                            {/* <div className="counter-box">
+                                <div className="icon"><i className="lni-pencil-alt"></i></div>
+                                <div className="fact-count">
+                                    <h3><span className="counter">900</span></h3>
+                                    <p>Resumes</p>
+                                </div>
+                            </div> */}
+                        </div>
                         <div className="col-lg-3 col-md-6 col-xs-12">
                             <div className="counter-box">
                                 <div className="icon"><i className="lni-home"></i></div>
                                 <div className="fact-count">
-                                    <h3><span className="counter">800</span></h3>
+                                    <h3><span className="counter">{postedJob}</span></h3>
                                     <p>Jobs Posted</p>
                                 </div>
                             </div>
@@ -58,30 +82,19 @@ const About = () => {
                             <div className="counter-box">
                                 <div className="icon"><i className="lni-briefcase"></i></div>
                                 <div className="fact-count">
-                                    <h3><span className="counter">80</span></h3>
+                                    <h3><span className="counter">{allCompany}</span></h3>
                                     <p>All Companies</p>
                                 </div>
                             </div>
                         </div>
-
                         <div className="col-lg-3 col-md-6 col-xs-12">
-                            <div className="counter-box">
-                                <div className="icon"><i className="lni-pencil-alt"></i></div>
-                                <div className="fact-count">
-                                    <h3><span className="counter">900</span></h3>
-                                    <p>Resumes</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-3 col-md-6 col-xs-12">
-                            <div className="counter-box">
+                            {/* <div className="counter-box">
                                 <div className="icon"><i className="lni-save"></i></div>
                                 <div className="fact-count">
                                     <h3><span className="counter">1200</span></h3>
                                     <p>Applications</p>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
 
                     </div>

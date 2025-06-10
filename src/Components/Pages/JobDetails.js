@@ -4,6 +4,7 @@ import Footer from './Footer'
 import { NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { GetBrowseApi } from '../../Api/EmployerApi/EmployeerApi'
 import { ApplyJobApi, DownloadResumeApi, GetResumeApi } from '../../Api/CandidateApi/AddResumeApi'
+import { GetSimilarJobApi } from '../../Api/EmployerApi/FeaturedApi'
 
 const JobDetails = () => {
     const navigate = useNavigate()
@@ -27,15 +28,15 @@ const JobDetails = () => {
     const [resumeUrl, setResumeUrl] = useState("")
     const [fileName, setFileName] = useState("")
     const [jobStatus, setJobStatus] = useState("")
+    const [companyLogo, setCompanyLogo] = useState("")
+    const [allSimilarJobs, setAllSimilarJobs] = useState([])
 
-    // useEffect(() => {
-    //     GetJobDetails();
-    // }, [])
     useEffect(() => {
         const fetchData = async () => {
             try {
                 await GetJobDetails();  // waits fully
                 await GetResumeData();  // uses updated token
+                await SimilarJobs();
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -58,12 +59,11 @@ const JobDetails = () => {
         setDescription(data.Description);
         setLocationName(data.LocationName);
         setJobDetailId(data.Id);
-
         const status = data.Status;
         console.log("Setting jobStatus to:", status); // ✅ correct placement
         setJobStatus(status);
-
         setFileName(data.UFileName);
+        setCompanyLogo(data.LOGOFile)
     };
     const GetResumeData = async () => {
         // const data = await GetResumeApi(jobDetailId, navigate);
@@ -72,53 +72,15 @@ const JobDetails = () => {
         setResumeUrl(data.ResumeUrl)
         setFileName(data.UFileName)
     };
-    // const GetJobDetails = () => {
-    //     GetBrowseApi(id, navigate).then((data) => {
-    //         console.log(data, "get browse data")
-    //         setJobTitle(data.Slug)
-    //         setCompanyName(data.Name)
-    //         setClosingDate(data.ClosingDate)
-    //         setJobSkills(data.Introduce)
-    //         setDescription(data.Description)
-    //         setLocationName(data.LocationName)
-    //         setJobDetailId(data.Id)
 
-    //     })
-    // }
-
-
+    const SimilarJobs = async () => {
+        const data = await GetSimilarJobApi(navigate)
+        console.log(data)
+        setAllSimilarJobs(data)
+    }
 
     const ApplyJobData = async () => {
         await ApplyJobApi(jobTitle, jobDetailId, resumeUrl, navigate);
-
-    };
-
-    const DownloadResume = async () => {
-        const data = await DownloadResumeApi(fileName, navigate);
-
-        if (!data?.fileBytes) {
-            console.error("No fileBytes found in response");
-            return;
-        }
-
-        // Decode base64 to binary
-        const byteCharacters = atob(data.fileBytes);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-
-        // Create a byte array and blob
-        const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], { type: 'application/pdf' });
-
-        // Create a link element to trigger download
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = `${fileName || 'Resume'}.pdf`; // Customize file name here
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link); // Cleanup
     };
 
     return (
@@ -131,7 +93,7 @@ const JobDetails = () => {
                         <div className="col-lg-8 col-md-6 col-xs-12">
                             <div className="breadcrumb-wrapper">
                                 <div className="img-wrapper">
-                                    <img src="assets/img/about/company-logo.png" alt="" />
+                                    <img src={companyLogo} alt="" style={{ width: "60px", height: "55px" }}/>
                                 </div>
                                 <div className="content text-start">
                                     <h3 className="product-title">{jobTitle}</h3>
@@ -143,12 +105,12 @@ const JobDetails = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4 col-md-6 col-xs-12">
+                        {/* <div className="col-lg-4 col-md-6 col-xs-12">
                             <div className="month-price">
                                 <span className="year">Yearly</span>
                                 <div className="price">$65,000</div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -171,7 +133,11 @@ const JobDetails = () => {
                                     <li>{jobSkills}</li>
                                 </ul>
                                 <h5>How To Apply</h5>
-                                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
+                                <p>Register or log in to your account on the portal.
+                                    Complete your profile with personal, academic, and work details.
+                                    Upload your updated resume and any required documents.
+                                    Browse available job listings that match your skills and interests.
+                                    Click “Apply” on your chosen job and wait for employer responses.</p>
 
                                 <button
                                     className="btn btn-common"
@@ -193,7 +159,7 @@ const JobDetails = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="widghet text-start">
+                                {/* <div className="widghet text-start">
                                     <h3>Share This Job</h3>
                                     <div className="share-job">
                                         <form method="post" className="subscribe-form">
@@ -215,7 +181,7 @@ const JobDetails = () => {
                                             <span className="meta-part"><NavLink to="/"><i className="lni-share"></i> Share</NavLink></span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -226,60 +192,41 @@ const JobDetails = () => {
                 <div className="container">
                     <h4 className="small-title text-left">Similar Jobs</h4>
                     <div className="row">
-                        <div className="col-lg-6 col-md-12 col-xs-12">
-                            <NavLink className="job-listings-featured" to="/jobDetails">
-                                <div className="row">
-                                    <div className="col-lg-6 col-md-6 col-xs-12">
-                                        <div className="job-company-logo">
-                                            <img src="assets/img/features/img1.png" alt="" />
-                                        </div>
-                                        <div className="job-details text-start">
-                                            <h3>Software Engineer</h3>
-                                            <span className="company-neme">MizTech</span>
-                                            <div className="tags">
-                                                <span><i className="lni-map-marker"></i> New York</span>
-                                                <span><i className="lni-user"></i>John Smith</span>
+                        {
+                            allSimilarJobs.map((data) => {
+                                return (
+                                    <div className="col-lg-6 col-md-12 col-xs-12">
+                                        <NavLink className="job-listings-featured" to="/jobDetails">
+                                            <div className="row">
+                                                <div className="col-lg-6 col-md-6 col-xs-12">
+                                                    <div className="job-company-logo">
+                                                        <img src={data.LOGOFile} alt="" style={{ width: "55px", height: "50px" }} />
+                                                    </div>
+                                                    <div className="job-details text-start">
+                                                        <h3>{data.Slug}</h3>
+                                                        <span className="company-neme">{data.Name}</span>
+                                                        <div className="tags">
+                                                            <span><i className="lni-map-marker"></i>{data.LocationName}</span>
+                                                            <span><i className="lni-user"></i>John Smith</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-6 col-md-6 col-xs-12 text-right">
+                                                    <div className="tag-type">
+                                                        <span className="heart-icon">
+                                                            <i className="lni-heart"></i>
+                                                        </span>
+                                                        <span className="full-time">Full Time</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </NavLink>
                                     </div>
-                                    <div className="col-lg-6 col-md-6 col-xs-12 text-right">
-                                        <div className="tag-type">
-                                            <span className="heart-icon">
-                                                <i className="lni-heart"></i>
-                                            </span>
-                                            <span className="full-time">Full Time</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </NavLink>
-                        </div>
-                        <div className="col-lg-6 col-md-12 col-xs-12">
-                            <NavLink className="job-listings-featured" to="/jobDetails">
-                                <div className="row">
-                                    <div className="col-lg-6 col-md-6 col-xs-12">
-                                        <div className="job-company-logo">
-                                            <img src="assets/img/features/img2.png" alt="" />
-                                        </div>
-                                        <div className="job-details text-start">
-                                            <h3>Graphic Designer</h3>
-                                            <span className="company-neme">Hunter Inc.</span>
-                                            <div className="tags">
-                                                <span><i className="lni-map-marker"></i> New York</span>
-                                                <span><i className="lni-user"></i>John Smith</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6 col-md-6 col-xs-12 text-right">
-                                        <div className="tag-type">
-                                            <span className="heart-icon">
-                                                <i className="lni-heart"></i>
-                                            </span>
-                                            <span className="part-time">Part Time</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </NavLink>
-                        </div>
+                                )
+                            })
+                        }
+
+
                     </div>
                 </div>
             </section>

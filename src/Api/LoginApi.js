@@ -86,7 +86,7 @@ export const RegisterApi = (username, password, email, role, companyName, compan
         SessionId: sessionId,
         um_roleid: role,
         companyWebsite: companyWebsite,
-        companyLogo : companyLogo
+        companyLogo: companyLogo
     };
 
     const url = 'UserMaster/Insert';
@@ -120,6 +120,45 @@ export const ChangePasswordApi = async (oldPassword, newPassword, navigate) => {
 
         console.log(response.data.data, "change password");
         toast.success("Changed Password Successfully!");
+        // ✅ Set token manually so it's ready for next API call
+        if (response.data?.outcome?.tokens) {
+            const newToken = response.data.outcome.tokens;
+            Cookies.set("UserCredential", newToken, { expires: 7 });
+        }
+
+        return response.data.data;
+    } catch (error) {
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        return null;
+    }
+};
+
+export const EmpDashboardApi = async (navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    const roleName = sessionStorage.getItem('rolename');
+    const url = 'EmpDashboard/GetEmpDashboard';
+    const params = { UserId: userId, RoleName: roleName };
+
+    try {
+        const response = await apiClient({
+            method: 'get',
+            url: url,
+            params: params,
+        });
+
+        console.log(response.data.data, "emp dashboard");
+        // toast.success("Changed Password Successfully!");
         // ✅ Set token manually so it's ready for next API call
         if (response.data?.outcome?.tokens) {
             const newToken = response.data.outcome.tokens;

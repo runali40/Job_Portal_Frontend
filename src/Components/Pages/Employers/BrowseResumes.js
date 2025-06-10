@@ -95,7 +95,7 @@ const BrowseResumes = () => {
                   <div className="manager-info">
                     <div className="manager-name text-start">
                       <h4><NavLink to="/">Zane Joyner</NavLink></h4>
-                      <h5>Front-end developer</h5>
+                      <h5>Front-end Jveloper</h5>
                     </div>
                     <div className="manager-meta">
                       <span className="location"><i className="ti-location-pin"></i> Cupertino, CA, USA</span>

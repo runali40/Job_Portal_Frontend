@@ -32,6 +32,7 @@ const ViewAppliedCandidates = () => {
     const [resumeUrl, setResumeUrl] = useState("")
     const [fileName, setFileName] = useState("")
     const [currentIndustry, setCurrentIndustry] = useState("")
+    const [resumeId, setResumeId] = useState("")
 
     // useEffect(() => {
     //     GetJobDetails();
@@ -54,6 +55,7 @@ const ViewAppliedCandidates = () => {
         console.log(data)
         setCandidateName(data.Name)
         setPostName(data.PostName)
+        setResumeId(data.ResumeId)
         // setJobTitle(data.Slug)
         // setCompanyName(data.Name)
         // setClosingDate(data.ClosingDate)
@@ -99,6 +101,15 @@ const ViewAppliedCandidates = () => {
         link.click();
         document.body.removeChild(link); // Cleanup
     };
+
+    
+  const GetViewResume = () => {
+    console.log("30")
+    navigate("/resumePage", {
+      state: { resumeId },
+    }
+    )
+  }
 
     return (
         <>
@@ -151,7 +162,7 @@ const ViewAppliedCandidates = () => {
                                 </ul>
                                 <h5>How To Apply</h5>
                                 <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
-                                <button className="btn btn-common mx-1" /* onClick={ApplyJobData} */>View Resume</button>
+                                <button className="btn btn-common mx-1"  onClick={GetViewResume}>View Resume</button>
                                 <button className="btn btn-common mx-1" onClick={DownloadResume}>Download Resume</button>
                                 <button
                                     className="btn btn-common mx-1"

@@ -6,7 +6,7 @@ import Footer from './Footer'
 const Pricing = () => {
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <div className="page-header">
                 <div className="container">
                     <div className="row">
@@ -94,7 +94,7 @@ const Pricing = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

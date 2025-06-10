@@ -15,7 +15,7 @@ import {
     FaBell
 } from 'react-icons/fa';
 
-import { GetFeaturedApi } from '../../Api/EmployerApi/FeaturedApi';
+import { GetFeaturedApi, GetLatestJobApi } from '../../Api/EmployerApi/FeaturedApi';
 import { BookmarkedJobApi } from '../../Api/CandidateApi/BookmarkedJobApi';
 import Cookies from 'js-cookie';
 import { getAllJobAlertApi, GetCandidateAlertCount } from '../../Api/CandidateApi/JobAlertApi';
@@ -33,6 +33,7 @@ const Home = () => {
     const [allCompanyName, setAllCompanyName] = useState([])
     const [jobTitle, setJobTitle] = useState("")
     const [allJobTitle, setAllJobTitle] = useState([])
+    const [allLatestJob, setAllLatestJob] = useState([])
     const [jobAlertCount, setJobAlertCount] = useState("")
     const [appliedCandidateCount, setAppliedCandidateCount] = useState("")
 
@@ -44,6 +45,7 @@ const Home = () => {
                 await GetCompanyNameData();
                 await GetJobTitleData();
                 await GetFeaturesData();
+                await LatestJobData()
                 {
                     RoleName === "Candidate" ?
                         await GetJobAlertCount() :
@@ -87,6 +89,12 @@ const Home = () => {
         console.log(data.NotificationCount, "count data");
         setAppliedCandidateCount(data.NotificationCount)
     }
+
+    const LatestJobData = async () => {
+        const data = await GetLatestJobApi(navigate);
+        console.log(data);
+        setAllLatestJob(data)
+    };
 
     const categoryIcons = {
         'Finance': <FaHome />,
@@ -163,7 +171,7 @@ const Home = () => {
                                         </NavLink>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <NavLink className="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <NavLink className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Pages
                                         </NavLink>
                                         <ul className="dropdown-menu">
@@ -180,7 +188,7 @@ const Home = () => {
                                         RoleName === "Candidate" ?
                                             <>
                                                 <li className="nav-item dropdown">
-                                                    <NavLink className="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <NavLink className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Candidates
                                                     </NavLink>
                                                     <ul className="dropdown-menu">
@@ -199,7 +207,7 @@ const Home = () => {
                                             </>
                                             :
                                             <li className="nav-item dropdown">
-                                                <NavLink className="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <NavLink className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Employers
                                                 </NavLink>
                                                 <ul className="dropdown-menu">
@@ -502,108 +510,29 @@ const Home = () => {
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ellentesque dignissim quam et <br /> metus effici turac fringilla lorem facilisis.</p>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6 col-md-12 col-xs-12">
-                            <div className="jobs-latest">
-                                <div className="img-thumb">
-                                    <img src="assets/img/features/img-1.jpg" alt="" />
-                                </div>
-                                <div className="content text-start">
-                                    <h3><NavLink to="/jobDetails">UX Designer</NavLink></h3>
-                                    <p className="brand">MagNews</p>
-                                    <div className="tags">
-                                        <span><i className="lni-map-marker"></i> New York</span>
-                                        <span><i className="lni-user"></i>  John Smith</span>
+                        {
+                            allLatestJob.map((data) => {
+                                return (
+                                    <div className="col-lg-6 col-md-12 col-xs-12">
+                                        <div className="jobs-latest">
+                                            <div className="img-thumb">
+                                                <img src={data.LOGOFile} alt="" style={{ width: "60px", height: "55px" }} />
+                                            </div>
+                                            <div className="content text-start">
+                                                <h3><NavLink to="/jobDetails">{data.Slug}</NavLink></h3>
+                                                <p className="brand">{data.Name}</p>
+                                                <div className="tags">
+                                                    <span><i className="lni-map-marker"></i>{data.LocationName}</span>
+                                                    <span><i className="lni-user"></i>  John Smith</span>
+                                                </div>
+                                                <div className="tag mb-3"><i className="lni-tag"></i> #Html #Css #PHP</div>
+                                                <span className="full-time">Full Time</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="tag mb-3"><i className="lni-tag"></i> #Html #Css #PHP</div>
-                                    <span className="full-time">Full Time</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-12 col-xs-12">
-                            <div className="jobs-latest">
-                                <div className="img-thumb">
-                                    <img src="assets/img/features/img-2.jpg" alt="" />
-                                </div>
-                                <div className="content text-start">
-                                    <h3><NavLink to="/jobDetails">UI Designer</NavLink></h3>
-                                    <p className="brand">Hunter Inc.</p>
-                                    <div className="tags">
-                                        <span><i className="lni-map-marker"></i> New York</span>
-                                        <span><i className="lni-user"></i>  John Smith</span>
-                                    </div>
-                                    <div className="tag mb-3"><i className="lni-tag"></i> #Html #Css #PHP</div>
-                                    <span className="part-time">Part Time</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-12 col-xs-12">
-                            <div className="jobs-latest">
-                                <div className="img-thumb">
-                                    <img src="assets/img/features/img-3.jpg" alt="" />
-                                </div>
-                                <div className="content text-start">
-                                    <h3><NavLink to="/jobDetails">Web Developer</NavLink></h3>
-                                    <p className="brand">MagNews</p>
-                                    <div className="tags">
-                                        <span><i className="lni-map-marker"></i> New York</span>
-                                        <span><i className="lni-user"></i>  John Smith</span>
-                                    </div>
-                                    <div className="tag mb-3"><i className="lni-tag"></i> #Html #Css #PHP</div>
-                                    <span className="full-time">Full Time</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-12 col-xs-12">
-                            <div className="jobs-latest">
-                                <div className="img-thumb">
-                                    <img src="assets/img/features/img-4.jpg" alt="" />
-                                </div>
-                                <div className="content text-start">
-                                    <h3><NavLink to="/jobDetails">UX Designer</NavLink></h3>
-                                    <p className="brand">AmazeSoft</p>
-                                    <div className="tags">
-                                        <span><i className="lni-map-marker"></i> New York</span>
-                                        <span><i className="lni-user"></i>  John Smith</span>
-                                    </div>
-                                    <div className="tag mb-3"><i className="lni-tag"></i> #Html #Css #PHP</div>
-                                    <span className="full-time">Full Time</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-12 col-xs-12">
-                            <div className="jobs-latest">
-                                <div className="img-thumb">
-                                    <img src="assets/img/features/img-2.jpg" alt="" />
-                                </div>
-                                <div className="content text-start">
-                                    <h3><NavLink to="/jobDetails">Digital Marketer</NavLink></h3>
-                                    <p className="brand">Bingo</p>
-                                    <div className="tags">
-                                        <span><i className="lni-map-marker"></i> New York</span>
-                                        <span><i className="lni-user"></i>  John Smith</span>
-                                    </div>
-                                    <div className="tag mb-3"><i className="lni-tag"></i> #Html #Css #PHP</div>
-                                    <span className="part-time">Part Time</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-12 col-xs-12">
-                            <div className="jobs-latest">
-                                <div className="img-thumb">
-                                    <img src="assets/img/features/img-1.jpg" alt="" />
-                                </div>
-                                <div className="content text-start">
-                                    <h3><NavLink to="/jobDetails">Web Developer</NavLink></h3>
-                                    <p className="brand">MagNews</p>
-                                    <div className="tags">
-                                        <span><i className="lni-map-marker"></i> New York</span>
-                                        <span><i className="lni-user"></i>  John Smith</span>
-                                    </div>
-                                    <div className="tag mb-3"><i className="lni-tag"></i> #Html #Css #PHP</div>
-                                    <span className="full-time">Full Time</span>
-                                </div>
-                            </div>
-                        </div>
+                                )
+                            })
+                        }
                         <div className="col-12 text-center mt-4">
                             <NavLink to="/jobPage" className="btn btn-common">Browse All Jobs</NavLink>
                         </div>
@@ -673,7 +602,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
+            {/* 
             <div id="pricing" className="section bg-gray">
                 <div className="container">
                     <div className="section-header">
@@ -750,9 +679,9 @@ const Home = () => {
 
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <section id="blog" className="section">
+            {/* <section id="blog" className="section">
 
                 <div className="container">
                     <div className="section-header">
@@ -812,11 +741,11 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
 
 
-            <section id="download" className="section bg-gray">
+            {/* <section id="download" className="section bg-gray">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-6 col-md-8 col-xs-12">
@@ -840,7 +769,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <Footer />
 

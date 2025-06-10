@@ -64,18 +64,96 @@ export const GetFeaturedApi = async (navigate) => {
 
         return response.data.data;
     } catch (error) {
-      if (
-                      error.response &&
-                      error.response.data &&
-                      error.response.data.outcome
-                  ) {
-                      const token1 = error.response.data.outcome.tokens;
-                      Cookies.set("UserCredential", token1, { expires: 7 });
-                  }
-                  console.log(error);
-      
-                  const errors = ErrorHandler(error, navigate);
-                  toast.error(errors);
-                  return null;
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        return null;
+    }
+};
+
+export const GetLatestJobApi = async (navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    const url = 'Employeer/LatestJob';
+    const params = { UserId: userId };
+
+    try {
+        const response = await apiClient({
+            method: 'get',
+            url: url,
+            params: params,
+        });
+
+        console.log(response.data.data, "get featured job api");
+
+        // ✅ Set token manually so it's ready for next API call
+        if (response.data?.outcome?.tokens) {
+            const newToken = response.data.outcome.tokens;
+            Cookies.set("UserCredential", newToken, { expires: 7 });
+        }
+
+        return response.data.data;
+    } catch (error) {
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        return null;
+    }
+};
+
+export const GetSimilarJobApi = async (navigate) => {
+    const userId = sessionStorage.getItem('userid');
+
+    const currentIndustry = sessionStorage.getItem('currentIndustry');
+    const url = 'Employeer/SimilarJobs';
+    const params = { UserId: userId, CategoryId: currentIndustry };
+
+    try {
+        const response = await apiClient({
+            method: 'get',
+            url: url,
+            params: params,
+        });
+
+        console.log(response.data.data, "get similar jobs api");
+
+        // ✅ Set token manually so it's ready for next API call
+        if (response.data?.outcome?.tokens) {
+            const newToken = response.data.outcome.tokens;
+            Cookies.set("UserCredential", newToken, { expires: 7 });
+        }
+
+        return response.data.data;
+    } catch (error) {
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        return null;
     }
 };
