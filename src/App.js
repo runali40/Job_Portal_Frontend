@@ -41,6 +41,7 @@ import Pricing from './Components/Pages/Pricing';
 import UploadCv from './Components/Pages/Candidates/UploadCv';
 import AppliedCandidate from './Components/Pages/Employers/AppliedCandidate';
 import ViewAppliedCandidates from './Components/Pages/Employers/ViewAppliedCandidates';
+import PaymentGateway from './Components/Pages/Employers/PaymentGateway';
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/uploadCv" element={<UploadCv />} />
         <Route path="/viewAppliedCandidates" element={<ViewAppliedCandidates />} />
+        <Route path="/paymentGateway" element={<PaymentGateway />} />
       </Routes>
     </div>
   );
