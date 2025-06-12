@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import { NavLink, useNavigate , useLocation} from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
 import { BookmarkedJobApi } from '../../../Api/CandidateApi/BookmarkedJobApi'
 import { GetLocationApi, JobSearchApi } from '../../../Api/HomeApi'
@@ -51,7 +51,7 @@ const BrowseJobs = () => {
   };
 
   const JobSearchData = async () => {
-    const data = await JobSearchApi(location, null, navigate);
+    const data = await JobSearchApi(location, null, null, null, navigate);
     console.log(data, "job search data");
     setAllBrowseJobs(data);
   }
@@ -72,7 +72,7 @@ const BrowseJobs = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentJobs = allBrowseJobs.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(allBrowseJobs.length / itemsPerPage);
-  
+
   return (
     <>
       <Header />
