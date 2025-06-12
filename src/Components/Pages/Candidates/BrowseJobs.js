@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate , useLocation} from 'react-router-dom'
 import { ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
 import { BookmarkedJobApi } from '../../../Api/CandidateApi/BookmarkedJobApi'
 import { GetLocationApi, JobSearchApi } from '../../../Api/HomeApi'
 
 const BrowseJobs = () => {
   const navigate = useNavigate();
+  const locationValue = useLocation();
+  const { categoryId } = locationValue.state || {};
+  console.log(locationValue.state, "10")
+  console.log("Received ID:", categoryId);
   const [location, setLocation] = useState("")
   const [allLocation, setAllLocation] = useState([])
   const [allBrowseJobs, setAllBrowseJobs] = useState([])
@@ -34,7 +38,7 @@ const BrowseJobs = () => {
   };
 
   const BrowseJobData = async () => {
-    const data = await ManageJobApi();
+    const data = await ManageJobApi(categoryId, navigate);
     console.log(data, 'browse job')
     setAllBrowseJobs(data)
   }

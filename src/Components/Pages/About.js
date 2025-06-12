@@ -141,7 +141,7 @@ const About = () => {
                 </div>
             </section>
 
-            <section id="testimonial" className="section bg-gray">
+            {/* <section id="testimonial" className="section bg-gray">
                 <div className="container">
                     <div className="section-header">
                         <h2 className="section-title">Clients Review</h2>
@@ -202,7 +202,7 @@ const About = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <Footer />
 

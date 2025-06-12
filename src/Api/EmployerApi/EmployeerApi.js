@@ -53,10 +53,11 @@ export const AddJobApi = (jobTitle, location, category, jobTags, description, ap
         });
 };
 
-export const ManageJobApi = (navigate) => {
+export const ManageJobApi = (categoryId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const params = {
-        UserId: userId
+        UserId: userId,
+        CategoryId: categoryId
     };
     const url = 'Employeer/MangageJob';
     return apiClient({

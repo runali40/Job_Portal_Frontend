@@ -220,17 +220,17 @@ const Header = () => {
                                         </NavLink>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <NavLink className="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <NavLink className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Pages
                                         </NavLink>
                                         <ul className="dropdown-menu">
                                             <li><NavLink className="dropdown-item" to="/about">About</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/jobPage">Job Page</NavLink></li>
                                             {/* <li><NavLink className="dropdown-item" to="/jobDetails">Job Details</NavLink></li> */}
-                                            <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li>
+                                            {/* <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li> */}
                                             <li><NavLink className="dropdown-item" to="/privacyPolicy">Privacy Policy</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/pricing">Pricing Tables</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/contact">Contact</NavLink></li>
+                                            {/* <li><NavLink className="dropdown-item" to="/contact">Contact</NavLink></li> */}
                                         </ul>
                                     </li>
                                     {
@@ -256,7 +256,7 @@ const Header = () => {
                                             </>
                                             :
                                             <li className="nav-item dropdown">
-                                                <NavLink className="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <NavLink className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Employers
                                                 </NavLink>
                                                 <ul className="dropdown-menu">

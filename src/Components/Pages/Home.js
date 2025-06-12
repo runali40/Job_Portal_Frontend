@@ -138,6 +138,15 @@ const Home = () => {
         BookmarkedJobData(Id, newStatus); // Send updated status to backend
     };
 
+    const GetCategory = (categoryId) => {
+        console.log(categoryId, "142")
+        navigate("/browseJobs", {
+              state: { categoryId },
+            // state: { categoryId: categoryId }
+        }
+        );
+    };
+
     const LogOutButton = () => {
         localStorage.removeItem("sessionid");
         // localStorage.removeItem("UserCredential");
@@ -178,10 +187,10 @@ const Home = () => {
                                             <li><NavLink className="dropdown-item" to="/about">About</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/jobPage">Job Page</NavLink></li>
                                             {/* <li><NavLink className="dropdown-item" to="/jobDetails">Job Details</NavLink></li> */}
-                                            <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li>
+                                            {/* <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li> */}
                                             <li><NavLink className="dropdown-item" to="/privacyPolicy">Privacy Policy</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/pricing">Pricing Tables</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/contact">Contact</NavLink></li>
+                                            {/* <li><NavLink className="dropdown-item" to="/contact">Contact</NavLink></li> */}
                                         </ul>
                                     </li>
                                     {
@@ -274,7 +283,7 @@ const Home = () => {
                         <div className="col-lg-10 col-md-12 col-xs-12">
                             <div className="contents">
                                 <h2 className="head-title">Find the job that fits your life</h2>
-                                <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus, <br /> id tincidunt nisi porta sit amet. Suspendisse et sapien varius, pellentesque dui non.</p>
+                                <p>Discover opportunities tailored to your lifestyle.<br /> Whether you're seeking flexibility, growth, or a fresh start, we help connect you with the right role. <br /> Explore positions that match your goals and support your journey forward.</p>
                                 <div className="job-search-form">
                                     <div>
                                         <div className="row">
@@ -378,11 +387,11 @@ const Home = () => {
 
                             return (
                                 <div className="col-lg-3 col-md-6 col-xs-12 f-category" key={data.CategoryId}>
-                                    <NavLink to="/browseJobs">
+                                    <div  onClick={() => GetCategory(data.CategoryId)}>
                                         <div style={{ fontSize: '2.5rem', marginBottom: '10px' }} className='icon bg-color-1'>{Icon}</div>
                                         <h3>{data.CategoryName}</h3>
                                         <p>{data.TotalJobs} jobs</p>
-                                    </NavLink>
+                                    </div>
                                 </div>
                             );
                         })}
@@ -435,7 +444,6 @@ const Home = () => {
                                     </div>
                                 )
                             })
-
                         }
                         <div className="col-12 text-center mt-4">
                             <NavLink to="/jobPage" className="btn btn-common">Browse All Jobs</NavLink>
@@ -507,7 +515,7 @@ const Home = () => {
                 <div className="container">
                     <div className="section-header">
                         <h2 className="section-title">Latest Jobs</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ellentesque dignissim quam et <br /> metus effici turac fringilla lorem facilisis.</p>
+                        <p>Explore the most recent job openings across various industries.<br /> Find roles that match your skills and interests, and take the next step in your career with confidence.</p>
                     </div>
                     <div className="row">
                         {
@@ -540,7 +548,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <section id="testimonial" className="section">
+            {/* <section id="testimonial" className="section">
                 <div className="container">
                     <div className="section-header">
                         <h2 className="section-title">Clients Review</h2>
@@ -601,7 +609,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
             {/* 
             <div id="pricing" className="section bg-gray">
                 <div className="container">
