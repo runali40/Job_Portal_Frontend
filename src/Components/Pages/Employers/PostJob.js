@@ -14,6 +14,7 @@ const PostJob = () => {
   const [category, setCategory] = useState("")
   const [allCategory, setAllCategory] = useState([])
   const [jobTags, setJobTags] = useState("")
+  const [jobType, setJobType] = useState("")
   const [description, setDescription] = useState("")
   const [appUrl, setAppUrl] = useState("")
   const [closingDate, setClosingDate] = useState("")
@@ -65,7 +66,7 @@ const PostJob = () => {
   };
 
   const AddJobData = async () => {
-    const data = await AddJobApi(jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate);
+    const data = await AddJobApi(jobTitle, location, category, jobTags, jobType, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate);
     console.log(data)
   }
   return (
@@ -134,6 +135,11 @@ const PostJob = () => {
                     <label className="control-label">Job Tags <span>(optional)</span></label>
                     <input type="text" className="form-control" placeholder="e.g.PHP,Social Media,Management" value={jobTags} onChange={(e) => setJobTags(e.target.value)} />
                     <p className="note">Comma separate tags, such as required skills or technologies, for this job.</p>
+                  </div>
+                  <div className="form-group">
+                    <label className="control-label">Job Type</label>
+                    <input type="text" className="form-control" placeholder="Job Type" value={jobType} onChange={(e) => setJobType(e.target.value)} />
+                   
                   </div>
                   <section id="editor">
                     <div className="form-group">

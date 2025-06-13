@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorHandler from "../../ErrorHandler";
 
-export const AddJobApi = (jobTitle, location, category, jobTags, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate) => {
+export const AddJobApi = (jobTitle, location, category, jobTags, jobType, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const data = {
         UserId: userId,
@@ -21,6 +21,7 @@ export const AddJobApi = (jobTitle, location, category, jobTags, description, ap
         tagline1: tagline1,
         tagline2: tagline2,
         logoFile: base64Image,
+        typeofJob : jobType,
 
     };
     const url = 'Employeer/AddJob';
