@@ -108,7 +108,10 @@ const Register = () => {
                                     <div className="form-group mt-3">
                                         <div className="input-icon">
                                             <i className="lni-user"></i>
-                                            <input type="text" className="form-control" name="name" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                            <input type="text" className="form-control" name="name" placeholder="Username"
+                                           /*  disabled={
+                                                !!allRole.find((item) => item.r_id === role && item.r_rolename === "Employer")
+                                            } */ value={username} onChange={(e) => setUsername(e.target.value)} />
                                         </div>
                                     </div>
                                     <div className="form-group">

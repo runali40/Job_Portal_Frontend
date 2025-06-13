@@ -300,8 +300,8 @@ const Home = () => {
                                                             <select value={companyName} onChange={(e) => setCompanyName(e.target.value)}>
                                                                 <option value="" disabled hidden>Select Company Name</option>
                                                                 {allCompanyName.map((data) => (
-                                                                    <option key={data.Name} value={data.Name}>
-                                                                        {data.Name}
+                                                                    <option key={data.CompanyName} value={data.CompanyName}>
+                                                                        {data.CompanyName}
                                                                     </option>
                                                                 ))}
                                                             </select>

@@ -78,8 +78,9 @@ export const GetCategoryApi = async (navigate) => {
 };
 export const GetCompanyNameApi = async (navigate) => {
     const userId = sessionStorage.getItem('userid');
+    const roleId = sessionStorage.getItem('roleId');
     const url = 'Home/GetCompanyName';
-    const params = { UserId: userId };
+    const params = { UserId: userId, roleid: roleId };
 
     try {
         const response = await apiClient({
