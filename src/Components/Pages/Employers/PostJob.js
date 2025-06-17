@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
 import { useNavigate } from 'react-router-dom'
-import { GetCategoryApi, GetLocationApi } from '../../../Api/HomeApi'
+import { GetCategoryApi, GetCompanyNameApi, GetLocationApi } from '../../../Api/HomeApi'
 import { AddJobApi } from '../../../Api/EmployerApi/EmployeerApi'
-
 
 const PostJob = () => {
   const navigate = useNavigate()
@@ -20,6 +19,7 @@ const PostJob = () => {
   const [closingDate, setClosingDate] = useState("")
 
   const [companyName, setCompanyName] = useState("")
+  const [allCompanyName, setAllCompanyName] = useState([])
   const [website, setWebsite] = useState("")
   const [tagline1, setTagLine1] = useState("")
   const [tagline2, setTagLine2] = useState("")
@@ -31,6 +31,7 @@ const PostJob = () => {
       try {
         await GetLocationData();  // waits fully
         await GetCategoryData();  // uses updated token
+        await GetCompanyNameData();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -38,16 +39,21 @@ const PostJob = () => {
     fetchData();
   }, []);
 
-
   const GetLocationData = async () => {
     const data = await GetLocationApi(navigate);
     setAllLocation(data);
+  };
+
+  const GetCompanyNameData = async () => {
+    const data = await GetCompanyNameApi(navigate);
+    setAllCompanyName(data);
   };
 
   const GetCategoryData = async () => {
     const data = await GetCategoryApi(navigate);
     setAllCategory(data);
   };
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
 
@@ -69,6 +75,7 @@ const PostJob = () => {
     const data = await AddJobApi(jobTitle, location, category, jobTags, jobType, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate);
     console.log(data)
   }
+
   return (
     <>
       <Header />
@@ -98,7 +105,20 @@ const PostJob = () => {
                   </div>
                   <div className="form-group">
                     <label className="control-label">Company</label>
-                    <input type="text" className="form-control" placeholder="Write company name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                    <div className="search-category-container">
+                      <label className="styled-select">
+                        <select value={companyName} onChange={(e) => setCompanyName(e.target.value)}>
+                          <option value="" disabled hidden>Select Company Name</option>
+                          {allCompanyName.map((data) => (
+                            <option key={data.CompanyName} value={data.CompanyName}>
+                              {data.CompanyName}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    </div>
+
+                    {/* <input type="text" className="form-control" placeholder="Write company name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} /> */}
                   </div>
                   <div className="form-group">
                     <label className="control-label">Location <span>(optional)</span></label>
@@ -139,7 +159,7 @@ const PostJob = () => {
                   <div className="form-group">
                     <label className="control-label">Job Type</label>
                     <input type="text" className="form-control" placeholder="Job Type" value={jobType} onChange={(e) => setJobType(e.target.value)} />
-                   
+
                   </div>
                   <section id="editor">
                     <div className="form-group">
