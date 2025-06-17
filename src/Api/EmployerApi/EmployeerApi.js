@@ -56,9 +56,11 @@ export const AddJobApi = (jobTitle, location, category, jobTags, jobType, descri
 
 export const ManageJobApi = (categoryId, navigate) => {
     const userId = sessionStorage.getItem('userid');
+    const roleId = sessionStorage.getItem('roleId');
     const params = {
         UserId: userId,
-        CategoryId: categoryId
+        CategoryId: categoryId,
+        roleid : roleId
     };
     const url = 'Employeer/MangageJob';
     return apiClient({

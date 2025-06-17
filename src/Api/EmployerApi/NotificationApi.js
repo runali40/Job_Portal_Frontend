@@ -6,8 +6,10 @@ import Cookies from 'js-cookie';
 
 export const GetNotificationCountApi = async (navigate) => {
     const userId = sessionStorage.getItem('userid');
+    const roleId = sessionStorage.getItem('roleId');
+    const companyId = sessionStorage.getItem('companyId');
     const url = 'Employeer/GetNotificationCount';
-    const params = { UserId: userId };
+    const params = { UserId: userId, roleid: roleId, companyId: companyId };
 
     try {
         const response = await apiClient({
@@ -82,7 +84,7 @@ export const GetAllAppliedCandidateApi = async (navigate) => {
 export const GetAppliedCandidateApi = async (ApplicationId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const url = 'Employeer/GetappliedCandidatedata';
-    const params = { UserId: userId , ApplicationId: ApplicationId};
+    const params = { UserId: userId, ApplicationId: ApplicationId };
 
     try {
         const response = await apiClient({
@@ -157,7 +159,7 @@ export const GetNotificationMsgApi = async (navigate) => {
 export const EmpViewNotification = async (jobId, NotificationId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const url = 'Employeer/EmpViewNotification';
-    const data = {  UserId: userId ,  jobId: jobId, notificationId: NotificationId };
+    const data = { UserId: userId, jobId: jobId, notificationId: NotificationId };
 
     try {
         const response = await apiClient({
@@ -195,7 +197,7 @@ export const EmpViewNotification = async (jobId, NotificationId, navigate) => {
 export const StatusByEmployee = async (ApplicationId, statusbyemployee, CurrentIndustry, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const url = 'Employeer/StausEmp';
-    const params = {  UserId: userId ,  ApplicationId: ApplicationId, statusbyemployee: statusbyemployee, CategoryId: CurrentIndustry };
+    const params = { UserId: userId, ApplicationId: ApplicationId, statusbyemployee: statusbyemployee, CategoryId: CurrentIndustry };
 
     try {
         const response = await apiClient({

@@ -142,7 +142,7 @@ const JobDetails = () => {
                                 <button
                                     className="btn btn-common"
                                     onClick={ApplyJobData}
-                                    disabled={!jobStatus || jobStatus === "Applied"}
+                                    // disabled={/* !jobStatus || */ jobStatus === "Applied"}
                                 >
                                     Apply job
                                 </button>
