@@ -48,7 +48,7 @@ const Login = () => {
                   Login
                 </h3>
                 <div className="login-form">
- 
+
                   <div className="form-group">
                     <div className="input-icon">
                       <i className="lni-user"></i>
@@ -58,7 +58,7 @@ const Login = () => {
                   <div className="form-group">
                     <div className="input-icon">
                       <i className="lni-lock"></i>
-                      <input  type={showPassword ? "text" : "password"} className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                      <input type={showPassword ? "text" : "password"} className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                       <span
                         onClick={() => setShowPassword(!showPassword)}
                         style={{
@@ -82,6 +82,9 @@ const Login = () => {
                 </div>
                 <ul className="form-links">
                   <li className="text-center"><NavLink to="/register">Don't have an account?</NavLink></li>
+                </ul>
+                <ul className="form-links">
+                  <li className="text-center"><NavLink to="/forgotPassword">Forgot Password</NavLink></li>
                 </ul>
               </div>
             </div>

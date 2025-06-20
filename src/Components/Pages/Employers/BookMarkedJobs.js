@@ -29,10 +29,10 @@ const BookMarkedJobs = () => {
     });
   };
 
-      // const ApplyJobData = async () => {
-      //     // await ApplyJobApi(jobTitle, jobDetailId, resumeUrl, navigate);
-  
-      // };
+  // const ApplyJobData = async () => {
+  //     // await ApplyJobApi(jobTitle, jobDetailId, resumeUrl, navigate);
+
+  // };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -97,7 +97,9 @@ const BookMarkedJobs = () => {
                             </div>
                           </div>
                           <div className="col-lg-2 col-md-12 col-xs-12 text-right">
-                            <span className="btn-full-time">Full Time</span>
+                            {
+                              data.TypeofJob && <span className="full-time">{data.TypeofJob}</span>
+                            }
                           </div>
                           {/* <div className="col-lg-3 col-md-12 col-xs-12 text-right">
                             <span className="btn-apply" onClick={()=>ApplyJobData(data.Slug, data.Id,)}>Apply Now</span>

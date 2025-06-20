@@ -48,7 +48,7 @@ const About = () => {
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6 col-xs-12">
-                            <img className="img-fluid float-right" src="assets/img/about/img1.jpg" alt="" />
+                            <img className="img-fluid float-right" src="assets/img/about/aboutus.jpg" alt="" />
                         </div>
                     </div>
                 </div>

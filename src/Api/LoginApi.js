@@ -31,6 +31,7 @@ export const LoginApi = (username, password, navigate) => {
             sessionStorage.setItem("currentIndustry", response.data.result.data.CurrentIndustry)
             sessionStorage.setItem("roleId", response.data.result.data.r_id)
             sessionStorage.setItem("companyId", response.data.result.data.CompanyId)
+            sessionStorage.setItem("resumeId", response.data.result.data.Id)
             Cookies.set("UserCredential", response.data.result.outcome.tokens, { expires: 7 });
             toast.success("User Login Successfully!")
             navigate("/home")
@@ -122,6 +123,44 @@ export const ChangePasswordApi = async (oldPassword, newPassword, navigate) => {
 
         console.log(response.data.data, "change password");
         toast.success("Changed Password Successfully!");
+        // ✅ Set token manually so it's ready for next API call
+        if (response.data?.outcome?.tokens) {
+            const newToken = response.data.outcome.tokens;
+            Cookies.set("UserCredential", newToken, { expires: 7 });
+        }
+
+        return response.data.data;
+    } catch (error) {
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        return null;
+    }
+};
+
+export const ForgotPasswordApi = async (username, emailId, newPassword, navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    const url = 'Auth/ForgotPassword';
+    const data = { userId: userId, username: username, mailId : emailId, password: newPassword };
+
+    try {
+        const response = await apiClient({
+            method: 'post',
+            url: url,
+            data: data,
+        });
+
+        console.log(response.data.data, "change password");
+        toast.success("Forgot Password Successfully!");
         // ✅ Set token manually so it's ready for next API call
         if (response.data?.outcome?.tokens) {
             const newToken = response.data.outcome.tokens;

@@ -87,7 +87,10 @@ const ManageApplications = () => {
                             <span className='ml-5'>{data.PostName}</span>
                           </div>
                           <div className="col-md-2">
-                            <p><span className="full-time">Full-Time</span></p>
+                            {
+                              data.TypeofJob && <p><span className="full-time">Full-Time</span></p>                       
+                            }
+
                           </div>
                           <div className="col-md-3">
                             {/* <p>Nov 14th, 2017</p> */}

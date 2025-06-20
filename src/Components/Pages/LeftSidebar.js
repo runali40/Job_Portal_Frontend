@@ -7,7 +7,7 @@ const LeftSidebar = () => {
             <div className="right-sideabr text-start">
                 <h4>Manage Account</h4>
                 <ul className="list-item">
-                    <li><NavLink to="/resumePage">My Resume</NavLink></li>
+                   {RoleName === "Candidate" && <li><NavLink to="/resumePage">My Resume</NavLink></li>}
                     {RoleName === "Candidate" &&
                         <>
                             <li><NavLink to="/bookMarkedJobs">Bookmarked Jobs</NavLink></li>

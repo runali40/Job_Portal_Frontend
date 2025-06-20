@@ -48,7 +48,7 @@ const JobAlerts = () => {
       console.error("Error during API calls", error);
     }
   };
-  
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentJobs = jobAllAlert.slice(indexOfFirstItem, indexOfLastItem);
@@ -127,7 +127,9 @@ const JobAlerts = () => {
                             <p>{data.Slug}</p>
                           </div>
                           <div className="col-md-3">
-                            <p><span className="full-time">Full-Time</span></p>
+                            <p>{
+                              data.TypeofJob && <span className="full-time">{data.TypeofJob}</span>
+                            }</p>
                           </div>
                           <div className="col-md-3">
                             <p>Daily</p>

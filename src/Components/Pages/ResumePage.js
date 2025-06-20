@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { GetManageResumeApi } from '../../Api/CandidateApi/AddResumeApi'
+import { GetManageResumeApi, GetManageResumeApi1 } from '../../Api/CandidateApi/AddResumeApi'
 
 const ResumePage = () => {
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const ResumePage = () => {
   const [allEducation, setAllEducation] = useState([])
   const [allWorkExperience, setAllWorkExperience] = useState([])
   const [allSkills, setAllSkills] = useState([])
+  const [profilePhoto, setProfilePhoto] = useState("")
 
   useEffect(() => {
     GetManageResumeData();
@@ -42,6 +43,7 @@ const ResumePage = () => {
     setAge(data.model1.Age);
     setRId(data.model1.Id);
     setAboutMe(data.model1.AboutMe)
+    setProfilePhoto(data.model1.ProfilePhoto)
     // setCategory(data.model1.CurrentIndustry)
   };
   return (
@@ -80,7 +82,7 @@ const ResumePage = () => {
               <div className="inner-box my-resume">
                 <div className="author-resume">
                   <div className="thumb">
-                    <img src="assets/img/resume/img-1.png" alt="" />
+                    <img src={profilePhoto} alt="" />
                   </div>
                   <div className="author-info text-start">
                     <h3>{name}</h3>

@@ -14,7 +14,8 @@ import {
     FaTrophy,
     FaBell
 } from 'react-icons/fa';
-
+// import '../assets/css/main.css'
+// import '../../../../assets/css/main.css'
 import { GetFeaturedApi, GetLatestJobApi } from '../../Api/EmployerApi/FeaturedApi';
 import { BookmarkedJobApi } from '../../Api/CandidateApi/BookmarkedJobApi';
 import Cookies from 'js-cookie';
@@ -141,7 +142,7 @@ const Home = () => {
     const GetCategory = (categoryId) => {
         console.log(categoryId, "142")
         navigate("/browseJobs", {
-              state: { categoryId },
+            state: { categoryId },
             // state: { categoryId: categoryId }
         }
         );
@@ -187,7 +188,7 @@ const Home = () => {
                                             <li><NavLink className="dropdown-item" to="/about">About</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/jobPage">Job Page</NavLink></li>
                                             {/* <li><NavLink className="dropdown-item" to="/jobDetails">Job Details</NavLink></li> */}
-                                            {/* <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li> */}
+                                           {RoleName === "Candidate" && <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li>}
                                             <li><NavLink className="dropdown-item" to="/privacyPolicy">Privacy Policy</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/pricing">Pricing Tables</NavLink></li>
                                             {/* <li><NavLink className="dropdown-item" to="/contact">Contact</NavLink></li> */}
@@ -387,7 +388,7 @@ const Home = () => {
 
                             return (
                                 <div className="col-lg-3 col-md-6 col-xs-12 f-category" key={data.CategoryId}>
-                                    <div  onClick={() => GetCategory(data.CategoryId)}>
+                                    <div onClick={() => GetCategory(data.CategoryId)}>
                                         <div style={{ fontSize: '2.5rem', marginBottom: '10px' }} className='icon bg-color-1'>{Icon}</div>
                                         <h3>{data.CategoryName}</h3>
                                         <p>{data.TotalJobs} jobs</p>
@@ -436,7 +437,9 @@ const Home = () => {
                                                             {/* {data.Bookmark === "1" ? "♥" : "♡"} */}
                                                             <i className={data.Bookmark === "1" ? "fas fa-heart" : "far fa-heart"}></i>
                                                         </span>
-                                                        <span className="full-time">Full Time</span>
+                                                        {
+                                                            data.TypeofJob && <span className="full-time">{data.TypeofJob}</span>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -534,7 +537,9 @@ const Home = () => {
                                                     <span><i className="lni-user"></i>  John Smith</span>
                                                 </div>
                                                 <div className="tag mb-3"><i className="lni-tag"></i> #Html #Css #PHP</div>
-                                                <span className="full-time">Full Time</span>
+                                              {
+                                                            data.TypeofJob && <span className="full-time">{data.TypeofJob}</span>
+                                                        }
                                             </div>
                                         </div>
                                     </div>

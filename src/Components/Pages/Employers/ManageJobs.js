@@ -106,7 +106,9 @@ const ManageJobs = () => {
                               <span className="location"><i className="lni-map-marker"></i>{data.LocationName}</span>
                             </div>
                             <div className="col-lg-3 col-md-3 col-xs-12">
-                              <p><span className="full-time">Full-Time</span></p>
+                               {
+                              data.TypeofJob && <p><span className="full-time">Full-Time</span></p>                       
+                            }
                             </div>
                             <div className="col-lg-3 col-md-2 col-xs-12">
                               <div className="can-img"><NavLink to="/"><img src="assets/img/jobs/candidates.png" alt="" /></NavLink></div>

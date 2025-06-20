@@ -151,7 +151,9 @@ const BrowseJobs = () => {
                                 {/* {data.Bookmark === "1" ? "♥" : "♡"} */}
                                 <i className={data.Bookmark === "1" ? "fas fa-heart" : "far fa-heart"}></i>
                               </span>
-                              <span className="full-time">Full Time</span>
+                            {
+                              data.TypeofJob && <span className="full-time">{data.TypeofJob}</span>
+                            }
                             </div>
                           </div>
                         </div>
