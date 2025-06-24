@@ -4,10 +4,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { apiClient } from "../../ApiClient";
 import Cookies from 'js-cookie';
 
-export const VerifyPayment = async ( navigate) => {
-    const userId = sessionStorage.getItem('userid');
+export const VerifyPayment = async (navigate) => {
+    // const userId = sessionStorage.getItem('userid');
+    const orderId = sessionStorage.getItem('orderid')
+    const amount = sessionStorage.getItem('amount')
     const url = 'Payments/verify';
-    const data = {  UserId: userId , razorpay_order_id: "12345", razorpay_payment_id : "34354353", razorpay_signature : "abc" };
+    const data = { orderId: orderId, paymentId: amount, signature: "abc" };
 
     try {
         const response = await apiClient({
@@ -43,9 +45,9 @@ export const VerifyPayment = async ( navigate) => {
 };
 
 export const CreateOrderApi = async (amount, navigate) => {
-    const userId = sessionStorage.getItem('userid');
+    // const userId = sessionStorage.getItem('userid');
     const url = 'Payments/create-order';
-    const data = {  UserId: userId , amount:amount}
+    const data = { amount: amount }
     try {
         const response = await apiClient({
             method: 'post',
@@ -53,8 +55,9 @@ export const CreateOrderApi = async (amount, navigate) => {
             data: data,
         });
 
-        console.log(response.data.data, "get create order data");
-
+        console.log(response.data, "get create order data");
+        sessionStorage.setItem("orderid", response.data.orderId)
+        sessionStorage.setItem('amount', response.data.amount)
         // ✅ Set token manually so it's ready for next API call
         if (response.data?.outcome?.tokens) {
             const newToken = response.data.outcome.tokens;

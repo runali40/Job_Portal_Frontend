@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
-import Footer from '../Footer'
-import Header from '../Header'
-import { NavLink, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { ForgotPasswordApi } from '../../../Api/LoginApi'
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("")
     const [emailId, setEmailId] = useState("")
     const [newPassword, setNewPassword] = useState("")
-    const [showPassword, setShowPassword] = useState(false);
+    // const [showPassword, setShowPassword] = useState(false);
 
     const ForgotPasswordData = async () => {
         const data = ForgotPasswordApi(username, emailId, newPassword, navigate)
@@ -19,7 +17,6 @@ const ForgotPassword = () => {
 
     return (
         <>
-            <Header />
             <div className="page-header">
                 <div className="container">
                     <div className="row">
@@ -63,7 +60,6 @@ const ForgotPassword = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     )
 }
