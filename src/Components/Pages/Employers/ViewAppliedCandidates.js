@@ -4,7 +4,7 @@ import Footer from '../Footer'
 import { NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { GetBrowseApi } from '../../../Api/EmployerApi/EmployeerApi'
 import { ApplyJobApi, DownloadResumeApi, GetResumeApi } from '../../../Api/CandidateApi/AddResumeApi'
-import { GetAppliedCandidateApi, StatusByEmployee } from '../../../Api/EmployerApi/NotificationApi'
+import { GetAppliedCandidateApi, GetEmailNotification, StatusByEmployee } from '../../../Api/EmployerApi/NotificationApi'
 // import { GetBrowseApi } from '../../Api/EmployerApi/EmployeerApi'
 // import { ApplyJobApi, DownloadResumeApi, GetResumeApi } from '../../Api/CandidateApi/AddResumeApi'
 
@@ -33,6 +33,8 @@ const ViewAppliedCandidates = () => {
     const [fileName, setFileName] = useState("")
     const [currentIndustry, setCurrentIndustry] = useState("")
     const [resumeId, setResumeId] = useState("")
+    const [applicationId, setApplicationId] = useState("")
+    const [statusByEmployee, setStatusByEmployee] = useState("")
 
     // useEffect(() => {
     //     GetJobDetails();
@@ -65,6 +67,8 @@ const ViewAppliedCandidates = () => {
         // setJobDetailId(data.Id)
         setCurrentIndustry(data.CurrentIndustry)
         setFileName(data.UFileName)
+        setApplicationId(data.ApplicationId)
+        setStatusByEmployee(data.statusbyemployee)
 
 
     };
@@ -72,7 +76,9 @@ const ViewAppliedCandidates = () => {
     const ShowStatusByEmployee = async (status) => {
         const data = await StatusByEmployee(ApplicationId, status, currentIndustry, navigate);
         console.log(data);
-      };
+        const data1 = await GetEmailNotification(applicationId, statusByEmployee, navigate);
+        console.log(data1)
+    };
 
     const DownloadResume = async () => {
         const data = await DownloadResumeApi(fileName, navigate);
@@ -102,14 +108,14 @@ const ViewAppliedCandidates = () => {
         document.body.removeChild(link); // Cleanup
     };
 
-    
-  const GetViewResume = () => {
-    console.log("30")
-    navigate("/resumePage", {
-      state: { resumeId },
+
+    const GetViewResume = () => {
+        console.log("30")
+        navigate("/resumePage", {
+            state: { resumeId },
+        }
+        )
     }
-    )
-  }
 
     return (
         <>
@@ -162,7 +168,7 @@ const ViewAppliedCandidates = () => {
                                 </ul>
                                 <h5>How To Apply</h5>
                                 <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
-                                <button className="btn btn-common mx-1"  onClick={GetViewResume}>View Resume</button>
+                                <button className="btn btn-common mx-1" onClick={GetViewResume}>View Resume</button>
                                 <button className="btn btn-common mx-1" onClick={DownloadResume}>Download Resume</button>
                                 <button
                                     className="btn btn-common mx-1"

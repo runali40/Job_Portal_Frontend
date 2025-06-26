@@ -8,11 +8,77 @@ const Pricing = () => {
     const navigate = useNavigate();
     // const [amount, setAmount] = useState("")
 
+
+
+    // const loadRazorpayScript = () => {
+    //     return new Promise((resolve) => {
+    //         const script = document.createElement("script");
+    //         script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    //         script.onload = () => resolve(true);
+    //         script.onerror = () => resolve(false);
+    //         document.body.appendChild(script);
+    //     });
+    // };
+
+    // const handlePayment = async () => {
+    //     const isLoaded = await loadRazorpayScript();
+
+    //     if (!isLoaded) {
+    //         alert("Razorpay SDK failed to load. Check your internet.");
+    //         return;
+    //     }
+
+    //     const options = {
+    //         key: "rzp_test_gL5huWXM1ghnNM",
+    //         amount: 1, // in paise (₹1000)
+    //         currency: "INR",
+    //         name: "DEVENDRA IT INFRASOFT SECURITY PRIVATE LIMITED",
+    //         description: "Plan Purchase",
+    //         order_id: "order_QlLL9Lq146W7ai",
+    //         handler: function (response) {
+    //             console.log("Payment successful", response);
+    //         },
+    //         prefill: {
+    //             name: "Runali Kadam",
+    //             email: "runali.devit@gmail.com",
+    //             contact: "9075372928"
+    //         },
+    //         theme: { color: "#3399cc" }
+    //     };
+
+    //     const rzp = new window.Razorpay(options);
+    //     rzp.open();
+    // };
+
     const CreateOrderData = async (amount) => {
-        const data = await CreateOrderApi(amount, navigate)
-        console.log(data)
-        navigate('/paymentGateway', { state: { amount } });
-    }
+        navigate('/createOrder', { state: { amount } });
+    };
+    // const handlePayment = (orderData) => {
+    //     const options = {
+    //         key: "YOUR_RAZORPAY_KEY_ID",
+    //         // amount: orderData.amount, // in paise
+    //         amount: "1",
+    //         currency: "INR",
+    //         name: "Your App Name",
+    //         description: "Plan Purchase",
+    //         order_id: orderData.id,
+    //         handler: function (response) {
+    //             // handle success
+    //             console.log("Payment Success", response);
+    //         },
+    //         prefill: {
+    //             name: "User Name",
+    //             email: "user@example.com",
+    //             contact: "9999999999"
+    //         },
+    //         theme: {
+    //             color: "#3399cc"
+    //         }
+    //     };
+
+    //     const rzp = new window.Razorpay(options);
+    //     rzp.open();
+    // };
     return (
 
 
@@ -62,7 +128,7 @@ const Pricing = () => {
                                     <div className="price"><span>₹</span>1200<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
-                                    <NavLink to="/paymentGateway" className="btn btn-border" onClick={()=>CreateOrderData(1200)}>Get Started</NavLink>
+                                    <NavLink to="/createOrder" className="btn btn-border" onClick={() => CreateOrderData(1)} >Get Started</NavLink>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +160,7 @@ const Pricing = () => {
                                     <div className="price"><span>₹</span>2500<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
-                                    <NavLink to="/paymentGateway" className="btn btn-border" onClick={()=>CreateOrderData(2500)}>Get Started</NavLink>
+                                    <NavLink /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(1)}/* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(2500)} */>Get Started</NavLink>
                                 </div>
                             </div>
                         </div>
@@ -128,7 +194,7 @@ const Pricing = () => {
                                     <div className="price"><span>₹</span>4000<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
-                                    <NavLink to="/paymentGateway" className="btn btn-border" onClick={()=>CreateOrderData(4000)}>Get Started</NavLink>
+                                    <NavLink /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(1)}/* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(4000)} */>Get Started</NavLink>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +229,7 @@ const Pricing = () => {
                                     <div className="price"><span>₹</span>6000<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
-                                    <NavLink to="/paymentGateway" className="btn btn-border" onClick={()=>CreateOrderData(6000)}>Get Started</NavLink>
+                                    <NavLink /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(1)} /* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(6000)} */>Get Started</NavLink>
                                 </div>
                             </div>
                         </div>

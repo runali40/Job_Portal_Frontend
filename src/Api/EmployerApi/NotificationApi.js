@@ -81,6 +81,44 @@ export const GetAllAppliedCandidateApi = async (navigate) => {
         return null;
     }
 };
+export const GetEmailNotification = async (ApplicationId, statusbyemployee, navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    const url = 'Employeer/Email';
+    const params = { UserId: userId, ApplicationId:ApplicationId, statusbyemployee: statusbyemployee };
+
+    try {
+        const response = await apiClient({
+            method: 'get',
+            url: url,
+            params: params,
+        });
+
+        console.log(response.data.data, "get email notification data");
+
+        // ✅ Set token manually so it's ready for next API call
+        if (response.data?.outcome?.tokens) {
+            const newToken = response.data.outcome.tokens;
+            Cookies.set("UserCredential", newToken, { expires: 7 });
+        }
+
+        return response.data.data;
+    } catch (error) {
+        if (
+            error.response &&
+            error.response.data &&
+            error.response.data.outcome
+        ) {
+            const token1 = error.response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+        }
+        console.log(error);
+
+        const errors = ErrorHandler(error, navigate);
+        toast.error(errors);
+        return null;
+    }
+};
+
 export const GetAppliedCandidateApi = async (ApplicationId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const url = 'Employeer/GetappliedCandidatedata';

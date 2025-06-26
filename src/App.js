@@ -43,6 +43,7 @@ import AppliedCandidate from './Components/Pages/Employers/AppliedCandidate';
 import ViewAppliedCandidates from './Components/Pages/Employers/ViewAppliedCandidates';
 import PaymentGateway from './Components/Pages/Employers/PaymentGateway';
 import ForgotPassword from './Components/Pages/Candidates/ForgotPassword';
+import CreateOrder from './Components/Pages/PaymentGateway/CreateOrder';
 
 function App() {
   return (
@@ -79,6 +80,7 @@ function App() {
         <Route path="/viewAppliedCandidates" element={<ViewAppliedCandidates />} />
         <Route path="/paymentGateway" element={<PaymentGateway />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/createOrder" element={<CreateOrder />} />
       </Routes>
     </div>
   );
