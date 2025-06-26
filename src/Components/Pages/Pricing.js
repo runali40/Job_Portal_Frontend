@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import Header from './Header'
-import Footer from './Footer'
-import { CreateOrderApi } from '../../Api/EmployerApi/PaymentGatewayApi'
 
 const Pricing = () => {
     const navigate = useNavigate();
@@ -128,7 +125,7 @@ const Pricing = () => {
                                     <div className="price"><span>₹</span>1200<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
-                                    <NavLink to="/createOrder" className="btn btn-border" onClick={() => CreateOrderData(1)} >Get Started</NavLink>
+                                    <div className="btn btn-border" onClick={() => CreateOrderData(1)} >Get Started</div>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +157,7 @@ const Pricing = () => {
                                     <div className="price"><span>₹</span>2500<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
-                                    <NavLink /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(1)}/* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(2500)} */>Get Started</NavLink>
+                                    <div /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(4000)}/* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(2500)} */>Get Started</div>
                                 </div>
                             </div>
                         </div>
@@ -194,7 +191,7 @@ const Pricing = () => {
                                     <div className="price"><span>₹</span>4000<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
-                                    <NavLink /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(1)}/* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(4000)} */>Get Started</NavLink>
+                                    <div /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(1)}/* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(4000)} */>Get Started</div>
                                 </div>
                             </div>
                         </div>
@@ -229,7 +226,7 @@ const Pricing = () => {
                                     <div className="price"><span>₹</span>6000<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
-                                    <NavLink /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(1)} /* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(6000)} */>Get Started</NavLink>
+                                    <div /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(1)} /* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(6000)} */>Get Started</div>
                                 </div>
                             </div>
                         </div>

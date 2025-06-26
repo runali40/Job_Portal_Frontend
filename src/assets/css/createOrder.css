@@ -59,7 +59,9 @@
     background-color: rgb(35, 113, 236);
     color: #fff !important;
 }
-
+input[type=number] {
+    -moz-appearance: textfield;
+}
 .card--pay-btn:disabled {
     opacity: .5;
     cursor: not-allowed;
@@ -119,6 +121,10 @@
     width: 25px;
     max-width: 100%;
     padding: 0;
+}
+.card--dynamic-input:active, .card--dynamic-input:focus {
+    border: none;
+    outline: none;
 }
 .card--pay-btn,
 .card textarea {

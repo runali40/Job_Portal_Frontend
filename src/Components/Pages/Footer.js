@@ -13,7 +13,7 @@ const Footer = () => {
                 <div className="widget">
                     <div className="footer-logo"><img src="assets/img/logo-footer.png" alt="" /></div>
                     <div className="textwidget text-start">
-                        <p>Sed consequat sapien faus quam bibendum convallis quis in nulla. Pellentesque volutpat odio eget diam cursus semper.</p>
+                        <p>Find jobs that match your skills, experience, and passion. We bring candidates and companies together on one trusted platform to make hiring faster and smarter.</p>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@ const Footer = () => {
             <div className="col-lg-3 col-md-4 col-xs-12">
                 <div className="widget text-start">
                     <h3 className="block-title">Subscribe Now</h3>
-                    <p>Sed consequat sapien faus quam bibendum convallis.</p>
+                    <p>subscribe this.</p>
                     <form method="post" id="subscribe-form" name="subscribe-form" className="validate">
                         <div className="form-group is-empty">
                             <input type="email"  name="Email" className="form-control" id="EMAIL" placeholder="Enter Email..." required="" />
