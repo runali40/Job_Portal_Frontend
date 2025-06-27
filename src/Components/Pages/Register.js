@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { GetRoleApi, RegisterApi } from '../../Api/LoginApi'
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
+    const navigate = useNavigate();
     const [role, setRole] = useState("")
     const [allRole, setAllRole] = useState([])
     const [username, setUsername] = useState("")
@@ -20,16 +21,24 @@ const Register = () => {
         GetRoleData();
     }, [])
 
+    const passwordsMatch = password && retypePassword && password === retypePassword;
+
     const RegisterData = () => {
         if (role === "") {
             toast.warning("Please select role!")
         }
-        else if (username === "" || password === "" || email === "" || retypePassword === "") {
+        else if (username === "" ||!passwordsMatch || email === "") {
             toast.warning("Please enter all the fields!")
         }
         else {
             RegisterApi(username, password, email, role, companyName, companyWebsite, companyLogo).then((data) => {
-                console.log(data)
+                console.log(data.data)
+                const temp = data.data;
+                console.log(temp[0])
+                const uId = temp[0].UserId;
+                const rId = temp[0].r_id;
+                const cId = temp[0].CompanyId;
+                navigate('/pricing', { state: { uId, rId, cId } });
             })
         }
     }
@@ -103,8 +112,8 @@ const Register = () => {
                                             <input type="text" className="form-control" name="name" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
                                         </div>
                                     </div> */}
-                                    {allRole.find((item) => item.r_id === role && item.r_rolename === "Employer") &&
-                                        <p>Please click on the pricing plan.<NavLink to="/pricing">Click Here</NavLink></p>}
+                                    {/* {allRole.find((item) => item.r_id === role && item.r_rolename === "Employer") &&
+                                        <p>Please click on the pricing plan.<NavLink to="/pricing">Click Here</NavLink></p>} */}
                                     <div className="form-group mt-3">
                                         <div className="input-icon">
                                             <i className="lni-user"></i>
@@ -132,6 +141,9 @@ const Register = () => {
                                             <input type="password" className="form-control" placeholder="Retype Password" value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} />
                                         </div>
                                     </div>
+                                    {retypePassword && password !== retypePassword && (
+                                        <small style={{ color: 'red' }}>Passwords do not match</small>
+                                    )}
                                     {allRole.find((item) => item.r_id === role && item.r_rolename === "Employer")
                                         ?
                                         <>
@@ -156,7 +168,15 @@ const Register = () => {
 
                                         </>
                                         : null}
-                                    <button className="btn btn-common log-btn mt-3" onClick={RegisterData}>Register</button>
+                                    {
+                                        allRole.find((item) => item.r_id === role && item.r_rolename === "Employer") ? (
+                                            <button className="btn btn-common log-btn mt-3" onClick={RegisterData} disabled={!username || !email || !passwordsMatch || !companyName} >Next</button>
+                                        ) : (
+                                            <button className="btn btn-common log-btn mt-3" onClick={RegisterData}>Register</button>
+                                        )
+                                    }
+
+
                                     <p className="text-center">Already have an account?<NavLink to="/"> Sign In</NavLink></p>
                                 </div>
                             </div>

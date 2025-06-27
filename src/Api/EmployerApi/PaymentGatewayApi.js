@@ -17,7 +17,8 @@ export const VerifyPayment = async (navigate) => {
             url: url,
             data: data,
         });
-
+        console.log(response, "verify data")
+        console.log(response.data, "verify 21")
         console.log(response.data.data, "get view notification data");
 
         // ✅ Set token manually so it's ready for next API call
@@ -44,10 +45,10 @@ export const VerifyPayment = async (navigate) => {
     }
 };
 
-export const CreateOrderApi = async (amount, navigate) => {
+export const CreateOrderApi = async (amount, duration, uId, rId, cId, navigate) => {
     // const userId = sessionStorage.getItem('userid');
     const url = 'Payments/create-order';
-    const data = { amount: amount }
+    const data = { amount: amount, duration: duration, planName: "premium", userId: uId, roleId: rId, companyId: cId }
     try {
         const response = await apiClient({
             method: 'post',

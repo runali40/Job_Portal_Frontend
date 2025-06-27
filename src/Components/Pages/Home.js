@@ -153,6 +153,15 @@ const Home = () => {
         // localStorage.removeItem("UserCredential");
         Cookies.remove("UserCredential", { path: '/' });
         Cookies.remove("UserCredential")
+        sessionStorage.removeItem("amount")
+        sessionStorage.removeItem("companyId")
+        sessionStorage.removeItem("currentIndustry")
+        sessionStorage.removeItem("orderid")
+        sessionStorage.removeItem("resumeId")
+        sessionStorage.removeItem("roleId")
+        sessionStorage.removeItem("rolename")
+        sessionStorage.removeItem("sessionid")
+        sessionStorage.removeItem("userid")
         navigate("/")
     }
 

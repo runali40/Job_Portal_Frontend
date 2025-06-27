@@ -6,6 +6,14 @@ import { apiClient } from '../../../ApiClient';
 const CreateOrder = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const uId = location.state?.uId || 0;
+    console.log(uId)
+    const rId = location.state?.rId || 0;
+    console.log(rId)
+    const cId = location.state?.cId || 0;
+    console.log(cId)
+    const duration = location.state?.duration || 0;
+    console.log(duration)
     const [amount, setAmount] = useState((location.state?.amount || 0).toString());
     // const amount = location.state?.amount || 0;
     console.log(amount, "amount")
@@ -26,7 +34,7 @@ const CreateOrder = () => {
         }
     };
     const CreateOrderData = async () => {
-        const data = await CreateOrderApi(amount, navigate)
+        const data = await CreateOrderApi(amount, duration, uId, rId, cId, navigate)
         console.log(data)
         handlePayment()
         // navigate('/paymentGateway', { state: { amount } });
@@ -52,7 +60,7 @@ const CreateOrder = () => {
 
         const options = {
             // key: "rzp_test_gL5huWXM1ghnNM",
-            key: "rzp_test_ncMT4AiPgvLhNh",
+            key: "rzp_live_ajVE3kPFAPTm7X",
             amount: 1, // in paise (₹1000)
             currency: "INR",
             name: "DEVENDRA IT INFRASOFT SECURITY PRIVATE LIMITED",
@@ -70,17 +78,13 @@ const CreateOrder = () => {
                 try {
                     const url = 'Payments/verify';
                     const verifyRes = await apiClient.post(url, verifyPayload);
-                    console.log(verifyRes)
+                    console.log(verifyRes.data, "verify response")
                     alert("Payment successful and verified!");
+                    navigate("/")
                 } catch (err) {
                     alert("Payment succeeded but verification failed.");
                 }
             },
-            // prefill: {
-            //     name: "Runali Kadam",
-            //     email: "runali.devit@gmail.com",
-            //     contact: "9075372928"
-            // },
             prefill: {
                 name: "",
                 email: "",

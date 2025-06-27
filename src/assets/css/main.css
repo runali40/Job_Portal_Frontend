@@ -4481,3 +4481,7 @@ footer .menu li .small-title {
   color: #333;
   font-weight: 400;
 }
+.log-btn:disabled {
+  opacity: 0.5;         /* Light faded effect */
+  cursor: not-allowed;  /* Optional: show "not-allowed" cursor */
+}
