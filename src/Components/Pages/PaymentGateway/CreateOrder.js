@@ -52,7 +52,9 @@ const CreateOrder = () => {
     const handlePayment = async () => {
         const orderId = sessionStorage.getItem("orderid")
         const isLoaded = await loadRazorpayScript();
-
+        const companyId = sessionStorage.getItem('companyId')
+        console.log(companyId, "companyId")
+        const userId = sessionStorage.getItem('userid');
         if (!isLoaded) {
             alert("Razorpay SDK failed to load. Check your internet.");
             return;
@@ -71,7 +73,9 @@ const CreateOrder = () => {
                 const verifyPayload = {
                     razorpay_payment_id: response.razorpay_payment_id,
                     razorpay_order_id: response.razorpay_order_id,
-                    razorpay_signature: response.razorpay_signature
+                    razorpay_signature: response.razorpay_signature,
+                    userId: userId,
+                    CompanyId: companyId
                 };
 
                 // Call verify API

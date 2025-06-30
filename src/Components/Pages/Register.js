@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { GetRoleApi, RegisterApi } from '../../Api/LoginApi'
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Register = () => {
     const navigate = useNavigate();
     const [role, setRole] = useState("")
@@ -16,6 +16,12 @@ const Register = () => {
     const [companyWebsite, setCompanyWebsite] = useState("")
     const [companyLogo, setCompanyLogo] = useState("")
     const [file, setFile] = useState("")
+    const [isChecked, setIsChecked] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
+    const [retypeShowPassword, setRetypeShowPassword] = useState(false)
+    const handleCheckboxChange = (e) => {
+        setIsChecked(e.target.checked);
+    };
 
     useEffect(() => {
         GetRoleData();
@@ -27,7 +33,7 @@ const Register = () => {
         if (role === "") {
             toast.warning("Please select role!")
         }
-        else if (username === "" ||!passwordsMatch || email === "") {
+        else if (username === "" || !passwordsMatch || email === "") {
             toast.warning("Please enter all the fields!")
         }
         else {
@@ -42,7 +48,22 @@ const Register = () => {
             })
         }
     }
-
+    const RegisterData1 = () => {
+        if (role === "") {
+            toast.warning("Please select role!")
+        }
+        else if (username === "" || !passwordsMatch || email === "") {
+            toast.warning("Please enter all the fields!")
+        }
+        else {
+            RegisterApi(username, password, email, role, companyName, companyWebsite, companyLogo).then((data) => {
+                console.log(data.data)
+                const temp = data.data;
+                console.log(temp[0])
+                navigate('/');
+            })
+        }
+    }
     const GetRoleData = () => {
         GetRoleApi().then((data) => {
             setAllRole(data)
@@ -132,13 +153,40 @@ const Register = () => {
                                     <div className="form-group">
                                         <div className="input-icon">
                                             <i className="lni-lock"></i>
-                                            <input type="password" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                            {/* <input type="password" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /> */}
+                                            <input type={showPassword ? "text" : "password"} className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                            <span
+                                                onClick={() => setShowPassword(!showPassword)}
+                                                style={{
+                                                    position: "absolute",
+                                                    right: "10px",
+                                                    top: "50%",
+                                                    transform: "translateY(-50%)",
+                                                    cursor: "pointer",
+                                                    color: "#555"
+                                                }}
+                                            >
+                                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                            </span>
                                         </div>
                                     </div>
                                     <div className="form-group">
                                         <div className="input-icon">
                                             <i className="lni-unlock"></i>
-                                            <input type="password" className="form-control" placeholder="Retype Password" value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} />
+                                            <input type={retypeShowPassword ? "text" : "password"} className="form-control" placeholder="Retype Password" value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} />
+                                            <span
+                                                onClick={() => setRetypeShowPassword(!retypeShowPassword)}
+                                                style={{
+                                                    position: "absolute",
+                                                    right: "10px",
+                                                    top: "50%",
+                                                    transform: "translateY(-50%)",
+                                                    cursor: "pointer",
+                                                    color: "#555"
+                                                }}
+                                            >
+                                                {retypeShowPassword ? <FaEyeSlash /> : <FaEye />}
+                                            </span>
                                         </div>
                                     </div>
                                     {retypePassword && password !== retypePassword && (
@@ -165,14 +213,25 @@ const Register = () => {
                                             <input type="file" className="form-control" name="companyLogo" placeholder="Company Logo" onChange={handleFileChange} />
                                             {/* </div> */}
                                             {/* </div> */}
-
+                                            <div className="form-group form-check mt-3">
+                                                <input
+                                                    type="checkbox"
+                                                    className="form-check-input"
+                                                    id="pricingPlan"
+                                                    checked={isChecked}
+                                                    onChange={handleCheckboxChange}
+                                                />
+                                                <label className="form-check-label text-start" htmlFor="pricingPlan">
+                                                    Please select a pricing plan for employees.
+                                                </label>
+                                            </div>
                                         </>
                                         : null}
                                     {
                                         allRole.find((item) => item.r_id === role && item.r_rolename === "Employer") ? (
-                                            <button className="btn btn-common log-btn mt-3" onClick={RegisterData} disabled={!username || !email || !passwordsMatch || !companyName} >Next</button>
+                                            <button className="btn btn-common log-btn mt-3" onClick={RegisterData} disabled={!username || !email || !passwordsMatch || !companyName || !isChecked} >Save & Next</button>
                                         ) : (
-                                            <button className="btn btn-common log-btn mt-3" onClick={RegisterData}>Register</button>
+                                            <button className="btn btn-common log-btn mt-3" onClick={RegisterData1}>Register</button>
                                         )
                                     }
 

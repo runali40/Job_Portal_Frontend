@@ -5,12 +5,13 @@ import { apiClient } from "../../ApiClient";
 import Cookies from 'js-cookie';
 
 export const VerifyPayment = async (navigate) => {
-    // const userId = sessionStorage.getItem('userid');
+    const userId = sessionStorage.getItem('userid');
     const orderId = sessionStorage.getItem('orderid')
     const amount = sessionStorage.getItem('amount')
-    const companyId = sessionStorage.getItem('amount')
+    const companyId = sessionStorage.getItem('companyId')
+    console.log(companyId, "companyId")
     const url = 'Payments/verify';
-    const data = { orderId: orderId, paymentId: amount, signature: "abc" , CompanyId: companyId};
+    const data = {userId : userId, orderId: orderId, paymentId: amount, signature: "abc" , CompanyId: companyId};
 
     try {
         const response = await apiClient({
@@ -61,6 +62,7 @@ export const CreateOrderApi = async (amount, duration, uId, rId, cId, navigate) 
         sessionStorage.setItem("orderid", response.data.orderId)
         sessionStorage.setItem('amount', response.data.amount)
         sessionStorage.setItem('companyId', response.data.companyid)
+         sessionStorage.setItem('userid', response.data.userId)
         // ✅ Set token manually so it's ready for next API call
         if (response.data?.outcome?.tokens) {
             const newToken = response.data.outcome.tokens;

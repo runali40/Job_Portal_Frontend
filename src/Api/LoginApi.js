@@ -50,6 +50,9 @@ export const LoginApi = (username, password, navigate) => {
             if (error.response.status === 400) {
                 toast.error("Invalid username or password");
             }
+             if (error.response.status === 403){
+                toast.error("Access denied: Payment required");
+            }
             // const errors = ErrorHandler(error);
             // toast.error(errors);
         });
