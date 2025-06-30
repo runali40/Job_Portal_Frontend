@@ -8,8 +8,9 @@ export const VerifyPayment = async (navigate) => {
     // const userId = sessionStorage.getItem('userid');
     const orderId = sessionStorage.getItem('orderid')
     const amount = sessionStorage.getItem('amount')
+    const companyId = sessionStorage.getItem('amount')
     const url = 'Payments/verify';
-    const data = { orderId: orderId, paymentId: amount, signature: "abc" };
+    const data = { orderId: orderId, paymentId: amount, signature: "abc" , CompanyId: companyId};
 
     try {
         const response = await apiClient({
@@ -59,6 +60,7 @@ export const CreateOrderApi = async (amount, duration, uId, rId, cId, navigate) 
         console.log(response.data, "get create order data");
         sessionStorage.setItem("orderid", response.data.orderId)
         sessionStorage.setItem('amount', response.data.amount)
+        sessionStorage.setItem('companyId', response.data.companyid)
         // ✅ Set token manually so it's ready for next API call
         if (response.data?.outcome?.tokens) {
             const newToken = response.data.outcome.tokens;
