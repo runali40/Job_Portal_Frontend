@@ -8,8 +8,6 @@ import '../src/assets/css/animate.css'
 import '../src/assets/css/main.css'
 import '../src/assets/css/responsive.css'
 import '../src/assets/css/uploadCv.css'
-
-
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 // import '../node_modules/bootstrap/dist/css/bootstrap.css'
@@ -44,6 +42,7 @@ import ViewAppliedCandidates from './Components/Pages/Employers/ViewAppliedCandi
 import PaymentGateway from './Components/Pages/Employers/PaymentGateway';
 import ForgotPassword from './Components/Pages/Candidates/ForgotPassword';
 import CreateOrder from './Components/Pages/PaymentGateway/CreateOrder';
+import PrivateRoute from './Components/Pages/PrivateRoute';
 
 function App() {
   return (
@@ -51,36 +50,49 @@ function App() {
       <ToastContainer />
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/" element={<Login />} />
-        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/register" element={<Register />} />
-        <Route path="/postJob" element={<PostJob />} />
-        <Route path="/jobPage" element={<JobPage />} />
-        <Route path="/jobDetails" element={<JobDetails />} />
-        <Route path="/resumePage" element={<ResumePage />} />
-        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
-        <Route path="/browseJobs" element={<BrowseJobs />} />
-        <Route path="/browseCategories" element={<BrowseCategories />} />
-        <Route path="/addResume" element={<AddResume />} />
-        <Route path="/manageResume" element={<ManageResume />} />
-        <Route path="/jobAlerts" element={<JobAlerts />} />
-        <Route path="/manageJobs" element={<ManageJobs />} />
-        <Route path="/manageApplications" element={<ManageApplications />} />
-        <Route path="/browseResumes" element={<BrowseResumes />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/changePassword" element={<ChangePassword />} />
-        <Route path="/bookMarkedJobs" element={<BookMarkedJobs />} />
-        <Route path="/notifications" element={<Notifications />} />
-        <Route path="/appliedCandidate" element={<AppliedCandidate />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/uploadCv" element={<UploadCv />} />
-        <Route path="/viewAppliedCandidates" element={<ViewAppliedCandidates />} />
-        <Route path="/paymentGateway" element={<PaymentGateway />} />
+          <Route path="/paymentGateway" element={<PaymentGateway />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/createOrder" element={<CreateOrder />} />
+        <Route path="/createOrder" element={<CreateOrder />}/>
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/about" element={<PrivateRoute><About /></PrivateRoute>} />
+        <Route path="/contact" element={<PrivateRoute><Contact /></PrivateRoute>} />
+
+        {/* <Route path="/" element={<Login />} /> */}
+        {/* <Route path="/login" element={<Login />} /> */}
+        {/* <Route path="/register" element={<Register />} /> */}
+        <Route path="/postJob" element={<PrivateRoute><PostJob /></PrivateRoute>} />
+        <Route path="/jobPage" element={<PrivateRoute><JobPage /></PrivateRoute>} />
+        <Route path="/jobDetails" element={<PrivateRoute><JobDetails /></PrivateRoute>} />
+        <Route path="/resumePage" element={<PrivateRoute><ResumePage /></PrivateRoute>} />
+        <Route path="/privacyPolicy" element={<PrivateRoute><PrivacyPolicy /></PrivateRoute>} />
+        <Route path="/browseJobs" element={<PrivateRoute><BrowseJobs /></PrivateRoute>} />
+        <Route path="/browseCategories" element={<PrivateRoute><BrowseCategories /></PrivateRoute>} />
+        <Route path="/addResume" element={<PrivateRoute><AddResume /></PrivateRoute>} />
+        <Route path="/manageResume" element={<PrivateRoute><ManageResume /></PrivateRoute>} />
+        <Route path="/jobAlerts" element={<PrivateRoute><JobAlerts /></PrivateRoute>} />
+        <Route path="/manageJobs" element={<PrivateRoute><ManageJobs /></PrivateRoute>} />
+        <Route path="/manageApplications" element={<PrivateRoute><ManageApplications /></PrivateRoute>} />
+        <Route path="/browseResumes" element={<PrivateRoute><BrowseResumes /></PrivateRoute>} />
+        <Route path="/blog" element={<PrivateRoute><Blog /></PrivateRoute>} />
+        <Route path="/changePassword" element={<PrivateRoute><ChangePassword /></PrivateRoute>} />
+        <Route path="/bookMarkedJobs" element={<PrivateRoute><BookMarkedJobs /></PrivateRoute>} />
+        <Route path="/notifications" element={<PrivateRoute><Notifications /></PrivateRoute>} />
+        <Route path="/appliedCandidate" element={<PrivateRoute><AppliedCandidate /></PrivateRoute>} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/uploadCv" element={<PrivateRoute><UploadCv /></PrivateRoute>} />
+        <Route path="/viewAppliedCandidates" element={<PrivateRoute><ViewAppliedCandidates /></PrivateRoute>} />
+        {/* <Route path="/paymentGateway" element={<PrivateRoute><PaymentGateway /></PrivateRoute>} />
+        <Route path="/forgotPassword" element={<PrivateRoute><ForgotPassword /></PrivateRoute>} />
+        <Route path="/createOrder" element={<PrivateRoute><CreateOrder /></PrivateRoute>} /> */}
       </Routes>
     </div>
   );
