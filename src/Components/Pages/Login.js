@@ -77,7 +77,7 @@ const Login = () => {
                       <p className='mt-2'>Please click on the pricing plan.<NavLink to="/pricing">Click Here</NavLink></p>} */}
                     <div className="input-icon mt-3">
                       <i className="lni-user"></i>
-                      <input type="text" id="sender-email" className="form-control" name="email" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                      <input type="text" id="sender-email" className="form-control" name="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                     </div>
                   </div>
                   <div className="form-group">
