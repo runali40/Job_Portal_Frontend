@@ -8,6 +8,8 @@ const BrowseResumes = () => {
   const navigate = useNavigate();
   const [allResume, setAllResume] = useState([])
   const [allSkills, setAllSkills] = useState([])
+  const [resumeId, setResumeId] = useState("")
+  
 
   useEffect(() => {
     getAllResumeData()
@@ -20,12 +22,21 @@ const BrowseResumes = () => {
     data.forEach((item, index) => {
       console.log(`Resume ${index + 1}:`);
       console.log("Educations:", item.educations);
+      console.log("resumeID:", item.educations[0].resumeId);
+      setResumeId(item.educations[0].resumeId)
       console.log("Skills:", item.skills);
       setAllSkills(item.skills)
       console.log("Work Experiences:", item.workExperiences);
     });
   };
 
+  const GetResumeData = (resumeId) => {
+    console.log("30")
+    navigate("/resumePage", {
+      state: { resumeId },
+    }
+    )
+  }
   return (
     <>
       <Header />
@@ -47,15 +58,15 @@ const BrowseResumes = () => {
             {
               allResume.map((data) => {
                 return (
-                  <div className="col-lg-12 col-md-6 col-xs-12">
+                  <div className="col-lg-12 col-md-6 col-xs-12">9
                     <div className="manager-resumes-item">
-                      <div className="manager-content">
-                        <NavLink to="/resumePage">
+                      <div className="manager-content" onClick={()=>GetResumeData(resumeId)}>
+                        
                           <img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" />
-                        </NavLink>
+                        
                         <div className="manager-info">
                           <div className="manager-name text-start">
-                            <h4><NavLink to="/">{data.name}</NavLink></h4>
+                            <h4>{data.name}</h4>
                             <h5>{data.professionTitle}</h5>
                           </div>
                           <div className="manager-meta">
