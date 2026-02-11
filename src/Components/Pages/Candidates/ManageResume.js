@@ -23,7 +23,7 @@ const ManageResume = () => {
 
   const ManageResumeData = async() => {
     const data = await ManageResumeApi(navigate);
-    console.log(data[0])
+    // console.log(data[0])
     setName(data[0].Name)
     setProfessionTitle(data[0].ProfessionTitle)
     setLocationName(data[0].LocationName)

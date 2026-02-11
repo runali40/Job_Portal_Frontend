@@ -45,6 +45,7 @@ const Register = () => {
                 const rId = temp[0].r_id;
                 const cId = temp[0].CompanyId;
                 navigate('/pricing', { state: { uId, rId, cId } });
+                // navigate('/home', { state: { uId, rId, cId } });
             })
         }
     }
@@ -56,12 +57,10 @@ const Register = () => {
             toast.warning("Please enter all the fields!")
         }
         else {
-            RegisterApi(username, password, email, role, companyName, companyWebsite, companyLogo).then((data) => {
-                console.log(data.data)
-                const temp = data.data;
-                console.log(temp[0])
-                navigate('/');
-            })
+            const data = RegisterApi(username, password, email, role, companyName, companyWebsite, companyLogo);
+            console.log(data)
+            navigate('/');
+           
         }
     }
     const GetRoleData = () => {
@@ -229,7 +228,7 @@ const Register = () => {
                                         : null}
                                     {
                                         allRole.find((item) => item.r_id === role && item.r_rolename === "Employer") ? (
-                                            <button className="btn btn-common log-btn mt-3" onClick={RegisterData} disabled={!username || !email || !passwordsMatch || !companyName || !isChecked} >Save & Next</button>
+                                            <button className="btn btn-common log-btn mt-3" onClick={RegisterData} disabled={!username || !email || !passwordsMatch || !companyName /* || !isChecked */} >Save & Next</button>
                                         ) : (
                                             <button className="btn btn-common log-btn mt-3" onClick={RegisterData1}>Register</button>
                                         )
