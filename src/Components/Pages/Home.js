@@ -197,7 +197,7 @@ const Home = () => {
                                             <li><NavLink className="dropdown-item" to="/about">About</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/jobPage">Job Page</NavLink></li>
                                             {/* <li><NavLink className="dropdown-item" to="/jobDetails">Job Details</NavLink></li> */}
-                                           {RoleName === "Candidate" && <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li>}
+                                            {RoleName === "Candidate" && <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li>}
                                             <li><NavLink className="dropdown-item" to="/privacyPolicy">Privacy Policy</NavLink></li>
                                             <li><NavLink className="dropdown-item" to="/pricing">Pricing Tables</NavLink></li>
                                             {/* <li><NavLink className="dropdown-item" to="/contact">Contact</NavLink></li> */}
@@ -530,33 +530,52 @@ const Home = () => {
                         <p>Explore the most recent job openings across various industries.<br /> Find roles that match your skills and interests, and take the next step in your career with confidence.</p>
                     </div>
                     <div className="row">
-                        {
-                            allLatestJob.map((data) => {
-                                return (
-                                    <div className="col-lg-6 col-md-12 col-xs-12">
-                                        <div className="jobs-latest">
-                                            <div className="img-thumb">
-                                                <img src={data.LOGOFile} alt="" style={{ width: "60px", height: "55px" }} />
-                                            </div>
-                                            <div className="content text-start">
-                                                <h3><NavLink to="/jobDetails">{data.Slug}</NavLink></h3>
-                                                <p className="brand">{data.Name}</p>
-                                                <div className="tags">
-                                                    <span><i className="lni-map-marker"></i>{data.LocationName}</span>
-                                                    <span><i className="lni-user"></i>  John Smith</span>
-                                                </div>
-                                                <div className="tag mb-3"><i className="lni-tag"></i> #Html #Css #PHP</div>
-                                              {
-                                                            data.TypeofJob && <span className="full-time">{data.TypeofJob}</span>
-                                                        }
-                                            </div>
-                                        </div>
+                        {allLatestJob.map((data) => (
+                            <div
+                                className="col-lg-6 col-md-12 col-xs-12"
+                                key={data.Slug}   // ✅ unique key
+                            >
+                                <div className="jobs-latest">
+                                    <div className="img-thumb">
+                                        <img
+                                            src={data.LOGOFile}
+                                            alt=""
+                                            style={{ width: "60px", height: "55px" }}
+                                        />
                                     </div>
-                                )
-                            })
-                        }
+
+                                    <div className="content text-start">
+                                        <h3>
+                                            <NavLink to="/jobDetails">{data.Slug}</NavLink>
+                                        </h3>
+
+                                        <p className="brand">{data.Name}</p>
+
+                                        <div className="tags">
+                                            <span>
+                                                <i className="lni-map-marker"></i> {data.LocationName}
+                                            </span>
+                                            <span>
+                                                <i className="lni-user"></i> John Smith
+                                            </span>
+                                        </div>
+
+                                        <div className="tag mb-3">
+                                            <i className="lni-tag"></i> #Html #Css #PHP
+                                        </div>
+
+                                        {data.TypeofJob && (
+                                            <span className="full-time">{data.TypeofJob}</span>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
                         <div className="col-12 text-center mt-4">
-                            <NavLink to="/jobPage" className="btn btn-common">Browse All Jobs</NavLink>
+                            <NavLink to="/jobPage" className="btn btn-common">
+                                Browse All Jobs
+                            </NavLink>
                         </div>
                     </div>
                 </div>

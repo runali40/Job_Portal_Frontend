@@ -9,7 +9,7 @@ const BrowseResumes = () => {
   const [allResume, setAllResume] = useState([])
   const [allSkills, setAllSkills] = useState([])
   const [resumeId, setResumeId] = useState("")
-  
+
 
   useEffect(() => {
     getAllResumeData()
@@ -58,12 +58,12 @@ const BrowseResumes = () => {
             {
               allResume.map((data) => {
                 return (
-                  <div className="col-lg-12 col-md-6 col-xs-12">9
+                  <div className="col-lg-12 col-md-6 col-xs-12" key={data.id || data.resumeId}>
                     <div className="manager-resumes-item">
-                      <div className="manager-content" onClick={()=>GetResumeData(resumeId)}>
-                        
-                          <img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" />
-                        
+                      <div className="manager-content" onClick={() => GetResumeData(resumeId)}>
+
+                        <img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" />
+
                         <div className="manager-info">
                           <div className="manager-name text-start">
                             <h4>{data.name}</h4>

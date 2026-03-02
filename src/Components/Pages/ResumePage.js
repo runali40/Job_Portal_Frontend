@@ -29,23 +29,35 @@ const ResumePage = () => {
   }, [])
 
   const GetManageResumeData = async () => {
-    const data = await GetManageResumeApi(resumeId, navigate);
-    console.log(data, "data 30");
-    setAllEducation(data.educations);
-    setAllWorkExperience(data.workExperiences);
-    setAllSkills(data.skills);
-    setName(data.model1.Name);
-    setEmail(data.model1.Email);
-    setProfessionTitle(data.model1.ProfessionTitle);
-    setLocation(data.model1.LocationName);
-    setWebsite(data.model1.Web);
-    setPreHour(data.model1.PreHour);
-    setAge(data.model1.Age);
-    setRId(data.model1.Id);
-    setAboutMe(data.model1.AboutMe)
-    setProfilePhoto(data.model1.ProfilePhoto)
-    // setCategory(data.model1.CurrentIndustry)
+    try {
+      const data = await GetManageResumeApi(resumeId, navigate);
+
+      console.log(data, "data 30");
+
+      if (!data) return; // ✅ stop if null
+
+      setAllEducation(data?.educations || []);
+      setAllWorkExperience(data?.workExperiences || []);
+      setAllSkills(data?.skills || []);
+
+      const model = data?.model1 || {};
+
+      setName(model?.Name || "");
+      setEmail(model?.Email || "");
+      setProfessionTitle(model?.ProfessionTitle || "");
+      setLocation(model?.LocationName || "");
+      setWebsite(model?.Web || "");
+      setPreHour(model?.PreHour || "");
+      setAge(model?.Age || "");
+      setRId(model?.Id || "");
+      setAboutMe(model?.AboutMe || "");
+      setProfilePhoto(model?.ProfilePhoto || "");
+    } catch (error) {
+      console.log("Error in GetManageResumeData:", error);
+      // ❌ UI break nahi hoga
+    }
   };
+
   return (
     <>
       <Header />
@@ -60,11 +72,11 @@ const ResumePage = () => {
           </div>
         </div>
       </div>
-
-      <div className="section">
-        <div className="container">
-          <div className="row">
-            {/* <div className="col-lg-4 col-md-4 col-xs-12">
+      {resumeId ? (
+        <div className="section">
+          <div className="container">
+            <div className="row">
+              {/* <div className="col-lg-4 col-md-4 col-xs-12">
               <div className="right-sideabr">
                 <h4>Manage Account</h4>
                 <ul className="list-item text-start">
@@ -78,75 +90,80 @@ const ResumePage = () => {
                 </ul>
               </div>
             </div> */}
-            <div className="col-lg-12 col-md-12 col-xs-12">
-              <div className="inner-box my-resume">
-                <div className="author-resume">
-                  <div className="thumb">
-                    <img src={profilePhoto} alt="" />
-                  </div>
-                  <div className="author-info text-start">
-                    <h3>{name}</h3>
-                    <p className="sub-title">{professionTitle}</p>
-                    <p><span className="address"><i className="lni-map-marker"></i>{location}</span> <span><i className="ti-phone"></i>(+01) 211-123-5678</span></p>
-                    <div className="social-link">
-                      <NavLink to="/" className="Twitter"><i className="lni-twitter-filled"></i></NavLink>
-                      <NavLink to="/" className="facebook"><i className="lni-facebook-filled"></i></NavLink>
-                      <NavLink to="/" className="google"><i className="lni-google-plus"></i></NavLink>
-                      <NavLink to="/" className="linkedin"><i className="lni-linkedin-fill"></i></NavLink>
+              <div className="col-lg-12 col-md-12 col-xs-12">
+                <div className="inner-box my-resume">
+                  <div className="author-resume">
+                    <div className="thumb">
+                      <img src={profilePhoto} alt="profile" />
+                    </div>
+                    <div className="author-info text-start">
+                      <h3>{name}</h3>
+                      <p className="sub-title">{professionTitle}</p>
+                      <p><span className="address"><i className="lni-map-marker"></i>{location}</span> <span><i className="ti-phone"></i>(+01) 211-123-5678</span></p>
+                      <div className="social-link">
+                        <NavLink to="/" className="Twitter"><i className="lni-twitter-filled"></i></NavLink>
+                        <NavLink to="/" className="facebook"><i className="lni-facebook-filled"></i></NavLink>
+                        <NavLink to="/" className="google"><i className="lni-google-plus"></i></NavLink>
+                        <NavLink to="/" className="linkedin"><i className="lni-linkedin-fill"></i></NavLink>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="about-me item text-start">
-                  <h3>About Me</h3>
-                  <p>{aboutMe}</p>
-                </div>
-                <div className="work-experence item text-start">
-                  <h3>Work Experience</h3>
-                  {
-                    allWorkExperience.map((data) => {
-                      return (
-                        <>
-                          <h4>{data.Title}</h4>
-                          <h5>Bannana INC.</h5>
-                          <span className="date">{data.CompDateFrom}-{data.CompDateTo}(5year)</span>
-                          <p>{data.WorkDescription}</p>
-                          <p><NavLink to="/">4 Projects</NavLink></p>
-                        </>
+                  <div className="about-me item text-start">
+                    <h3>About Me</h3>
+                    <p>{aboutMe}</p>
+                  </div>
+                  <div className="work-experence item text-start">
+                    <h3>Work Experience</h3>
+                    {
+                      allWorkExperience.map((data) => {
+                        return (
+                          <>
+                            <h4>{data.Title}</h4>
+                            <h5>Bannana INC.</h5>
+                            <span className="date">{data.CompDateFrom}-{data.CompDateTo}(5year)</span>
+                            <p>{data.WorkDescription}</p>
+                            <p><NavLink to="/">4 Projects</NavLink></p>
+                          </>
 
-                      )
-                    })
-                  }
+                        )
+                      })
+                    }
 
-                  <br />
-                  {/* <h4>UI Designer</h4>
+                    <br />
+                    {/* <h4>UI Designer</h4>
                   <h5>Whale Creative</h5>
                   <span className="date">Fab 2017-Present(2year)</span>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero vero, dolores, officia quibusdam architecto sapiente eos voluptas odit ab veniam porro quae possimus itaque, quas! Tempora sequi nobis, atque incidunt!</p>
                   <p><NavLink to="/">4 Projects</NavLink></p> */}
-                </div>
-                <div className="education item text-start">
-                  <h3>Education</h3>
-                  {
-                    allEducation.map((data) => {
-                      return (
-                        <>
-                          <h4>{data.School}</h4>
-                          <p>{data.School}</p>
-                          <span className="date">{data.SchoolFrom}-{data.SchoolTo}</span>
-                          <br />
+                  </div>
+                  <div className="education item text-start">
+                    <h3>Education</h3>
+                    {
+                      allEducation.map((data) => {
+                        return (
+                          <>
+                            <h4>{data.School}</h4>
+                            <p>{data.School}</p>
+                            <span className="date">{data.SchoolFrom}-{data.SchoolTo}</span>
+                            <br />
 
-                        </>
-                      )
-                    })
-                  }
+                          </>
+                        )
+                      })
+                    }
 
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
+      ) :
+        (
+          <div className="text-center py-4">
+            <p>Resume data is not available</p>
+          </div>
+        )}
       <Footer />
     </>
   )

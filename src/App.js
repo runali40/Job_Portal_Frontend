@@ -52,7 +52,7 @@ function App() {
         {/* <Route path="/" element={<Home />} /> */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-          <Route path="/paymentGateway" element={<PaymentGateway />} />
+        <Route path="/paymentGateway" element={<PaymentGateway />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/createOrder" element={<CreateOrder />}/>
         <Route

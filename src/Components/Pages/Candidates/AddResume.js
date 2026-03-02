@@ -43,7 +43,7 @@ const AddResume = () => {
         fetchData();
     }, []);
 
-   const GetCategoryData = async () => {
+    const GetCategoryData = async () => {
         const data = await GetCategoryApi(navigate);
         setAllCategory(data);
     };
@@ -238,7 +238,7 @@ const AddResume = () => {
                                 <div className="post-header ">
                                     <p className="text-left">
                                         Already have an account?{" "}
-                                        <NavLink to="/login">Click here to login</NavLink>
+                                        <NavLink to="/">Click here to login</NavLink>
                                     </p>
                                 </div>
                                 <div className="form-ad">
@@ -403,131 +403,133 @@ const AddResume = () => {
 
                                     <div>
                                         <h3 className="text-start">Education</h3>
-                                        {educations.map((edu, index) => (
-                                            <div
-                                                key={edu.id}
-                                                className="education-section mb-4 border p-3 rounded"
-                                            >
-                                                <h3 className="text-start">Education {index + 1}</h3>
-                                                <div className="form-group text-start">
-                                                    <label className="control-label">Degree</label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        value={edu.Degree}
-                                                        onChange={(e) => {
-                                                            const val = e.target.value;
-                                                            if (/^[a-zA-Z\s]*$/.test(val))
-                                                                handleChange(index, "Degree", val);
-                                                        }}
-                                                        placeholder="e.g. Bachelor"
-                                                    />
-                                                </div>
+                                        {educations.map((edu, index) => {
+                                            return (
+                                                <div
+                                                    key={edu.id}
+                                                    className="education-section mb-4 border p-3 rounded"
+                                                >
+                                                    <h3 className="text-start">Education {index + 1}</h3>
+                                                    <div className="form-group text-start">
+                                                        <label className="control-label">Degree</label>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            value={edu.Degree}
+                                                            onChange={(e) => {
+                                                                const val = e.target.value;
+                                                                if (/^[a-zA-Z\s]*$/.test(val))
+                                                                    handleChange(index, "Degree", val);
+                                                            }}
+                                                            placeholder="e.g. Bachelor"
+                                                        />
+                                                    </div>
 
-                                                <div className="form-group text-start">
-                                                    <label className="control-label">
-                                                        Field of Study
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        value={edu.FieldofStudy}
-                                                        onChange={(e) => {
-                                                            const val = e.target.value;
-                                                            if (/^[a-zA-Z\s]*$/.test(val))
-                                                                handleChange(index, "FieldofStudy", val);
-                                                        }}
-                                                        placeholder="e.g. Computer Science"
-                                                    />
-                                                </div>
+                                                    <div className="form-group text-start">
+                                                        <label className="control-label">
+                                                            Field of Study
+                                                        </label>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            value={edu.FieldofStudy}
+                                                            onChange={(e) => {
+                                                                const val = e.target.value;
+                                                                if (/^[a-zA-Z\s]*$/.test(val))
+                                                                    handleChange(index, "FieldofStudy", val);
+                                                            }}
+                                                            placeholder="e.g. Computer Science"
+                                                        />
+                                                    </div>
 
-                                                <div className="form-group text-start">
-                                                    <label className="control-label">School</label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        value={edu.School}
-                                                        onChange={(e) => {
-                                                            const val = e.target.value;
-                                                            if (/^[a-zA-Z\s]*$/.test(val))
-                                                                handleChange(index, "School", val);
-                                                        }}
-                                                        placeholder="e.g. MIT"
-                                                    />
-                                                </div>
+                                                    <div className="form-group text-start">
+                                                        <label className="control-label">School</label>
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            value={edu.School}
+                                                            onChange={(e) => {
+                                                                const val = e.target.value;
+                                                                if (/^[a-zA-Z\s]*$/.test(val))
+                                                                    handleChange(index, "School", val);
+                                                            }}
+                                                            placeholder="e.g. MIT"
+                                                        />
+                                                    </div>
 
-                                                <div className="form-group text-start">
-                                                    <div className="row">
-                                                        <div className="col-md-6">
-                                                            <label className="control-label">From</label>
-                                                            <select
-                                                                className="form-control"
-                                                                value={edu.SchoolFrom}
-                                                                onChange={(e) =>
-                                                                    handleChange(
-                                                                        index,
-                                                                        "SchoolFrom",
-                                                                        e.target.value
-                                                                    )
-                                                                }
-                                                            >
-                                                                <option value="">Select Year</option>
-                                                                {years.map((y) => (
-                                                                    <option key={y} value={y}>
-                                                                        {y}
-                                                                    </option>
-                                                                ))}
-                                                            </select>
-                                                        </div>
-                                                        <div className="col-md-6">
-                                                            <label className="control-label">To</label>
-                                                            <select
-                                                                className="form-control"
-                                                                value={edu.SchoolTo}
-                                                                onChange={(e) =>
-                                                                    handleChange(
-                                                                        index,
-                                                                        "SchoolTo",
-                                                                        e.target.value
-                                                                    )
-                                                                }
-                                                            >
-                                                                <option value="">Select Year</option>
-                                                                {years.map((y) => (
-                                                                    <option key={y} value={y}>
-                                                                        {y}
-                                                                    </option>
-                                                                ))}
-                                                            </select>
+                                                    <div className="form-group text-start">
+                                                        <div className="row">
+                                                            <div className="col-md-6">
+                                                                <label className="control-label">From</label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    value={edu.SchoolFrom}
+                                                                    onChange={(e) =>
+                                                                        handleChange(
+                                                                            index,
+                                                                            "SchoolFrom",
+                                                                            e.target.value
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <option value="">Select Year</option>
+                                                                    {years.map((y) => (
+                                                                        <option key={y} value={y}>
+                                                                            {y}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
+                                                            </div>
+                                                            <div className="col-md-6">
+                                                                <label className="control-label">To</label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    value={edu.SchoolTo}
+                                                                    onChange={(e) =>
+                                                                        handleChange(
+                                                                            index,
+                                                                            "SchoolTo",
+                                                                            e.target.value
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <option value="">Select Year</option>
+                                                                    {years.map((y) => (
+                                                                        <option key={y} value={y}>
+                                                                            {y}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div className="form-group text-start">
-                                                    <label className="control-label">Description</label>
-                                                    <textarea
-                                                        className="form-control"
-                                                        rows="3"
-                                                        value={edu.educationDescription}
-                                                        onChange={(e) => {
-                                                            const val = e.target.value;
-                                                            if (/^[a-zA-Z\s]*$/.test(val))
-                                                                handleChange(index, "educationDescription", val);
-                                                        }}
-                                                    ></textarea>
-                                                </div>
+                                                    <div className="form-group text-start">
+                                                        <label className="control-label">Description</label>
+                                                        <textarea
+                                                            className="form-control"
+                                                            rows="3"
+                                                            value={edu.educationDescription}
+                                                            onChange={(e) => {
+                                                                const val = e.target.value;
+                                                                if (/^[a-zA-Z\s]*$/.test(val))
+                                                                    handleChange(index, "educationDescription", val);
+                                                            }}
+                                                        ></textarea>
+                                                    </div>
 
-                                                <div className="d-flex justify-content-between">
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-danger btn-sm"
-                                                        onClick={() => deleteEducation(index)}
-                                                    >
-                                                        Delete This
-                                                    </button>
+                                                    <div className="d-flex justify-content-between">
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-danger btn-sm"
+                                                            onClick={() => deleteEducation(index)}
+                                                        >
+                                                            Delete This
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            )
+                                        })}
 
                                         <div className="text-start mt-3">
                                             <button
@@ -857,7 +859,7 @@ const AddResume = () => {
                                         </button>
                                     </div>
                                 </div>
-                                <div className="text-start">
+                                <div className="text-start mt-3">
                                     <button
                                         className="btn btn-common text-start"
                                         onClick={AddResumeData}

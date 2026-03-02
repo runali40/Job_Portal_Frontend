@@ -146,7 +146,7 @@ const Register = () => {
                                     <div className="form-group">
                                         <div className="input-icon">
                                             <i className="lni-envelope"></i>
-                                            <input type="text" className="form-control" name="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                            <input type="email" className="form-control" name="email"  placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} />
                                         </div>
                                     </div>
                                     <div className="form-group">

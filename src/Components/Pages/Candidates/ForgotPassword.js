@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {  useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { ForgotPasswordApi } from '../../../Api/LoginApi'
 
 
@@ -13,6 +13,7 @@ const ForgotPassword = () => {
     const ForgotPasswordData = async () => {
         const data = ForgotPasswordApi(username, emailId, newPassword, navigate)
         console.log(data)
+        navigate("/")
     }
 
     return (
@@ -32,7 +33,7 @@ const ForgotPassword = () => {
             <div id="content">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-4 col-sm-4 col-xs-12">
+                        <div className="col-md-2 col-sm-2 col-xs-12">
                         </div>
                         <div className="col-md-8 col-sm-8 col-xs-12">
                             <div className="job-alerts-item text-start">
@@ -43,7 +44,7 @@ const ForgotPassword = () => {
                                         <input className="form-control" type="text" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
                                         <span className="material-input"></span>
                                     </div>
-                                     <div className="form-group is-empty">
+                                    <div className="form-group is-empty">
                                         <label className="control-label">Email Address*</label>
                                         <input className="form-control" type="email" placeholder='Email Address' value={emailId} onChange={(e) => setEmailId(e.target.value)} />
                                         <span className="material-input"></span>
@@ -54,8 +55,11 @@ const ForgotPassword = () => {
                                         <span className="material-input"></span>
                                     </div>
                                     <button id="submit" className="btn btn-common" onClick={ForgotPasswordData}>Save Change</button>
+                                    <p className="text-center"><NavLink to="/"> Back to Login</NavLink></p>
                                 </div>
                             </div>
+                        </div>
+                        <div className="col-md-2 col-sm-2 col-xs-12">
                         </div>
                     </div>
                 </div>

@@ -21,17 +21,20 @@ const ManageResume = () => {
   }, [])
 
 
-  const ManageResumeData = async() => {
+  const ManageResumeData = async () => {
     const data = await ManageResumeApi(navigate);
-    // console.log(data[0])
-    setName(data[0].Name)
-    setProfessionTitle(data[0].ProfessionTitle)
-    setLocationName(data[0].LocationName)
-    setPerHour(data[0].PreHour)
-    setResumeId(data[0].Id)
-    setUpdatedDate(data[0].UpdatedDate)
-    setProfilePhoto(data[0].ProfilePhoto)
-  }
+
+    const resume = data?.[0] || {};
+
+    setName(resume.Name || "");
+    setProfessionTitle(resume.ProfessionTitle || "");
+    setLocationName(resume.LocationName || "");
+    setPerHour(resume.PreHour || "");
+    setResumeId(resume.Id || "");
+    setUpdatedDate(resume.UpdatedDate || "");
+    setProfilePhoto(resume.ProfilePhoto || "");
+  };
+
 
   const GetResumeData = (resumeId) => {
     console.log("30")
@@ -72,36 +75,63 @@ const ManageResume = () => {
                   <li><NavLink to="/">Sign Out</NavLink></li>
                 </ul>
               </div> */}
-              <LeftSidebar/>
+              <LeftSidebar />
             </div>
             <div className="col-lg-8 col-md-12 col-xs-12">
               <div className="job-alerts-item candidates">
                 <h3 className="alerts-title text-start">Manage Resumes</h3>
-                <div className="manager-resumes-item">
-                  <div className="manager-content">
-                    <NavLink to="/resumePage"><img className="resume-thumb" src={profilePhoto} alt="" /></NavLink>
-                    <div className="manager-info">
-                      <div className="manager-name text-start">
-                        <h4>{name}</h4>
-                        <h5>{professionTitle}</h5>
+                {resumeId ? (
+                  <div className="manager-resumes-item">
+                    <div className="manager-content">
+                      <NavLink to="/resumePage">
+                        <img
+                          className="resume-thumb"
+                          src={profilePhoto || "/default-profile.png"}
+                          alt=""
+                        />
+                      </NavLink>
+
+                      <div className="manager-info">
+                        <div className="manager-name text-start">
+                          <h4>{name}</h4>
+                          <h5>{professionTitle}</h5>
+                        </div>
+
+                        <div className="manager-meta">
+                          <span className="location">
+                            <i className="lni-map-marker"></i> {locationName}
+                          </span>
+                          <span className="rate">
+                            <i className="lni-alarm-clock"></i> ₹ {perHour} per hour
+                          </span>
+                        </div>
                       </div>
-                      <div className="manager-meta">
-                        <span className="location"><i className="lni-map-marker"></i> {locationName}</span>
-                        <span className="rate"><i className="lni-alarm-clock"></i> ₹ {perHour} per hour</span>
+                    </div>
+
+                    <div className="update-date">
+                      <p className="status">
+                        <strong>Updated on:</strong> {updatedDate}
+                      </p>
+
+                      <div className="action-btn">
+                        <NavLink className="btn btn-xs btn-gray" to="/">
+                          Hide
+                        </NavLink>
+                        <button
+                          className="btn btn-xs btn-gray"
+                          onClick={() => GetResumeData(resumeId)}
+                        >
+                          Edit
+                        </button>
                       </div>
                     </div>
                   </div>
-                  <div className="update-date">
-                    <p className="status">
-                      <strong>Updated on:</strong> {updatedDate}
-                    </p>
-                    <div className="action-btn">
-                      <NavLink className="btn btn-xs btn-gray" to="/">Hide</NavLink>
-                      <button className="btn btn-xs btn-gray" onClick={() => GetResumeData(resumeId)}>Edit</button>
-                      {/* <NavLink className="btn btn-xs btn-danger" to="/">Delete</NavLink> */}
-                    </div>
+                ) : (
+                  <div className="text-center py-4">
+                    <p>Resume data is not available</p>
                   </div>
-                </div>
+                )}
+
                 <div className='text-start'>
                   <NavLink className="btn btn-common btn-sm" to="/addResume">Add new resume</NavLink>
                 </div>
