@@ -7,7 +7,8 @@ import { GetManageResumeApi, GetManageResumeApi1 } from '../../Api/CandidateApi/
 const ResumePage = () => {
   const navigate = useNavigate();
   const locationValue = useLocation();
-  const { resumeId } = locationValue.state || {};
+  // const { resumeId } = locationValue.state || {};
+const resumeId = sessionStorage.getItem('resumeId')
   console.log(resumeId, "resumeID");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -99,7 +100,7 @@ const ResumePage = () => {
                     <div className="author-info text-start">
                       <h3>{name}</h3>
                       <p className="sub-title">{professionTitle}</p>
-                      <p><span className="address"><i className="lni-map-marker"></i>{location}</span> <span><i className="ti-phone"></i>(+01) 211-123-5678</span></p>
+                      <p><span className="address"><i className="lni-map-marker"></i>{location}</span> <span><i className="ti-phone"></i>(+91) 211-123-5678</span></p>
                       <div className="social-link">
                         <NavLink to="/" className="Twitter"><i className="lni-twitter-filled"></i></NavLink>
                         <NavLink to="/" className="facebook"><i className="lni-facebook-filled"></i></NavLink>
