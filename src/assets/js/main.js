@@ -52,15 +52,15 @@ JS INDEX
     /*====================================
     slick menu js
     ======================================*/
-    var logo_path=$('.mobile-menu').data('logo');
-    $('#main-navbar').slicknav({
-        appendTo:'.mobile-menu',
-        removeClasses:false,
-        label:'',
-        closedSymbol:'<i class="lni-chevron-right"><i/>',
-        openedSymbol:'<i class="lni-chevron-down"><i/>',
-        brand:'<a href="index.html"><img src="'+logo_path+'" class="img-responsive" alt="logo"></a>'
-    });
+    // var logo_path=$('.mobile-menu').data('logo');
+    // $('#main-navbar').slicknav({
+    //     appendTo:'.mobile-menu',
+    //     removeClasses:false,
+    //     label:'',
+    //     closedSymbol:'<i class="lni-chevron-right"><i/>',
+    //     openedSymbol:'<i class="lni-chevron-down"><i/>',
+    //     brand:'<a href="index.html"><img src="'+logo_path+'" class="img-responsive" alt="logo"></a>'
+    // });
       
     /*====================================
     sticky menu js

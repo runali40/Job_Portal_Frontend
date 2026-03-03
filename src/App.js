@@ -10,8 +10,13 @@ import '../src/assets/css/responsive.css'
 import '../src/assets/css/uploadCv.css'
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 // import '../node_modules/bootstrap/dist/css/bootstrap.css'
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import Home from './Components/Pages/Home';
 import About from './Components/Pages/About';
 import Contact from './Components/Pages/Contact';

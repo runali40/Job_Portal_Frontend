@@ -168,126 +168,159 @@ const Home = () => {
     return (
         <>
             <header id="home" className="hero-area">
-
-                <nav className="navbar navbar-expand-lg fixed-top scrolling-navbar">
+                {/* <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm"> */}
+                <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
                     <div className="container">
-                        <div className="theme-header clearfix">
 
-                            <div className="navbar-header">
-                                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span className="navbar-toggler-icon"></span>
-                                    <span className="lni-menu"></span>
-                                    <span className="lni-menu"></span>
-                                    <span className="lni-menu"></span>
-                                </button>
-                                <NavLink to="/" className="navbar-brand"><img src="assets/img/logo.png" alt="" /></NavLink>
-                            </div>
-                            <div className="collapse navbar-collapse" id="main-navbar">
-                                <ul className="navbar-nav mr-auto w-100 justify-content-end">
-                                    <li className="nav-item active">
-                                        <NavLink className="nav-link" to="/home">
-                                            Home
-                                        </NavLink>
-                                    </li>
-                                    <li className="nav-item dropdown">
-                                        <NavLink className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Pages
-                                        </NavLink>
-                                        <ul className="dropdown-menu">
-                                            <li><NavLink className="dropdown-item" to="/about">About</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/jobPage">Job Page</NavLink></li>
-                                            {/* <li><NavLink className="dropdown-item" to="/jobDetails">Job Details</NavLink></li> */}
-                                            {RoleName === "Candidate" && <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li>}
-                                            <li><NavLink className="dropdown-item" to="/privacyPolicy">Privacy Policy</NavLink></li>
-                                            <li><NavLink className="dropdown-item" to="/pricing">Pricing Tables</NavLink></li>
-                                            {/* <li><NavLink className="dropdown-item" to="/contact">Contact</NavLink></li> */}
-                                        </ul>
-                                    </li>
-                                    {
-                                        RoleName === "Candidate" ?
-                                            <>
-                                                <li className="nav-item dropdown">
-                                                    <NavLink className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Candidates
-                                                    </NavLink>
-                                                    <ul className="dropdown-menu">
-                                                        <li><NavLink className="dropdown-item" to="/browseJobs">Browse Jobs</NavLink></li>
-                                                        <li><NavLink className="dropdown-item" to="/browseCategories">Browse Categories</NavLink></li>
-                                                        <li><NavLink className="dropdown-item" to="/addResume">Add Resume</NavLink></li>
-                                                        <li><NavLink className="dropdown-item" to="/manageResume">Manage Resumes</NavLink></li>
-                                                        <li><NavLink className="dropdown-item" to="/jobAlerts">Job Alerts</NavLink></li>
-                                                    </ul>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <NavLink className="nav-link" to="/uploadCv">
-                                                        Upload CV
-                                                    </NavLink>
-                                                </li>
-                                            </>
-                                            :
-                                            <li className="nav-item dropdown">
-                                                <NavLink className="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Employers
-                                                </NavLink>
-                                                <ul className="dropdown-menu">
-                                                    <li><NavLink className="dropdown-item" to="/postJob">Add Job</NavLink></li>
-                                                    <li><NavLink className="dropdown-item" to="/manageJobs">Manage Jobs</NavLink></li>
-                                                    <li><NavLink className="dropdown-item" to="/manageApplications">Manage Applications</NavLink></li>
-                                                    <li><NavLink className="dropdown-item" to="/browseResumes">Browse Resumes</NavLink></li>
-                                                </ul>
-                                            </li>
-                                    }
+                        {/* Logo */}
+                        <NavLink to="/" className="navbar-brand">
+                            <img src="/assets/img/logo.png" alt="logo" height="40" />
+                        </NavLink>
 
-                                    {/* <li className="nav-item dropdown">
-                                        <NavLink className="nav-link dropdown-toggle" to="/blog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Blog
-                                        </NavLink>
+                        {/* Toggle Button */}
 
-                                    </li> */}
-                                    {/* <li className="nav-item">
-                                        <NavLink className="nav-link" to="/contact">
-                                            Contact
-                                        </NavLink>
-                                    </li> */}
+                        <button
+                            className="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#main-navbar"
+                            aria-controls="main-navbar"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
 
-                                    {/* <li className="nav-item">
-                                        <NavLink className="nav-link" to="/login">Sign In</NavLink>
-                                    </li> */}
-                                    {
-                                        RoleName === "Employer" &&
-                                        <li className="button-group">
-                                            <NavLink to="/postJob" className="button btn btn-common">Post a Job</NavLink>
+                        {/* Collapsible Menu */}
+                        <div className="collapse navbar-collapse" id="main-navbar">
+                            <ul className="navbar-nav mr-auto w-100 justify-content-end">
+
+                                <li className="nav-item active text-start ml-3">
+                                    <NavLink className="nav-link" to="/home">
+                                        Home
+                                    </NavLink>
+                                </li>
+
+                                {/* Pages Dropdown */}
+                                <li className="nav-item dropdown text-start ml-3">
+                                    <a
+                                        className="nav-link dropdown-toggle"
+                                        href="#!"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                    >
+                                        Pages
+                                    </a>
+
+                                    <ul className="dropdown-menu ">
+                                        <li><NavLink className="dropdown-item" to="/about">About</NavLink></li>
+                                        <li><NavLink className="dropdown-item" to="/jobPage">Job Page</NavLink></li>
+                                        {RoleName === "Candidate" &&
+                                            <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li>
+                                        }
+                                        <li><NavLink className="dropdown-item" to="/privacyPolicy">Privacy Policy</NavLink></li>
+                                        <li><NavLink className="dropdown-item" to="/pricing">Pricing</NavLink></li>
+                                    </ul>
+                                </li>
+
+                                {/* Candidate Menu */}
+                                {RoleName === "Candidate" && (
+                                    <>
+                                        <li className="nav-item dropdown text-start ml-3">
+                                            <a
+                                                className="nav-link dropdown-toggle"
+                                                href="#!"
+                                                role="button"
+                                                data-bs-toggle="dropdown"
+                                            >
+                                                Candidates
+                                            </a>
+
+                                            <ul className="dropdown-menu ">
+                                                <li><NavLink className="dropdown-item" to="/browseJobs">Browse Jobs</NavLink></li>
+                                                <li><NavLink className="dropdown-item" to="/browseCategories">Browse Categories</NavLink></li>
+                                                <li><NavLink className="dropdown-item" to="/addResume">Add Resume</NavLink></li>
+                                                <li><NavLink className="dropdown-item" to="/manageResume">Manage Resumes</NavLink></li>
+                                                <li><NavLink className="dropdown-item" to="/jobAlerts">Job Alerts</NavLink></li>
+                                            </ul>
                                         </li>
-                                    }
-                                    <div style={{ position: 'relative', display: 'inline-block' }}>
-                                        <MdNotifications size={28} color="#000" className='mt-3' />
 
-                                        <span style={{
-                                            position: 'absolute',
-                                            top: '2px',
-                                            right: '-6px',
-                                            backgroundColor: 'red',
-                                            color: 'white',
-                                            borderRadius: '50%',
-                                            padding: '2px 6px',
-                                            fontSize: '10px'
-                                        }}>
-                                            {
-                                                RoleName === "Candidate" ? jobAlertCount : appliedCandidateCount
-                                            }
-                                        </span>
+                                        <li className="nav-item text-start ml-3">
+                                            <NavLink className="nav-link" to="/uploadCv">
+                                                Upload CV
+                                            </NavLink>
+                                        </li>
+                                    </>
+                                )}
 
-                                    </div>
+                                {/* Employer Menu */}
+                                {RoleName === "Employer" && (
+                                    <>
+                                        <li className="nav-item dropdown text-start ml-3">
+                                            <a
+                                                className="nav-link dropdown-toggle"
+                                                href="#!"
+                                                role="button"
+                                                data-bs-toggle="dropdown"
+                                            >
+                                                Employers
+                                            </a>
 
-                                    <li className="nav-item">
-                                        <div className="nav-link" onClick={LogOutButton} style={{ cursor: "pointer" }}>Sign Out</div>
-                                    </li>
-                                </ul>
-                            </div>
+                                            <ul className="dropdown-menu">
+                                                <li><NavLink className="dropdown-item" to="/postJob">Add Job</NavLink></li>
+                                                <li><NavLink className="dropdown-item" to="/manageJobs">Manage Jobs</NavLink></li>
+                                                <li><NavLink className="dropdown-item" to="/manageApplications">Manage Applications</NavLink></li>
+                                                <li><NavLink className="dropdown-item" to="/browseResumes">Browse Resumes</NavLink></li>
+                                            </ul>
+                                        </li>
+
+                                        <li className="nav-item ms-lg-3 text-start ml-3">
+                                            <NavLink to="/postJob" className="btn btn-primary">
+                                                Post a Job
+                                            </NavLink>
+                                        </li>
+                                    </>
+                                )}
+
+                                {/* Notification */}
+                                {/* <li className="nav-item position-relative ms-lg-3">
+                                                              <MdNotifications size={24}  color="#000"  className='mt-3'/>
+                                                              <span style={{
+                                                                      position: 'absolute',
+                                                                      top: '2px',
+                                                                      right: '-6px',
+                                                                      backgroundColor: 'red',
+                                                                      color: 'white',
+                                                                      borderRadius: '50%',
+                                                                      padding: '2px 6px',
+                                                                      fontSize: '10px'
+                                                                  }}>
+                                                                  {RoleName === "Candidate" ? jobAlertCount : appliedCandidateCount}
+                                                              </span>
+                                                          </li>
+                           */}
+                                <li className="nav-item position-relative ms-lg-3 text-start ml-3">
+                                    <MdNotifications size={22} color="#000" className='mt-lg-3' />
+                                    <span
+                                        className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                        style={{ fontSize: "10px" }}
+                                    >
+                                        {RoleName === "Candidate" ? jobAlertCount : appliedCandidateCount}
+                                    </span>
+                                </li>
+                                {/* Logout */}
+                                <li className="nav-item ms-lg-3 text-start ml-3">
+                                    {/* <button className="btn btn-outline-danger btn-sm" onClick={LogOutButton}>
+                                                                  Sign Out
+                                                              </button> */}
+                                    <div className="nav-link" onClick={LogOutButton} style={{ cursor: "pointer" }}>Sign Out</div>
+                                </li>
+
+                            </ul>
                         </div>
                     </div>
-                    <div className="mobile-menu" data-logo="assets/img/logo-mobile.png"></div>
                 </nav>
+
                 <div className="container">
                     <div className="row space-100 justify-content-center">
                         <div className="col-lg-10 col-md-12 col-xs-12">
