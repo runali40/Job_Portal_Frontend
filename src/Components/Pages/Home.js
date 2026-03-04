@@ -195,14 +195,14 @@ const Home = () => {
                         <div className="collapse navbar-collapse" id="main-navbar">
                             <ul className="navbar-nav mr-auto w-100 justify-content-end">
 
-                                <li className="nav-item active text-start ml-3 ml-lg-0 ml-md-0">
+                                <li className="nav-item text-start ml-3">
                                     <NavLink className="nav-link" to="/home">
                                         Home
                                     </NavLink>
                                 </li>
 
                                 {/* Pages Dropdown */}
-                                <li className="nav-item dropdown text-start ml-3  ml-lg-0 ml-md-0">
+                                <li className="nav-item dropdown text-start ml-3 ml-lg-0">
                                     <a
                                         className="nav-link dropdown-toggle"
                                         href="#!"
@@ -226,7 +226,7 @@ const Home = () => {
                                 {/* Candidate Menu */}
                                 {RoleName === "Candidate" && (
                                     <>
-                                        <li className="nav-item dropdown text-start ml-3 ml-lg-0 ml-md-0">
+                                        <li className="nav-item dropdown text-start ml-3 ml-lg-0">
                                             <a
                                                 className="nav-link dropdown-toggle"
                                                 href="#!"
@@ -245,7 +245,7 @@ const Home = () => {
                                             </ul>
                                         </li>
 
-                                        <li className="nav-item text-start ml-3 ml-lg-0 ml-md-0">
+                                        <li className="nav-item text-start ml-3 ml-lg-0">
                                             <NavLink className="nav-link" to="/uploadCv">
                                                 Upload CV
                                             </NavLink>
@@ -256,7 +256,7 @@ const Home = () => {
                                 {/* Employer Menu */}
                                 {RoleName === "Employer" && (
                                     <>
-                                        <li className="nav-item dropdown text-start ml-3 ml-lg-0 ml-md-0">
+                                        <li className="nav-item dropdown text-start ml-3 ml-lg-0">
                                             <a
                                                 className="nav-link dropdown-toggle"
                                                 href="#!"
@@ -275,11 +275,12 @@ const Home = () => {
                                         </li>
 
                                         {/* <li className="nav-item ms-lg-3 text-start ml-3">
-                                            <NavLink to="/postJob" className="btn btn-primary">
-                                                Post a Job
-                                            </NavLink>
-                                        </li> */}
-                                        <li className="button-group">
+                                                                          <NavLink to="/postJob" className="btn btn-primary">
+                                                                              Post a Job
+                                                                          </NavLink>
+                                                                          
+                                                                      </li> */}
+                                        <li className="button-group text-start ml-3 ml-lg-0">
                                             <NavLink to="/postJob" className="button btn btn-common">Post a Job</NavLink>
                                         </li>
                                     </>
@@ -287,35 +288,35 @@ const Home = () => {
 
                                 {/* Notification */}
                                 {/* <li className="nav-item position-relative ms-lg-3">
-                                                              <MdNotifications size={24}  color="#000"  className='mt-3'/>
-                                                              <span style={{
-                                                                      position: 'absolute',
-                                                                      top: '2px',
-                                                                      right: '-6px',
-                                                                      backgroundColor: 'red',
-                                                                      color: 'white',
-                                                                      borderRadius: '50%',
-                                                                      padding: '2px 6px',
-                                                                      fontSize: '10px'
-                                                                  }}>
-                                                                  {RoleName === "Candidate" ? jobAlertCount : appliedCandidateCount}
-                                                              </span>
-                                                          </li>
-                           */}
-                                <li className="nav-item position-relative text-start ml-3 ml-lg-0 ml-md-0">
-                                    <MdNotifications size={22} color="#000" className='mt-lg-3' />
+                                                                  <MdNotifications size={24}  color="#000"  className='mt-3'/>
+                                                                  <span style={{
+                                                                          position: 'absolute',
+                                                                          top: '2px',
+                                                                          right: '-6px',
+                                                                          backgroundColor: 'red',
+                                                                          color: 'white',
+                                                                          borderRadius: '50%',
+                                                                          padding: '2px 6px',
+                                                                          fontSize: '10px'
+                                                                      }}>
+                                                                      {RoleName === "Candidate" ? jobAlertCount : appliedCandidateCount}
+                                                                  </span>
+                                                              </li>
+                               */}
+                                <li className="nav-item position-relative ms-lg-3 text-start ml-3 ml-lg-3">
+                                    <MdNotifications size={22} color="#000" className='mt-lg-3 mt-3' />
                                     <span
-                                        className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                        className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-2"
                                         style={{ fontSize: "10px" }}
                                     >
                                         {RoleName === "Candidate" ? jobAlertCount : appliedCandidateCount}
                                     </span>
                                 </li>
                                 {/* Logout */}
-                                <li className="nav-item  text-start ml-3  ml-lg-0 ml-md-0">
+                                <li className="nav-item text-start ml-3 ml-lg-3 ml-md-0">
                                     {/* <button className="btn btn-outline-danger btn-sm" onClick={LogOutButton}>
-                                                                  Sign Out
-                                                              </button> */}
+                                                                      Sign Out
+                                                                  </button> */}
                                     <div className="nav-link" onClick={LogOutButton} style={{ cursor: "pointer" }}>Sign Out</div>
                                 </li>
 
@@ -323,7 +324,6 @@ const Home = () => {
                         </div>
                     </div>
                 </nav>
-
                 <div className="container">
                     <div className="row space-100 justify-content-center">
                         <div className="col-lg-10 col-md-12 col-xs-12">
@@ -344,7 +344,7 @@ const Home = () => {
                                                         <label className="styled-select">
 
                                                             <select value={companyName} onChange={(e) => setCompanyName(e.target.value)}>
-                                                                <option value="" disabled hidden>Select Company Name</option>
+                                                                <option value="" disabled hidden>Company Name</option>
                                                                 {allCompanyName.map((data) => (
                                                                     <option key={data.CompanyName} value={data.CompanyName}>
                                                                         {data.CompanyName}
@@ -362,7 +362,7 @@ const Home = () => {
                                                         <label className="styled-select">
 
                                                             <select value={jobTitle} onChange={(e) => setJobTitle(e.target.value)}>
-                                                                <option value="" disabled hidden>Select Job Title</option>
+                                                                <option value="" disabled hidden>Job Title</option>
                                                                 {allJobTitle.map((data) => (
                                                                     <option key={data.Slug} value={data.Slug}>
                                                                         {data.Slug}
@@ -380,7 +380,7 @@ const Home = () => {
                                                         <label className="styled-select">
 
                                                             <select value={location} onChange={(e) => setLocation(e.target.value)}>
-                                                                <option value="" disabled hidden>Select Location</option>
+                                                                <option value="" disabled hidden>Location</option>
                                                                 {allLocation.map((data) => (
                                                                     <option key={data.LocationId} value={data.LocationId}>
                                                                         {data.LocationName}
@@ -397,7 +397,7 @@ const Home = () => {
                                                     <div className="search-category-container">
                                                         <label className="styled-select">
                                                             <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                                                                <option value="" disabled hidden>Select Category</option>
+                                                                <option value="" disabled hidden>Category</option>
                                                                 {allCategory.map((data) => (
                                                                     <option key={data.CategoryId} value={data.CategoryId}>
                                                                         {data.CategoryName}

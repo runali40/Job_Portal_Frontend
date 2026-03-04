@@ -38,13 +38,13 @@ const Footer = () => {
                 <div className="widget text-start">
                     <h3 className="block-title">Subscribe Now</h3>
                     <p>subscribe this.</p>
-                    <form method="post" id="subscribe-form" name="subscribe-form" className="validate">
+                    <div method="post" id="subscribe-form" name="subscribe-form" className="validate" >
                         <div className="form-group is-empty">
                             <input type="email"  name="Email" className="form-control" id="EMAIL" placeholder="Enter Email..." required="" />
                             <button type="submit" name="subscribe" id="subscribes" className="btn btn-common sub-btn"><i className="lni-envelope"></i></button>
                             <div className="clearfix"></div>
                         </div>
-                    </form>
+                    </div>
                     <ul className="mt-3 footer-social">
                         <li><NavLink className="facebook" to="/"><i className="lni-facebook-filled"></i></NavLink></li>
                         <li><NavLink className="twitter" to="/"><i className="lni-twitter-filled"></i></NavLink></li>
