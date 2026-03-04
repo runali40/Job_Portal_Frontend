@@ -195,14 +195,14 @@ const Home = () => {
                         <div className="collapse navbar-collapse" id="main-navbar">
                             <ul className="navbar-nav mr-auto w-100 justify-content-end">
 
-                                <li className="nav-item active text-start ml-3">
+                                <li className="nav-item active text-start ml-3 ml-lg-0 ml-md-0">
                                     <NavLink className="nav-link" to="/home">
                                         Home
                                     </NavLink>
                                 </li>
 
                                 {/* Pages Dropdown */}
-                                <li className="nav-item dropdown text-start ml-3">
+                                <li className="nav-item dropdown text-start ml-3  ml-lg-0 ml-md-0">
                                     <a
                                         className="nav-link dropdown-toggle"
                                         href="#!"
@@ -226,7 +226,7 @@ const Home = () => {
                                 {/* Candidate Menu */}
                                 {RoleName === "Candidate" && (
                                     <>
-                                        <li className="nav-item dropdown text-start ml-3">
+                                        <li className="nav-item dropdown text-start ml-3 ml-lg-0 ml-md-0">
                                             <a
                                                 className="nav-link dropdown-toggle"
                                                 href="#!"
@@ -245,7 +245,7 @@ const Home = () => {
                                             </ul>
                                         </li>
 
-                                        <li className="nav-item text-start ml-3">
+                                        <li className="nav-item text-start ml-3 ml-lg-0 ml-md-0">
                                             <NavLink className="nav-link" to="/uploadCv">
                                                 Upload CV
                                             </NavLink>
@@ -256,7 +256,7 @@ const Home = () => {
                                 {/* Employer Menu */}
                                 {RoleName === "Employer" && (
                                     <>
-                                        <li className="nav-item dropdown text-start ml-3">
+                                        <li className="nav-item dropdown text-start ml-3 ml-lg-0 ml-md-0">
                                             <a
                                                 className="nav-link dropdown-toggle"
                                                 href="#!"
@@ -274,10 +274,13 @@ const Home = () => {
                                             </ul>
                                         </li>
 
-                                        <li className="nav-item ms-lg-3 text-start ml-3">
+                                        {/* <li className="nav-item ms-lg-3 text-start ml-3">
                                             <NavLink to="/postJob" className="btn btn-primary">
                                                 Post a Job
                                             </NavLink>
+                                        </li> */}
+                                        <li className="button-group">
+                                            <NavLink to="/postJob" className="button btn btn-common">Post a Job</NavLink>
                                         </li>
                                     </>
                                 )}
@@ -299,7 +302,7 @@ const Home = () => {
                                                               </span>
                                                           </li>
                            */}
-                                <li className="nav-item position-relative ms-lg-3 text-start ml-3">
+                                <li className="nav-item position-relative text-start ml-3 ml-lg-0 ml-md-0">
                                     <MdNotifications size={22} color="#000" className='mt-lg-3' />
                                     <span
                                         className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
@@ -309,7 +312,7 @@ const Home = () => {
                                     </span>
                                 </li>
                                 {/* Logout */}
-                                <li className="nav-item ms-lg-3 text-start ml-3">
+                                <li className="nav-item  text-start ml-3  ml-lg-0 ml-md-0">
                                     {/* <button className="btn btn-outline-danger btn-sm" onClick={LogOutButton}>
                                                                   Sign Out
                                                               </button> */}

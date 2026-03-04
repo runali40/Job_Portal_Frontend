@@ -22,15 +22,15 @@ const Footer = () => {
                     <h3 className="block-title">Quick Links</h3>
                     <ul className="menu">
                         <li><NavLink to="/about">About Us</NavLink></li>
-                        <li><NavLink to="/">Support</NavLink></li>
-                        <li><NavLink to="/">License</NavLink></li>
+                        <li><NavLink >Support</NavLink></li>
+                        <li><NavLink >License</NavLink></li>
                         <li><NavLink to="/contact">Contact</NavLink></li>
                     </ul>
                     <ul className="menu text-start">
-                        <li><NavLink to="/">Terms & Conditions</NavLink></li>
+                        <li><NavLink >Terms & Conditions</NavLink></li>
                         <li><NavLink to="/privacyPolicy">Privacy</NavLink></li>
-                        <li><NavLink to="/">Refferal Terms</NavLink></li>
-                        <li><NavLink to="/">Product License</NavLink></li>
+                        <li><NavLink>Refferal Terms</NavLink></li>
+                        <li><NavLink>Product License</NavLink></li>
                     </ul>
                 </div>
             </div>
@@ -62,7 +62,7 @@ const Footer = () => {
         <div className="row">
             <div className="col-md-12">
                 <div className="site-info text-center">
-                    <p>Designed and Developed by <NavLink to="https://uideck.com/" rel="nofollow">UIdeck</NavLink></p>
+                    <p>Designed and Developed by <NavLink to="https://lightgrey-shrew-165850.hostingersite.com/" rel="nofollow">DIIS</NavLink></p>
                 </div>
             </div>
         </div>
