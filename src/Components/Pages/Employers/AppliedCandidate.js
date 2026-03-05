@@ -47,10 +47,10 @@ const AppliedCandidate = () => {
     setAllAppliedCandidate(data)
   };
 
-  const EmpViewNotificationData = async (jobId, NotificationId, ApplicationId, Id) => {
+  const EmpViewNotificationData = async (jobId, NotificationId, ApplicationId) => {
     const data = await EmpViewNotification(jobId, NotificationId, ApplicationId, navigate);
     console.log(data);
-    sessionStorage.setItem("resumeId", Id)
+    // sessionStorage.setItem("resumeId", Id)
     GetApplyCandidate(ApplicationId)
   };
 
@@ -125,7 +125,7 @@ const AppliedCandidate = () => {
                     return (
                       <div className="notification-item"
                         style={{ backgroundColor: data.IsRead === null ? '#f0f0f0' : 'transparent', cursor: "pointer" }}
-                        onClick={() => /* EmpViewNotificationData */GetApplyCandidate(data.JobId, data.NotificationId, data.ApplicationId, data.Id)}>
+                        onClick={() => EmpViewNotificationData(data.JobId, data.NotificationId, data.ApplicationId)}>
                         <div className="thums">
                           <img src={data.ProfilePhoto} alt="Profile" className=" my-auto" style={{ borderRadius: "55%", height: "50px", width: "50px" }} />
                         </div>

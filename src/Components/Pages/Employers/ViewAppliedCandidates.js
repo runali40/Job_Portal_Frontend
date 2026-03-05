@@ -36,6 +36,7 @@ const ViewAppliedCandidates = () => {
     const [resumeId, setResumeId] = useState("")
     const [applicationId, setApplicationId] = useState("")
     const [statusByEmployee, setStatusByEmployee] = useState("")
+    const [id, setId] = useState("")
 
     // useEffect(() => {
     //     GetJobDetails();
@@ -57,6 +58,10 @@ const ViewAppliedCandidates = () => {
         const data = await GetAppliedCandidateApi(ApplicationId, navigate);
         // console.log(candidateId, "58")
         console.log(data)
+        // const Id = data.Id;
+
+        sessionStorage.setItem("resumeId", data.Id)
+        console.log(id, "76")
         setCandidateName(data.Name)
         setPostName(data.PostName)
         setResumeId(data.ResumeId)
@@ -67,10 +72,13 @@ const ViewAppliedCandidates = () => {
         // setDescription(data.Description)
         // setLocationName(data.LocationName)
         // setJobDetailId(data.Id)
+
         setCurrentIndustry(data.CurrentIndustry)
         setFileName(data.UFileName)
         setApplicationId(data.ApplicationId)
         setStatusByEmployee(data.statusbyemployee)
+
+
 
 
     };
@@ -112,9 +120,11 @@ const ViewAppliedCandidates = () => {
 
 
     const GetViewResume = () => {
-        console.log("30")
+        console.log(id, "30")
+        const resumePageId = sessionStorage.getItem("resumePageId")
         navigate("/resumePage", {
-            state: { resumeId },
+            // state: { resumeId },
+            state: { resumePageId }
         }
         )
     }
