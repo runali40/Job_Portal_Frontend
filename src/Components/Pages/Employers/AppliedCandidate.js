@@ -50,6 +50,7 @@ const AppliedCandidate = () => {
   const EmpViewNotificationData = async (jobId, NotificationId, ApplicationId) => {
     const data = await EmpViewNotification(jobId, NotificationId, ApplicationId, navigate);
     console.log(data);
+    // sessionStorage.setItem("resumeId", Id)
     GetApplyCandidate(ApplicationId)
   };
 

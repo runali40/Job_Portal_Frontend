@@ -21,6 +21,7 @@ import { BookmarkedJobApi } from '../../Api/CandidateApi/BookmarkedJobApi';
 import Cookies from 'js-cookie';
 import { getAllJobAlertApi, GetCandidateAlertCount } from '../../Api/CandidateApi/JobAlertApi';
 import { GetNotificationCountApi } from '../../Api/EmployerApi/NotificationApi';
+import { ManageJobApi } from '../../Api/EmployerApi/EmployeerApi';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -37,6 +38,10 @@ const Home = () => {
     const [allLatestJob, setAllLatestJob] = useState([])
     const [jobAlertCount, setJobAlertCount] = useState("")
     const [appliedCandidateCount, setAppliedCandidateCount] = useState("")
+    const [allBrowseJobs, setAllBrowseJobs] = useState([])
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(6);
+    const [categoryId, setCategoryId] = useState("")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,6 +51,7 @@ const Home = () => {
                 await GetCompanyNameData();
                 await GetJobTitleData();
                 await GetFeaturesData();
+                await BrowseJobData();
                 await LatestJobData()
                 {
                     RoleName === "Candidate" ?
@@ -59,6 +65,12 @@ const Home = () => {
         };
         fetchData();
     }, []);
+
+    const BrowseJobData = async () => {
+        const data = await ManageJobApi(categoryId, navigate);
+        console.log(data, 'browse job')
+        setAllBrowseJobs(data)
+    }
 
     const GetLocationData = async () => {
         const data = await GetLocationApi(navigate);
@@ -122,8 +134,11 @@ const Home = () => {
     };
 
     const JobSearchData = async () => {
+        console.log(companyName, "137")
         const data = await JobSearchApi(location, category, companyName, jobTitle, navigate);
         console.log(data, "job search data");
+        setAllBrowseJobs(data)
+
         const featuredData = data.filter(item => item.Featured === "1");
         setAllFeatures(featuredData);
     }
@@ -141,12 +156,19 @@ const Home = () => {
 
     const GetCategory = (categoryId) => {
         console.log(categoryId, "142")
+        setCategoryId(categoryId)
         navigate("/browseJobs", {
             state: { categoryId },
             // state: { categoryId: categoryId }
         }
         );
     };
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentJobs = allBrowseJobs.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(allBrowseJobs.length / itemsPerPage);
+
 
     const LogOutButton = () => {
         localStorage.removeItem("sessionid");
@@ -420,7 +442,99 @@ const Home = () => {
                     </div>
                 </div>
             </header>
+            <section className="job-browse section">
+                <div className="container">
+                    <div className="row">
 
+                        {
+                            currentJobs.map((data) => {
+                                return (
+                                    <>
+                                        <div className="col-lg-6 col-md-12 col-xs-12" key={data.Id}>
+                                            <div className="job-listings-featured" /* to="/jobDetails" */ >
+                                                <div className="row ">
+                                                    <div className="col-lg-6 col-md-6 col-xs-12 ">
+                                                        <div className="job-company-logo">
+                                                            <img src={data.LOGOFile} alt="" style={{ width: "55px", height: "50px" }} />
+                                                        </div>
+                                                        <div className="job-details text-start">
+                                                            <h3 onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>{data.Slug}</h3>
+                                                            <span className="company-neme" onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>{data.Name}</span>
+                                                            <div className="tags">
+                                                                <span><i className="lni-map-marker"></i>{data.LocationName}</span>
+                                                                <span><i className="lni-user"></i>John Smith</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-lg-6 col-md-6 col-xs-12 text-right">
+                                                        <div className="tag-type">
+                                                            {/* <span className="heart-icon">
+                                <i className="lni-heart"></i>
+                              </span> */}
+                                                            <span
+                                                                onClick={() => handleStarClick(data.Id, data.Bookmark)}
+                                                                style={{ cursor: "pointer", fontSize: "20px", color: data.Bookmark === "1" ? "blue" : "gray" }}
+                                                            >
+                                                                {/* {data.Bookmark === "1" ? "♥" : "♡"} */}
+                                                                <i className={data.Bookmark === "1" ? "fas fa-heart" : "far fa-heart"}></i>
+                                                            </span>
+                                                            {
+                                                                data.TypeofJob && <span className="full-time">{data.TypeofJob}</span>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                )
+                            })
+                        }
+                        {/* <div className="col-lg-12 col-md-12 col-xs-12">
+
+              <ul className="pagination">
+                <li className="active"><NavLink to="/" className="btn-prev" ><i className="lni-angle-left"></i> prev</NavLink></li>
+                <li><NavLink to="/">1</NavLink></li>
+                <li><NavLink to="/">2</NavLink></li>
+                <li><NavLink to="/">3</NavLink></li>
+                <li><NavLink to="/">4</NavLink></li>
+                <li><NavLink to="/">5</NavLink></li>
+                <li className="active"><NavLink to="/" className="btn-next">Next <i className="lni-angle-right"></i></NavLink></li>
+              </ul>
+
+            </div> */}
+                        <div className="col-lg-12 col-md-12 col-xs-12">
+                            <ul className="pagination">
+                                <li className={currentPage === 1 ? "disabled" : "active"}>
+                                    <button
+                                        className="btn btn-prev"
+                                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                        disabled={currentPage === 1}
+                                    >
+                                        <i className="lni-angle-left"></i> Prev
+                                    </button>
+                                </li>
+
+                                {[...Array(totalPages)].map((_, index) => (
+                                    <li key={index} className={currentPage === index + 1 ? "active" : ""}>
+                                        <button className='btn btn-prev' onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
+                                    </li>
+                                ))}
+
+                                <li className={currentPage === totalPages ? "disabled" : "active"}>
+                                    <button
+                                        className="btn btn-next"
+                                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                        disabled={currentPage === totalPages}
+                                    >
+                                        Next <i className="lni-angle-right"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section className="category section bg-gray">
                 <div className="container">
                     <div className="section-header">

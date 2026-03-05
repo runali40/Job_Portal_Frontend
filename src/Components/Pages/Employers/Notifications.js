@@ -47,11 +47,12 @@ const Notifications = () => {
     console.log(data.NotificationCount, "count data");
     setNotificationCount(data.NotificationCount)
   }
+  
   const GetAppliedCandidateData = async () => {
     const data = await GetAppliedCandidateApi(navigate);
     console.log(data);
-
   };
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentJobs = allNotification.slice(indexOfFirstItem, indexOfLastItem);

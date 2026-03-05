@@ -64,7 +64,7 @@ const JobPage = () => {
   }
 
   const JobSearchData = async () => {
-    const data = await JobSearchApi(location, category, navigate);
+    const data = await JobSearchApi(location, category,companyName, jobTitle, navigate);
     console.log(data, "job search data");
     const featuredData = data.filter(item => item.Featured === "1");
     setAllFeatures(featuredData);
@@ -111,6 +111,7 @@ const JobPage = () => {
                                   {data.CompanyName}
                                 </option>
                               ))}
+                              
                             </select>
                           </label>
                         </div>

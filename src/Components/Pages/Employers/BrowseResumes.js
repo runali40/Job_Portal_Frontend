@@ -24,6 +24,7 @@ const BrowseResumes = () => {
       console.log("Educations:", item.educations);
       console.log("resumeID:", item.educations[0].resumeId);
       setResumeId(item.educations[0].resumeId)
+
       console.log("Skills:", item.skills);
       setAllSkills(item.skills)
       console.log("Work Experiences:", item.workExperiences);
@@ -31,6 +32,7 @@ const BrowseResumes = () => {
   };
 
   const GetResumeData = (resumeId) => {
+    sessionStorage.setItem("resumeId", resumeId)
     console.log("30")
     navigate("/resumePage", {
       state: { resumeId },
@@ -59,8 +61,8 @@ const BrowseResumes = () => {
               allResume.map((data) => {
                 return (
                   <div className="col-lg-12 col-md-6 col-xs-12" key={data.id || data.resumeId}>
-                    <div className="manager-resumes-item">
-                      <div className="manager-content" onClick={() => GetResumeData(resumeId)}>
+                    <div className="manager-resumes-item" style={{cursor: "pointer"}}>
+                      <div className="manager-content" onClick={() => GetResumeData(data.id)}>
 
                         <img className="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt="" />
 
@@ -71,13 +73,14 @@ const BrowseResumes = () => {
                           </div>
                           <div className="manager-meta">
                             <span className="location"><i className="ti-location-pin"></i>{data.locationName}</span>
-                            <span className="rate"><i className="ti-time"></i> ₹{data.preHour} per hour</span>
+                            {/* <span className="rate"><i className="ti-time"></i> ₹{data.preHour} per hour</span> */}
                           </div>
                         </div>
                       </div>
                       <div className="item-body">
                         <div className="content text-start">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, qui aspernatur accusantium! Molestiae, cum cupiditate nam optio dignissimos magnam velit, perspiciatis amet qui aut nobis, quisquam, laudantium vitae eos ipsam.</p>
+                          {/* <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, qui aspernatur accusantium! Molestiae, cum cupiditate nam optio dignissimos magnam velit, perspiciatis amet qui aut nobis, quisquam, laudantium vitae eos ipsam.</p> */}
+                        <p>{data.aboutme}</p>
                         </div>
                         <div className="resume-skills text-start">
                           <div className="tag-list float-left">
@@ -88,7 +91,7 @@ const BrowseResumes = () => {
                             }
                           </div>
                           <div className="resume-exp float-right">
-                            <NavLink to="/" className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
+                            <NavLink /* to="/" */ className="btn btn-common btn-xs">Exp. 4 Year</NavLink>
                           </div>
                         </div>
                       </div>
