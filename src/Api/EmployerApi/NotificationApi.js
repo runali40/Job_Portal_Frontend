@@ -120,6 +120,7 @@ export const GetEmailNotification = async (ApplicationId, statusbyemployee, navi
 };
 
 export const GetAppliedCandidateApi = async (ApplicationId, navigate) => {
+    console.log(ApplicationId, "123")
     const userId = sessionStorage.getItem('userid');
     const url = 'Employeer/GetappliedCandidatedata';
     const params = { UserId: userId, ApplicationId: ApplicationId };

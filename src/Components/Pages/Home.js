@@ -134,8 +134,11 @@ const Home = () => {
     };
 
     const JobSearchData = async () => {
+        console.log(companyName, "137")
         const data = await JobSearchApi(location, category, companyName, jobTitle, navigate);
         console.log(data, "job search data");
+        setAllBrowseJobs(data)
+
         const featuredData = data.filter(item => item.Featured === "1");
         setAllFeatures(featuredData);
     }
@@ -442,7 +445,7 @@ const Home = () => {
             <section className="job-browse section">
                 <div className="container">
                     <div className="row">
-                       
+
                         {
                             currentJobs.map((data) => {
                                 return (

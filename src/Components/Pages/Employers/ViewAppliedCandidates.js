@@ -17,6 +17,7 @@ const ViewAppliedCandidates = () => {
     console.log(location.state, "10")
     console.log("Received ID:", ApplicationId);
     console.log(ApplicationId, "14")
+    // const candidateId = sessionStorage.getItem("resumeId")
     // const [searchParams] = useSearchParams();
     // const jobId = searchParams.get("id");
     // console.log(jobId, "14")
@@ -54,6 +55,7 @@ const ViewAppliedCandidates = () => {
 
     const GetJobDetails = async () => {
         const data = await GetAppliedCandidateApi(ApplicationId, navigate);
+        // console.log(candidateId, "58")
         console.log(data)
         setCandidateName(data.Name)
         setPostName(data.PostName)

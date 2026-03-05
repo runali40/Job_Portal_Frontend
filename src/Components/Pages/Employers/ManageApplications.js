@@ -84,7 +84,7 @@ const ManageApplications = () => {
                             {/* <h3>Web Designer Meeded</h3> */}
                             <h3>{data.Name}</h3>
                             {/* <span>Quick Studio</span> */}
-                            <span className='ml-5'>{data.PostName}</span>
+                            <span className='text-left block'>{data.PostName}</span>
                           </div>
                           <div className="col-md-2">
                             {
