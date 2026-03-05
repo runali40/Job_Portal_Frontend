@@ -4,7 +4,7 @@ import Footer from '../Footer'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
 import { BookmarkedJobApi } from '../../../Api/CandidateApi/BookmarkedJobApi'
-import { GetLocationApi, JobSearchApi } from '../../../Api/HomeApi'
+import { GetJobTitleApi, GetLocationApi, JobSearchApi } from '../../../Api/HomeApi'
 
 const BrowseJobs = () => {
   const navigate = useNavigate();
@@ -17,12 +17,15 @@ const BrowseJobs = () => {
   const [allBrowseJobs, setAllBrowseJobs] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
+  const [jobTitle, setJobTitle] = useState("")
+  const [allJobTitle, setAllJobTitle] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         await GetLocationData();  // waits fully
         await BrowseJobData();  // uses updated token
+        await GetJobTitleData();
 
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -43,6 +46,12 @@ const BrowseJobs = () => {
     setAllBrowseJobs(data)
   }
 
+  const GetJobTitleData = async () => {
+    const data = await GetJobTitleApi(navigate);
+    setAllJobTitle(data);
+  };
+
+
   const GetBrowseData = (id) => {
     console.log("30")
     navigate("/jobDetails", {
@@ -51,7 +60,7 @@ const BrowseJobs = () => {
   };
 
   const JobSearchData = async () => {
-    const data = await JobSearchApi(location, null, null, null, navigate);
+    const data = await JobSearchApi(location, null, null, jobTitle, navigate);
     console.log(data, "job search data");
     setAllBrowseJobs(data);
   }
@@ -94,7 +103,20 @@ const BrowseJobs = () => {
             <div className="col-lg-12 col-md-12 col-xs-12">
               <div className="wrap-search-filter row">
                 <div className="col-lg-5 col-md-5 col-xs-12">
-                  <input type="text" className="form-control" placeholder="Keyword: Name, Tag" />
+                  {/* <input type="text" className="form-control" placeholder="Keyword: Name, Tag" /> */}
+                  <div className="form-group" style={{ border: '1px solid #ced4da', borderRadius: "4px" }}>
+                    <div className="search-category-container">
+                      <label className="styled-select" >
+                        <select value={jobTitle} onChange={(e) => setJobTitle(e.target.value)}>
+                          <option value="" disabled hidden>Select Job Title</option>
+                          {allJobTitle.map((data) => (
+                            <option key={data.Slug} value={data.Slug}>
+                              {data.Slug}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    </div></div>
                 </div>
                 <div className="col-lg-5 col-md-5 col-xs-12">
                   {/* <input type="text" className="form-control" placeholder="Location: City, State, Zip" /> */}
@@ -151,9 +173,9 @@ const BrowseJobs = () => {
                                 {/* {data.Bookmark === "1" ? "♥" : "♡"} */}
                                 <i className={data.Bookmark === "1" ? "fas fa-heart" : "far fa-heart"}></i>
                               </span>
-                            {
-                              data.TypeofJob && <span className="full-time">{data.TypeofJob}</span>
-                            }
+                              {
+                                data.TypeofJob && <span className="full-time">{data.TypeofJob}</span>
+                              }
                             </div>
                           </div>
                         </div>

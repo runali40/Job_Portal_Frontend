@@ -59,18 +59,7 @@ const ManageJobs = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-4 col-md-4 col-xs-12">
-              {/* <div className="right-sideabr text-start">
-                <h4>Manage Account</h4>
-                <ul className="list-item">
-                  <li><NavLink to="/resumePage">My Resume</NavLink></li>
-                  <li><NavLink to="/bookMarkedJobs">Bookmarked Jobs</NavLink></li>
-                  <li><NavLink to="/notifications">Notifications <span className="notinumber">2</span></NavLink></li>
-                  <li><NavLink className="active" to="/manageJobs">Manage Jobs</NavLink></li>
-                  <li><NavLink to="/manageApplications">Manage Applications</NavLink></li>
-                  <li><NavLink to="/changePassword">Change Password</NavLink></li>
-                  <li><NavLink to="/">Sign Out</NavLink></li>
-                </ul>
-              </div> */}
+
               <LeftSidebar/>
             </div>
             <div className="col-lg-8 col-md-8 col-xs-12">

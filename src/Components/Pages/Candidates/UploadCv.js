@@ -45,8 +45,8 @@ const UploadCv = () => {
             sessionStorage.setItem("resumeId", response.data.value.data.Id)
 
         } catch (error) {
-            toast.error("Upload failed.");
-            console.error("Upload error:", error);
+            // toast.error("Upload failed.");
+            toast.error(error);
         }
     };
 
