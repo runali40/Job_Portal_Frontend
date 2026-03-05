@@ -41,12 +41,15 @@ const UploadCv = () => {
             });
 
             toast.success("File uploaded successfully!");
-            console.log("Upload response:", response.data);
+            console.log("Upload response:", response.data.value.data.Id);
+            sessionStorage.setItem("resumeId", response.data.value.data.Id)
+
         } catch (error) {
             toast.error("Upload failed.");
             console.error("Upload error:", error);
         }
     };
+
     return (
         <>
             <Header />

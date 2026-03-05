@@ -8,8 +8,9 @@ const ResumePage = () => {
   const navigate = useNavigate();
   const locationValue = useLocation();
   // const { resumeId } = locationValue.state || {};
-const resumeId = sessionStorage.getItem('resumeId')
+  const resumeId = sessionStorage.getItem('resumeId')
   console.log(resumeId, "resumeID");
+  console.log(resumeId, typeof resumeId);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [professionTitle, setProfessionTitle] = useState("");
@@ -26,10 +27,15 @@ const resumeId = sessionStorage.getItem('resumeId')
   const [profilePhoto, setProfilePhoto] = useState("")
 
   useEffect(() => {
-    GetManageResumeData();
-  }, [])
+    const resumeId = sessionStorage.getItem("resumeId");
+
+    if (resumeId && resumeId !== "null") {
+      GetManageResumeData();
+    }
+  }, []);
 
   const GetManageResumeData = async () => {
+
     try {
       const data = await GetManageResumeApi(resumeId, navigate);
 
@@ -57,6 +63,8 @@ const resumeId = sessionStorage.getItem('resumeId')
       console.log("Error in GetManageResumeData:", error);
       // ❌ UI break nahi hoga
     }
+
+
   };
 
   return (
@@ -73,24 +81,11 @@ const resumeId = sessionStorage.getItem('resumeId')
           </div>
         </div>
       </div>
-      {resumeId ? (
+      {(resumeId && resumeId !== "null") ? (
         <div className="section">
           <div className="container">
             <div className="row">
-              {/* <div className="col-lg-4 col-md-4 col-xs-12">
-              <div className="right-sideabr">
-                <h4>Manage Account</h4>
-                <ul className="list-item text-start">
-                  <li><NavLink className="active" to="/resumePage">My Resume</NavLink></li>
-                  <li><NavLink to="/bookMarkedJobs">Bookmarked Jobs</NavLink></li>
-                  <li><NavLink to="/notifications">Notifications <span className="notinumber">2</span></NavLink></li>
-                  <li><NavLink to="/manageApplications">Manage Applications</NavLink></li>
-                  <li><NavLink to="/jobAlerts">Job Alerts</NavLink></li>
-                  <li><NavLink to="/changePassword">Change Password</NavLink></li>
-                  <li><NavLink to="/">Sign Out</NavLink></li>
-                </ul>
-              </div>
-            </div> */}
+
               <div className="col-lg-12 col-md-12 col-xs-12">
                 <div className="inner-box my-resume">
                   <div className="author-resume">
@@ -123,7 +118,7 @@ const resumeId = sessionStorage.getItem('resumeId')
                             <h5>Bannana INC.</h5>
                             <span className="date">{data.CompDateFrom}-{data.CompDateTo}(5year)</span>
                             <p>{data.WorkDescription}</p>
-                            <p><NavLink to="/">4 Projects</NavLink></p>
+                            <p><NavLink /* to="/" */>4 Projects</NavLink></p>
                           </>
 
                         )
@@ -162,7 +157,13 @@ const resumeId = sessionStorage.getItem('resumeId')
       ) :
         (
           <div className="text-center py-4">
-            <p>Resume data is not available</p>
+            <p>Resume data is not available...</p>
+            <button
+              className="btn btn-primary mt-2"
+              onClick={() => navigate("/uploadCv")}
+            >
+              Upload CV
+            </button>
           </div>
         )}
       <Footer />

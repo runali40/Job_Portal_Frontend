@@ -236,7 +236,7 @@ export const EmpViewNotification = async (jobId, NotificationId, navigate) => {
 export const StatusByEmployee = async (ApplicationId, statusbyemployee, CurrentIndustry, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const url = 'Employeer/StausEmp';
-    const params = { UserId: userId, ApplicationId: ApplicationId, statusbyemployee: statusbyemployee, CategoryId: CurrentIndustry };
+    const params = { UserId: userId, ApplicationId: ApplicationId, statusbyemployee: statusbyemployee/* , CategoryId: CurrentIndustry */ };
 
     try {
         const response = await apiClient({
