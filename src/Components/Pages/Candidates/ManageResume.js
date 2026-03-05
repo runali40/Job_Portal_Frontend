@@ -86,7 +86,8 @@ const ManageResume = () => {
                       <NavLink to="/resumePage">
                         <img
                           className="resume-thumb"
-                          src={profilePhoto || "/default-profile.png"}
+                          // src={profilePhoto || "/default-profile.png"}
+                          src={profilePhoto ? profilePhoto : "assets/img/jobs/avatar-1.jpg"} 
                           alt=""
                         />
                       </NavLink>
@@ -101,22 +102,22 @@ const ManageResume = () => {
                           <span className="location">
                             <i className="lni-map-marker"></i> {locationName}
                           </span>
-                          <span className="rate">
+                          {/* <span className="rate">
                             <i className="lni-alarm-clock"></i> ₹ {perHour} per hour
-                          </span>
+                          </span> */}
                         </div>
                       </div>
                     </div>
 
                     <div className="update-date">
                       <p className="status">
-                        <strong>Updated on:</strong> {updatedDate}
+                        <strong>Updated on:</strong> {updatedDate.split("T")[0]}
                       </p>
 
                       <div className="action-btn">
-                        <NavLink className="btn btn-xs btn-gray" to="/">
+                        {/* <NavLink className="btn btn-xs btn-gray" to="/">
                           Hide
-                        </NavLink>
+                        </NavLink> */}
                         <button
                           className="btn btn-xs btn-gray"
                           onClick={() => GetResumeData(resumeId)}

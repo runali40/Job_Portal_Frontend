@@ -90,7 +90,7 @@ const ResumePage = () => {
                 <div className="inner-box my-resume">
                   <div className="author-resume">
                     <div className="thumb">
-                      <img src={profilePhoto} alt="profile" />
+                      <img  src={profilePhoto ? profilePhoto : "assets/img/jobs/avatar-1.jpg"} alt="profile" />
                     </div>
                     <div className="author-info text-start">
                       <h3>{name}</h3>

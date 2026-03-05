@@ -127,7 +127,8 @@ const AppliedCandidate = () => {
                         style={{ backgroundColor: data.IsRead === null ? '#f0f0f0' : 'transparent', cursor: "pointer" }}
                         onClick={() => EmpViewNotificationData(data.JobId, data.NotificationId, data.ApplicationId)}>
                         <div className="thums">
-                          <img src={data.ProfilePhoto} alt="Profile" className=" my-auto" style={{ borderRadius: "55%", height: "50px", width: "50px" }} />
+                          <img src={data.ProfilePhoto ? data.ProfilePhoto : "assets/img/jobs/avatar-1.jpg"} alt="Profile" className=" my-auto" style={{ borderRadius: "55%", height: "50px", width: "50px" }} />
+                        
                         </div>
                         <div className="text-left">
                           <p>

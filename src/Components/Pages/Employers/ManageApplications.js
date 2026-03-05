@@ -53,20 +53,8 @@ const ManageApplications = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-4 col-md-12 col-xs-12">
-              {/* <div className="right-sideabr text-start">
-                <h4>Manage Account</h4>
-                <ul className="list-item">
-                  <li><NavLink to="/resumePage">My Resume</NavLink></li>
-                  <li><NavLink to="/bookMarkedJobs">Bookmarked Jobs</NavLink></li>
-                  <li><NavLink to="/notifications">Notifications <span className="notinumber">2</span></NavLink></li>
-                  <li><NavLink to="/appliedCandidate">Applied Candidate</NavLink></li>
-                  <li><NavLink className="active" to="/manageJobs">Manage Applications</NavLink></li>
-                  <li><NavLink to="/jobAlerts">Job Alerts</NavLink></li>
-                  <li><NavLink to="/changePassword">Change Password</NavLink></li>
-                  <li><NavLink to="/">Sign Out</NavLink></li>
-                </ul>
-              </div> */}
-              <LeftSidebar/>
+
+              <LeftSidebar />
             </div>
             <div className="col-lg-8 col-md-12 col-xs-12">
               <div className="job-alerts-item text-start">
@@ -79,7 +67,7 @@ const ManageApplications = () => {
                           <div className="col-md-5">
                             <div className="thums">
                               {/* <img src="assets/img/jobs/img-1.jpg" alt="" /> */}
-                              <img src={data.ProfilePhoto} alt="" style={{ borderRadius: "55%", height: "50px", width: "50px" }} />
+                              <img src={data.ProfilePhoto ? data.ProfilePhoto : "assets/img/jobs/avatar-1.jpg"} alt="" style={{ borderRadius: "55%", height: "50px", width: "50px" }} />
                             </div>
                             {/* <h3>Web Designer Meeded</h3> */}
                             <h3>{data.Name}</h3>
@@ -88,7 +76,7 @@ const ManageApplications = () => {
                           </div>
                           <div className="col-md-2">
                             {
-                              data.TypeofJob && <p><span className="full-time">Full-Time</span></p>                       
+                              data.TypeofJob && <p><span className="full-time">Full-Time</span></p>
                             }
 
                           </div>
@@ -107,15 +95,6 @@ const ManageApplications = () => {
                 }
                 <br />
 
-                {/* <ul className="pagination">
-                  <li className="active"><NavLink to="/" className="btn-prev" ><i className="lni-angle-left"></i> prev</NavLink></li>
-                  <li><NavLink to="/">1</NavLink></li>
-                  <li><NavLink to="/">2</NavLink></li>
-                  <li><NavLink to="/">3</NavLink></li>
-                  <li><NavLink to="/">4</NavLink></li>
-                  <li><NavLink to="/">5</NavLink></li>
-                  <li className="active"><NavLink to="/" className="btn-next">Next <i className="lni-angle-right"></i></NavLink></li>
-                </ul> */}
                 <div className="col-lg-12 col-md-12 col-xs-12">
                   <ul className="pagination">
                     <li className={currentPage === 1 ? "disabled" : "active"}>
