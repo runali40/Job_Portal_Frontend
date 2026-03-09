@@ -242,7 +242,7 @@ export const StatusByEmployee = async (ApplicationId, statusbyemployee, CurrentI
         const response = await apiClient({
             method: 'post',
             url: url,
-            body: data,
+            data: data,
         });
 
         console.log(response.data.data, "get status emp data");
