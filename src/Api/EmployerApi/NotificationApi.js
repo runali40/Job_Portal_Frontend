@@ -240,7 +240,7 @@ export const StatusByEmployee = async (ApplicationId, statusbyemployee, CurrentI
 
     try {
         const response = await apiClient({
-            method: 'get',
+            method: 'post',
             url: url,
             params: params,
         });
