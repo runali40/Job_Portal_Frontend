@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../Header'
 import Footer from '../Footer'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { GetCategoryApi, GetCompanyNameApi, GetLocationApi } from '../../../Api/HomeApi'
-import { AddJobApi } from '../../../Api/EmployerApi/EmployeerApi'
+import { AddJobApi, GetManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
 
 const PostJob = () => {
   const navigate = useNavigate()
+  const locationValue = useLocation();
+  const { postJobId } = locationValue.state || {};
+  console.log(postJobId, "10")
+  const [jobId, setJobId] = useState("")
   const [jobTitle, setJobTitle] = useState("")
   const [location, setLocation] = useState("")
   const [allLocation, setAllLocation] = useState([])
@@ -32,6 +36,7 @@ const PostJob = () => {
         await GetLocationData();  // waits fully
         await GetCategoryData();  // uses updated token
         await GetCompanyNameData();
+        await GetPostJobData();
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -54,6 +59,25 @@ const PostJob = () => {
     setAllCategory(data);
   };
 
+  const GetPostJobData = async () => {
+    const data = await GetManageJobApi(postJobId, navigate);
+    console.log(data, "get post data")
+    setJobTitle(data[0].Slug)
+    setCompanyName(data[0].Name)
+    setLocation(data[0].Location)
+    setCategory(data[0].CategoryId)
+    setJobTags(data[0].Introduce)
+    setJobType(data[0].JobType)
+    setDescription(data[0].Description)
+    setWebsite(data[0].Website)
+    setTagLine1(data[0].Tagline1)
+    setTagLine2(data[0].Tagline2)
+    setAppUrl(data[0].EmailId)
+    setClosingDate(data[0].ClosingDate.split("T")[0])
+    setJobId(data[0].Id)
+    setBase64Image(data[0].LOGOFile)
+  };
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
 
@@ -72,8 +96,9 @@ const PostJob = () => {
   };
 
   const AddJobData = async () => {
-    const data = await AddJobApi(jobTitle, location, category, jobTags, jobType, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate);
+    const data = await AddJobApi(jobTitle, location, category, jobTags, jobType, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, jobId, navigate);
     console.log(data)
+    navigate("/manageJobs")
   }
 
   return (
@@ -195,25 +220,25 @@ const PostJob = () => {
                     <input type="text" className="form-control" placeholder="Briefly describe your company" value={tagline2} onChange={(e) => setTagLine2(e.target.value)} />
                   </div>
 
-                    <div className="form-group">
+                  <div className="form-group">
                     <label className="control-label">Company Logo</label>
-                  <div className="custom-file mb-3">
-                    
-                    {/* <input type="file" className="custom-file-input" id="validatedCustomFile" required value={file} onChange={(e) => setFile(e.target.value)} />
+                    <div className="custom-file mb-3">
+
+                      {/* <input type="file" className="custom-file-input" id="validatedCustomFile" required value={file} onChange={(e) => setFile(e.target.value)} />
                     <label className="custom-file-label form-control" htmlFor="validatedCustomFile">Choose file...</label> */}
-                    <input
-                      type="file"
-                      className="custom-file-input"
-                      id="validatedCustomFile"
-                      accept="image/*"
-                      required
-                      onChange={handleFileChange}
-                    />
-                    <label className="custom-file-label form-control" htmlFor="validatedCustomFile">
-                      {file || 'Choose file...'}
-                    </label>
-                    <div className="invalid-feedback">Example invalid custom file feedback</div>
-                  </div>
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        id="validatedCustomFile"
+                        accept="image/*"
+                        required
+                        onChange={handleFileChange}
+                      />
+                      <label className="custom-file-label form-control" htmlFor="validatedCustomFile">
+                        {file || 'Choose file...'}
+                      </label>
+                      <div className="invalid-feedback">Example invalid custom file feedback</div>
+                    </div>
                   </div>
                   <button className="btn btn-common" onClick={AddJobData}>Submit your job</button>
                 </div>

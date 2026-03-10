@@ -42,9 +42,9 @@ const Login = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="inner-header">
-                 <NavLink  className="navbar-brand">
-                                            <img src="/assets/img/logo.png" alt="logo" height="60" />
-                                        </NavLink>
+                <NavLink className="navbar-brand">
+                  <img src="/assets/img/logo.png" alt="logo" height="60" />
+                </NavLink>
               </div>
             </div>
           </div>

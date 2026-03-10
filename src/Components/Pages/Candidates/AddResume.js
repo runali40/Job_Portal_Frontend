@@ -56,7 +56,6 @@ const AddResume = () => {
         const data = await GetManageResumeApi(resumeId, navigate);
         console.log(data, "data 30");
         console.log(data.model1?.DOB?.split("T")[0] || "")
-
         setDob(data.model1?.DOB?.split("T")[0] || "");
         console.log(dob)
         setEducations(data.educations);

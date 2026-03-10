@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Footer from '../Footer'
 import Header from '../Header'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
+import { GetManageJobApi, ManageJobApi } from '../../../Api/EmployerApi/EmployeerApi'
 import { FeaturedJobApi } from '../../../Api/EmployerApi/FeaturedApi'
 import LeftSidebar from '../LeftSidebar'
 
@@ -34,6 +34,14 @@ const ManageJobs = () => {
     const newStatus = currentStatus === "1" ? "0" : "1";
     FeaturedJobData(Id, newStatus); // Send updated status to backend
   };
+
+
+  const GetManageJob = (postJobId) => {
+    navigate("/postJob", {
+      state: { postJobId },
+    }
+    )
+  }
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -118,7 +126,7 @@ const ManageJobs = () => {
                               </p>
                             </div>
                             <div className="col-lg-3 col-md-2 col-xs-12">
-                              <button className='btn btn-primary btn-sm'>Edit</button>
+                              <button className='btn btn-primary btn-sm' onClick={() => GetManageJob(data.Id)}>Edit</button>
                             </div>
                           </div>
                         </div>

@@ -35,6 +35,8 @@ export const LoginApi = (username, password, navigate) => {
             sessionStorage.setItem("companyName", response.data.result.data.CompanyName)
             sessionStorage.setItem("logo", response.data.result.data.Logo)
             sessionStorage.setItem("username", response.data.result.data.um_user_name)
+            sessionStorage.setItem("profilePhoto", response.data.result.data.ProfilePhoto)
+
             Cookies.set("UserCredential", response.data.result.outcome.tokens, { expires: 7 });
             toast.success("User Login Successfully!")
             navigate("/home")
@@ -53,7 +55,7 @@ export const LoginApi = (username, password, navigate) => {
             if (error.response.status === 400) {
                 toast.error("Invalid username or password");
             }
-             if (error.response.status === 403){
+            if (error.response.status === 403) {
                 toast.error("Access denied: Payment required");
             }
             // const errors = ErrorHandler(error);
@@ -156,7 +158,7 @@ export const ChangePasswordApi = async (oldPassword, newPassword, navigate) => {
 export const ForgotPasswordApi = async (username, emailId, newPassword, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const url = 'Auth/ForgotPassword';
-    const data = { userId: userId, username: username, mailId : emailId, password: newPassword };
+    const data = { userId: userId, username: username, mailId: emailId, password: newPassword };
 
     try {
         const response = await apiClient({

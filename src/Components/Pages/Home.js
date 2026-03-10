@@ -46,6 +46,7 @@ const Home = () => {
     const logo = sessionStorage.getItem("logo")
     const userName = sessionStorage.getItem("username")
     const roleName = sessionStorage.getItem("rolename")
+    const profilePhoto = sessionStorage.getItem("profilePhoto")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -222,7 +223,7 @@ const Home = () => {
                     <div className="container">
 
                         {/* Logo */}
-                        <NavLink  className="navbar-brand">
+                        <NavLink className="navbar-brand">
                             <img src="/assets/img/logo.png" alt="logo" height="40" />
                         </NavLink>
 
@@ -299,9 +300,9 @@ const Home = () => {
                                                 Upload CV
                                             </NavLink>
                                         </li>
-                                         <li className="nav-item text-start ml-3 ml-lg-0">
+                                        <li className="nav-item text-start ml-3 ml-lg-0">
                                             <NavLink className="nav-link" to="/contact">
-                                               Contact Us
+                                                Contact Us
                                             </NavLink>
                                         </li>
                                     </>
@@ -334,6 +335,11 @@ const Home = () => {
                                                                           </NavLink>
                                                                           
                                                                       </li> */}
+                                        <li className="nav-item text-start ml-3 ml-lg-0">
+                                            <NavLink className="nav-link" to="/contact">
+                                                Contact Us
+                                            </NavLink>
+                                        </li>
                                         <li className="button-group text-start ml-3 ml-lg-0">
                                             <NavLink to="/postJob" className="button btn btn-common">Post a Job</NavLink>
                                         </li>
@@ -375,12 +381,21 @@ const Home = () => {
                                 </li>
                                 <li className="nav-item ml-3 ml-lg-3 ml-md-0 mt-lg-2">
                                     <div className="company-box d-flex align-items-center px-3 py-1">
+                                        {
+                                            roleName === "Candidate" ? <img
+                                                src={profilePhoto || ""}
+                                                alt="company"
+                                                className="company-logo"
+                                            />
+                                                :
+                                                <img
+                                                    src={logo || ""}
+                                                    alt="company"
+                                                    className="company-logo"
+                                                />
 
-                                        <img
-                                            src={logo}
-                                            alt="company"
-                                            className="company-logo"
-                                        />
+                                        }
+
 
                                         <span className="company-name ms-2 text-dark">{roleName === "Candidate" ? userName : compName}</span>
 

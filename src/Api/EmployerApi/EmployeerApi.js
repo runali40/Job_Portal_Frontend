@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorHandler from "../../ErrorHandler";
 
-export const AddJobApi = (jobTitle, location, category, jobTags, jobType, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, navigate) => {
+export const AddJobApi = (jobTitle, location, category, jobTags, jobType, description, appUrl, closingDate, companyName, website, tagline1, tagline2, base64Image, jobId, navigate) => {
     const userId = sessionStorage.getItem('userid');
     const data = {
         UserId: userId,
@@ -21,9 +21,12 @@ export const AddJobApi = (jobTitle, location, category, jobTags, jobType, descri
         tagline1: tagline1,
         tagline2: tagline2,
         logoFile: base64Image,
-        typeofJob : jobType,
+        typeofJob: jobType,
 
     };
+       if (jobId) {
+        data.Id = jobId;
+    }
     const url = 'Employeer/AddJob';
     return apiClient({
         method: 'post',
@@ -32,7 +35,10 @@ export const AddJobApi = (jobTitle, location, category, jobTags, jobType, descri
     })
         .then((response) => {
             console.log('API response:', response);
-            toast.success("Job Added Successfully!")
+            // toast.success("Job Added Successfully!")
+             toast.success(
+                            data.Id ? "Job Updated Successfully!" : "Job Added Successfully!"
+                        );
             const token1 = response.data.outcome.tokens;
             Cookies.set("UserCredential", token1, { expires: 7 });
             return response.data;
@@ -60,13 +66,48 @@ export const ManageJobApi = (categoryId, navigate) => {
     const params = {
         UserId: userId,
         CategoryId: categoryId,
-        roleid : roleId
+        roleid: roleId
     };
     const url = 'Employeer/MangageJob';
     return apiClient({
         method: 'get',
         url: (UrlData + url).toString(),
         params: params,
+    })
+        .then((response) => {
+            console.log('API response:', response.data.data);
+            console.log("token1", response.data.outcome.tokens)
+            const token1 = response.data.outcome.tokens;
+            Cookies.set("UserCredential", token1, { expires: 7 });
+            return response.data.data;
+        })
+        .catch((error) => {
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.outcome
+            ) {
+                const token1 = error.response.data.outcome.tokens;
+                Cookies.set("UserCredential", token1, { expires: 7 });
+            }
+            console.log(error);
+
+            const errors = ErrorHandler(error, navigate);
+            toast.error(errors);
+            return [];
+        });
+};
+
+export const GetManageJobApi = (postJobId, navigate) => {
+    const userId = sessionStorage.getItem('userid');
+    const url = 'Employeer/GetJob';
+    return apiClient({
+        method: 'get',
+        url: (UrlData + url),
+        params: {
+            UserId: userId,
+            Id: postJobId
+        }
     })
         .then((response) => {
             console.log('API response:', response.data.data);
