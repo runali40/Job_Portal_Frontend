@@ -32,6 +32,9 @@ export const LoginApi = (username, password, navigate) => {
             sessionStorage.setItem("roleId", response.data.result.data.r_id)
             sessionStorage.setItem("companyId", response.data.result.data.CompanyId)
             sessionStorage.setItem("resumeId", response.data.result.data.Id)
+            sessionStorage.setItem("companyName", response.data.result.data.CompanyName)
+            sessionStorage.setItem("logo", response.data.result.data.Logo)
+            sessionStorage.setItem("username", response.data.result.data.um_user_name)
             Cookies.set("UserCredential", response.data.result.outcome.tokens, { expires: 7 });
             toast.success("User Login Successfully!")
             navigate("/home")

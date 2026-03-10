@@ -259,11 +259,9 @@ const AddResume = () => {
                     <div className="row justify-content-center">
                         <div className="col-lg-9 col-md-12 col-xs-12">
                             <div className="add-resume box">
-                                <div className="post-header ">
-                                    <p className="text-left">
-                                        Already have an account?{" "}
-                                        <NavLink to="/">Click here to login</NavLink>
-                                    </p>
+                                <div className="post-header text-start">
+                                  
+                                    <NavLink to="/uploadCv"><button className="btn btn-primary">Upload CV</button></NavLink>
                                 </div>
                                 <div className="form-ad">
                                     <h3 className="text-left">Basic information</h3>
@@ -353,7 +351,7 @@ const AddResume = () => {
                                         />
                                     </div>
                                     <div className="form-group text-start">
-                                        <label className="control-label text-left">Current Industry</label>
+                                        <label className="control-label text-left">Select Industry</label>
 
                                         <label className="styled-select form-control">
                                             <select
@@ -361,7 +359,7 @@ const AddResume = () => {
                                                 onChange={(e) => setCategory(e.target.value)}
                                             >
                                                 <option value="" disabled hidden>
-                                                    Select Current Industry
+                                                    Select Industry
                                                 </option>
                                                 {allCategory.map((data) => (
                                                     <option key={data.CategoryId} value={data.CategoryId}>
@@ -450,7 +448,7 @@ const AddResume = () => {
                                     </div>
 
                                     <div>
-                                        <h3 className="text-start">Educational Details</h3>
+                                        <h3 className="text-start">Educational Qualification</h3>
                                         {educations.map((edu, index) => {
                                             return (
                                                 <div
@@ -491,7 +489,7 @@ const AddResume = () => {
                                                     </div> */}
 
                                                     <div className="form-group text-start">
-                                                        <label className="control-label">School</label>
+                                                        <label className="control-label">College / University</label>
                                                         <input
                                                             type="text"
                                                             className="form-control"

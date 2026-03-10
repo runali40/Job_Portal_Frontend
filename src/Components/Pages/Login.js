@@ -42,7 +42,9 @@ const Login = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="inner-header">
-                <h3>Login</h3>
+                 <NavLink  className="navbar-brand">
+                                            <img src="/assets/img/logo.png" alt="logo" height="60" />
+                                        </NavLink>
               </div>
             </div>
           </div>
@@ -106,7 +108,8 @@ const Login = () => {
                   <button className="btn btn-common log-btn" onClick={LoginData}>Submit</button>
                 </div>
                 <ul className="form-links">
-                  <li className="text-center"><NavLink to="/register">Don't have an account?</NavLink></li>
+                  {/* <li className="text-center">Don't have an account?<NavLink to="/register"> Sign Up</NavLink></li> */}
+                  <p className="text-center">Don't have an account?<NavLink to="/register"> Sign Up</NavLink></p>
                 </ul>
                 <ul className="form-links">
                   <li className="text-center mt-2"><NavLink to="/forgotPassword">Forgot Password</NavLink></li>

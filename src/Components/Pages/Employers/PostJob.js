@@ -158,13 +158,13 @@ const PostJob = () => {
                   </div>
                   <div className="form-group">
                     <label className="control-label">Job Type</label>
-                    <input type="text" className="form-control" placeholder="Job Type" value={jobType} onChange={(e) => setJobType(e.target.value)} />
+                    <input type="text" className="form-control" placeholder="e.g.Full Time/ Part Time" value={jobType} onChange={(e) => setJobType(e.target.value)} />
 
                   </div>
                   <section id="editor">
                     <div className="form-group">
                       <label htmlFor="comment">Description</label>
-                      <textarea className="form-control" rows="5" id="comment" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                      <textarea className="form-control" rows="5" id="comment" placeholder='Job Description' value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                     </div>
                   </section>
                   <div className="form-group">
@@ -194,7 +194,11 @@ const PostJob = () => {
                     <label className="control-label">Tagline <span>(optional)</span></label>
                     <input type="text" className="form-control" placeholder="Briefly describe your company" value={tagline2} onChange={(e) => setTagLine2(e.target.value)} />
                   </div>
+
+                    <div className="form-group">
+                    <label className="control-label">Company Logo</label>
                   <div className="custom-file mb-3">
+                    
                     {/* <input type="file" className="custom-file-input" id="validatedCustomFile" required value={file} onChange={(e) => setFile(e.target.value)} />
                     <label className="custom-file-label form-control" htmlFor="validatedCustomFile">Choose file...</label> */}
                     <input
@@ -209,6 +213,7 @@ const PostJob = () => {
                       {file || 'Choose file...'}
                     </label>
                     <div className="invalid-feedback">Example invalid custom file feedback</div>
+                  </div>
                   </div>
                   <button className="btn btn-common" onClick={AddJobData}>Submit your job</button>
                 </div>

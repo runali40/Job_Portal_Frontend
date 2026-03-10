@@ -63,7 +63,8 @@ const CreateOrder = () => {
         const options = {
             // key: "rzp_test_gL5huWXM1ghnNM",
             key: "rzp_live_ajVE3kPFAPTm7X",
-            amount: 1, // in paise (₹1000)
+            // amount: 1, 
+            amount: amount,
             currency: "INR",
             name: "DEVENDRA IT INFRASOFT SECURITY PRIVATE LIMITED",
             description: "Plan Purchase",

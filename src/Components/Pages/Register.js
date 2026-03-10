@@ -60,7 +60,7 @@ const Register = () => {
             const data = RegisterApi(username, password, email, role, companyName, companyWebsite, companyLogo);
             console.log(data)
             navigate('/');
-           
+
         }
     }
     const GetRoleData = () => {
@@ -93,7 +93,9 @@ const Register = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="inner-header">
-                                <h3>Create Your Account</h3>
+                                <NavLink className="navbar-brand">
+                                    <img src="/assets/img/logo.png" alt="logo" height="60" />
+                                </NavLink>
                             </div>
                         </div>
                     </div>
@@ -146,7 +148,7 @@ const Register = () => {
                                     <div className="form-group">
                                         <div className="input-icon">
                                             <i className="lni-envelope"></i>
-                                            <input type="email" className="form-control" name="email"  placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                            <input type="email" className="form-control" name="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} />
                                         </div>
                                     </div>
                                     <div className="form-group">

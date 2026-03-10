@@ -42,6 +42,10 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(6);
     const [categoryId, setCategoryId] = useState("")
+    const compName = sessionStorage.getItem("companyName")
+    const logo = sessionStorage.getItem("logo")
+    const userName = sessionStorage.getItem("username")
+    const roleName = sessionStorage.getItem("rolename")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -184,18 +188,41 @@ const Home = () => {
         sessionStorage.removeItem("rolename")
         sessionStorage.removeItem("sessionid")
         sessionStorage.removeItem("userid")
+        sessionStorage.removeItem("companyName")
+        sessionStorage.removeItem("logo")
         navigate("/")
     }
 
     return (
+
         <>
+            <style>
+                {`
+      .company-box{
+        background:#f3f4f6;
+        border-radius:20px;
+        font-size:14px;
+      }
+
+      .company-logo{
+        width:28px;
+        height:28px;
+        border-radius:50%;
+        object-fit:cover;
+      }
+
+      .company-name{
+        font-weight:500;
+      }
+    `}
+            </style>
             <header id="home" className="hero-area">
                 {/* <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm"> */}
                 <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
                     <div className="container">
 
                         {/* Logo */}
-                        <NavLink to="/" className="navbar-brand">
+                        <NavLink  className="navbar-brand">
                             <img src="/assets/img/logo.png" alt="logo" height="40" />
                         </NavLink>
 
@@ -272,6 +299,11 @@ const Home = () => {
                                                 Upload CV
                                             </NavLink>
                                         </li>
+                                         <li className="nav-item text-start ml-3 ml-lg-0">
+                                            <NavLink className="nav-link" to="/contact">
+                                               Contact Us
+                                            </NavLink>
+                                        </li>
                                     </>
                                 )}
 
@@ -341,7 +373,19 @@ const Home = () => {
                                                                   </button> */}
                                     <div className="nav-link" onClick={LogOutButton} style={{ cursor: "pointer" }}>Sign Out</div>
                                 </li>
+                                <li className="nav-item ml-3 ml-lg-3 ml-md-0 mt-lg-2">
+                                    <div className="company-box d-flex align-items-center px-3 py-1">
 
+                                        <img
+                                            src={logo}
+                                            alt="company"
+                                            className="company-logo"
+                                        />
+
+                                        <span className="company-name ms-2 text-dark">{roleName === "Candidate" ? userName : compName}</span>
+
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>

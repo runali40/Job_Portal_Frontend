@@ -16,7 +16,7 @@ const BrowseJobs = () => {
   const [allLocation, setAllLocation] = useState([])
   const [allBrowseJobs, setAllBrowseJobs] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
+  const [itemsPerPage] = useState(10);
   const [jobTitle, setJobTitle] = useState("")
   const [allJobTitle, setAllJobTitle] = useState([])
 

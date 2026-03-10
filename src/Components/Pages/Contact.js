@@ -94,8 +94,8 @@ const Contact = () => {
                       <div className="contact-icon">
                         <i className="lni-phone-handset"></i>
                       </div>
-                      <p><NavLink to="/">Mob No: +91 9321148952</NavLink></p>
-                      <p><NavLink to="/">Contact No: 022-40057002</NavLink></p>
+                      <p><NavLink >Mob No: +91 8691911318</NavLink></p>
+                      <p><NavLink >Mob No: +91 9321148952</NavLink></p>
                     </div>
                   </div>
                 </div>
@@ -103,15 +103,14 @@ const Contact = () => {
               <div className="col-md-12">
                 <div id="container-map">
                   <iframe
-                    title="Khopat, Thane East Map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.123456789!2d72.977654321!3d19.197654321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b9c123456789%3A0xabcdef1234567890!2sKhopat%2C%20Thane%20East%2C%20Maharashtra%20400601%2C%20India!5e0!3m2!1sen!2sin!4v1620000000000"
-                    width="100%"
-                    height="600"
-                    style={{ border: "0" }}
-                    allowFullScreen=""
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade">
-                  </iframe>
+  title="Punjani Estate Khopat Thane Map"
+  // src="https://www.google.com/maps?q=Punjani%20Industrial%20Estate%20Pokhran%20Road%20No%201%20Khopat%20Thane%20400601&output=embed"
+  src="https://www.google.com/maps?q=113%202nd%20Floor%20Punjani%20Estate%20Khopat%20Pokhran%20Road%20No%201%20Thane%20400601&output=embed"
+  width="100%"
+  height="600"
+  style={{ border: 0 }}
+  loading="lazy"
+/>
                 </div>
               </div>
             </div>

@@ -10,6 +10,10 @@ const Header = () => {
     const navigate = useNavigate();
     const [jobAlertCount, setJobAlertCount] = useState("")
     const [appliedCandidateCount, setAppliedCandidateCount] = useState("")
+    const compName = sessionStorage.getItem("companyName")
+    const logo = sessionStorage.getItem("logo")
+    const userName = sessionStorage.getItem("username")
+    const roleName = sessionStorage.getItem("rolename")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -56,6 +60,26 @@ const Header = () => {
 
     return (
         <>
+            <style>
+                {`
+      .company-box{
+        background:#f3f4f6;
+        border-radius:20px;
+        font-size:14px;
+      }
+
+      .company-logo{
+        width:28px;
+        height:28px;
+        border-radius:50%;
+        object-fit:cover;
+      }
+
+      .company-name{
+        font-weight:500;
+      }
+    `}
+            </style>
             <header id="home" className="hero-area">
 
                 <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
@@ -267,6 +291,11 @@ const Header = () => {
                                                 Upload CV
                                             </NavLink>
                                         </li>
+                                        <li className="nav-item text-start ml-3 ml-lg-0">
+                                            <NavLink className="nav-link" to="/contact">
+                                                Contact Us
+                                            </NavLink>
+                                        </li>
                                     </>
                                 )}
 
@@ -344,12 +373,22 @@ const Header = () => {
                                 </li>
                                 {/* Logout */}
                                 <li className="nav-item text-start ml-3 ml-lg-3 ml-md-0">
-                                    {/* <button className="btn btn-outline-danger btn-sm" onClick={LogOutButton}>
-                                                        Sign Out
-                                                    </button> */}
+
                                     <div className="nav-link" onClick={LogOutButton} style={{ cursor: "pointer" }}>Sign Out</div>
                                 </li>
+                                <li className="nav-item ml-3 ml-lg-3 ml-md-0 mt-lg-2">
+                                    <div className="company-box d-flex align-items-center px-3 py-1">
 
+                                        <img
+                                            src={logo}
+                                            alt="company"
+                                            className="company-logo"
+                                        />
+
+                                        <span className="company-name ms-2 text-dark">{roleName === "Candidate" ? userName : compName}</span>
+
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>

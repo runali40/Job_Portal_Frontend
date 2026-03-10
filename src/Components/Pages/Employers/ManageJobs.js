@@ -60,7 +60,7 @@ const ManageJobs = () => {
           <div className="row">
             <div className="col-lg-4 col-md-4 col-xs-12">
 
-              <LeftSidebar/>
+              <LeftSidebar />
             </div>
             <div className="col-lg-8 col-md-8 col-xs-12">
               <div className="job-alerts-item candidates text-start">
@@ -73,11 +73,14 @@ const ManageJobs = () => {
                     <div className="col-lg-3 col-md-3 col-xs-12">
                       <p>Keywords</p>
                     </div>
-                    <div className="col-lg-3 col-md-3 col-xs-12">
+                    {/* <div className="col-lg-3 col-md-3 col-xs-12">
                       <p>Candidates</p>
-                    </div>
+                    </div> */}
                     <div className="col-lg-3 col-md-3 col-xs-12">
                       <p>Featured</p>
+                    </div>
+                    <div className="col-lg-3 col-md-3 col-xs-12">
+                      <p>Edit</p>
                     </div>
                   </div>
                 </div>
@@ -95,21 +98,17 @@ const ManageJobs = () => {
                               <span className="location"><i className="lni-map-marker"></i>{data.LocationName}</span>
                             </div>
                             <div className="col-lg-3 col-md-3 col-xs-12">
-                               {
-                              data.TypeofJob && <p><span className="full-time">Full-Time</span></p>                       
-                            }
+
+                              <p><span className="full-time">{data.TypeofJob}</span></p>
+
                             </div>
-                            <div className="col-lg-3 col-md-2 col-xs-12">
+                            {/* <div className="col-lg-3 col-md-2 col-xs-12">
                               <div className="can-img"><NavLink to="/"><img src="assets/img/jobs/candidates.png" alt="" /></NavLink></div>
-                            </div>
+                            </div> */}
                             <div className="col-lg-3 col-md-2 col-xs-12">
                               {/* <p><i className="lni-star" onClick={()=>{FeaturedJobData(data.Id)}}></i></p> */}
                               <p>
-                                {/* <i
-                                  className={`lni-star ${data.Featured === "1" ? "lni-star-color  " : "text-white"}`}
-                                  onClick={() => handleStarClick(data.Id, data.Featured)}
-                                  style={{ cursor: "pointer" }}
-                                ></i> */}
+
                                 <span
                                   onClick={() => handleStarClick(data.Id, data.Featured)}
                                   style={{ cursor: "pointer", fontSize: "20px", color: data.Featured === "1" ? "blue" : "gray" }}
@@ -117,6 +116,9 @@ const ManageJobs = () => {
                                   {data.Featured === "1" ? "★" : "☆"}
                                 </span>
                               </p>
+                            </div>
+                            <div className="col-lg-3 col-md-2 col-xs-12">
+                              <button className='btn btn-primary btn-sm'>Edit</button>
                             </div>
                           </div>
                         </div>

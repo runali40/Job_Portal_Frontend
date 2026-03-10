@@ -23,7 +23,9 @@ const ForgotPassword = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="inner-header">
-                                <h3>Forgot Password</h3>
+                                <NavLink className="navbar-brand">
+                                    <img src="/assets/img/logo.png" alt="logo" height="60" />
+                                </NavLink>
                             </div>
                         </div>
                     </div>
@@ -40,22 +42,22 @@ const ForgotPassword = () => {
                                 <h3 className="alerts-title">Forgot Password</h3>
                                 <div className="form">
                                     <div className="form-group is-empty">
-                                        <label className="control-label">Username*</label>
+                                        <label className="control-label">Username</label>
                                         <input className="form-control" type="text" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
                                         <span className="material-input"></span>
                                     </div>
                                     <div className="form-group is-empty">
-                                        <label className="control-label">Email Address*</label>
+                                        <label className="control-label">Email Address</label>
                                         <input className="form-control" type="email" placeholder='Email Address' value={emailId} onChange={(e) => setEmailId(e.target.value)} />
                                         <span className="material-input"></span>
                                     </div>
                                     <div className="form-group is-empty">
-                                        <label className="control-label">New Password*</label>
+                                        <label className="control-label">New Password</label>
                                         <input className="form-control" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                                         <span className="material-input"></span>
                                     </div>
-                                    <button id="submit" className="btn btn-common" onClick={ForgotPasswordData}>Save Change</button>
-                                    <p className="text-center"><NavLink to="/"> Back to Login</NavLink></p>
+                                    <button id="submit" className="btn btn-common" onClick={ForgotPasswordData}>Save</button>
+                                    <p className="text-start mt-2"><NavLink to="/"> Back to Login</NavLink></p>
                                 </div>
                             </div>
                         </div>
