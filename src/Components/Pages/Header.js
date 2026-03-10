@@ -57,7 +57,7 @@ const Header = () => {
     return (
         <>
             <header id="home" className="hero-area">
-                    
+
                 <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
                     <div className="container">
 
@@ -103,8 +103,8 @@ const Header = () => {
                                         "/privacyPolicy",
                                         "/pricing",
                                     ])
-                                            ? "active"
-                                            : ""
+                                        ? "active"
+                                        : ""
                                         }`}
                                 >
                                     <a
@@ -115,8 +115,8 @@ const Header = () => {
                                             "/privacyPolicy",
                                             "/pricing",
                                         ])
-                                                ? "active"
-                                                : ""
+                                            ? "active"
+                                            : ""
                                             }`}
                                         href="#!"
                                         role="button"
@@ -180,7 +180,7 @@ const Header = () => {
                                             </NavLink>
                                         </li>
 
-                                        <li>
+                                        {/* <li>
                                             <NavLink
                                                 to="/pricing"
                                                 className={({ isActive }) =>
@@ -191,7 +191,7 @@ const Header = () => {
                                             >
                                                 Pricing
                                             </NavLink>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </li>
 
@@ -206,8 +206,8 @@ const Header = () => {
                                                 "/manageResume",
                                                 "/jobAlerts",
                                             ])
-                                                    ? "active"
-                                                    : ""
+                                                ? "active"
+                                                : ""
                                                 }`}
                                         >
                                             <a
@@ -218,8 +218,8 @@ const Header = () => {
                                                     "/manageResume",
                                                     "/jobAlerts",
                                                 ])
-                                                        ? "active"
-                                                        : ""
+                                                    ? "active"
+                                                    : ""
                                                     }`}
                                                 href="#!"
                                                 role="button"
@@ -280,8 +280,8 @@ const Header = () => {
                                                 "/manageApplications",
                                                 "/browseResumes",
                                             ])
-                                                    ? "active"
-                                                    : ""
+                                                ? "active"
+                                                : ""
                                                 }`}
                                         >
                                             <a
@@ -291,8 +291,8 @@ const Header = () => {
                                                     "/manageApplications",
                                                     "/browseResumes",
                                                 ])
-                                                        ? "active"
-                                                        : ""
+                                                    ? "active"
+                                                    : ""
                                                     }`}
                                                 href="#!"
                                                 role="button"

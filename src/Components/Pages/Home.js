@@ -241,7 +241,7 @@ const Home = () => {
                                             <li><NavLink className="dropdown-item" to="/resumePage">Resume Page</NavLink></li>
                                         }
                                         <li><NavLink className="dropdown-item" to="/privacyPolicy">Privacy Policy</NavLink></li>
-                                        <li><NavLink className="dropdown-item" to="/pricing">Pricing</NavLink></li>
+                                        {/* <li><NavLink className="dropdown-item" to="/pricing">Pricing</NavLink></li> */}
                                     </ul>
                                 </li>
 

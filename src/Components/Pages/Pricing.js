@@ -92,7 +92,8 @@ const Pricing = () => {
 
                                         <li className='text-start'>✅ Access to Employer Dashboard</li>
                                     </ul>
-                                    <div className="price"><span>₹</span>2500<span>/Month</span></div>
+                                    {/* <div className="price"><span>₹</span>2500<span>/Month</span></div> */}
+                                <div className="price"><span>₹</span>850<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
                                     <div /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(4000)}/* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(2500)} */>Get Started</div>
@@ -126,7 +127,8 @@ const Pricing = () => {
 
                                         <li className='text-start'>✅ Dashboard + Alerts</li>
                                     </ul>
-                                    <div className="price"><span>₹</span>4000<span>/Month</span></div>
+                                    {/* <div className="price"><span>₹</span>4000<span>/Month</span></div> */}
+                                 <div className="price"><span>₹</span>700<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
                                     <div /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(1)}/* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(4000)} */>Get Started</div>
@@ -161,7 +163,8 @@ const Pricing = () => {
 
                                         <li className='text-start'>✅ Full Dashboard + Email Alerts</li>
                                     </ul>
-                                    <div className="price"><span>₹</span>6000<span>/Month</span></div>
+                                    {/* <div className="price"><span>₹</span>6000<span>/Month</span></div> */}
+                                 <div className="price"><span>₹</span>500<span>/Month</span></div>
                                 </div>
                                 <div className="plan-button">
                                     <div /* to="/paymentGateway" */ className="btn btn-border" onClick={() => CreateOrderData(1)} /* onClick={() => handlePayment(1)} *//* onClick={()=>CreateOrderData(6000)} */>Get Started</div>

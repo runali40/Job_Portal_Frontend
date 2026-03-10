@@ -90,17 +90,17 @@ const ResumePage = () => {
                 <div className="inner-box my-resume">
                   <div className="author-resume">
                     <div className="thumb">
-                      <img  src={profilePhoto ? profilePhoto : "assets/img/jobs/avatar-1.jpg"} alt="profile" />
+                      <img src={profilePhoto ? profilePhoto : "assets/img/jobs/avatar-1.jpg"} alt="profile" />
                     </div>
                     <div className="author-info text-start">
                       <h3>{name}</h3>
                       <p className="sub-title">{professionTitle}</p>
                       <p><span className="address"><i className="lni-map-marker"></i>{location}</span> <span><i className="ti-phone"></i>(+91) 211-123-5678</span></p>
                       <div className="social-link">
-                        <NavLink to="/" className="Twitter"><i className="lni-twitter-filled"></i></NavLink>
-                        <NavLink to="/" className="facebook"><i className="lni-facebook-filled"></i></NavLink>
-                        <NavLink to="/" className="google"><i className="lni-google-plus"></i></NavLink>
-                        <NavLink to="/" className="linkedin"><i className="lni-linkedin-fill"></i></NavLink>
+                        <NavLink className="Twitter"><i className="lni-twitter-filled"></i></NavLink>
+                        <NavLink className="facebook"><i className="lni-facebook-filled"></i></NavLink>
+                        <NavLink className="google"><i className="lni-google-plus"></i></NavLink>
+                        <NavLink className="linkedin"><i className="lni-linkedin-fill"></i></NavLink>
                       </div>
                     </div>
                   </div>
@@ -115,10 +115,10 @@ const ResumePage = () => {
                         return (
                           <>
                             <h4>{data.Title}</h4>
-                            <h5>Bannana INC.</h5>
-                            <span className="date">{data.CompDateFrom}-{data.CompDateTo}(5year)</span>
-                            <p>{data.WorkDescription}</p>
-                            <p><NavLink /* to="/" */>4 Projects</NavLink></p>
+                            <h5>{data.CompanyName}</h5>
+                            <span className="date">{data.CompDateFrom}-{data.CompDateTo}({data.CompDateTo - data.CompDateFrom} years)</span>
+                            <p>{data.workDescription}</p>
+                            {/* <p><NavLink >4 Projects</NavLink></p> */}
                           </>
 
                         )
@@ -139,7 +139,7 @@ const ResumePage = () => {
                         return (
                           <>
                             <h4>{data.School}</h4>
-                            <p>{data.School}</p>
+                            <p>{data.Degree}</p>
                             <span className="date">{data.SchoolFrom}-{data.SchoolTo}</span>
                             <br />
 
@@ -148,6 +148,26 @@ const ResumePage = () => {
                       })
                     }
 
+                  </div>
+
+                  <div className="education item text-start">
+                    <h3>Skills</h3>
+
+                    {allSkills.map((data, index) => (
+                      <div key={index} className="mb-3">
+                        <div className="d-flex justify-content-between">
+                          <h4 className="mb-0">{data.SkillName}</h4>
+                          <span>{data.SkillProficiency}%</span>
+                        </div>
+
+                        <div className="progress mt-1" >
+                          <div
+                            className="progress-bar"
+                            style={{ width: `${data.SkillProficiency}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

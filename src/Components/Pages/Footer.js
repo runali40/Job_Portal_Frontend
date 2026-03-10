@@ -46,10 +46,10 @@ const Footer = () => {
                         </div>
                     </div>
                     <ul className="mt-3 footer-social">
-                        <li><NavLink className="facebook" to="/"><i className="lni-facebook-filled"></i></NavLink></li>
-                        <li><NavLink className="twitter" to="/"><i className="lni-twitter-filled"></i></NavLink></li>
-                        <li><NavLink className="linkedin" to="/"><i className="lni-linkedin-fill"></i></NavLink></li>
-                        <li><NavLink className="google-plus" to="/"><i className="lni-google-plus"></i></NavLink></li>
+                        <li><NavLink className="facebook"><i className="lni-facebook-filled"></i></NavLink></li>
+                        <li><NavLink className="twitter"><i className="lni-twitter-filled"></i></NavLink></li>
+                        <li><NavLink className="linkedin"><i className="lni-linkedin-fill"></i></NavLink></li>
+                        <li><NavLink className="google-plus"><i className="lni-google-plus"></i></NavLink></li>
                     </ul>
                 </div>
             </div>

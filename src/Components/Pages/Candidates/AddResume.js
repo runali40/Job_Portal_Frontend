@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import Footer from "../Footer";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import {
     AddResumeApi,
@@ -14,6 +16,7 @@ const AddResume = () => {
     const { resumeId } = locationValue.state || {};
     console.log(resumeId, "resumeID");
     const [name, setName] = useState("");
+    const [dob, setDob] = useState(null)
     const [email, setEmail] = useState("");
     const [professionTitle, setProfessionTitle] = useState("");
     const [location, setLocation] = useState("");
@@ -52,6 +55,10 @@ const AddResume = () => {
     const GetManageResumeData = async () => {
         const data = await GetManageResumeApi(resumeId, navigate);
         console.log(data, "data 30");
+        console.log(data.model1?.DOB?.split("T")[0] || "")
+
+        setDob(data.model1?.DOB?.split("T")[0] || "");
+        console.log(dob)
         setEducations(data.educations);
         setWorkExperiences(data.workExperiences);
         setSkills(data.skills);
@@ -65,6 +72,8 @@ const AddResume = () => {
         setRId(data.model1.Id);
         setAboutMe(data.model1.AboutMe)
         setCategory(data.model1.CurrentIndustry)
+        setBase64Image(data.model1.ProfilePhoto)
+
     };
 
     const GetLocationData = async () => {
@@ -75,6 +84,7 @@ const AddResume = () => {
     const AddResumeData = () => {
         AddResumeApi(
             name,
+            dob,
             email,
             professionTitle,
             location,
@@ -215,6 +225,20 @@ const AddResume = () => {
         }
     };
 
+    const handleDobChange = (date) => {
+        setDob(date);
+
+        const today = new Date();
+        let calculatedAge = today.getFullYear() - date.getFullYear();
+        const monthDiff = today.getMonth() - date.getMonth();
+
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < date.getDate())) {
+            calculatedAge--;
+        }
+
+        setAge(calculatedAge);
+    };
+
     return (
         <>
             <Header />
@@ -257,6 +281,48 @@ const AddResume = () => {
                                                 }
                                             }}
                                         />
+                                    </div>
+                                    <div className="form-group text-start">
+                                        <label className="control-label">DOB</label>
+                                        <br />
+                                        <DatePicker
+                                            selected={dob}
+                                            onChange={handleDobChange}
+                                            className="form-control"
+                                            dateFormat="dd/MM/yyyy"
+                                            placeholderText="DD/MM/YYYY"
+                                        />
+                                    </div>
+                                    <div className="form-group text-start">
+                                        <label className="control-label text-left">Age</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Years old"
+                                            value={age}
+                                            maxLength={2}
+                                            onChange={(e) => {
+                                                const value = e.target.value;
+                                                if (/^\d*$/.test(value)) {
+                                                    setAge(value);
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="form-group text-start">
+                                        <label className="control-label">Personal Details</label>
+                                        <textarea
+                                            className="form-control"
+                                            rows="3"
+                                            value={aboutMe}
+                                            placeholder="Personal Details"
+                                            onChange={(e) => {
+                                                const input = e.target.value;
+                                                if (/^[a-zA-Z\s]*$/.test(input)) {
+                                                    setAboutMe(input);
+                                                }
+                                            }}
+                                        ></textarea>
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label text-left"></label>
@@ -335,11 +401,11 @@ const AddResume = () => {
                                         />
                                     </div>
                                     <div className="form-group text-start">
-                                        <label className="control-label text-left">Pre Hour</label>
+                                        <label className="control-label text-left">Expected Salary</label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            placeholder="Salary, e.g. 85"
+                                            placeholder="Expected Salary"
                                             value={preHour}
                                             maxLength={6}
                                             onChange={(e) => {
@@ -350,42 +416,14 @@ const AddResume = () => {
                                             }}
                                         />
                                     </div>
-                                    <div className="form-group text-start">
-                                        <label className="control-label text-left">Age</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Years old"
-                                            value={age}
-                                            maxLength={2}
-                                            onChange={(e) => {
-                                                const value = e.target.value;
-                                                if (/^\d*$/.test(value)) {
-                                                    setAge(value);
-                                                }
-                                            }}
-                                        />
-                                    </div>
-                                    <div className="form-group text-start">
-                                        <label className="control-label">About Me</label>
-                                        <textarea
-                                            className="form-control"
-                                            rows="3"
-                                            value={aboutMe}
-                                            onChange={(e) => {
-                                                const input = e.target.value;
-                                                if (/^[a-zA-Z\s]*$/.test(input)) {
-                                                    setAboutMe(input);
-                                                }
-                                            }}
-                                        ></textarea>
-                                    </div>
+
+
                                     <div className="form-group text-start">
                                         <div className="button-group">
                                             <div className="action-buttons">
                                                 <div className="upload-button">
                                                     <button className="btn btn-common">
-                                                        Choose a cover image
+                                                        Upload Photo
                                                     </button>
                                                     {/* <input id="cover_img_file_2" type="file" /> */}
                                                     <input
@@ -395,14 +433,24 @@ const AddResume = () => {
                                                         accept="image/*"
                                                         required
                                                         onChange={handleFileChange}
+
                                                     />
+                                                    {base64Image && (
+                                                        <img
+                                                            className="ml-3"
+                                                            style={{ width: "60px", height: "60px" }}
+                                                            src={base64Image}
+                                                            alt="profile"
+                                                          
+                                                        />
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <h3 className="text-start">Education</h3>
+                                        <h3 className="text-start">Educational Details</h3>
                                         {educations.map((edu, index) => {
                                             return (
                                                 <div
@@ -425,7 +473,7 @@ const AddResume = () => {
                                                         />
                                                     </div>
 
-                                                    <div className="form-group text-start">
+                                                    {/* <div className="form-group text-start">
                                                         <label className="control-label">
                                                             Field of Study
                                                         </label>
@@ -440,7 +488,7 @@ const AddResume = () => {
                                                             }}
                                                             placeholder="e.g. Computer Science"
                                                         />
-                                                    </div>
+                                                    </div> */}
 
                                                     <div className="form-group text-start">
                                                         <label className="control-label">School</label>
