@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ForgotPasswordApi } from '../../../Api/LoginApi'
-
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
@@ -11,10 +12,41 @@ const ForgotPassword = () => {
     // const [showPassword, setShowPassword] = useState(false);
 
     const ForgotPasswordData = async () => {
-        const data = ForgotPasswordApi(username, emailId, newPassword, navigate)
-        console.log(data)
-        navigate("/")
-    }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (username.trim() === "") {
+            toast.warning("Please enter username!");
+            return;
+        }
+
+        if (emailId.trim() === "") {
+            toast.warning("Please enter email!");
+            return;
+        }
+
+        if (!emailPattern.test(emailId)) {
+            toast.warning("Please enter valid email!");
+            return;
+        }
+
+        if (newPassword.trim() === "") {
+            toast.warning("Please enter new password!");
+            return;
+        }
+
+        try {
+            const data = await ForgotPasswordApi(username, emailId, newPassword, navigate);
+            console.log(data);
+            if (data) {
+                navigate("/");
+            }
+
+        } catch (error) {
+            console.log(error);
+
+        }
+    };
 
     return (
         <>
@@ -42,18 +74,24 @@ const ForgotPassword = () => {
                                 <h3 className="alerts-title">Forgot Password</h3>
                                 <div className="form">
                                     <div className="form-group is-empty">
-                                        <label className="control-label">Username</label>
-                                        <input className="form-control" type="text" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
+                                        <label className="control-label">Username</label> <span className="text-danger">*</span>
+                                        <input className="form-control" type="text" placeholder='Username' autoComplete="off"
+                                            readOnly
+                                            onFocus={(e) => e.target.removeAttribute('readonly')} value={username} onChange={(e) => setUsername(e.target.value)} />
                                         <span className="material-input"></span>
                                     </div>
                                     <div className="form-group is-empty">
                                         <label className="control-label">Email Address</label>
-                                        <input className="form-control" type="email" placeholder='Email Address' value={emailId} onChange={(e) => setEmailId(e.target.value)} />
+                                        <input className="form-control" type="email" autoComplete="off"
+                                            readOnly
+                                            onFocus={(e) => e.target.removeAttribute('readonly')} placeholder='Email Address' value={emailId} onChange={(e) => setEmailId(e.target.value)} />
                                         <span className="material-input"></span>
                                     </div>
                                     <div className="form-group is-empty">
-                                        <label className="control-label">New Password</label>
-                                        <input className="form-control" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                                        <label className="control-label">New Password</label> <span className="text-danger">*</span>
+                                        <input className="form-control" type="password" autoComplete="off"
+                                            readOnly
+                                            onFocus={(e) => e.target.removeAttribute('readonly')} placeholder='New Password' value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                                         <span className="material-input"></span>
                                     </div>
                                     <button id="submit" className="btn btn-common" onClick={ForgotPasswordData}>Save</button>

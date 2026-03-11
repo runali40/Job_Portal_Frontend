@@ -79,13 +79,17 @@ const Login = () => {
                       <p className='mt-2'>Please click on the pricing plan.<NavLink to="/pricing">Click Here</NavLink></p>} */}
                     <div className="input-icon mt-3">
                       <i className="lni-user"></i>
-                      <input type="text" id="sender-email" className="form-control" name="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                      <input type="text" id="sender-email" className="form-control" name="username" placeholder="Username" autoComplete="off"
+                        readOnly
+                        onFocus={(e) => e.target.removeAttribute('readonly')} value={username} onChange={(e) => setUsername(e.target.value)} />
                     </div>
                   </div>
                   <div className="form-group">
                     <div className="input-icon">
                       <i className="lni-lock"></i>
-                      <input type={showPassword ? "text" : "password"} className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                      <input type={showPassword ? "text" : "password"} className="form-control" placeholder="Password" autoComplete="off"
+                        readOnly
+                        onFocus={(e) => e.target.removeAttribute('readonly')} value={password} onChange={(e) => setPassword(e.target.value)} />
                       <span
                         onClick={() => setShowPassword(!showPassword)}
                         style={{

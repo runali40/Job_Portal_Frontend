@@ -384,13 +384,13 @@ const Home = () => {
                                         {
                                             roleName === "Candidate" ? <img
                                                 src={profilePhoto || ""}
-                                                alt="company"
+                                                alt=""
                                                 className="company-logo"
                                             />
                                                 :
                                                 <img
                                                     src={logo || ""}
-                                                    alt="company"
+                                                    alt=""
                                                     className="company-logo"
                                                 />
 
@@ -649,7 +649,7 @@ const Home = () => {
                                                 <div className="col-lg-6 col-md-6 col-xs-12 text-right">
                                                     <div className="tag-type">
                                                         <span
-                                                            onClick={() => handleStarClick(data.Id, data.Bookmark)}
+                                                            // onClick={() => handleStarClick(data.Id, data.Bookmark)}
                                                             style={{ cursor: "pointer", fontSize: "20px", color: data.Bookmark === "1" ? "blue" : "gray" }}
                                                         >
                                                             {/* {data.Bookmark === "1" ? "♥" : "♡"} */}
@@ -790,247 +790,9 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* <section id="testimonial" className="section">
-                <div className="container">
-                    <div className="section-header">
-                        <h2 className="section-title">Clients Review</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ellentesque dignissim quam et <br /> metus effici turac fringilla lorem facilisis.</p>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                            <div id="testimonials" className="touch-slider owl-carousel">
-                                <div className="item">
-                                    <div className="testimonial-item">
-                                        <div className="author">
-                                            <div className="img-thumb">
-                                                <img src="assets/img/testimonial/img1.png" alt="" />
-                                            </div>
-                                        </div>
-                                        <div className="content-inner">
-                                            <p className="description">Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui.</p>
-                                            <div className="author-info">
-                                                <h2><NavLink to="#">Jessica</NavLink></h2>
-                                                <span>Senior Accountant</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="item">
-                                    <div className="testimonial-item">
-                                        <div className="author">
-                                            <div className="img-thumb">
-                                                <img src="assets/img/testimonial/img2.png" alt="" />
-                                            </div>
-                                        </div>
-                                        <div className="content-inner">
-                                            <p className="description">Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui.</p>
-                                            <div className="author-info">
-                                                <h2><NavLink to="#">John Doe</NavLink></h2>
-                                                <span>Project Menager</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="item">
-                                    <div className="testimonial-item">
-                                        <div className="author">
-                                            <div className="img-thumb">
-                                                <img src="assets/img/testimonial/img3.png" alt="" />
-                                            </div>
-                                        </div>
-                                        <div className="content-inner">
-                                            <p className="description">Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui Morbi quam enim, cursus non erat pretium veh icula finibus ex stibulum venenatis viverra dui.</p>
-                                            <div className="author-info">
-                                                <h2><NavLink to="#">Helen</NavLink></h2>
-                                                <span>Engineer</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-            {/* 
-            <div id="pricing" className="section bg-gray">
-                <div className="container">
-                    <div className="section-header">
-                        <h2 className="section-title">Pricing Plan</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ellentesque dignissim quam et <br /> metus effici turac fringilla lorem facilisis.</p>
-                    </div>
-
-                    <div className="row pricing-tables">
-                        <div className="col-lg-4 col-md-4 col-xs-12">
-                            <div className="pricing-table border-color-defult">
-                                <div className="pricing-details">
-                                    <div className="icon">
-                                        <i className="lni-rocket"></i>
-                                    </div>
-                                    <h2>Professional</h2>
-                                    <ul>
-                                        <li>Post 1 Job</li>
-                                        <li>No Featured Job</li>
-                                        <li>Edit Your Job Listing</li>
-                                        <li>Manage Application</li>
-                                        <li>30-day Expired</li>
-                                    </ul>
-                                    <div className="price"><span>$</span>0<span>/Month</span></div>
-                                </div>
-                                <div className="plan-button">
-                                    <NavLink to="#" className="btn btn-border">Get Started</NavLink>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-4 col-md-4 col-xs-12">
-                            <div className="pricing-table pricing-active border-color-red">
-                                <div className="pricing-details">
-                                    <div className="icon">
-                                        <i className="lni-drop"></i>
-                                    </div>
-                                    <h2>Advance</h2>
-                                    <ul>
-                                        <li>Post 1 Job</li>
-                                        <li>No Featured Job</li>
-                                        <li>Edit Your Job Listing</li>
-                                        <li>Manage Application</li>
-                                        <li>30-day Expired</li>
-                                    </ul>
-                                    <div className="price"><span>$</span>20<span>/Month</span></div>
-                                </div>
-                                <div className="plan-button">
-                                    <NavLink to="#" className="btn btn-border">Get Started</NavLink>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-4 col-md-4 col-xs-12">
-                            <div className="pricing-table border-color-green">
-                                <div className="pricing-details">
-                                    <div className="icon">
-                                        <i className="lni-briefcase"></i>
-                                    </div>
-                                    <h2>Premium</h2>
-                                    <ul>
-                                        <li>Post 1 Job</li>
-                                        <li>No Featured Job</li>
-                                        <li>Edit Your Job Listing</li>
-                                        <li>Manage Application</li>
-                                        <li>30-day Expired</li>
-                                    </ul>
-                                    <div className="price"><span>$</span>40<span>/Month</span></div>
-                                </div>
-                                <div className="plan-button">
-                                    <NavLink to="#" className="btn btn-border">Get Started</NavLink>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div> */}
-
-            {/* <section id="blog" className="section">
-
-                <div className="container">
-                    <div className="section-header">
-                        <h2 className="section-title">Blog Post</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ellentesque dignissim quam et <br /> metus effici turac fringilla lorem facilisis.</p>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-4 col-md-6 col-xs-12 blog-item">
-
-                            <div className="blog-item-wrapper">
-                                <div className="blog-item-img">
-                                    <NavLink to="/blog">
-                                        <img src="assets/img/blog/img1.jpg" alt="" />
-                                    </NavLink>
-                                </div>
-                                <div className="blog-item-text text-start">
-                                    <h3><NavLink to="/blog">Tips to write an impressive resume online for beginner</NavLink></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore praesentium asperiores ad vitae.</p>
-                                </div>
-                                <NavLink className="readmore" to="#">Read More</NavLink>
-                            </div>
-
-                        </div>
-
-                        <div className="col-lg-4 col-md-6 col-xs-12 blog-item">
-
-                            <div className="blog-item-wrapper">
-                                <div className="blog-item-img">
-                                    <NavLink to="/blog">
-                                        <img src="assets/img/blog/img2.jpg" alt="" />
-                                    </NavLink>
-                                </div>
-                                <div className="blog-item-text text-start">
-                                    <h3><NavLink to="/blog">Let's explore 5 cool new features in JobBoard theme</NavLink></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore praesentium asperiores ad vitae.</p>
-                                </div>
-                                <NavLink className="readmore" to="#">Read More</NavLink>
-                            </div>
-
-                        </div>
-
-                        <div className="col-lg-4 col-md-6 col-xs-12 blog-item">
-
-                            <div className="blog-item-wrapper">
-                                <div className="blog-item-img">
-                                    <NavLink to="/blog">
-                                        <img src="assets/img/blog/img3.jpg" alt="" />
-                                    </NavLink>
-                                </div>
-                                <div className="blog-item-text text-start">
-                                    <h3><NavLink to="/blog">How to convince recruiters and get your dream job</NavLink></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore praesentium asperiores ad vitae.</p>
-                                </div>
-                                <NavLink className="readmore" to="#">Read More</NavLink>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-
-
-
-            {/* <section id="download" className="section bg-gray">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-8 col-xs-12">
-                            <div className="download-wrapper text-start">
-                                <div>
-                                    <div className="download-text">
-                                        <h4>Download Our Best Apps</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ellentesque dignissim quam et metus effici turac fringilla lorem facilisis, Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </div>
-                                    <div className="app-button">
-                                        <NavLink to="#" className="btn btn-border"><i className="lni-apple"></i>Download <br /> <span>From App Store</span></NavLink>
-                                        <NavLink to="#" className="btn btn-common btn-effect"><i className="lni-android"></i> Download <br /> <span>From Play Store</span></NavLink>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-4 col-xs-12">
-                            <div className="download-thumb">
-                                <img className="img-fluid" src="assets/img/app.png" alt="" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> */}
+            
 
             <Footer />
-
-            {/* <NavLink to="#" className="back-to-top">
-                <i className="lni-arrow-up"></i>
-            </NavLink>
-
-
-            <div id="preloader">
-                <div className="loader" id="loader-1"></div>
-            </div> */}
 
 
 

@@ -4,6 +4,8 @@ import Footer from "../Footer";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import {
     AddResumeApi,
     GetManageResumeApi,
@@ -80,7 +82,115 @@ const AddResume = () => {
         setAllLocation(data);
     };
 
+    // const AddResumeData = () => {
+    //     AddResumeApi(
+    //         name,
+    //         dob,
+    //         email,
+    //         professionTitle,
+    //         location,
+    //         category,
+    //         website,
+    //         preHour,
+    //         age,
+    //         aboutMe,
+    //         base64Image,
+    //         educations,
+    //         workExperiences,
+    //         skills,
+    //         rId,
+    //         navigate
+    //     ).then((data) => {
+    //         console.log(data);
+    //     });
+    // };
+
     const AddResumeData = () => {
+
+        if (name.trim() === "") {
+            toast.warning("Please enter name!");
+            return;
+        }
+
+        if (!dob) {
+            toast.warning("Please select DOB!");
+            return;
+        }
+
+        if (email.trim() === "") {
+            toast.warning("Please enter email!");
+            return;
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            toast.warning("Please enter valid email!");
+            return;
+        }
+
+        if (professionTitle.trim() === "") {
+            toast.warning("Please enter profession title!");
+            return;
+        }
+
+        if (location.trim() === "") {
+            toast.warning("Please enter location!");
+            return;
+        }
+
+        if (category === "") {
+            toast.warning("Please select Industry!");
+            return;
+        }
+
+        if (aboutMe.trim() === "") {
+            toast.warning("Please enter about yourself!");
+            return;
+        }
+
+        if (!base64Image) {
+            toast.warning("Please upload profile image!");
+            return;
+        }
+
+    if (
+    !educations ||
+    educations.length === 0 ||
+    educations.some(edu =>
+        edu.Degree.trim() === "" |
+        edu.School.trim() === "" ||
+        edu.SchoolFrom === "" ||
+        edu.SchoolTo === "" 
+    )
+) {
+    toast.warning("Please fill all education details!");
+    return;
+}
+        if (
+            !workExperiences ||
+            workExperiences.length === 0 ||
+            workExperiences.some(exp =>
+                exp.CompanyName.trim() === "" ||
+                exp.Title.trim() === "" ||
+                exp.CompDateFrom === "" ||
+                exp.CompDateTo === ""
+            )
+        ) {
+            toast.warning("Please fill all work experience details!");
+            return;
+        }
+        if (
+            !skills ||
+            skills.length === 0 ||
+            skills.some(exp =>
+                exp.SkillName.trim() === "" ||
+                exp.SkillProficiency
+                === ""
+            )
+        ) {
+            toast.warning("Please fill all skills details!");
+            return;
+        }
         AddResumeApi(
             name,
             dob,
@@ -88,8 +198,8 @@ const AddResume = () => {
             professionTitle,
             location,
             category,
-            website,
-            preHour,
+            website,      // optional
+            preHour,      // optional
             age,
             aboutMe,
             base64Image,
@@ -100,11 +210,11 @@ const AddResume = () => {
             navigate
         ).then((data) => {
             console.log(data);
+        }).catch((error) => {
+            console.log(error);
+            // toast.error("Something went wrong!");
         });
     };
-
-    // const currentYear = new Date().getFullYear();
-    // const years = Array.from(new Array(50), (val, index) => currentYear - index);
 
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 50 }, (_, i) => currentYear - i);
@@ -259,13 +369,13 @@ const AddResume = () => {
                         <div className="col-lg-9 col-md-12 col-xs-12">
                             <div className="add-resume box">
                                 <div className="post-header text-start">
-                                  
+
                                     <NavLink to="/uploadCv"><button className="btn btn-primary">Upload CV</button></NavLink>
                                 </div>
                                 <div className="form-ad">
                                     <h3 className="text-left">Basic information</h3>
                                     <div className="form-group text-start">
-                                        <label className="control-label">Name</label>
+                                        <label className="control-label">Name</label> <span className="text-danger">*</span>
                                         <input
                                             type="text"
                                             className="form-control text-left"
@@ -280,7 +390,7 @@ const AddResume = () => {
                                         />
                                     </div>
                                     <div className="form-group text-start">
-                                        <label className="control-label">DOB</label>
+                                        <label className="control-label">DOB</label> <span className="text-danger">*</span>
                                         <br />
                                         <DatePicker
                                             selected={dob}
@@ -307,7 +417,7 @@ const AddResume = () => {
                                         />
                                     </div>
                                     <div className="form-group text-start">
-                                        <label className="control-label">Personal Details</label>
+                                        <label className="control-label">Personal Details</label> <span className="text-danger">*</span>
                                         <textarea
                                             className="form-control"
                                             rows="3"
@@ -323,7 +433,7 @@ const AddResume = () => {
                                     </div>
                                     <div className="form-group text-start">
                                         <label className="control-label text-left"></label>
-                                        <label className="control-label text-left">Email</label>
+                                        <label className="control-label text-left">Email</label> <span className="text-danger">*</span>
                                         <input
                                             type="email"
                                             className="form-control"
@@ -335,7 +445,7 @@ const AddResume = () => {
                                     <div className="form-group text-start">
                                         <label className="control-label text-left">
                                             Profession Title
-                                        </label>
+                                        </label> <span className="text-danger">*</span>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -350,7 +460,7 @@ const AddResume = () => {
                                         />
                                     </div>
                                     <div className="form-group text-start">
-                                        <label className="control-label text-left">Select Industry</label>
+                                        <label className="control-label text-left">Select Industry</label> <span className="text-danger">*</span>
 
                                         <label className="styled-select form-control">
                                             <select
@@ -369,7 +479,7 @@ const AddResume = () => {
                                         </label>
                                     </div>
                                     <div className="form-group text-start">
-                                        <label className="control-label text-left">Location</label>
+                                        <label className="control-label text-left">Location</label> <span className="text-danger">*</span>
 
                                         <label className="styled-select form-control">
                                             <select
@@ -438,7 +548,7 @@ const AddResume = () => {
                                                             style={{ width: "60px", height: "60px" }}
                                                             src={base64Image}
                                                             alt="profile"
-                                                          
+
                                                         />
                                                     )}
                                                 </div>
@@ -456,7 +566,7 @@ const AddResume = () => {
                                                 >
                                                     <h3 className="text-start">Education {index + 1}</h3>
                                                     <div className="form-group text-start">
-                                                        <label className="control-label">Degree</label>
+                                                        <label className="control-label">Degree</label> <span className="text-danger">*</span>
                                                         <input
                                                             type="text"
                                                             className="form-control"
@@ -488,7 +598,7 @@ const AddResume = () => {
                                                     </div> */}
 
                                                     <div className="form-group text-start">
-                                                        <label className="control-label">College / University</label>
+                                                        <label className="control-label">College / University</label> <span className="text-danger">*</span>
                                                         <input
                                                             type="text"
                                                             className="form-control"
@@ -505,7 +615,7 @@ const AddResume = () => {
                                                     <div className="form-group text-start">
                                                         <div className="row">
                                                             <div className="col-md-6">
-                                                                <label className="control-label">From</label>
+                                                                <label className="control-label">From</label> <span className="text-danger">*</span>
                                                                 <select
                                                                     className="form-control"
                                                                     value={edu.SchoolFrom}
@@ -526,7 +636,7 @@ const AddResume = () => {
                                                                 </select>
                                                             </div>
                                                             <div className="col-md-6">
-                                                                <label className="control-label">To</label>
+                                                                <label className="control-label">To</label> <span className="text-danger">*</span>
                                                                 <select
                                                                     className="form-control"
                                                                     value={edu.SchoolTo}
@@ -586,87 +696,7 @@ const AddResume = () => {
                                             </button>
                                         </div>
                                     </div>
-                                    {/* 
-                                    <div className="divider"><h3>Work Experience</h3></div>
-                                    <div className="form-group text-start">
-                                        <label className="control-label">Company Name</label>
-                                        <input type="text" className="form-control" placeholder="Company name" value={companyName} onChange={(e) => {
-                                            const input = e.target.value;
-                                            if (/^[a-zA-Z\s]*$/.test(input)) {
-                                                setCompanyName(input);
-                                            }
-                                        }} />
-                                    </div>
-                                    <div className="form-group text-start">
-                                        <label className="control-label">Title</label>
-                                        <input type="text" className="form-control" placeholder="e.g UI/UX Researcher" value={title} onChange={(e) => {
-                                            const input = e.target.value;
-                                            if (/^[a-zA-Z\s]*$/.test(input)) {
-                                                setTitle(input);
-                                            }
-                                        }} />
-                                    </div>
-                                    <div className="form-group text-start">
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <label className="control-label">Date From</label>
-                                                <select
-                                                    className="form-control"
-                                                    value={expFrom}
-                                                    onChange={(e) => setExpFrom(e.target.value)}
-                                                >
-                                                    <option value="">e.g 2014</option>
-                                                    {years.map((year) => (
-                                                        <option key={year} value={year}>
-                                                            {year}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <label className="control-label">Date To</label>
-                                                <select
-                                                    className="form-control"
-                                                    value={expTo}
-                                                    onChange={(e) => setExpTo(e.target.value)}
-                                                >
-                                                    <option value="">e.g 2020</option>
-                                                    {years.map((year) => (
-                                                        <option key={year} value={year}>
-                                                            {year}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="form-group text-start">
-                                        <label className="control-label">Description</label>
-                                        <textarea className="form-control" rows="4" value={workDescription} onChange={(e) => {
-                                            const input = e.target.value;
-                                            if (/^[a-zA-Z\s]*$/.test(input)) {
-                                                setWorkDescription(input);
-                                            }
-                                        }}></textarea>
-                                    </div>
-                                    <div className="form-group text-start">
-                                        <div className="button-group">
-                                            <div className="action-buttons">
-                                                <div className="upload-button">
-                                                    <button className="btn btn-common">Choose a cover Logo</button>
-                                                    <input id="cover_img_file_1" type="file" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="add-post-btn">
-                                        <div className="float-left">
-                                            <NavLink to="/" className="btn-added"><i className="ti-plus"></i> Add New Experience</NavLink>
-                                        </div>
-                                        <div className="float-right">
-                                            <NavLink to="/" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
-                                        </div>
-                                    </div> */}
+
                                     <div>
                                         <h3 className="text-start mt-4">Work Experience</h3>
                                         {workExperiences.map((exp, index) => (
@@ -677,7 +707,7 @@ const AddResume = () => {
                                                 <h3 className="text-start">Experience {index + 1}</h3>
 
                                                 <div className="form-group text-start">
-                                                    <label className="control-label">Job Title</label>
+                                                    <label className="control-label">Job Title</label> <span className="text-danger">*</span>
                                                     <input
                                                         type="text"
                                                         className="form-control"
@@ -692,7 +722,7 @@ const AddResume = () => {
                                                 </div>
 
                                                 <div className="form-group text-start">
-                                                    <label className="control-label">Company</label>
+                                                    <label className="control-label">Company</label> <span className="text-danger">*</span>
                                                     <input
                                                         type="text"
                                                         className="form-control"
@@ -713,7 +743,7 @@ const AddResume = () => {
                                                 <div className="form-group text-start">
                                                     <div className="row">
                                                         <div className="col-md-6">
-                                                            <label className="control-label">From</label>
+                                                            <label className="control-label">From</label> <span className="text-danger">*</span>
                                                             <select
                                                                 className="form-control"
                                                                 value={exp.CompDateFrom}
@@ -734,7 +764,7 @@ const AddResume = () => {
                                                             </select>
                                                         </div>
                                                         <div className="col-md-6">
-                                                            <label className="control-label">To</label>
+                                                            <label className="control-label">To</label> <span className="text-danger">*</span>
                                                             <select
                                                                 className="form-control"
                                                                 value={exp.CompDateTo}
@@ -800,32 +830,6 @@ const AddResume = () => {
                                         </div>
                                     </div>
 
-                                    {/* <div className="divider"><h3 className='text-start'>Skills</h3></div>
-                                    <div className="form-group text-start">
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <label className="control-label">Skill Name</label>
-                                                <input className="form-control" placeholder="Skill name, e.g. HTML" type="text" value={skillName} onChange={(e) => {
-                                                    const input = e.target.value;
-                                                    if (/^[a-zA-Z\s]*$/.test(input)) {
-                                                        setSkillName(input);
-                                                    }
-                                                }} />
-                                            </div>
-                                            <div className="col-md-6">
-                                                <label className="control-label">% (1-100)</label>
-                                                <input className="form-control" placeholder="Skill proficiency, e.g. 90" type="text" value={skillProficiency} onChange={(e) => setSkillProficiency(e.target.value)} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="add-post-btn">
-                                        <div className="float-left">
-                                            <NavLink to="/" className="btn-added"><i className="ti-plus"></i> Add New Skills</NavLink>
-                                        </div>
-                                        <div className="float-right">
-                                            <NavLink to="/" className="btn-delete"><i className="ti-trash"></i> Delete This</NavLink>
-                                        </div>
-                                    </div> */}
                                     <div className="divider">
                                         <h3 className="text-start">Skills</h3>
                                     </div>
@@ -840,7 +844,7 @@ const AddResume = () => {
                                             <div className="form-group text-start">
                                                 <div className="row">
                                                     <div className="col-md-6">
-                                                        <label className="control-label">Skill Name</label>
+                                                        <label className="control-label">Skill Name</label> <span className="text-danger">*</span>
                                                         <input
                                                             type="text"
                                                             className="form-control"
@@ -856,7 +860,7 @@ const AddResume = () => {
                                                     </div>
 
                                                     <div className="col-md-6">
-                                                        <label className="control-label">% (1–100)</label>
+                                                        <label className="control-label">% (1–100)</label> <span className="text-danger">*</span>
                                                         <input
                                                             type="text"
                                                             className="form-control"

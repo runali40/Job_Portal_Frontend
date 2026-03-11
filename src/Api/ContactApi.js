@@ -12,7 +12,7 @@ export const ContactApi = (name, email, subject, message, navigate) => {
         subject: subject,
         message: message,
     };
-    const url = 'Auth';
+    const url = 'Contact';
     return apiClient({
         method: 'post',
         url: UrlData + url,

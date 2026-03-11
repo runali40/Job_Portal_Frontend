@@ -14,7 +14,7 @@ const Header = () => {
     const logo = sessionStorage.getItem("logo")
     const userName = sessionStorage.getItem("username")
     const roleName = sessionStorage.getItem("rolename")
-     const profilePhoto = sessionStorage.getItem("profilePhoto")
+    const profilePhoto = sessionStorage.getItem("profilePhoto")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -354,9 +354,9 @@ const Header = () => {
                                                 </li>
                                             </ul>
                                         </li>
-<li className="nav-item text-start ml-3 ml-lg-0">
+                                        <li className="nav-item text-start ml-3 ml-lg-0">
                                             <NavLink className="nav-link" to="/contact">
-                                               Contact Us
+                                                Contact Us
                                             </NavLink>
                                         </li>
                                         <li className="button-group text-start ml-3 ml-lg-0">
@@ -382,25 +382,25 @@ const Header = () => {
                                     <div className="nav-link" onClick={LogOutButton} style={{ cursor: "pointer" }}>Sign Out</div>
                                 </li>
                                 <div className="company-box d-flex align-items-center px-3 py-1">
-                                        {
-                                            roleName === "Candidate" ? <img
-                                                src={profilePhoto || ""}
-                                                alt="company"
+                                    {
+                                        roleName === "Candidate" ? <img
+                                            src={profilePhoto || ""}
+                                            alt=""
+                                            className="company-logo"
+                                        />
+                                            :
+                                            <img
+                                                src={logo || ""}
+                                                alt=""
                                                 className="company-logo"
                                             />
-                                                :
-                                                <img
-                                                    src={logo || ""}
-                                                    alt="company"
-                                                    className="company-logo"
-                                                />
 
-                                        }
+                                    }
 
 
-                                        <span className="company-name ms-2 text-dark">{roleName === "Candidate" ? userName : compName}</span>
+                                    <span className="company-name ms-2 text-dark">{roleName === "Candidate" ? userName : compName}</span>
 
-                                    </div>
+                                </div>
                             </ul>
                         </div>
                     </div>

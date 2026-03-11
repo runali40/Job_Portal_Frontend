@@ -146,15 +146,15 @@ const BrowseJobs = () => {
                 return (
                   <>
                     <div className="col-lg-6 col-md-12 col-xs-12" key={data.Id}>
-                      <div className="job-listings-featured" /* to="/jobDetails" */ >
+                      <div className="job-listings-featured" style={{ cursor: "pointer" }} onClick={() => GetBrowseData(data.Id)} >
                         <div className="row ">
                           <div className="col-lg-6 col-md-6 col-xs-12 ">
                             <div className="job-company-logo">
                               <img src={data.LOGOFile} alt="" style={{ width: "55px", height: "50px" }} />
                             </div>
                             <div className="job-details text-start">
-                              <h3 onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>{data.Slug}</h3>
-                              <span className="company-neme" onClick={() => GetBrowseData(data.Id)} style={{ cursor: "pointer" }}>{data.Name}</span>
+                              <h3>{data.Slug}</h3>
+                              <span className="company-neme">{data.Name}</span>
                               <div className="tags">
                                 <span><i className="lni-map-marker"></i>{data.LocationName}</span>
                                 <span><i className="lni-user"></i>John Smith</span>

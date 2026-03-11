@@ -4,6 +4,7 @@ import { GetRoleApi, RegisterApi } from '../../Api/LoginApi'
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import ErrorHandler from '../../ErrorHandler';
 const Register = () => {
     const navigate = useNavigate();
     const [role, setRole] = useState("")
@@ -29,40 +30,153 @@ const Register = () => {
 
     const passwordsMatch = password && retypePassword && password === retypePassword;
 
+    // const RegisterData = () => {
+    //     if (role === "") {
+    //         toast.warning("Please select role!")
+    //     }
+    //     else if (username === "" || !passwordsMatch || email === "") {
+    //         toast.warning("Please enter all the fields!")
+    //     }
+    //     else {
+    //         RegisterApi(username, password, email, role, companyName, companyWebsite, companyLogo).then((data) => {
+    //             console.log(data.data)
+    //             const temp = data.data;
+    //             console.log(temp[0])
+    //             const uId = temp[0].UserId;
+    //             const rId = temp[0].r_id;
+    //             const cId = temp[0].CompanyId;
+    //             navigate('/pricing', { state: { uId, rId, cId } });
+    //             // navigate('/home', { state: { uId, rId, cId } });
+    //         })
+    //     }
+    // }
+
     const RegisterData = () => {
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (role === "") {
-            toast.warning("Please select role!")
+            toast.warning("Please select role!");
+            return;
         }
-        else if (username === "" || !passwordsMatch || email === "") {
-            toast.warning("Please enter all the fields!")
+
+        if (username.trim() === "") {
+            toast.warning("Please enter username!");
+            return;
         }
-        else {
-            RegisterApi(username, password, email, role, companyName, companyWebsite, companyLogo).then((data) => {
-                console.log(data.data)
-                const temp = data.data;
-                console.log(temp[0])
+
+        if (email.trim() === "") {
+            toast.warning("Please enter email!");
+            return;
+        }
+
+        if (!emailPattern.test(email)) {
+            toast.warning("Please enter valid email!");
+            return;
+        }
+
+        if (password === "") {
+            toast.warning("Please enter password!");
+            return;
+        }
+
+        if (!passwordsMatch) {
+            toast.warning("Passwords do not match!");
+            return;
+        }
+
+        if (companyName.trim() === "") {
+            toast.warning("Please enter company name!");
+            return;
+        }
+
+        if (!companyLogo) {
+            toast.warning("Please upload company logo!");
+            return;
+        }
+
+        RegisterApi(
+            username,
+            password,
+            email,
+            role,
+            companyName,
+            companyWebsite,
+            companyLogo
+        ).then((data) => {
+
+            const temp = data.data;
+
+            if (temp && temp.length > 0) {
+
                 const uId = temp[0].UserId;
                 const rId = temp[0].r_id;
                 const cId = temp[0].CompanyId;
-                navigate('/pricing', { state: { uId, rId, cId } });
-                // navigate('/home', { state: { uId, rId, cId } });
-            })
-        }
-    }
-    const RegisterData1 = () => {
-        if (role === "") {
-            toast.warning("Please select role!")
-        }
-        else if (username === "" || !passwordsMatch || email === "") {
-            toast.warning("Please enter all the fields!")
-        }
-        else {
-            const data = RegisterApi(username, password, email, role, companyName, companyWebsite, companyLogo);
-            console.log(data)
-            navigate('/');
 
+                navigate('/pricing', { state: { uId, rId, cId } });
+            }
+
+        }).catch((error) => {
+            console.log(error);
+            // toast.error("Registration failed!");
+
+        });
+    };
+
+    const RegisterData1 = () => {
+
+        // Email Regex
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (role === "") {
+            toast.warning("Please select role!");
+            return;
         }
-    }
+
+        if (username.trim() === "") {
+            toast.warning("Please enter username!");
+            return;
+        }
+
+        if (email.trim() === "") {
+            toast.warning("Please enter email!");
+            return;
+        }
+
+        if (!emailPattern.test(email)) {
+            toast.warning("Please enter a valid email!");
+            return;
+        }
+
+        if (password === "") {
+            toast.warning("Please enter password!");
+            return;
+        }
+
+        if (retypePassword === "") {
+            toast.warning("Please enter confirm password!");
+            return;
+        }
+
+        if (password !== retypePassword) {
+            toast.warning("Passwords do not match!");
+            return;
+        }
+
+        // If all validations pass
+        const data = RegisterApi(
+            username,
+            password,
+            email,
+            role,
+            companyName,
+            companyWebsite,
+            companyLogo
+        );
+
+        console.log(data);
+        navigate('/');
+    };
     const GetRoleData = () => {
         GetRoleApi().then((data) => {
             setAllRole(data)
@@ -142,20 +256,34 @@ const Register = () => {
                                             <input type="text" className="form-control" name="name" placeholder="Username"
                                            /*  disabled={
                                                 !!allRole.find((item) => item.r_id === role && item.r_rolename === "Employer")
-                                            } */ value={username} onChange={(e) => setUsername(e.target.value)} />
+                                            } */ value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="off"
+                                                readOnly
+                                                onFocus={(e) => e.target.removeAttribute('readonly')} />
                                         </div>
                                     </div>
                                     <div className="form-group">
                                         <div className="input-icon">
                                             <i className="lni-envelope"></i>
-                                            <input type="email" className="form-control" name="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                            <input
+                                                type="email"
+                                                className="form-control"
+                                                name="email"
+                                                placeholder="Email Address"
+                                                autoComplete="off"
+                                                readOnly
+                                                onFocus={(e) => e.target.removeAttribute('readonly')}
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                            />
                                         </div>
                                     </div>
                                     <div className="form-group">
                                         <div className="input-icon">
                                             <i className="lni-lock"></i>
                                             {/* <input type="password" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /> */}
-                                            <input type={showPassword ? "text" : "password"} className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                            <input type={showPassword ? "text" : "password"} className="form-control" autoComplete="off"
+                                                readOnly
+                                                onFocus={(e) => e.target.removeAttribute('readonly')} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                                             <span
                                                 onClick={() => setShowPassword(!showPassword)}
                                                 style={{
@@ -174,7 +302,9 @@ const Register = () => {
                                     <div className="form-group">
                                         <div className="input-icon">
                                             <i className="lni-unlock"></i>
-                                            <input type={retypeShowPassword ? "text" : "password"} className="form-control" placeholder="Retype Password" value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} />
+                                            <input type={retypeShowPassword ? "text" : "password"} className="form-control" placeholder="Retype Password" autoComplete="off"
+                                                readOnly
+                                                onFocus={(e) => e.target.removeAttribute('readonly')} value={retypePassword} onChange={(e) => setRetypePassword(e.target.value)} />
                                             <span
                                                 onClick={() => setRetypeShowPassword(!retypeShowPassword)}
                                                 style={{
@@ -190,22 +320,26 @@ const Register = () => {
                                             </span>
                                         </div>
                                     </div>
-                                    {retypePassword && password !== retypePassword && (
+                                    {/* {retypePassword && password !== retypePassword && (
                                         <small style={{ color: 'red' }}>Passwords do not match</small>
-                                    )}
+                                    )} */}
                                     {allRole.find((item) => item.r_id === role && item.r_rolename === "Employer")
                                         ?
                                         <>
                                             <div className="form-group">
                                                 <div className="input-icon">
                                                     <i className="lni-user"></i>
-                                                    <input type="text" className="form-control" name="companyName" placeholder="Company Name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                                                    <input type="text" className="form-control" name="companyName" placeholder="Company Name"  autoComplete="off"
+  readOnly
+  onFocus={(e) => e.target.removeAttribute('readonly')} value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className="form-group">
                                                 <div className="input-icon">
                                                     <i className="lni-user"></i>
-                                                    <input type="text" className="form-control" name="companyWebsite" placeholder="Company Website" value={companyWebsite} onChange={(e) => setCompanyWebsite(e.target.value)} />
+                                                    <input type="text" className="form-control" name="companyWebsite" placeholder="Company Website"  autoComplete="off"
+  readOnly
+  onFocus={(e) => e.target.removeAttribute('readonly')} value={companyWebsite} onChange={(e) => setCompanyWebsite(e.target.value)} />
                                                 </div>
                                             </div>
                                             {/* <div className="form"> */}
@@ -230,7 +364,7 @@ const Register = () => {
                                         : null}
                                     {
                                         allRole.find((item) => item.r_id === role && item.r_rolename === "Employer") ? (
-                                            <button className="btn btn-common log-btn mt-3" onClick={RegisterData} disabled={!username || !email || !passwordsMatch || !companyName /* || !isChecked */} >Save & Next</button>
+                                            <button className="btn btn-common log-btn mt-3" onClick={RegisterData} disabled={!username || !email || !passwordsMatch || !companyName || !isChecked} >Save & Next</button>
                                         ) : (
                                             <button className="btn btn-common log-btn mt-3" onClick={RegisterData1}>Register</button>
                                         )

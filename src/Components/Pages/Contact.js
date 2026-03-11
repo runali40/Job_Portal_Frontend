@@ -11,7 +11,7 @@ const Contact = () => {
   const [message, setMessage] = useState("")
 
   const ContactData = async () => {
-    const data =  await ContactApi(name, email, subject, message);
+    const data = await ContactApi(name, email, subject, message);
     console.log("data", data)
 
   }
@@ -87,8 +87,8 @@ const Contact = () => {
                       <div className="contact-icon">
                         <i className="lni-envelope"></i>
                       </div>
-                      <p><NavLink to="mailto:hello@tom.com">Mail Us: sales@devitinfrasoft.com</NavLink></p>
-                      {/* <p><NavLink to="mailto:tomsaulnier@gmail.com">support@mail.com</NavLink></p> */}
+                      <p><NavLink /* to="mailto:hello@tom.com" */>Mail Us: sales@devitinfrasoft.co.in</NavLink></p>
+                      <p><NavLink /* to="mailto:tomsaulnier@gmail.com" */>Mail Us: sales@informaticsetech.com</NavLink></p>
                     </div>
                     <div className="single-contact">
                       <div className="contact-icon">
@@ -97,20 +97,27 @@ const Contact = () => {
                       <p><NavLink >Mob No: +91 8691911318</NavLink></p>
                       <p><NavLink >Mob No: +91 9321148952</NavLink></p>
                     </div>
+                    <div className="single-contact">
+                      <div className="contact-icon">
+                        <i className="lni-link"></i>
+                      </div>
+                      <p><NavLink >www.devitinfrasoft.com</NavLink></p>
+                      <p><NavLink >www.informaticsetech.com</NavLink></p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="col-md-12">
+              <div className="col-md-12 mt-4">
                 <div id="container-map">
                   <iframe
-  title="Punjani Estate Khopat Thane Map"
-  // src="https://www.google.com/maps?q=Punjani%20Industrial%20Estate%20Pokhran%20Road%20No%201%20Khopat%20Thane%20400601&output=embed"
-  src="https://www.google.com/maps?q=113%202nd%20Floor%20Punjani%20Estate%20Khopat%20Pokhran%20Road%20No%201%20Thane%20400601&output=embed"
-  width="100%"
-  height="600"
-  style={{ border: 0 }}
-  loading="lazy"
-/>
+                    title="Punjani Estate Khopat Thane Map"
+                    // src="https://www.google.com/maps?q=Punjani%20Industrial%20Estate%20Pokhran%20Road%20No%201%20Khopat%20Thane%20400601&output=embed"
+                    src="https://www.google.com/maps?q=113%202nd%20Floor%20Punjani%20Estate%20Khopat%20Pokhran%20Road%20No%201%20Thane%20400601&output=embed"
+                    width="100%"
+                    height="600"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>

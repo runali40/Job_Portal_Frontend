@@ -3,6 +3,8 @@ import Footer from '../Footer'
 import Header from '../Header'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ChangePasswordApi } from '../../../Api/LoginApi'
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import LeftSidebar from '../LeftSidebar'
 
@@ -13,9 +15,25 @@ const ChangePassword = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const ChangePasswordData = async () => {
-        const data = ChangePasswordApi(oldPassword, newPassword, navigate)
-        console.log(data)
-    }
+
+        if (oldPassword.trim() === "") {
+            toast.warning("Please enter old password!");
+            return;
+        }
+
+        if (newPassword.trim() === "") {
+            toast.warning("Please enter new password!");
+            return;
+        }
+
+        try {
+            const data = await ChangePasswordApi(oldPassword, newPassword, navigate);
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+
+        }
+    };
 
     return (
         <>
@@ -49,15 +67,15 @@ const ChangePassword = () => {
                                     <li><NavLink to="/">Sign Out</NavLink></li>
                                 </ul>
                             </div> */}
-                            <LeftSidebar/>
+                            <LeftSidebar />
                         </div>
                         <div className="col-md-8 col-sm-8 col-xs-12">
                             <div className="job-alerts-item text-start">
                                 <h3 className="alerts-title">Change Password</h3>
                                 <div className="form">
                                     <div className="form-group is-empty">
-                                        <label className="control-label">Old Password*</label>
-                                        <input className="form-control" type="password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+                                        <label className="control-label">Old Password</label><span className="text-danger">*</span>
+                                        <input className="form-control" type="password" placeholder='Old Password' value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
                                         {/* <span
                                             onClick={() => setShowPassword(!showPassword)}
                                             style={{
@@ -74,8 +92,8 @@ const ChangePassword = () => {
                                         <span className="material-input"></span>
                                     </div>
                                     <div className="form-group is-empty">
-                                        <label className="control-label">New Password*</label>
-                                        <input className="form-control" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                                        <label className="control-label">New Password</label><span className="text-danger">*</span>
+                                        <input className="form-control" type="password" placeholder='New Password' value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                                         {/* <span
                                             onClick={() => setShowPassword(!showPassword)}
                                             style={{

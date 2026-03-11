@@ -112,7 +112,12 @@ export const RegisterApi = (username, password, email, role, companyName, compan
             return response.data;
         })
         .catch((error) => {
-            console.error('API error:', error);
+            // console.error('API error:', error);
+            // return null;
+
+            const errors = ErrorHandler(error);
+            toast.error(errors);
+           
             return null;
         });
 };
