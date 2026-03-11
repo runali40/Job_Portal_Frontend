@@ -12,7 +12,7 @@ const ErrorHandler = (error, navigate) => {
             navigate("/")
             return "Session Time Out";
         } else if (error.response.status === 500) {
-            return "Application is not connect to API";
+            return "Something went wrong. Please try later";
         } else {
             // Default case if status code does not match any condition
             // return "An unexpected error occurred.";

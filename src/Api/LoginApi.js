@@ -38,7 +38,7 @@ export const LoginApi = (username, password, navigate) => {
             sessionStorage.setItem("profilePhoto", response.data.result.data.ProfilePhoto)
 
             Cookies.set("UserCredential", response.data.result.outcome.tokens, { expires: 7 });
-            toast.success("User Login Successfully!")
+            toast.success("Login Successful!")
             navigate("/home")
             return response.data;
         })
@@ -108,7 +108,7 @@ export const RegisterApi = (username, password, email, role, companyName, compan
     })
         .then((response) => {
             console.log('API response:', response);
-            toast.success("User Register Successfully!")
+            toast.success("Register Successful!")
             return response.data;
         })
         .catch((error) => {

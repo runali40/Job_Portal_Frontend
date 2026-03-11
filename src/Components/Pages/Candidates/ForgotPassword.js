@@ -81,7 +81,7 @@ const ForgotPassword = () => {
                                         <span className="material-input"></span>
                                     </div>
                                     <div className="form-group is-empty">
-                                        <label className="control-label">Email Address</label>
+                                        <label className="control-label">Email Address</label> <span className="text-danger">*</span>
                                         <input className="form-control" type="email" autoComplete="off"
                                             readOnly
                                             onFocus={(e) => e.target.removeAttribute('readonly')} placeholder='Email Address' value={emailId} onChange={(e) => setEmailId(e.target.value)} />
